@@ -1,0 +1,13 @@
+positive
+Los niños juegan en el parque.
+Compramos manzanas frescas.
+Las casas son grandes y bonitas.
+Mis amigas estudian juntas.
+Las mesas están limpias.
+
+negative
+El niño juega en el parque.
+Compré una manzana fresca.
+La casa es grande y bonita.
+Mi amiga estudia sola.
+La mesa está limpia.

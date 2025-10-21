@@ -6,4 +6,4 @@ I'll put more information here later, but so far this has been a project in prob
 
 ## Acknowledgements
 
-A significant amount of code for the probing experiments is from https://github.com/jannik-brinkmann/multilingual-features
+A significant amount of code for the probing experiments is from Jannik Brinkmann's code at https://github.com/jannik-brinkmann/multilingual-features

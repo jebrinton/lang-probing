@@ -1,3 +1,6 @@
+# Unnecessary file for implementation
+IMPLEMENTATION_SUMMARY.md
+
 # Directories to exclude
 run/
 outputs/

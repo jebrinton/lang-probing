@@ -25,6 +25,9 @@ logs/
 # Keep example files
 !examples/*.txt
 
+# Keep requirement file
+!requirements.txt
+
 # Python
 __pycache__/
 *.py[cod]

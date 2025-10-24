@@ -30,7 +30,7 @@ from src.config import (
 )
 from src.utils import setup_model, ensure_dir, setup_logging
 from src.data import get_training_files, get_available_concepts, concept_filter
-from src.activations import extract_all_activations_for_steering, extract_mlp_activations
+from src.activations import extract_all_activations_for_steering
 
 
 def filter_sentences_by_concept(conll_files, concept_key, concept_value):
@@ -196,6 +196,26 @@ def save_steering_vector(vector, metadata, output_dir):
     logging.info(f"Saved steering vector to {filename}")
 
 
+def steering_vector_exists(output_dir, language, concept_key, concept_value, layer_num):
+    """
+    Verifica si un steering vector ya existe.
+    
+    Args:
+        output_dir: directorio de salida
+        language: idioma
+        concept_key: clave del concepto
+        concept_value: valor del concepto
+        layer_num: número de capa
+        
+    Returns:
+        bool: True si el archivo existe, False en caso contrario
+    """
+    vectors_dir = os.path.join(output_dir, "vectors")
+    filename = f"{language}_{concept_key}_{concept_value}_layer{layer_num}.pkl"
+    filepath = os.path.join(vectors_dir, filename)
+    return os.path.exists(filepath)
+
+
 def main(args):
     """Main workflow para generar steering vectors."""
     
@@ -287,7 +307,7 @@ def main(args):
                 concept_activations = extract_concept_activations(
                     model, train_files, concept_key, concept_value, layers, 
                     TRACER_KWARGS, args.batch_size, args.max_samples
-                )  # TODO: add max_samples
+                )
                 
                 if not concept_activations:
                     logging.warning(f"No activations extracted for {concept_key}={concept_value}")
@@ -297,6 +317,11 @@ def main(args):
                 for layer_num in layers:
                     if layer_num not in concept_activations or layer_num not in global_activations:
                         logging.warning(f"Missing activations for layer {layer_num}")
+                        continue
+
+                    # Check if steering vector already exists
+                    if steering_vector_exists(args.output_dir, language, concept_key, concept_value, layer_num):
+                        logging.info(f"Steering vector already exists for {language}_{concept_key}_{concept_value}_layer{layer_num}, skipping")
                         continue
                     
                     # Compute steering vector

@@ -11,7 +11,7 @@ OUTPUTS_DIR = os.path.join(BASE_DIR, "outputs")
 PROBES_DIR = os.path.join(OUTPUTS_DIR, "probes")
 FEATURES_DIR = os.path.join(OUTPUTS_DIR, "features")
 ABLATIONS_DIR = os.path.join(OUTPUTS_DIR, "ablations")
-STEERING_VECTORS_DIR = os.path.join(OUTPUTS_DIR, "steering_vectors")
+STEERING_VECTORS_DIR = os.path.join(OUTPUTS_DIR, "steering_vectors/all")
 STEERING_VECTORS_DIR_NOVA = os.path.join(STEERING_VECTORS_DIR, "nova")
 STEERING_OUTPUT_DIR = os.path.join(OUTPUTS_DIR, "steering")
 LOGS_DIR = os.path.join(BASE_DIR, "logs")
@@ -26,10 +26,22 @@ LAYER_NUM = 16
 SAE_DIM = 32768
 
 # Languages to process (expandible)
-LANGUAGES = ["English", "Spanish", "Turkish", "Arabic", "German", "Chinese", "French", "Japanese"]
+LANGUAGES_NOVA = ["English", "Spanish", "Turkish", "Arabic", "German", "Chinese", "French", "Japanese"]
+LANGUAGES = [
+    "Arabic", "Chinese", "Czech", "Dutch", "English", "French", 
+    "German", "Greek", "Hebrew", "Hindi", "Indonesian", "Italian", 
+    "Japanese", "Korean", "Persian", "Polish", "Portuguese", "Romanian", 
+    "Russian", "Spanish", "Turkish", "Ukrainian", "Vietnamese"
+]
 
 # Grammatical concepts to probe
-CONCEPTS = ["Tense", "Number"]
+CONCEPTS_NOVA = ["Tense", "Number"]
+CONCEPTS = [
+    "Gender", "Animacy", "Mood", "Tense",
+    "Reflex", "Number", "Aspect", "Case",
+    "Definite", "Evident", "Polarity", 
+    "Person", "Degree", "Polite"
+]
 
 # Training parameters
 BATCH_SIZE = 16
@@ -45,5 +57,4 @@ TOP_K_FEATURES = 100  # Number of top correlating features to save
 
 # Steering vectors configuration
 MIN_SAMPLES_FOR_STEERING = 100  # Minimum samples required for steering vector generation
-MAX_SAMPLES_FOR_STEERING = 4000  # Maximum sentences https://nnsight.net/notebooks/features/multiple_token/to process for steering vector generation
-
+MAX_SAMPLES_FOR_STEERING = 50000  # Maximum sentences https://nnsight.net/notebooks/features/multiple_token/to process for steering vector generation

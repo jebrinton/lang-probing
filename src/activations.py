@@ -195,7 +195,7 @@ def get_mean_sae_activation(model, submodule, autoencoder, tokenizer, sentence, 
     return mean_acts
 
 
-def extract_all_activations_for_steering(model, conll_files, layers, tracer_kwargs=None, batch_size=16, max_sentences=None):
+def extract_all_activations_for_steering(model, conll_files, layers, tracer_kwargs=None, batch_size=16, max_sentences=None, seed=42):
     """
     Extrae activaciones para todas las oraciones en archivos UD, para múltiples capas.
     Esta función se usa para obtener la baseline global de activaciones.
@@ -230,7 +230,8 @@ def extract_all_activations_for_steering(model, conll_files, layers, tracer_kwar
     # Limitar el número de oraciones
     if max_sentences is not None and len(all_sentences) > max_sentences:
         logging.info(f"Limiting to {max_sentences} sentences for testing")
-        all_sentences = all_sentences[:max_sentences]
+        step = len(all_sentences)//max_sentences
+        all_sentences = all_sentences[::step]
     
     logging.info(f"Loaded {len(all_sentences)} sentences from {len(conll_files)} files")
     

@@ -1,13 +1,35 @@
-"""
-Extracción de activaciones desde modelos de lenguaje
-"""
-
 import torch
 import numpy as np
 import warnings
 import logging
 import os
 from tqdm import tqdm
+from torch.utils.data import Dataset
+import einops
+
+class ActivationDataset(Dataset):
+    """
+    Dataset simple para extracción de activaciones sin labels.
+    """
+    
+    def __init__(self, samples):
+        """
+        Args:
+            samples: lista de strings con las oraciones
+        """
+        self.samples = samples
+    
+    def __len__(self):
+        return len(self.samples)
+    
+    def __getitem__(self, idx):
+        """
+        Returns:
+            dict: {'sample': str}
+        """
+        return {
+            "sample": self.samples[idx]
+        }
 
 
 def extract_mlp_activations(model, dataloader, layer_num, tracer_kwargs=None):
@@ -277,3 +299,62 @@ def extract_all_activations_for_steering(model, conll_files, layers, tracer_kwar
     
     return final_activations
 
+
+def extract_mean_activations(model, dataloader):
+    """
+    Extract mean activations for all layers, meaned over the 
+    
+    Args:
+        model: LanguageModel (nnsight)
+        dataloader: DataLoader with batches of sentences
+        
+    Returns:
+        dict: {layer_num: numpy array of shape (n_samples, hidden_dim)}
+    """
+
+    device = model.device
+    layer_module = model.model.layers
+    num_layers = model.model.config.num_hidden_layers
+    hidden_dim = model.config.hidden_size
+
+    # Initialize accumulators for each layer
+    activation_sums = {i: torch.zeros(hidden_dim, device=device) for i in range(num_layers)}
+    total_non_padding_tokens = 0
+
+    with torch.no_grad():
+        for batch in tqdm(dataloader, desc="Extracting activations"):
+            if 'attention_mask' not in batch:
+                raise ValueError("Dataloader must provide 'attention_mask' to handle padding.")
+
+            input_ids = batch['input_ids']
+            attention_mask = batch['attention_mask']
+
+            with model.trace(input_ids):
+                for layer_num in range(num_layers):
+                    # .save() captures the activation just for this batch
+                    # It is not stored across batches and does not accumulate in memory
+                    acts = layer_module[layer_num].output[0].save() # Shape: (batch_size, seq_len, hidden_dim)
+
+                    # Create a mask compatible with the activations' shape for broadcasting
+                    mask = attention_mask.unsqueeze(-1) # Shape: (batch_size, seq_len, 1)
+                    # Zero out the activations of padding tokens and sum over batch and sequence
+                    masked_acts = acts * mask
+                    batch_sum = einops.reduce(masked_acts, 'b s d -> d', 'sum')
+                    
+                    # Update the running total sum
+                    activation_sums[layer_num] += batch_sum
+            
+            # Update per batch
+            total_non_padding_tokens += attention_mask.sum()
+
+    if total_non_padding_tokens == 0:
+        logging.warning("No non-padding tokens found, returning all zeros")
+        return {i: np.zeros(hidden_dim) for i in range(num_layers)}
+
+    # Calculate the final mean after processing all batches
+    mean_activations = {
+        layer_num: (sums / total_non_padding_tokens).cpu().numpy()
+        for layer_num, sums in activation_sums.items()
+    }
+
+    return mean_activations

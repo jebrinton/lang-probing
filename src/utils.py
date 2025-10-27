@@ -27,7 +27,7 @@ def get_device_info():
     if torch.cuda.is_available():
         n_gpus = torch.cuda.device_count()
         if n_gpus == 1:
-            device = "cuda"
+            device = torch.device("cuda")
             dtype = torch.bfloat16
         else:
             task_id = int(os.environ.get("SGE_TASK_ID", 1))
@@ -36,10 +36,10 @@ def get_device_info():
             device = torch.device(f"cuda:{gpu_id}")
             dtype = torch.bfloat16
     elif torch.backends.mps.is_available():
-        device = "mps"
+        device = torch.device("mps")
         dtype = torch.float16
     else:
-        device = "cpu"
+        device = torch.device("cpu")
         dtype = torch.float32
 
     return device, dtype
@@ -57,9 +57,9 @@ def setup_model(model_id, sae_id=None):
         tuple: (model, submodule, autoencoder, tokenizer)
     """
     device, dtype = get_device_info()
-
+    
     # Load language model
-    model = LanguageModel(model_id, torch_dtype=dtype, device_map="auto")
+    model = LanguageModel(model_id, torch_dtype=dtype, device_map=device)
     submodule = model.model.layers[16]
 
     # Load tokenizer
@@ -78,6 +78,20 @@ def setup_model(model_id, sae_id=None):
         autoencoder = None
 
     return model, submodule, autoencoder, tokenizer
+
+
+def print_gpu_memory_usage():
+    """
+    Imprime el uso actual de memoria GPU.
+    """
+    if torch.cuda.is_available():
+        for i in range(torch.cuda.device_count()):
+            allocated = torch.cuda.memory_allocated(i) / 1024**3  # GB
+            reserved = torch.cuda.memory_reserved(i) / 1024**3    # GB
+            available = torch.cuda.get_device_properties(i).total_memory / 1024**3    # GB
+            print(f"GPU {i}: {allocated:.2f}GB allocated, {reserved:.2f}GB reserved, {available:.2f}GB available")
+    else:
+        print("No CUDA GPUs available")
 
 
 def save_json(data, filepath):

@@ -11,6 +11,7 @@ OUTPUTS_DIR = os.path.join(BASE_DIR, "outputs")
 PROBES_DIR = os.path.join(OUTPUTS_DIR, "probes")
 FEATURES_DIR = os.path.join(OUTPUTS_DIR, "features")
 ABLATIONS_DIR = os.path.join(OUTPUTS_DIR, "ablations")
+ACTIVATIONS_DIR = os.path.join(OUTPUTS_DIR, "activations")
 STEERING_VECTORS_DIR = os.path.join(OUTPUTS_DIR, "steering_vectors/all")
 STEERING_VECTORS_DIR_NOVA = os.path.join(STEERING_VECTORS_DIR, "nova")
 STEERING_OUTPUT_DIR = os.path.join(OUTPUTS_DIR, "steering")
@@ -57,4 +58,7 @@ TOP_K_FEATURES = 100  # Number of top correlating features to save
 
 # Steering vectors configuration
 MIN_SAMPLES_FOR_STEERING = 100  # Minimum samples required for steering vector generation
-MAX_SAMPLES_FOR_STEERING = 5000  # Maximum sentences https://nnsight.net/notebooks/features/multiple_token/to process for steering vector generation
+MAX_SAMPLES_FOR_STEERING = 8000  # Maximum sentences https://nnsight.net/notebooks/features/multiple_token/to process for steering vector generation
+
+# Activation collection configuration
+COLLECTION_LAYERS = [0, 4, 8, 12, 16, 20, 24, 28, 31]  # Layers to extract activations from (every 4th layer)

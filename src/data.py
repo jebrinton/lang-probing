@@ -10,6 +10,7 @@ from torch.utils.data import Dataset
 from sklearn.utils import resample
 import logging
 
+from .config import UD_BASE_FOLDER
 
 
 def get_all_treebank_files(language, split, ud_base_folder=None):
@@ -278,4 +279,66 @@ def balance_dataset(dataset, seed=42):
     logging.info(f"  Negative samples: {len(negative_samples)}")
     
     return balanced_dataset
+
+
+def load_sentences_with_tags(language, max_samples=None, seed=42, ud_base_folder=UD_BASE_FOLDER, quickly=False):
+    """
+    Carga oraciones de archivos de entrenamiento con sus etiquetas gramaticales.
+    
+    Args:
+        language: Nombre del idioma (e.g., 'English')
+        max_samples: Número máximo de oraciones a retornar
+        seed: Random seed para muestreo
+        ud_base_folder: Path base de UD (usa config si es None)
+        quickly: Si es True, carga solo un archivo
+    Returns:
+        list: Lista de dicts con {"sentence_text": str, "tags": dict, "language": str}
+    """
+    conll_files = get_training_files(language, ud_base_folder)
+    if quickly:
+        conll_files = [conll_files[0]]
+    
+    if not conll_files:
+        logging.warning(f"No training files found for {language}")
+        return []
+    
+    all_sentences = []
+    
+    for conll_file in conll_files:
+        if not os.path.exists(conll_file):
+            logging.warning(f"File not found: {conll_file}")
+            continue
+            
+        logging.info(f"Loading sentences from: {os.path.basename(conll_file)}")
+        data = pyconll.load_from_file(conll_file)
+        
+        for sentence in data:
+            # Extract all grammatical tags from tokens
+            tags_dict = {}
+            for token in sentence:
+                if token.feats:
+                    for feat_key, feat_values in token.feats.items():
+                        if feat_key not in tags_dict:
+                            tags_dict[feat_key] = set()
+                        tags_dict[feat_key].update(feat_values)
+            
+            # Convert sets to sorted lists for JSON serialization
+            tags_dict = {k: sorted(list(v)) for k, v in tags_dict.items()}
+            
+            all_sentences.append({
+                "sentence_text": sentence.text,
+                "tags": tags_dict,
+                "language": language
+            })
+    
+    logging.info(f"Loaded {len(all_sentences)} sentences for {language}")
+    
+    # Random sampling if max_samples specified
+    if max_samples is not None and len(all_sentences) > max_samples:
+        np.random.seed(seed)
+        indices = np.random.choice(len(all_sentences), max_samples, replace=False)
+        all_sentences = [all_sentences[i] for i in indices]
+        logging.info(f"Sampled {max_samples} sentences for {language}")
+    
+    return all_sentences
 

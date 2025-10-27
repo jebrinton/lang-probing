@@ -57,4 +57,4 @@ TOP_K_FEATURES = 100  # Number of top correlating features to save
 
 # Steering vectors configuration
 MIN_SAMPLES_FOR_STEERING = 100  # Minimum samples required for steering vector generation
-MAX_SAMPLES_FOR_STEERING = 50000  # Maximum sentences https://nnsight.net/notebooks/features/multiple_token/to process for steering vector generation
+MAX_SAMPLES_FOR_STEERING = 5000  # Maximum sentences https://nnsight.net/notebooks/features/multiple_token/to process for steering vector generation

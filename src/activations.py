@@ -9,27 +9,30 @@ import einops
 
 class ActivationDataset(Dataset):
     """
-    Dataset simple para extracción de activaciones sin labels.
+    Dataset that tokenizes sentences on the fly.
     """
-    
-    def __init__(self, samples):
+    def __init__(self, samples, tokenizer):
         """
         Args:
-            samples: lista de strings con las oraciones
+            samples (list): A list of strings.
+            tokenizer: A Hugging Face tokenizer.
         """
         self.samples = samples
-    
+        self.tokenizer = tokenizer
+
     def __len__(self):
         return len(self.samples)
-    
+
     def __getitem__(self, idx):
         """
+        Tokenizes a single sentence. The padding will be handled by the DataLoader's collate_fn.
+        
         Returns:
-            dict: {'sample': str}
+            dict: A dictionary with 'input_ids' and 'attention_mask' for one sample.
         """
-        return {
-            "sample": self.samples[idx]
-        }
+        # The tokenizer returns a dictionary with 'input_ids', 'attention_mask', etc.
+        # We don't add padding here to allow for dynamic padding per batch.
+        return self.tokenizer(self.samples[idx], truncation=True, max_length=512)
 
 
 def extract_mlp_activations(model, dataloader, layer_num, tracer_kwargs=None):
@@ -302,14 +305,14 @@ def extract_all_activations_for_steering(model, conll_files, layers, tracer_kwar
 
 def extract_mean_activations(model, dataloader):
     """
-    Extract mean activations for all layers, meaned over the 
+    Extract mean activations for all layers, meaned over the batch and sequence
     
     Args:
         model: LanguageModel (nnsight)
         dataloader: DataLoader with batches of sentences
         
     Returns:
-        dict: {layer_num: numpy array of shape (n_samples, hidden_dim)}
+        dict: {layer_num: numpy array of shape (hidden_dim,)}
     """
 
     device = model.device

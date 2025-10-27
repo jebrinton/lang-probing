@@ -30,8 +30,8 @@ from src.config import (
 )
 from src.utils import setup_model, ensure_dir, setup_logging
 from src.data import get_training_files, get_available_concepts, concept_filter
-from src.activations import extract_all_activations_for_steering
-
+from src.activations import extract_all_activations_for_steering, extract_mean_activations, ActivationDataset
+from src.dataloader_factory import SentenceDataLoaderFactory
 
 def filter_sentences_by_concept(conll_files, concept_key, concept_value):
     """
@@ -227,10 +227,9 @@ def main(args):
     logging.info(f"Languages: {args.languages}")
     logging.info(f"Concepts: {args.concepts}")
     logging.info(f"Layers: {args.layers}")
-    logging.info(f"Min samples: {MIN_SAMPLES_FOR_STEERING}")
+    logging.info(f"Min samples: {args.max_samples}")
     
     # Load model
-    logging.info("Loading model...")
     model, _, _, tokenizer = setup_model(MODEL_ID, None)  # No SAE needed for MLP activations
     logging.info(f"Model loaded: {MODEL_ID}")
     
@@ -265,10 +264,30 @@ def main(args):
         logging.info(f"Available concepts: {list(available_concepts.keys())}")
         
         # Extract global activations for all layers (baseline)
-        logging.info("Extracting global activations...")
-        global_activations = extract_all_activations_for_steering(
-            model, train_files, layers, TRACER_KWARGS, args.batch_size, args.max_samples
-        )
+        # logging.info("Extracting global activations...")
+        # global_activations = extract_all_activations_for_steering(
+        #     model, train_files, layers, TRACER_KWARGS, args.batch_size, args.max_samples
+        # )
+
+        all_sentences = []
+        for conll_file in train_files:
+            data = pyconll.load_from_file(conll_file)
+            for sentence in data:
+                all_sentences.append(sentence.text)
+        
+        if len(all_sentences) > args.max_samples:
+            step = len(all_sentences)//args.max_samples
+            all_sentences = all_sentences[::step]
+
+        print(len(all_sentences))
+        print(all_sentences[0])
+
+        global_dataset = SentenceDataLoaderFactory(all_sentences, tokenizer)
+        global_mean_activations = extract_mean_activations(model, global_dataset.dataloader)
+
+        print(len(global_mean_activations))
+        print(global_mean_activations[0].shape)
+        continue
         
         # Loop over concepts
         for concept_key in args.concepts:
@@ -282,7 +301,7 @@ def main(args):
             concept_values = available_concepts[concept_key]
             logging.info(f"Available values: {list(concept_values)}")
             
-            # Filter values by minimum samples
+            # Filter values by minimum samples)
             valid_values = []
             for concept_value in concept_values:
                 # Count samples for this value
@@ -301,6 +320,7 @@ def main(args):
             
             # Process each valid value
             for concept_value in valid_values:
+                logging.info(f"Memory usage up to {language}_{concept_key}_{concept_value}: {torch.cuda.memory_summary(device=None, abbreviated=True)}")
                 logging.info(f"\nProcessing {concept_key}={concept_value}")
                 
                 # Extract activations for this concept value

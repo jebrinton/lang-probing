@@ -399,8 +399,8 @@ def collect_sentence_activations(model, dataloader, layers, tracer_kwargs=None):
             if 'attention_mask' not in batch:
                 raise ValueError("Dataloader must provide 'attention_mask' to handle padding.")
             
-            input_ids = batch['input_ids'].to(model.device)
-            attention_mask = batch['attention_mask'].to(model.device)
+            input_ids = batch['input_ids'].to(model.device) # TODO: these are redundant, we use the input text directly
+            attention_mask = batch['attention_mask'].to(model.device) # TODO: these are redundant, we should use the model.inputs directly
             batch_tags = batch['tags']
             batch_languages = batch['language']
             batch_sentences = batch['sentence_text']

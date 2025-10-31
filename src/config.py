@@ -44,6 +44,20 @@ CONCEPTS = [
     "Person", "Degree", "Polite"
 ]
 
+CONCEPTS_VALUES = {
+    "Gender": ["Masc", "Fem", "Neut"],
+    "Number": ["Sing", "Dual", "Plur"],
+    "Tense": ["Past", "Pres", "Fut"],
+    # "Animacy": ["Anim", "Inan"],
+    "Case": ["Nom", "Acc", "Gen", "Dat", "Loc"],
+    "Polarity": ["Pos", "Neg"],
+    "Aspect": ["Prog", "Imp", "Perf"],
+    "Mood": ["Ind", "Imp", "Cnd", "Sub"],
+    "Polite": ["Infm", "Form"],
+    "Person": ["1", "2", "3"],
+    "Degree": ["Pos", "Cmp", "Sup"],
+}
+
 # Training parameters
 BATCH_SIZE = 16
 SEED = 42

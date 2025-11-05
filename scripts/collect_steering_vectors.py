@@ -5,7 +5,7 @@ import pandas as pd
 # Add src to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from src.config import ACTIVATIONS_DIR, LANGUAGES, COLLECTION_LAYERS, BASE_DIR
+from src.config import ACTIVATIONS_DIR, LANGUAGES, CONCEPTS_VALUES, BASE_DIR, LAYERS
 
 import json
 import numpy as np
@@ -62,7 +62,6 @@ def generate_steering_vector(df, concept_key, concept_value):
     logging.info(f"Negative examples (doesn't have {concept_key}={concept_value}): {neg_count}")
     
     if pos_count == 0:
-        logging.warning(f"⚠ Warning: No examples found for {concept_key}={concept_value}")
         return None, pos_count, neg_count
     
     # Convert activations to numpy arrays if they're not already
@@ -208,13 +207,18 @@ def load_steering_vector(base_dir, concept, value, language, layer):
 
 
 def main():
-    layers = [16]
+    layers = [0, 4, 8, 12, 16, 20, 24, 28, 31]
+    layers = LAYERS
     for concept_key, concept_values in CONCEPTS_VALUES.items():
         for concept_value in concept_values:
             for language in LANGUAGES:
                 for layer in layers:
                     df = load_parquet(language, layer)
                     steering_vector, pos_count, neg_count = generate_steering_vector(df, concept_key, concept_value)
+
+                    if steering_vector is None:
+                        logging.warning(f"⚠ Warning: No examples found for {concept_key}={concept_value} in {language} at layer {layer}")
+                        continue
                     
                     data = {
                         'steering_vector': [steering_vector],
@@ -238,18 +242,19 @@ def main():
                     
                     df_sv.to_parquet(os.path.join(partition_dir, "data.parquet"), compression='snappy', index=False)
 
-    layer = 16
     for concept_key in CONCEPTS_VALUES.keys():
         for concept_value in CONCEPTS_VALUES[concept_key]:
-            steering_vectors = {}
-            for language in LANGUAGES:
-                steering_vectors[language] = load_steering_vector(STEERING_VECTORS_DIR, concept_key, concept_value, language, layer)
+            for layer in layers:
+                steering_vectors = {}
+                for language in LANGUAGES:
+                    steering_vectors[language] = load_steering_vector(STEERING_VECTORS_DIR, concept_key, concept_value, language, layer)
 
-            cos_img_dir = Path("projectnb", "mcnet", "jbrin", "lang-probing", "cos_img")
-            ensure_dir(cos_img_dir)
-            save_path = cos_img_dir / f"sv_{concept_key}_{concept_value}.png"
-            
-            generate_cosine_similarity_heatmap(steering_vectors, save_path=save_path, title=f"Cosine Similarity {concept_key}={concept_value}")
+                home = Path.home()
+                cos_img_dir = home / "projectnb" / "mcnet" / "jbrin" / "lang-probing" / "cos_img"
+                ensure_dir(cos_img_dir)
+                save_path = cos_img_dir / f"sv_{concept_key}_{concept_value}_layer{layer}.png"
+                
+                generate_cosine_similarity_heatmap(steering_vectors, save_path=save_path, title=f"Cosine similarity {concept_key}={concept_value} at layer {layer}")
 
 if __name__ == "__main__":
     main()

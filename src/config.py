@@ -58,6 +58,16 @@ CONCEPTS_VALUES = {
     "Degree": ["Pos", "Cmp", "Sup"],
 }
 
+LAYERS = [0, 4, 8, 12, 16, 20, 24, 28, 31]
+
+
+LANGUAGES = ["English", "Spanish"]
+CONCEPTS_VALUES = {
+    "Gender": ["Masc", "Fem"],
+}
+LAYERS = [16]
+
+
 # Training parameters
 BATCH_SIZE = 16
 SEED = 42

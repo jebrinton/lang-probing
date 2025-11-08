@@ -3,7 +3,7 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from tqdm import tqdm
-from nnsight import LanguageModel
+# from nnsight import LanguageModel
 from torch.utils.data import DataLoader
 import torch
 import glob
@@ -11,9 +11,13 @@ from transformers import AutoModel, AutoTokenizer
 import pyconll
 import joblib
 import numpy as np
+import pandas as pd
 import random
+import logging
+from cuml.common import logger as cuml_logger
 from src.word_probing_utils import WordProbingDataset, WordProbingCollate, train_and_evaluate_probe
 from src.config import PROBES_DIR, UD_BASE_FOLDER
+from src.data import get_available_concepts, get_training_files
 
 
 def conllu_to_processed_sentences(conll_filepaths):
@@ -141,8 +145,12 @@ def train_probe(model, tokenizer, language, concept, value, layer_num=16, max_sa
     train_word_acts, train_word_labels = extract_word_activations(model, train_dataloader, layer_num)
     test_word_acts, test_word_labels = extract_word_activations(model, test_dataloader, layer_num)
     
-    classifier = train_and_evaluate_probe(train_word_acts, train_word_labels, test_word_acts, test_word_labels, seed=42)
-    return classifier
+    classifier, stats = train_and_evaluate_probe(
+        train_word_acts, train_word_labels, 
+        test_word_acts, test_word_labels, 
+        seed=42
+    )
+    return classifier, stats # Return both
 
 
 # processed_sentences = get_processed_sentences("Spanish", "train")
@@ -176,6 +184,10 @@ def train_probe(model, tokenizer, language, concept, value, layer_num=16, max_sa
 # print(f"Test Accuracy: {test_accuracy:.2f}")
 
 def main():
+    # config logging
+    logging.basicConfig(level=logging.INFO)
+    cuml_logger.set_level(logging.ERROR)
+
     model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
     device = "cuda" if torch.cuda.is_available() else "cpu"
     my_hf_model = AutoModel.from_pretrained(model_name, torch_dtype=torch.float16, device_map="auto")
@@ -183,21 +195,73 @@ def main():
     tokenizer.pad_token = tokenizer.eos_token
 
     CONCEPTS_VALUES = {
-        "Number": ["Sing", "Plur"],
-        # "Tense": ["Past", "Pres"],
-        # "Gender": ["Masc", "Fem"],
+        "Number": ["Sing", "Dual", "Plur"],
+        "Tense": ["Past", "Pres", "Fut"],
+        "Gender": ["Masc", "Fem", "Neut"],
+        "Polite": ["Infm", "Form"],
+        "Case": ["Nom", "Acc", "Gen", "Dat", "Loc"],
     }
-    LANGUAGES = ["Turkish"]
+    LANGUAGES = ["English", "French", "German", "Spanish", "Turkish", "Arabic", "Chinese"]
+    LAYERS = [0, 4, 8, 12, 16, 20, 24, 28, 32]
+    max_samples = 1024
 
-    layer_num = 16
-    max_samples = 64
+    all_results = []
+
     for concept in CONCEPTS_VALUES.keys():
         for value in CONCEPTS_VALUES[concept]:
             for language in LANGUAGES:
-                print(f"Training probe for {language} {concept}={value} at layer {layer_num}...")
-                classifier = train_probe(my_hf_model, tokenizer, language, concept, value, layer_num, max_samples)
-                joblib.dump(classifier, f"outputs/probes/word_probes/{language}_{concept}_{value}_l{layer_num}_n{max_samples}.joblib")
-                print(f"Saved probe to outputs/probes/word_probes/{language}_{concept}_{value}_l{layer_num}_n{max_samples}.joblib")
+                # check that the concept and value are valid for the language
+                if concept not in get_available_concepts(get_training_files(language, ud_base_folder=UD_BASE_FOLDER)):
+                    continue
+                if value not in get_available_concepts(get_training_files(language, ud_base_folder=UD_BASE_FOLDER))[concept]:
+                    continue
+                for layer_num in LAYERS:
+                    logging.info(f"Training probe for {language} {concept}={value} at layer {layer_num}...")
+                    
+                    # 1. Get classifier and stats
+                    classifier, stats = train_probe(my_hf_model, tokenizer, language, concept, value, layer_num, max_samples)
+                    
+                    # 2. Save the probe file
+                    probe_filename = f"outputs/probes/word_probes/{language}_{concept}_{value}_l{layer_num}_n{max_samples}.joblib"
+                    joblib.dump(classifier, probe_filename)
+                    logging.info(f"Saved probe to {probe_filename}")
+                    
+                    # 3. Create a full record for our CSV
+                    record = {
+                        "language": language,
+                        "concept": concept,
+                        "value": value,
+                        "layer": layer_num,
+                        "n_samples": max_samples,
+                        "probe_file": probe_filename, # Link to the saved model
+                        **stats # Unpack the stats dict (train_acc, test_acc, etc.)
+                    }
+                    
+                    # 4. Add the record to our list
+                    all_results.append(record)
+
+    logging.info("\nAll probes trained. Saving results to CSV...")
+    
+    # Convert the list of dictionaries to a pandas DataFrame
+    results_df = pd.DataFrame(all_results)
+    
+    # Re-order columns for readability
+    columns = [
+        "language", "concept", "value", "layer", "n_samples", 
+        "train_accuracy", "test_accuracy", "cv_score", 
+        "best_params", "probe_file"
+    ]
+    # Make sure we only use columns that exist
+    final_columns = [col for col in columns if col in results_df.columns]
+    results_df = results_df[final_columns]
+    
+    # Define the save path
+    results_csv_path = "outputs/probes/all_probe_results.csv"
+    results_df.to_csv(results_csv_path, index=False)
+    
+    logging.info(f"Results saved to {results_csv_path}")
+    logging.info("\n--- Final Results Summary ---")
+    logging.info(results_df.to_string())
 
 if __name__ == "__main__":
     main()

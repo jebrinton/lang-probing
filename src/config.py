@@ -58,7 +58,7 @@ CONCEPTS_VALUES = {
     "Degree": ["Pos", "Cmp", "Sup"],
 }
 
-LAYERS = [0, 4, 8, 12, 16, 20, 24, 28, 31]
+LAYERS = [0, 4, 8, 12, 16, 20, 24, 28, 32]
 
 
 LANGUAGES = ["English", "Spanish"]

@@ -5,7 +5,7 @@ import pandas as pd
 # Add src to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from src.config import ACTIVATIONS_DIR, LANGUAGES, CONCEPTS_VALUES, BASE_DIR, LAYERS
+from src.config import ACTIVATIONS_DIR, LANGUAGES, CONCEPTS_VALUES, BASE_DIR, LAYERS, CONCEPTS_VALUES, COLLECTION_LAYERS
 
 import json
 import numpy as np
@@ -14,14 +14,14 @@ from src.config import OUTPUTS_DIR, STEERING_VECTORS_DIR
 from src.utils import ensure_dir
 from pathlib import Path
 import pickle
-from src.config import CONCEPTS_VALUES
 
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics.pairwise import cosine_similarity
+from tqdm import tqdm
 
 
-def generate_steering_vector(df, concept_key, concept_value):
+def generate_steering_vector(df, concept_key, concept_value) -> tuple[np.ndarray, int, int]:
     """
     Generate a steering vector for a given concept. 
     Difference in means of mean activations accross all token positions for sentences with and without concept_key=concept_value.
@@ -97,7 +97,6 @@ def load_parquet(language, layer):
     df = pd.read_parquet(parquet_path)
     
     return df
-
 
 
 def generate_cosine_similarity_heatmap(steering_vectors, save_path=None, title=None, vmax=1.0, vmin=-1.0):
@@ -180,7 +179,7 @@ def generate_cosine_similarity_heatmap(steering_vectors, save_path=None, title=N
     return similarity_matrix, labels
 
 
-def load_steering_vector(base_dir, concept, value, language, layer):
+def load_steering_vector_parquet(base_dir, concept, value, language, layer) -> pd.DataFrame:
     """
     Loads a single steering vector and its metadata from the partitioned
     Parquet dataset.
@@ -202,32 +201,43 @@ def load_steering_vector(base_dir, concept, value, language, layer):
         return df.iloc[0]
 
     except Exception as e:
-        print(f"Error loading vector {concept}/{value}/{language}/{layer}: {e}")
+        if "single positional indexer is out-of-bounds" in str(e):
+            logging.debug(f"No vector found for {concept}/{value}/{language}/{layer}")
+        else:
+            logging.warning(f"Error loading vector {concept}/{value}/{language}/{layer}: {e}")
         return None
 
 
 def main():
-    layers = [0, 4, 8, 12, 16, 20, 24, 28, 31]
-    layers = LAYERS
-    for concept_key, concept_values in CONCEPTS_VALUES.items():
-        for concept_value in concept_values:
-            for language in LANGUAGES:
-                for layer in layers:
+    logging.basicConfig(level=logging.WARNING)
+
+    CONCEPTS_VALUES = {
+        "Tense": ["Past", "Pres", "Fut"],
+        "Case": ["Nom", "Acc", "Gen", "Dat", "Loc"],
+        "Polarity": ["Pos", "Neg"],
+        "Aspect": ["Prog", "Imp", "Perf"],
+        "Mood": ["Ind", "Imp", "Cnd", "Sub"],
+        "Polite": ["Infm", "Form"],
+        "Person": ["1", "2", "3"],
+        "Degree": ["Pos", "Cmp", "Sup"],
+        "Animacy": ["Anim", "Inan"],
+    }
+    for concept_key in tqdm(CONCEPTS_VALUES.keys(), desc="All concepts", position=0, leave=True, colour='blue'):
+        for concept_value in tqdm(CONCEPTS_VALUES[concept_key], desc=f"Concept values of {concept_key}", position=1, leave=False, colour='green'):
+            for language in tqdm(LANGUAGES, desc=f"Languages for {concept_key}={concept_value}", position=2, leave=False, colour='red'):
+                for layer in tqdm(COLLECTION_LAYERS, desc=f"Layers for {concept_key}={concept_value} in {language}", position=3, leave=False, colour='black'):
+                    
                     df = load_parquet(language, layer)
                     steering_vector, pos_count, neg_count = generate_steering_vector(df, concept_key, concept_value)
 
                     if steering_vector is None:
-                        logging.warning(f"⚠ Warning: No examples found for {concept_key}={concept_value} in {language} at layer {layer}")
+                        logging.info(f"No examples found for {concept_key}={concept_value} in {language} at layer {layer}, skipping...")
                         continue
                     
                     data = {
                         'steering_vector': [steering_vector],
                         'pos_count': [pos_count],
                         'neg_count': [neg_count],
-                        'concept': [concept_key],
-                        'value': [concept_value],
-                        'language': [language],
-                        'layer': [layer]
                     }
                     df_sv = pd.DataFrame(data)
 
@@ -241,6 +251,8 @@ def main():
                     ensure_dir(partition_dir)
                     
                     df_sv.to_parquet(os.path.join(partition_dir, "data.parquet"), compression='snappy', index=False)
+
+    return
 
     for concept_key in CONCEPTS_VALUES.keys():
         for concept_value in CONCEPTS_VALUES[concept_key]:

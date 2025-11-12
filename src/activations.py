@@ -417,8 +417,11 @@ def collect_sentence_activations(model, dataloader, layers, tracer_kwargs=None):
                 correct_attention_mask = model.inputs[1]['attention_mask']
 
                 for layer_num in layers:
+                    print(f"Attempting to trace layer: {layer_module[layer_num]}")
+
                     # 1. Get a Proxy for the layer's output activations
-                    acts_proxy = layer_module[layer_num].output[0]  # Shape: (batch_size, seq_len, hidden_dim)
+                    # Important: use .output[0] for nnsight < v0.5
+                    acts_proxy = layer_module[layer_num].output  # Shape: (batch_size, seq_len, hidden_dim)
                     
                     # 2. Perform all pooling operations on the PROXY objects inside the context
                     

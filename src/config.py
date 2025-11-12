@@ -12,14 +12,16 @@ PROBES_DIR = os.path.join(OUTPUTS_DIR, "probes")
 FEATURES_DIR = os.path.join(OUTPUTS_DIR, "features")
 ABLATIONS_DIR = os.path.join(OUTPUTS_DIR, "ablations")
 ACTIVATIONS_DIR = os.path.join(OUTPUTS_DIR, "activations")
+FLORES_ACTIVATIONS_DIR = os.path.join(OUTPUTS_DIR, "activations_flores")
 STEERING_VECTORS_DIR = os.path.join(OUTPUTS_DIR, "steering_vectors/all")
 STEERING_VECTORS_DIR_NOVA = os.path.join(STEERING_VECTORS_DIR, "nova")
 STEERING_OUTPUT_DIR = os.path.join(OUTPUTS_DIR, "steering")
 LOGS_DIR = os.path.join(BASE_DIR, "logs")
+IMG_DIR = os.path.join(BASE_DIR, "img")
 
 # Paths
 UD_BASE_FOLDER = "/projectnb/mcnet/jbrin/.cache/ud/ud-treebanks-v2.16/"
-
+FLORES_BASE_FOLDER = "/projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101"
 # Model configuration
 MODEL_ID = "meta-llama/Llama-3.1-8B"
 SAE_ID = "jbrinkma/sae-llama-3-8b-layer16"
@@ -34,6 +36,34 @@ LANGUAGES = [
     "Japanese", "Korean", "Persian", "Polish", "Portuguese", "Romanian", 
     "Russian", "Spanish", "Turkish", "Ukrainian", "Vietnamese"
 ]
+LANG_CODE_TO_NAME = {
+    "ara": "Arabic",
+    "ces": "Czech",
+    "deu": "German",
+    "ell": "Greek",
+    "eng": "English",
+    "fas": "Persian",
+    "fra": "French",
+    "heb": "Hebrew",
+    "hin": "Hindi",
+    "ind": "Indonesian",
+    "ita": "Italian",
+    "jpn": "Japanese",
+    "kor": "Korean",
+    "nld": "Dutch",
+    "pol": "Polish",
+    "por": "Portuguese",
+    "ron": "Romanian",
+    "rus": "Russian",
+    "spa": "Spanish",
+    "tur": "Turkish",
+    "ukr": "Ukrainian",
+    "vie": "Vietnamese",
+    "zho_simpl": "Chinese (Simplified)",
+    "zho_trad": "Chinese (Traditional)",
+    "zho": "Chinese",
+}
+NAME_TO_LANG_CODE = {v: k for k, v in LANG_CODE_TO_NAME.items()}
 
 # Grammatical concepts to probe
 CONCEPTS_NOVA = ["Tense", "Number"]
@@ -61,11 +91,11 @@ CONCEPTS_VALUES = {
 LAYERS = [0, 4, 8, 12, 16, 20, 24, 28, 32]
 
 
-LANGUAGES = ["English", "Spanish"]
-CONCEPTS_VALUES = {
-    "Gender": ["Masc", "Fem"],
-}
-LAYERS = [16]
+# LANGUAGES = ["English", "Spanish"]
+# CONCEPTS_VALUES = {
+#     "Gender": ["Masc", "Fem"],
+# }
+# LAYERS = [16]
 
 
 # Training parameters

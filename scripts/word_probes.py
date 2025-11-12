@@ -1,5 +1,6 @@
 import sys
 import os
+import argparse
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from tqdm import tqdm
@@ -184,6 +185,22 @@ def train_probe(model, tokenizer, language, concept, value, layer_num=16, max_sa
 # print(f"Test Accuracy: {test_accuracy:.2f}")
 
 def main():
+    parser = argparse.ArgumentParser(description="Train word probes for linguistic concepts")
+    parser.add_argument("concept", help="The linguistic concept to probe for (e.g., Gender, Number, Tense)")
+    args = parser.parse_args()
+
+    ALL_CONCEPTS_VALUES = {
+        "Number": ["Sing", "Dual", "Plur"],
+        "Tense": ["Past", "Pres", "Fut"],
+        "Gender": ["Masc", "Fem", "Neut"],
+        "Polite": ["Infm", "Form"],
+        "Case": ["Nom", "Acc", "Gen", "Dat", "Loc"],
+    }
+
+    # Filter to only the requested concept
+    if args.concept not in ALL_CONCEPTS_VALUES:
+        raise ValueError(f"Concept '{args.concept}' not found. Available concepts: {list(ALL_CONCEPTS_VALUES.keys())}")
+
     # config logging
     logging.basicConfig(level=logging.INFO)
     cuml_logger.set_level(logging.ERROR)
@@ -193,14 +210,8 @@ def main():
     my_hf_model = AutoModel.from_pretrained(model_name, torch_dtype=torch.float16, device_map="auto")
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     tokenizer.pad_token = tokenizer.eos_token
-
-    CONCEPTS_VALUES = {
-        "Number": ["Sing", "Dual", "Plur"],
-        "Tense": ["Past", "Pres", "Fut"],
-        "Gender": ["Masc", "Fem", "Neut"],
-        "Polite": ["Infm", "Form"],
-        "Case": ["Nom", "Acc", "Gen", "Dat", "Loc"],
-    }
+    
+    CONCEPTS_VALUES = {args.concept: ALL_CONCEPTS_VALUES[args.concept]}
     LANGUAGES = ["English", "French", "German", "Spanish", "Turkish", "Arabic", "Chinese"]
     LAYERS = [0, 4, 8, 12, 16, 20, 24, 28, 32]
     max_samples = 1024
@@ -256,7 +267,7 @@ def main():
     results_df = results_df[final_columns]
     
     # Define the save path
-    results_csv_path = "outputs/probes/all_probe_results.csv"
+    results_csv_path = f"outputs/probes/all_probe_results_{args.concept.lower()}.csv"
     results_df.to_csv(results_csv_path, index=False)
     
     logging.info(f"Results saved to {results_csv_path}")

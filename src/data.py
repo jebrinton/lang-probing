@@ -9,8 +9,12 @@ import pyconll
 from torch.utils.data import Dataset
 from sklearn.utils import resample
 import logging
+import datasets
+from datasets import load_dataset
 
-from .config import UD_BASE_FOLDER
+from .config import NAME_TO_LANG_CODE, UD_BASE_FOLDER
+from .config import FLORES_BASE_FOLDER
+from .config import PROBES_DIR
 
 
 def get_all_treebank_files(language, split, ud_base_folder=None):
@@ -310,7 +314,7 @@ def load_sentences_with_tags(language, max_samples=None, seed=42, ud_base_folder
             continue
             
         logging.info(f"Loading sentences from: {os.path.basename(conll_file)}")
-        data = pyconll.load_from_file(conll_file)
+        data = pyconll.load.load_from_file(conll_file)
         
         for sentence in data:
             # Extract all grammatical tags from tokens
@@ -342,3 +346,16 @@ def load_sentences_with_tags(language, max_samples=None, seed=42, ud_base_folder
     
     return all_sentences
 
+def load_flores_sentences_with_tags(language, max_samples=None, seed=42, flores_base_folder=FLORES_BASE_FOLDER, probes_dir=PROBES_DIR):
+    """
+    Load sentences from FLORES; tag sentences according to the language/concept/value probe
+    """
+
+    # iterate thru all sentences in flores_base_folder/language_code
+    flores_file = os.path.join(flores_base_folder, NAME_TO_LANG_CODE[language])
+    i = 0
+    for sentence in datasets.load_dataset(flores_file, split="train"):
+        print(sentence)
+        if i > 10:
+            break
+        i += 1

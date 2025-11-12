@@ -17,8 +17,8 @@ import argparse
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from src.config import (
-    ACTIVATIONS_DIR, LANGUAGES, MODEL_ID, SEED,
-    MAX_SAMPLES_FOR_STEERING, COLLECTION_LAYERS, BATCH_SIZE
+    ACTIVATIONS_DIR, FLORES_ACTIVATIONS_DIR, LANGUAGES, LANG_CODE_TO_NAME, MODEL_ID, SEED,
+    MAX_SAMPLES_FOR_STEERING, COLLECTION_LAYERS, BATCH_SIZE, FLORES_BASE_FOLDER
 )
 from src.data import load_sentences_with_tags
 from src.activations import collect_sentence_activations
@@ -108,7 +108,8 @@ def main():
     for language in args.languages:
         df = collect_activations_by_language(model, tokenizer, language)
 
-        for layer in COLLECTION_LAYERS:
+        # for layer in COLLECTION_LAYERS:
+        for layer in [32]: # TODO: remove when done
             df_layer = df[df['layer'] == layer]
 
             layer_dir = os.path.join(ACTIVATIONS_DIR, f"language={language}", f"layer={layer}")

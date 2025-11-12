@@ -7,6 +7,7 @@ import json
 import pickle
 import logging
 import torch
+import pandas as pd
 from nnsight import LanguageModel
 from transformers import AutoTokenizer
 from huggingface_hub import hf_hub_download
@@ -215,3 +216,18 @@ def load_steering_vector(steering_dir, language, concept_key, concept_value, lay
     
     return vector, metadata
 
+def load_parquet_steering_vector(steering_dir, concept_key, concept_value, language, layer):
+    """
+    Carga un steering vector específico desde el directorio.
+    
+    Args:
+        steering_dir: Path al directorio que contiene el subdirectorio vectors/
+        language: Idioma del vector
+        concept_key: Clave del concepto (e.g., 'Tense')
+        concept_value: Valor del concepto (e.g., 'Past')
+        layer: Número de capa
+    """
+    sv_path = os.path.join(steering_dir, f"concept={concept_key}/value={concept_value}/language={language}/layer={layer}/data.parquet")
+    if not os.path.exists(sv_path):
+        raise FileNotFoundError(f"No se encontró el vector: {sv_path}")
+    return pd.read_parquet(sv_path)

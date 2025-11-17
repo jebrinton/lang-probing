@@ -5,13 +5,13 @@ import pandas as pd
 # Add src to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from src.config import ACTIVATIONS_DIR, LANGUAGES, CONCEPTS_VALUES, BASE_DIR, LAYERS, CONCEPTS_VALUES, COLLECTION_LAYERS
+from lang_probing_src.config import ACTIVATIONS_DIR, LANGUAGES, CONCEPTS_VALUES, BASE_DIR, LAYERS, CONCEPTS_VALUES, COLLECTION_LAYERS
 
 import json
 import numpy as np
 import logging
-from src.config import OUTPUTS_DIR, STEERING_VECTORS_DIR
-from src.utils import ensure_dir
+from lang_probing_src.config import OUTPUTS_DIR, STEERING_VECTORS_DIR
+from lang_probing_src.utils import ensure_dir
 from pathlib import Path
 import pickle
 

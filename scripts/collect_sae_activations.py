@@ -17,10 +17,10 @@ import argparse
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from lang_probing_src.config import (
-    ACTIVATIONS_DIR, FLORES_ACTIVATIONS_DIR, LANGUAGES, LANG_CODE_TO_NAME, MODEL_ID, SEED,
+    ACTIVATIONS_DIR, FLORES_ACTIVATIONS_DIR, LANGUAGES, LANG_CODE_TO_NAME, MODEL_ID, SAE_ID, SEED,
     MAX_SAMPLES_FOR_STEERING, COLLECTION_LAYERS, BATCH_SIZE, FLORES_BASE_FOLDER
 )
-from lang_probing_src.data import load_sentences_with_tags
+from lang_probing_src.data import load_flores_sentences_with_tags
 from lang_probing_src.activations import collect_sentence_activations
 from lang_probing_src.utils import setup_model, ensure_dir, setup_logging
 from lang_probing_src.sentence_dataset_class import SentenceDataset, collate_fn
@@ -28,7 +28,7 @@ from lang_probing_src.sentence_dataset_class import SentenceDataset, collate_fn
 def collect_activations_by_language(model, tokenizer, language):
     logging.info(f"\nProcessing {language}...")
     try:
-        sentences = load_sentences_with_tags(
+        sentences = load_flores_sentences_with_tags(
             language=language,
             max_samples=MAX_SAMPLES_FOR_STEERING,
             seed=SEED
@@ -96,9 +96,9 @@ def main():
     
     # Load model
     logging.info("\nLoading model...")
-    model, _, _, tokenizer = setup_model(
+    model, submodule, autoencoder, tokenizer = setup_model(
         model_id=MODEL_ID,
-        sae_id=None  # No SAE needed for this task
+        sae_id=SAE_ID
     )
     logging.info("✓ Model loaded successfully")
     
@@ -108,8 +108,7 @@ def main():
     for language in args.languages:
         df = collect_activations_by_language(model, tokenizer, language)
 
-        # for layer in COLLECTION_LAYERS:
-        for layer in [32]: # TODO: remove when done
+        for layer in COLLECTION_LAYERS:
             df_layer = df[df['layer'] == layer]
 
             layer_dir = os.path.join(ACTIVATIONS_DIR, f"language={language}", f"layer={layer}")

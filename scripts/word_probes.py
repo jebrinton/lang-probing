@@ -16,9 +16,9 @@ import pandas as pd
 import random
 import logging
 from cuml.common import logger as cuml_logger
-from src.word_probing_utils import WordProbingDataset, WordProbingCollate, train_and_evaluate_probe
-from src.config import PROBES_DIR, UD_BASE_FOLDER
-from src.data import get_available_concepts, get_training_files
+from lang_probing_src.word_probing_utils import WordProbingDataset, WordProbingCollate, train_and_evaluate_probe
+from lang_probing_src.config import PROBES_DIR, UD_BASE_FOLDER
+from lang_probing_src.data import get_available_concepts, get_training_files
 
 
 def conllu_to_processed_sentences(conll_filepaths):

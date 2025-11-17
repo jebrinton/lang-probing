@@ -5,9 +5,9 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 import pyconll
-from src.config import LANGUAGES, MODEL_ID
-from src.data import get_all_treebank_files
-from src.utils import setup_model
+from lang_probing_src.config import LANGUAGES, MODEL_ID
+from lang_probing_src.data import get_all_treebank_files
+from lang_probing_src.utils import setup_model
 from tqdm import tqdm
 
 # model, _, _, tokenizer = setup_model(MODEL_ID)

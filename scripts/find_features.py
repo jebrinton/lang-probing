@@ -15,10 +15,10 @@ import glob
 from collections import defaultdict
 from tqdm import tqdm
 
-from src.config import TOP_K_FEATURES, PROBES_DIR, FEATURES_DIR, LOGS_DIR
-from src.utils import ensure_dir, save_json, setup_logging
-from src.probe import load_probe
-from src.features import (
+from lang_probing_src.config import TOP_K_FEATURES, PROBES_DIR, FEATURES_DIR, LOGS_DIR
+from lang_probing_src.utils import ensure_dir, save_json, setup_logging
+from lang_probing_src.probe import load_probe
+from lang_probing_src.features import (
     find_top_correlating_features,
     find_top_positive_negative_features,
     get_shared_features_across_languages

@@ -11,7 +11,7 @@ from sklearn.decomposition import PCA
 from tqdm import tqdm
 
 from scripts.collect_steering_vectors import load_steering_vector_parquet
-from src.config import STEERING_VECTORS_DIR, LANGUAGES, CONCEPTS_VALUES, COLLECTION_LAYERS, IMG_DIR
+from lang_probing_src.config import STEERING_VECTORS_DIR, LANGUAGES, CONCEPTS_VALUES, COLLECTION_LAYERS, IMG_DIR
 
 def load_all_vectors(concept_values, languages, layers, base_dir):
     """

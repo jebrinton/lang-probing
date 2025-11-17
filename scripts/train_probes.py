@@ -14,14 +14,14 @@ import logging
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
-from src.config import (
+from lang_probing_src.config import (
     MODEL_ID, SAE_ID, LANGUAGES, CONCEPTS, BATCH_SIZE, SEED, 
     MAX_ITER, C_VALUE, LAYER_NUM, PROBES_DIR, LOGS_DIR
 )
-from src.utils import setup_model, ensure_dir, setup_logging
-from src.data import get_training_files, get_test_files, get_available_concepts, ProbingDataset, balance_dataset
-from src.activations import extract_mlp_activations
-from src.probe import train_probe, evaluate_probe, save_probe
+from lang_probing_src.utils import setup_model, ensure_dir, setup_logging
+from lang_probing_src.data import get_training_files, get_test_files, get_available_concepts, ProbingDataset, balance_dataset
+from lang_probing_src.activations import extract_mlp_activations
+from lang_probing_src.probe import train_probe, evaluate_probe, save_probe
 
 
 

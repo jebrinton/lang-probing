@@ -14,11 +14,11 @@ import argparse
 import logging
 import json
 
-from src.config import MODEL_ID, SAE_ID, PROBES_DIR, FEATURES_DIR, ABLATIONS_DIR, LOGS_DIR
-from src.utils import setup_model, ensure_dir, load_json, setup_logging
-from src.probe import load_probe
-from src.features import get_feature_indices
-from src.ablation import (
+from lang_probing_src.config import MODEL_ID, SAE_ID, PROBES_DIR, FEATURES_DIR, ABLATIONS_DIR, LOGS_DIR
+from lang_probing_src.utils import setup_model, ensure_dir, load_json, setup_logging
+from lang_probing_src.probe import load_probe
+from lang_probing_src.features import get_feature_indices
+from lang_probing_src.ablation import (
     ablate_features,
     activate_features,
     progressive_ablation,

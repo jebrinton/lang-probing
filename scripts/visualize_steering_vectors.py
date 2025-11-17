@@ -30,8 +30,8 @@ import seaborn as sns
 from pathlib import Path
 from sklearn.metrics.pairwise import cosine_similarity
 
-from src.config import STEERING_VECTORS_DIR_NOVA, LOGS_DIR, OUTPUTS_DIR, LANGUAGES
-from src.utils import setup_logging, load_steering_metadata, load_steering_vector
+from lang_probing_src.config import STEERING_VECTORS_DIR_NOVA, LOGS_DIR, OUTPUTS_DIR, LANGUAGES
+from lang_probing_src.utils import setup_logging, load_steering_metadata, load_steering_vector
 
 
 def verify_vector_structure(vector, metadata):
@@ -172,7 +172,7 @@ def save_cosine_similarity_heatmap(similarity_matrix, languages, layer, concept_
     Returns:
         str: Ruta del archivo guardado
     """
-    from src.utils import ensure_dir
+    from lang_probing_src.utils import ensure_dir
     
     # Crear directorio de salida
     ensure_dir(output_dir)

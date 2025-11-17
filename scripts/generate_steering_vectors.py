@@ -24,14 +24,14 @@ import pyconll
 import torch
 from tqdm import tqdm
 
-from src.config import (
+from lang_probing_src.config import (
     MODEL_ID, LANGUAGES, CONCEPTS, BATCH_SIZE, SEED, 
     TRACER_KWARGS, MIN_SAMPLES_FOR_STEERING, MAX_SAMPLES_FOR_STEERING, STEERING_VECTORS_DIR, LOGS_DIR
 )
-from src.utils import setup_model, ensure_dir, setup_logging
-from src.data import get_training_files, get_available_concepts, concept_filter
-from src.activations import extract_all_activations_for_steering, extract_mean_activations, ActivationDataset
-from src.dataloader_factory import SentenceDataLoaderFactory
+from lang_probing_src.utils import setup_model, ensure_dir, setup_logging
+from lang_probing_src.data import get_training_files, get_available_concepts, concept_filter
+from lang_probing_src.activations import extract_all_activations_for_steering, extract_mean_activations, ActivationDataset
+from lang_probing_src.dataloader_factory import SentenceDataLoaderFactory
 
 def filter_sentences_by_concept(conll_files, concept_key, concept_value):
     """

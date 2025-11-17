@@ -13,7 +13,7 @@ from collections import defaultdict
 # Add src to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from src.config import ACTIVATIONS_DIR
+from lang_probing_src.config import ACTIVATIONS_DIR
 
 
 def load_activations(parquet_path):

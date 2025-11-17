@@ -22,8 +22,8 @@ from datetime import datetime
 import torch
 import nnsight
 
-from src.config import STEERING_OUTPUT_DIR, MODEL_ID, TRACER_KWARGS
-from src.utils import setup_model, ensure_dir, setup_logging, load_steering_metadata, load_steering_vector
+from lang_probing_src.config import STEERING_OUTPUT_DIR, MODEL_ID, TRACER_KWARGS
+from lang_probing_src.utils import setup_model, ensure_dir, setup_logging, load_steering_metadata, load_steering_vector
 
 
 def generate_with_steering(model, prompt, steering_vector, steering_layer, coefficient, max_new_tokens, apply_to_all):

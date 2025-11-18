@@ -108,11 +108,6 @@ def extract_sae_activations(model, submodule, autoencoder, dataloader, layer_num
             - activations: np.array de shape (n_samples, dict_size)
             - labels: np.array de shape (n_samples,)
     """
-    warnings.warn(
-        "extract_sae_activations is deprecated. Use extract_mlp_activations() for general MLP activations.",
-        DeprecationWarning,
-        stacklevel=2
-    )
     if tracer_kwargs is None:
         from .config import TRACER_KWARGS
         tracer_kwargs = TRACER_KWARGS

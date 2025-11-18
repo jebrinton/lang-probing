@@ -134,7 +134,7 @@ def get_available_concepts(conll_files):
             logging.warning(f"File not found: {conll_file}")
             continue
             
-        data = pyconll.load_from_file(conll_file)
+        data = pyconll.load.load_from_file(conll_file)
         
         for sentence in data:
             for token in sentence:
@@ -359,3 +359,83 @@ def load_flores_sentences_with_tags(language, max_samples=None, seed=42, flores_
         if i > 10:
             break
         i += 1
+
+from torch.utils.data import Dataset
+from collections import defaultdict
+
+class ConlluDataset(Dataset):
+    def __init__(self, conllu_path):
+        """
+        Loads and parses a CoNLL-U file.
+        
+        Args:
+            conllu_path (str): Path to the .conllu file.
+        """
+        self.sentences = [sentence for sentence in pyconll.load.iter_from_file(conllu_path)]
+
+    def __len__(self):
+        return len(self.sentences)
+
+    def _pool_tags(self, sentence):
+        """
+        Implements your "Step 2" logic:
+        Pool all word-level tags for a sentence.
+        e.g., Tense=Past and Tense=Pres -> {'Tense': {'Past', 'Pres'}}
+        """
+        # defaultdict(set) is perfect for this
+        pooled = defaultdict(set)
+        for token in sentence:
+            feats = token.feats
+            if feats:
+                for key, values in feats.items():
+                    pooled[key].update(values)
+        
+        # Convert back to a regular dict for easier handling
+        return {k: sorted(list(v)) for k, v in pooled.items()}
+
+    def __getitem__(self, idx):
+        sentence = self.sentences[idx]
+        
+        return {
+            "sentence": sentence.meta_value("text"),
+            "tags": self._pool_tags(sentence)
+        }
+
+from datasets import load_dataset
+from torch.utils.data import Dataset
+
+class FloresDataset(Dataset):
+    def __init__(self, language_code, split='dev'):
+        """
+        Loads a language from the FLORES-101 dataset.
+        
+        Args:
+            language_code (str): e.g., 'eng_Latn', 'fra_Latn', 'spa_Latn'
+            split (str): 'dev' or 'devtest'
+        """
+        dataset_name = "gsarti/flores_101"
+        self.data = load_dataset(dataset_name, language_code, split=split)
+    
+    def __len__(self):
+        return len(self.data)
+
+    def __getitem__(self, idx):
+        sentence_text = self.data[idx]['sentence']
+        
+        return {
+            "sentence": sentence_text,
+            "tags": {}  # FLORES has no linguistic tags, so return empty
+        }
+
+def collate_fn(batch_list):
+    """
+    Collates a list of samples (dicts) from the Dataset
+    into a single batch dict.
+    """
+    sentences = [item['sentence'] for item in batch_list]
+    tags = [item['tags'] for item in batch_list]
+    
+    return {
+        "sentence": sentences,  # This will be a list of strings
+        "tags": tags            # This will be a list of dicts
+    }

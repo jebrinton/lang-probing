@@ -113,7 +113,7 @@ def get_best_classifier(train_activations, train_labels, seed):
     #    'qn' (Quasi-Newton) is a good, fast default.
     #    'l2' is the only supported penalty for 'qn'.
     param_grid = [{
-        'model__C' : np.logspace(-4, 3, 16), # np.logspace is fine, it just creates a CPU array
+        'model__C' : np.logspace(-4, 3, 16).tolist(), # np.logspace is fine, it just creates a CPU array
     }]
 
     # 3. Create the GPU-aware scorer
@@ -130,7 +130,6 @@ def get_best_classifier(train_activations, train_labels, seed):
     )
     
     # 5. Convert labels to CPU (NumPy) for sklearn's CV splitter
-    #    This was our "bandaid" fix, and it is still necessary.
     if isinstance(train_labels, cupy.ndarray):
         train_labels_cpu = cupy.asnumpy(train_labels)
     else:

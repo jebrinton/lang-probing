@@ -4,20 +4,23 @@ import argparse
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from tqdm import tqdm
+from datetime import datetime
+import glob
+import logging
+import random
+
 # from nnsight import LanguageModel
 from torch.utils.data import DataLoader
 import torch
-import glob
 from transformers import AutoModel, AutoTokenizer
 import pyconll
 import joblib
 import numpy as np
 import pandas as pd
-import random
-import logging
+
 from cuml.common import logger as cuml_logger
 from lang_probing_src.word_probing_utils import WordProbingDataset, WordProbingCollate, train_and_evaluate_probe
-from lang_probing_src.config import PROBES_DIR, UD_BASE_FOLDER
+from lang_probing_src.config import PROBES_DIR, UD_BASE_FOLDER, CONCEPTS_VALUES, LANGUAGES, LAYERS
 from lang_probing_src.data import get_available_concepts, get_training_files
 
 
@@ -184,22 +187,11 @@ def train_probe(model, tokenizer, language, concept, value, layer_num=16, max_sa
 # print(f"Train Accuracy: {train_accuracy:.2f}")
 # print(f"Test Accuracy: {test_accuracy:.2f}")
 
-def main():
-    parser = argparse.ArgumentParser(description="Train word probes for linguistic concepts")
-    parser.add_argument("concept", help="The linguistic concept to probe for (e.g., Gender, Number, Tense)")
-    args = parser.parse_args()
-
-    ALL_CONCEPTS_VALUES = {
-        "Number": ["Sing", "Dual", "Plur"],
-        "Tense": ["Past", "Pres", "Fut"],
-        "Gender": ["Masc", "Fem", "Neut"],
-        "Polite": ["Infm", "Form"],
-        "Case": ["Nom", "Acc", "Gen", "Dat", "Loc"],
-    }
-
-    # Filter to only the requested concept
-    if args.concept not in ALL_CONCEPTS_VALUES:
-        raise ValueError(f"Concept '{args.concept}' not found. Available concepts: {list(ALL_CONCEPTS_VALUES.keys())}")
+def main(args):
+    # check that the concepts are valid
+    for concept in args.concepts:
+        if concept not in CONCEPTS_VALUES:
+            raise ValueError(f"Concept '{concept}' not found. Available concepts: {list(CONCEPTS_VALUES.keys())}")
 
     # config logging
     logging.basicConfig(level=logging.INFO)
@@ -207,26 +199,24 @@ def main():
 
     model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    my_hf_model = AutoModel.from_pretrained(model_name, torch_dtype=torch.float16, device_map="auto")
+    my_hf_model = AutoModel.from_pretrained(model_name, dtype=torch.float16, device_map="auto")
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     tokenizer.pad_token = tokenizer.eos_token
+    max_samples = args.max_samples
+
+    available_concepts = {}
+    for language in args.languages:
+        available_concepts[language] = get_available_concepts(get_training_files(language, ud_base_folder=UD_BASE_FOLDER))
     
-    CONCEPTS_VALUES = {args.concept: ALL_CONCEPTS_VALUES[args.concept]}
-    LANGUAGES = ["English", "French", "German", "Spanish", "Turkish", "Arabic", "Chinese"]
-    LAYERS = [0, 4, 8, 12, 16, 20, 24, 28, 32]
-    max_samples = 1024
-
     all_results = []
-
-    for concept in CONCEPTS_VALUES.keys():
+    for concept in args.concepts:
         for value in CONCEPTS_VALUES[concept]:
-            for language in LANGUAGES:
+            for language in args.languages:
                 # check that the concept and value are valid for the language
-                if concept not in get_available_concepts(get_training_files(language, ud_base_folder=UD_BASE_FOLDER)):
+                if concept not in available_concepts[language] or value not in available_concepts[language][concept]:
                     continue
-                if value not in get_available_concepts(get_training_files(language, ud_base_folder=UD_BASE_FOLDER))[concept]:
-                    continue
-                for layer_num in LAYERS:
+
+                for layer_num in args.layers:
                     logging.info(f"Training probe for {language} {concept}={value} at layer {layer_num}...")
                     
                     # 1. Get classifier and stats
@@ -267,7 +257,7 @@ def main():
     results_df = results_df[final_columns]
     
     # Define the save path
-    results_csv_path = f"outputs/probes/all_probe_results_{args.concept.lower()}.csv"
+    results_csv_path = f"outputs/probes/all_probe_results_{datetime.now().strftime('%Y-%m-%d_%H:%M')}.csv"
     results_df.to_csv(results_csv_path, index=False)
     
     logging.info(f"Results saved to {results_csv_path}")
@@ -275,4 +265,10 @@ def main():
     logging.info(results_df.to_string())
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Train word probes for linguistic concepts")
+    parser.add_argument("--concepts", nargs='+', default=CONCEPTS_VALUES.keys(), help="Concepts to process")
+    parser.add_argument("--languages", nargs='+', default=LANGUAGES, help="Languages to process")
+    parser.add_argument("--layers", type=int, nargs='+', default=LAYERS, help="Layers to process")
+    parser.add_argument("--max_samples", type=int, default=1024, help="Maximum number of samples to process")
+    args = parser.parse_args()
+    main(args)

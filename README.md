@@ -12,6 +12,9 @@ Use `scripts/collect_activations.py` with a list of `--languages` to collect lay
 
 The file `scripts/collect_steering_vectors.py` expects activations to be stored in this format.
 
+## Note
+
+If you download the full UD treebank, keep in mind that the `UD_Arabic-NYUAD` treebank needs to be combined with its data; look at its README for more information.
 
 ## Acknowledgements
 

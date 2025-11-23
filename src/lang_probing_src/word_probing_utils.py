@@ -11,7 +11,6 @@ from cuml.linear_model import LogisticRegression # You already have this
 from sklearn.metrics import make_scorer, accuracy_score # <--- IMPORT NEW SCORERS
 
 
-# --- START NEW FUNCTION ---
 # This is our custom, GPU-aware scorer
 def gpu_aware_accuracy(y_true, y_pred):
     """
@@ -29,7 +28,8 @@ def gpu_aware_accuracy(y_true, y_pred):
         
     # Now both are NumPy arrays, and sklearn.metrics.accuracy_score will work
     return accuracy_score(y_true, y_pred)
-# --- END NEW FUNCTION ---
+
+
 class WordProbingCollate:
     def __init__(self, tokenizer):
         self.tokenizer = tokenizer

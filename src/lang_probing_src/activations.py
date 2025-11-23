@@ -89,10 +89,8 @@ def extract_mlp_activations(model, dataloader, layer_num, tracer_kwargs=None):
     return activations, labels
 
 
-def extract_sae_activations(model, submodule, autoencoder, dataloader, layer_num=16, tracer_kwargs=None):
+def extract_sae_activations(model, submodule, autoencoder, dataloader, tracer_kwargs=None):
     """
-    DEPRECATED: Use extract_mlp_activations() instead.
-    
     Extrae activaciones SAE para un dataset completo.
     
     Args:

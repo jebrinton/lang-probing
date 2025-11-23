@@ -125,8 +125,8 @@ def get_best_classifier(train_activations, train_labels, seed):
         probe_pipeline,
         param_grid,
         cv=4,
-        scoring=custom_scorer,  # <--- USE OUR CUSTOM SCORER
-        verbose=1
+        scoring=custom_scorer,
+        verbose=0
     )
     
     # 5. Convert labels to CPU (NumPy) for sklearn's CV splitter

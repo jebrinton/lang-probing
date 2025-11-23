@@ -131,10 +131,7 @@ def extract_word_activations(hf_model, dataloader, layer_num, device="cuda"):
     return np.vstack(all_word_activations), np.array(all_word_labels)
 
 
-def train_probe(model, tokenizer, language, concept, value, layer_num=16, max_samples=None):
-    train_sentences = get_processed_sentences(language, "train")
-    test_sentences = get_processed_sentences(language, "test")
-
+def train_probe(model, tokenizer, train_sentences, test_sentences, concept, value, layer_num=16, max_samples=None):
     random.seed(42)
     if max_samples is not None:
         train_sentences = random.sample(train_sentences, max_samples)
@@ -148,6 +145,7 @@ def train_probe(model, tokenizer, language, concept, value, layer_num=16, max_sa
     
     train_word_acts, train_word_labels = extract_word_activations(model, train_dataloader, layer_num)
     test_word_acts, test_word_labels = extract_word_activations(model, test_dataloader, layer_num)
+    torch.cuda.empty_cache()
     
     classifier, stats = train_and_evaluate_probe(
         train_word_acts, train_word_labels, 
@@ -157,36 +155,6 @@ def train_probe(model, tokenizer, language, concept, value, layer_num=16, max_sa
     return classifier, stats # Return both
 
 
-# processed_sentences = get_processed_sentences("Spanish", "train")
-# dataset = WordProbingDataset(processed_sentences, "Number", "Plur")
-# subset_indices = range(64)
-# dataset = Subset(dataset, subset_indices)
-
-# dataloader = DataLoader(
-#     dataset, 
-#     batch_size=16, 
-#     shuffle=False, 
-#     collate_fn=WordProbingCollate(tokenizer)
-# )
-
-# word_acts, word_labels = extract_word_activations(my_hf_model, dataloader, layer_num)
-
-# # save word_acts and word_labels to a file
-# np.savez("word_acts_and_labels.npz", word_acts=word_acts, word_labels=word_labels)
-
-# # load word_acts and word_labels from a file
-# word_acts, word_labels = np.load("word_acts_and_labels.npz")
-
-# classifier = train_and_evaluate_probe(word_acts, word_labels, word_acts, word_labels, 42)
-
-# classifier.fit(train_activations, train_labels)
-
-# train_accuracy = classifier.score(word_acts, word_labels)
-# test_accuracy = classifier.score(word_acts, word_labels)
-
-# print(f"Train Accuracy: {train_accuracy:.2f}")
-# print(f"Test Accuracy: {test_accuracy:.2f}")
-
 def main(args):
     # check that the concepts are valid
     for concept in args.concepts:
@@ -195,7 +163,7 @@ def main(args):
 
     # config logging
     logging.basicConfig(level=logging.INFO)
-    cuml_logger.set_level(logging.ERROR)
+    cuml_logger.set_level(cuml_logger.level_enum.error)
 
     model_name = "meta-llama/Meta-Llama-3.1-8B-Instruct"
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -205,12 +173,19 @@ def main(args):
     max_samples = args.max_samples
 
     available_concepts = {}
+    train_sentences = {}
+    test_sentences = {}
     for language in args.languages:
         available_concepts[language] = get_available_concepts(get_training_files(language, ud_base_folder=UD_BASE_FOLDER))
+
+        train_sentences[language] = get_processed_sentences(language, "train")
+        test_sentences[language] = get_processed_sentences(language, "test")
     
     all_results = []
     for concept in args.concepts:
         for value in CONCEPTS_VALUES[concept]:
+            if value not in args.values:
+                continue
             for language in args.languages:
                 # check that the concept and value are valid for the language
                 if concept not in available_concepts[language] or value not in available_concepts[language][concept]:
@@ -220,7 +195,7 @@ def main(args):
                     logging.info(f"Training probe for {language} {concept}={value} at layer {layer_num}...")
                     
                     # 1. Get classifier and stats
-                    classifier, stats = train_probe(my_hf_model, tokenizer, language, concept, value, layer_num, max_samples)
+                    classifier, stats = train_probe(my_hf_model, tokenizer, train_sentences[language], test_sentences[language], concept, value, layer_num, max_samples)
                     
                     # 2. Save the probe file
                     probe_filename = f"outputs/probes/word_probes/{language}_{concept}_{value}_l{layer_num}_n{max_samples}.joblib"
@@ -267,6 +242,7 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Train word probes for linguistic concepts")
     parser.add_argument("--concepts", nargs='+', default=CONCEPTS_VALUES.keys(), help="Concepts to process")
+    parser.add_argument("--values", nargs='+', default=CONCEPTS_VALUES.values(), help="Concept values to process")
     parser.add_argument("--languages", nargs='+', default=LANGUAGES, help="Languages to process")
     parser.add_argument("--layers", type=int, nargs='+', default=LAYERS, help="Layers to process")
     parser.add_argument("--max_samples", type=int, default=1024, help="Maximum number of samples to process")

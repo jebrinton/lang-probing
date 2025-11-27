@@ -80,55 +80,42 @@ def get_last_token_mask(inputs, texts):
     return diff_vector
 
 
-def input_features(model, sae, tokenizer, dataloader, probe):
+# def input_features_treebank
+
+def input_features_probe(model, sae, tokenizer, dataloader, probe):
     tracer_kwargs = {'scan': False, 'validate': False}
     with torch.no_grad():
         all_positive = []
         all_negative = []
         for batch in dataloader:
-            inputs = tokenizer(batch["sentence"], padding=True, return_tensors="pt")
-            extraction_mask = get_last_token_mask(inputs, batch["sentence"]) # shape: [batch_size, seq_len]
+            sentence_batch = batch["sentence"]
 
-            with model.trace(batch["sentence"], **tracer_kwargs) as tracer:
-                hidden_layer = model.model.layers[16].output
+            inputs = tokenizer(sentence_batch, padding=True, return_tensors="pt")
+            extraction_mask = get_last_token_mask(inputs, sentence_batch) # shape: [batch_size, seq_len]
+
+            with model.trace(sentence_batch, **tracer_kwargs) as tracer:
+                hidden_layer = model.model.layers[16].output # remember that nnsight v0.5 changed the output to output instead of output[0]
                 acts = hidden_layer[extraction_mask].save() # shape: [seq_len, hidden_dim]
 
-            # --- Post-Processing (Probe -> SAE -> Diff) ---
-            # Acts shape: [N_Words, 4096]
-            activations = acts.to(model.device) # Move back to GPU if .save() moved it
-
             # A. Get Probe Logits (Concept Present vs Absent)
-            activations_cpu = activations.cpu().numpy()
-            probe_logits = probe.predict_proba(activations_cpu)[:, 1]  # Probabilidad de la clase positiva
+            acts_cpu = acts.cpu().numpy()
+            probe_logits = probe.predict_proba(acts_cpu)[:, 1]  # Probabilidad de la clase positiva
             probe_logits = torch.from_numpy(probe_logits).to(model.device)
-
             concept_mask = probe_logits > 0.5  # Umbral de 0.5 para probabilidad
 
-            # B. Get SAE Features 
-            sae_acts = sae.encode(activations) # shape: [n_words, sae_dim]
-
-            print(sae_acts.nonzero().shape)
-            print(sae_acts.shape)
-            print(sae_acts.mean(dim=0))
-            exit()
-
-            # C. Accumulate SAE activations by concept presence
-            # Append the SAE acts where concept is present/absent to lists
-            if concept_mask.any():
-                all_positive.append(sae_acts[concept_mask].cpu())
-            if (~concept_mask).any():
-                all_negative.append(sae_acts[~concept_mask].cpu())
+            all_positive.append(acts[concept_mask].cpu())
+            all_negative.append(acts[~concept_mask].cpu())
         
         # D. Compute global means after processing all batches
         if all_positive:
             mean_present = torch.cat(all_positive, dim=0).mean(dim=0)  # shape: [sae_dim]
         else:
-            mean_present = torch.zeros(sae_acts.shape[1])
+            raise ValueError(f"No positive examples found for {dataloader}")
         
         if all_negative:
             mean_absent = torch.cat(all_negative, dim=0).mean(dim=0)  # shape: [sae_dim]
         else:
-            mean_absent = torch.zeros(sae_acts.shape[1])
+            raise ValueError(f"No negative examples found for {dataloader}")
         
         # E. Calculate final difference vector
         diff_vector = mean_present - mean_absent  # shape: [sae_dim] -> [32768]
@@ -147,15 +134,17 @@ def main():
     tokenizer.pad_token = tokenizer.eos_token
 
     LANGUAGES = ["English", "French", "German", "Spanish", "Turkish", "Arabic", "Hindi", "Hebrew", "Chinese", "Indonesian"]
+    LANGUAGES = ["English", "French", "German", "Spanish", "Turkish"]
+
     
     all_diff_vectors = {}
     for language in LANGUAGES:
         dataset = load_dataset("gsarti/flores_101", NAME_TO_LANG_CODE[language], split="devtest")
         dataloader = DataLoader(dataset, batch_size=32, shuffle=False)
 
-        probe_path = f"outputs/probes/word_probes/{language}_Number_Plur_l16_n1024.joblib"
+        probe_path = f"outputs/probes/word_probes/{language}_Tense_Past_l16_n1024.joblib"
         probe = joblib.load(probe_path)
-        diff_vector = input_features(model, sae, tokenizer, dataloader, probe)
+        diff_vector = input_features_probe(model, sae, tokenizer, dataloader, probe)
         all_diff_vectors[language] = diff_vector.cpu().numpy()
 
 if __name__ == "__main__":

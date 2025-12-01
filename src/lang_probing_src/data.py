@@ -364,14 +364,48 @@ from torch.utils.data import Dataset
 from collections import defaultdict
 
 class ConlluDataset(Dataset):
-    def __init__(self, conllu_path):
+    def __init__(self, language, treebank="PUD", split="test"):
         """
         Loads and parses a CoNLL-U file.
         
         Args:
             conllu_path (str): Path to the .conllu file.
         """
-        self.sentences = [sentence for sentence in pyconll.load.iter_from_file(conllu_path)]
+        conllu_dir = os.path.join(UD_BASE_FOLDER, f"UD_{language}-{treebank}")
+        conllu_files = glob.glob(os.path.join(conllu_dir, f"*ud-{split}.conllu"))
+        self.sentences = []
+        for conllu_file in conllu_files:
+            data = pyconll.load.load_from_file(conllu_file)
+            for sentence in data:
+                self.sentences.append(sentence)
+
+    def __len__(self):
+        return len(self.sentences)
+
+    def __getitem__(self, idx):
+        sentence = self.sentences[idx]
+        
+        return {
+            "sentence": [token.form for token in sentence],
+            "tags": [token.feats for token in sentence]
+        }
+
+
+class ConlluDatasetPooled(Dataset):
+    def __init__(self, language, treebank="PUD", split="test"):
+        """
+        Loads and parses a CoNLL-U file and pools the tags for each sentence.
+        
+        Args:
+            conllu_path (str): Path to the .conllu file.
+        """
+        conllu_dir = os.path.join(UD_BASE_FOLDER, f"UD_{language}-{treebank}")
+        conllu_files = glob.glob(os.path.join(conllu_dir, f"*ud-{split}.conllu"))
+        self.sentences = []
+        for conllu_file in conllu_files:
+            data = pyconll.load.load_from_file(conllu_file)
+            for sentence in data:
+                self.sentences.append(sentence)
 
     def __len__(self):
         return len(self.sentences)
@@ -393,6 +427,23 @@ class ConlluDataset(Dataset):
         # Convert back to a regular dict for easier handling
         return {k: sorted(list(v)) for k, v in pooled.items()}
 
+
+    def filter(self, filter_function):
+        """
+        Filters the dataset according to a filter function.
+        Returns a new ConlluDatasetPooled with filtered sentences.
+        """
+        filtered_dataset = ConlluDatasetPooled.__new__(ConlluDatasetPooled)
+        filtered_dataset.sentences = []
+        
+        for idx in range(len(self.sentences)):
+            item = self.__getitem__(idx)
+            if filter_function(item):
+                filtered_dataset.sentences.append(self.sentences[idx])
+        
+        return filtered_dataset
+
+
     def __getitem__(self, idx):
         sentence = self.sentences[idx]
         
@@ -405,7 +456,7 @@ from datasets import load_dataset
 from torch.utils.data import Dataset
 
 class FloresDataset(Dataset):
-    def __init__(self, language_code, split='dev'):
+    def __init__(self, language, split='dev'):
         """
         Loads a language from the FLORES-101 dataset.
         
@@ -414,6 +465,7 @@ class FloresDataset(Dataset):
             split (str): 'dev' or 'devtest'
         """
         dataset_name = "gsarti/flores_101"
+        language_code = NAME_TO_LANG_CODE[language]
         self.data = load_dataset(dataset_name, language_code, split=split)
     
     def __len__(self):

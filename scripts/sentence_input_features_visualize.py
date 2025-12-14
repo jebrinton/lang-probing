@@ -6,20 +6,7 @@ import numpy as np
 import logging
 from pathlib import Path
 
-
-def load_diff_vector(output_dir, language, concept, value):
-    save_dir = output_dir / language / concept / value
-    save_path = save_dir / "diff_vector.pt"
-
-    if not save_path.exists():
-        logging.error(f"Diff vector for {language}-{concept}-{value} not found at {save_path}")
-        return None
-
-    return torch.load(save_path)
-
-
-def sort_diff_vector(diff_vector):
-    return diff_vector.sort(dim=0)
+from input_output_features_visualize import load_diff_vector, sort_diff_vector
 
 
 def plot_feature_language_distribution(output_dir, languages, concept, value, k=100, save_dir=None):

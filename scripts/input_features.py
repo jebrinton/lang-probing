@@ -60,7 +60,6 @@ def input_features(model, sae, dataloader, probe=None):
             for sentence, tags in zip(sentence_batch, tags_batch):
                 for i in range(len(sentence)):
                     print(f"{sentence[i]} {tags[i]}")
-            exit()
 
             inputs = model.tokenizer(sentence_batch, padding=True, return_tensors="pt")
             extraction_mask = get_last_token_mask(inputs, sentence_batch) # shape: [batch_size, seq_len]

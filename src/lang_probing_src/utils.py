@@ -69,7 +69,7 @@ def setup_model(model_id, sae_id=None):
         padding_side="left",
     )
     tokenizer.pad_token = tokenizer.eos_token
-    model.tokenizer = tokenizer
+    # model.tokenizer = tokenizer
 
     # Load SAE from HuggingFace Hub (opcional)
     if sae_id is not None:

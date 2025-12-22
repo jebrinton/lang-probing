@@ -15,6 +15,7 @@ from nnsight import LanguageModel
 # ablate ablate ablate
 import torch
 import torch.nn.functional as F
+from einops import rearrange
 
 def get_log_probs(logits, input_ids):
     # Calculate probabilities
@@ -105,6 +106,156 @@ def ablate(model, submodule, autoencoder, tokenizer, input_ids, feature_indices,
 
     log_diff = log_probs_intervention - log_probs_original
     return torch.exp(log_diff) - 1 # return ratio of (new prob - old prob) / old prob
+
+
+def ablate_batch(model, submodule, autoencoder, tokenizer, input_ids, feature_indices, ablate_mask, prob_mask):
+    """
+    Ablate features and measure change in log-probability using batch masks.
+    
+    Args:
+        ablate_mask: BoolTensor [Batch, Seq] (True where we ablate)
+        prob_mask: BoolTensor [Batch, Seq] (True where we measure probability)
+    """
+    if isinstance(input_ids, list):
+        input_ids = torch.tensor(input_ids)
+    if input_ids.ndim == 1:
+        input_ids = input_ids.unsqueeze(0)
+
+    # 1. Validation
+    # We cannot predict the first token (no context), so ensure mask is False there
+    prob_mask[:, 0] = False 
+
+    with torch.no_grad():
+        with model.trace() as tracer:
+            with tracer.invoke(input_ids):
+                acts = submodule.input
+                # 1. Encode
+                # Note: This creates a large dense tensor [Batch, Seq, SAE_Dim]
+                encoded_acts = autoencoder.encode(acts)
+                
+                # 2. Identify the specific contribution we want to REMOVE
+                # We want to subtract (Features * Decoder_Weights) for the specific indices
+                
+                # Create a sparse-like perturbation tensor (Initialize with zeros)
+                # This is still memory heavy but we avoid the .clone() of the full state
+                perturbation = torch.zeros_like(encoded_acts)
+                
+                # Select only the features to ablate
+                # Shape: [Batch, Seq, K]
+                selected_features = encoded_acts[:, :, feature_indices]
+                
+                # Apply the ablation mask (True where we want to ablate)
+                # We keep the value only if the mask is True
+                mask_reshaped = rearrange(ablate_mask, 'b s -> b s 1')
+                features_to_remove = selected_features * mask_reshaped.float()
+                
+                # Slot them into the perturbation tensor
+                perturbation[:, :, feature_indices] = features_to_remove
+                
+                # 3. Decode only the perturbation and subtract it from the output
+                # Output_new = Output_old - Decode(Features_to_remove)
+                ablation_update = autoencoder.decode(perturbation)
+                submodule.output = submodule.output - ablation_update
+
+                # 3. Compute All Logits
+                logits = model.lm_head.output
+                
+                # Shift logits/labels for Causal LM (logit[i] predicts input[i+1])
+                shifted_logits = logits[:, :-1, :]
+                shifted_labels = input_ids[:, 1:]
+
+                # Compute log probs for the whole sequence
+                all_log_probs = F.log_softmax(shifted_logits, dim=-1)
+                
+                # Gather the log prob of the *correct* next token at every position
+                # Shape: [Batch, Seq-1]
+                token_log_probs_interv = all_log_probs.gather(
+                    dim=-1, 
+                    index=shifted_labels.unsqueeze(-1)
+                ).squeeze(-1).cpu().save()
+
+            with tracer.invoke(input_ids):
+                # Repeat logic for Clean run
+                logits = model.lm_head.output
+                shifted_logits = logits[:, :-1, :]
+                shifted_labels = input_ids[:, 1:]
+
+                all_log_probs = F.log_softmax(shifted_logits, dim=-1)
+                token_log_probs_orig = all_log_probs.gather(
+                    dim=-1, 
+                    index=shifted_labels.unsqueeze(-1)
+                ).squeeze(-1).cpu().save()
+    
+    # 4. Filter with Prob Mask
+    # We must slice the mask because our log_probs are shifted (Seq-1)
+    # prob_mask[:, i] corresponds to input_ids[:, i], which is predicted by logits[:, i-1]
+    valid_mask = prob_mask[:, 1:].cpu()
+
+    # Select only the relevant tokens (flattens the output to 1D)
+    log_probs_intervention = token_log_probs_interv[valid_mask]
+    log_probs_original = token_log_probs_orig[valid_mask]
+
+    log_diff = log_probs_intervention - log_probs_original
+    return torch.exp(log_diff) - 1
+
+
+# old code that went between acts = submodule.input and submodule.output = submodule.output + (decoded_acts - decoded_acts_clean)
+# # 1. Encode
+#             # Note: This creates a large dense tensor [Batch, Seq, SAE_Dim]
+#             encoded_acts = autoencoder.encode(acts)
+            
+#             # 2. Identify the specific contribution we want to REMOVE
+#             # We want to subtract (Features * Decoder_Weights) for the specific indices
+            
+#             # Create a sparse-like perturbation tensor (Initialize with zeros)
+#             # This is still memory heavy but we avoid the .clone() of the full state
+#             perturbation = torch.zeros_like(encoded_acts)
+            
+#             # Select only the features to ablate
+#             # Shape: [Batch, Seq, K]
+#             selected_features = encoded_acts[:, :, feature_indices]
+            
+#             # Apply the ablation mask (True where we want to ablate)
+#             # We keep the value only if the mask is True
+#             mask_reshaped = rearrange(ablate_mask, 'b s -> b s 1')
+#             features_to_remove = selected_features * mask_reshaped.float()
+            
+#             # Slot them into the perturbation tensor
+#             perturbation[:, :, feature_indices] = features_to_remove
+            
+#             # 3. Decode only the perturbation and subtract it from the output
+#             # Output_new = Output_old - Decode(Features_to_remove)
+#             ablation_update = autoencoder.decode(perturbation)
+#             submodule.output = submodule.output - ablation_update
+
+# new code that might not work perfectly
+                # # 1. Encode
+                # # Note: This creates a large dense tensor [Batch, Seq, SAE_Dim]
+                # encoded_acts = autoencoder.encode(acts)
+                
+                # # 2. Identify the specific contribution we want to REMOVE
+                # # We want to subtract (Features * Decoder_Weights) for the specific indices
+                
+                # # Create a sparse-like perturbation tensor (Initialize with zeros)
+                # # This is still memory heavy but we avoid the .clone() of the full state
+                # perturbation = torch.zeros_like(encoded_acts)
+                
+                # # Select only the features to ablate
+                # # Shape: [Batch, Seq, K]
+                # selected_features = encoded_acts[:, :, feature_indices]
+                
+                # # Apply the ablation mask (True where we want to ablate)
+                # # We keep the value only if the mask is True
+                # mask_reshaped = rearrange(ablate_mask, 'b s -> b s 1')
+                # features_to_remove = selected_features * mask_reshaped.float()
+                
+                # # Slot them into the perturbation tensor
+                # perturbation[:, :, feature_indices] = features_to_remove
+                
+                # # 3. Decode only the perturbation and subtract it from the output
+                # # Output_new = Output_old - Decode(Features_to_remove)
+                # ablation_update = autoencoder.decode(perturbation)
+                # submodule.output = submodule.output - ablation_update
 
 
 def ablate_bleu(model, submodule, autoencoder, tokenizer, input_ids, feature_indices, ablate_positions, prob_positions):

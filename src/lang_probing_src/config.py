@@ -37,7 +37,7 @@ LANGUAGES = [
     "Russian", "Spanish", "Turkish", "Ukrainian", "Vietnamese"
 ]
 LANGUAGES_DEC = [
-    "English", "French", "German", "Spanish", "Turkish", "Arabic", "Hindi", "Hebrew", "Chinese", "Indonesian"
+    "English", "French", "German", "Spanish", "Turkish", "Arabic", "Hindi", "Chinese", "Indonesian"
 ]
 LANG_CODE_TO_NAME = {
     "ara": "Arabic",
@@ -64,7 +64,8 @@ LANG_CODE_TO_NAME = {
     "vie": "Vietnamese",
     "zho_simpl": "Chinese (Simplified)",
     "zho_trad": "Chinese (Traditional)",
-    "zho": "Chinese",
+    # TODO: check that you're using the one you want to use
+    "zho_simpl": "Chinese",
 }
 NAME_TO_LANG_CODE = {v: k for k, v in LANG_CODE_TO_NAME.items()}
 

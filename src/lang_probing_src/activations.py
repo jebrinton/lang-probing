@@ -92,6 +92,8 @@ def extract_mlp_activations(model, dataloader, layer_num, tracer_kwargs=None):
 def extract_sae_activations(model, submodule, autoencoder, dataloader, tracer_kwargs=None):
     """
     Extrae activaciones SAE para un dataset completo.
+
+    TODO: this is incorrect, you shouldn't mean pool before encoding
     
     Args:
         model: LanguageModel (nnsight)

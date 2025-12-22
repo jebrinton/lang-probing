@@ -36,6 +36,9 @@ LANGUAGES = [
     "Japanese", "Korean", "Persian", "Polish", "Portuguese", "Romanian", 
     "Russian", "Spanish", "Turkish", "Ukrainian", "Vietnamese"
 ]
+LANGUAGES_DEC = [
+    "English", "French", "German", "Spanish", "Turkish", "Arabic", "Hindi", "Hebrew", "Chinese", "Indonesian"
+]
 LANG_CODE_TO_NAME = {
     "ara": "Arabic",
     "ces": "Czech",

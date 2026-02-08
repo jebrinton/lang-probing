@@ -19,6 +19,7 @@ import itertools
 import logging
 import gc
 import json
+import time
 
 from nnsight import LanguageModel
 from torch.utils.data import DataLoader
@@ -54,15 +55,32 @@ EXP_CONFIGS = {
         "mode": "monolingual", "ablate_loc": "source", "prob_loc": "source", "feats": "random"
     },
     # 6. Multilingual Random Source Baseline
-    "multi_random_src": {
+    "multi_input_random": {
         "mode": "multilingual", "ablate_loc": "source", "prob_loc": "target", "feats": "random"
     },
     # 7. Multilingual Random Target Baseline
-    "multi_random_tgt": {
+    "multi_output_random": {
         "mode": "multilingual", "ablate_loc": "target", "prob_loc": "target", "feats": "random"
     },
 }
 
+#region agent log
+def _agent_log(hypothesis_id, location, message, data):
+    """
+    Lightweight NDJSON logger for debug mode.
+    """
+    entry = {
+        "sessionId": "debug-session",
+        "runId": "pre-fix",
+        "hypothesisId": hypothesis_id,
+        "location": location,
+        "message": message,
+        "data": data,
+        "timestamp": int(time.time() * 1000),
+    }
+    with open("/projectnb/mcnet/jbrin/.cursor/debug.log", "a", encoding="utf-8") as _f:
+        _f.write(json.dumps(entry) + "\n")
+#endregion
 
 def get_feature_indices(K, feature_vector):
     """Return the top K feature indices from a feature vector"""
@@ -183,7 +201,6 @@ def old_get_batch_positions_masks(tokenizer, contexts, source_sentences, target_
     return input_ids, source_mask, target_mask
 
 
-
 def get_positions(tokenizer, context, source_sentence, target_sentence):
     # 1. Create the full prompt
     full_text = context + source_sentence + target_sentence
@@ -234,6 +251,7 @@ def get_positions(tokenizer, context, source_sentence, target_sentence):
 
     return input_ids, ablate_positions, prob_positions
 
+
 def save_result_jsonl(filename, data_dict):
     """
     Appends a dictionary as a JSON line to the specified file.
@@ -243,6 +261,7 @@ def save_result_jsonl(filename, data_dict):
     with open(file_path, mode='a', encoding='utf-8') as f:
         f.write(json.dumps(data_dict) + "\n")
         f.flush()
+
 
 def main(args):
     logging.basicConfig(level=logging.INFO)
@@ -262,8 +281,19 @@ def main(args):
     
     # Configuration
     exp_cfg = EXP_CONFIGS[args.experiment]
+    #region agent log
+    _agent_log(
+        "H1",
+        "ablate.main:config",
+        "Loaded experiment config",
+        {"experiment": args.experiment, "config": exp_cfg, "k": args.k, "max_samples": args.max_samples},
+    )
+    #endregion
     input_features_dir = Path("/projectnb/mcnet/jbrin/lang-probing/outputs/sentence_input_features/")
     effects_files = load_effects_files() if "output" in exp_cfg['feats'] else None
+    language_pairs_available = None
+    if effects_files is not None:
+        language_pairs_available, _ = get_language_pairs_and_concepts(effects_files)
 
     # TODO: ensure that language pairs for which there is no concept=value get handled gracefully
     # Iterate Languages
@@ -271,11 +301,23 @@ def main(args):
         iterator = itertools.permutations(LANGUAGES_DEC, 2)
     elif exp_cfg['feats'] == 'output':
         iterator = [(None, lang) for lang in LANGUAGES_DEC]
-    else:
+    elif exp_cfg['feats'] == 'input':
         iterator = [(lang, None) for lang in LANGUAGES_DEC]
+    elif exp_cfg['feats'] == 'random':
+        iterator = [(lang, None) for lang in LANGUAGES_DEC]
+    else:
+        raise ValueError(f"Invalid feature type: {exp_cfg['feats']}")
 
     for source_lang, target_lang in iterator:
         logging.info(f"Running {args.experiment}: {source_lang} -> {target_lang}")
+        #region agent log
+        _agent_log(
+            "H2",
+            "ablate.main:loop_start",
+            "Loop start for language pair",
+            {"source_lang": source_lang, "target_lang": target_lang},
+        )
+        #endregion
 
         if source_lang is not None:
             source_dataset = load_dataset("gsarti/flores_101", NAME_TO_LANG_CODE[source_lang], split="devtest")
@@ -285,7 +327,6 @@ def main(args):
             target_dataset = load_dataset("gsarti/flores_101", NAME_TO_LANG_CODE[target_lang], split="devtest")
         else:
             target_dataset = None
-        
         
         num_samples = args.max_samples
 
@@ -299,21 +340,55 @@ def main(args):
                 if source_lang is not None:
                     feat_vec = get_output_features_vector(effects_files, (source_lang, target_lang), args.concept, args.value)
                 else:
-                    # TODO: clean this up
-                    feat_vecs = [get_output_features_vector(effects_files, (source_lang, target_lang), args.concept, args.value) for source_lang in LANGUAGES_DEC]
+                    # For mono_output: get all pairs where target_lang matches, then average
+                    if language_pairs_available is None:
+                        raise ValueError("effects_files not loaded but required for output features")
+                    source_langs = [src for src, tgt in language_pairs_available if tgt == target_lang]
+                    if not source_langs:
+                        raise ValueError(f"No language pairs found with target_lang={target_lang}")
+                    feat_vecs = []
+                    for src_lang in source_langs:
+                        try:
+                            feat_vec = get_output_features_vector(effects_files, (src_lang, target_lang), args.concept, args.value)
+                            feat_vecs.append(feat_vec)
+                        except (KeyError, TypeError) as e:
+                            logging.warning(f"Skipping pair ({src_lang}, {target_lang}): {e}")
+                            continue
+                    if not feat_vecs:
+                        raise ValueError(f"No valid features found for target_lang={target_lang}, concept={args.concept}, value={args.value}")
                     feat_vec = np.mean(feat_vecs, axis=0)
                 feature_indices = np.argsort(feat_vec)[-args.k:]
             elif exp_cfg['feats'] == 'random':
                 # Use input vector to get correct SAE dimension size
-                temp_vec = get_input_features_vector(input_features_dir, source_lang, args.concept, args.value)
+                lang_for_dim = source_lang if source_lang is not None else target_lang
+                temp_vec = get_input_features_vector(input_features_dir, lang_for_dim, args.concept, args.value)
                 sae_dim = len(temp_vec)
                 feature_indices = np.random.choice(sae_dim, args.k, replace=False)
         except Exception as e:
             logging.warning(f"Could not load features for {source_lang}->{target_lang}: {e}")
+            #region agent log
+            _agent_log(
+                "H1",
+                "ablate.main:feature_load_error",
+                "Failed to load feature indices",
+                {"source_lang": source_lang, "target_lang": target_lang, "error": str(e)},
+            )
+            #endregion
             continue
+        #region agent log
+        _agent_log(
+            "H1",
+            "ablate.main:feature_indices",
+            "Selected feature indices",
+            {"source_lang": source_lang, "target_lang": target_lang, "num_indices": len(feature_indices)},
+        )
+        #endregion
 
         # --- PREPARE BATCHES ---
         all_contexts, all_sources, all_targets = [], [], []
+
+        # For monolingual experiments, use target_dataset when source_lang is None
+        dataset_for_src = source_dataset if source_dataset is not None else target_dataset
 
         for i in range(num_samples):
             idx_1 = (i + 1) % num_samples
@@ -326,7 +401,7 @@ def main(args):
                 ctx = ""
                 tgt = None
 
-            src = source_dataset[i]['sentence']
+            src = dataset_for_src[i]['sentence']
             all_contexts.append(ctx)
             all_sources.append(src)
             all_targets.append(tgt)
@@ -349,6 +424,20 @@ def main(args):
             prob_mask = src_mask if exp_cfg['prob_loc'] == 'source' else tgt_mask
 
             if not ablate_mask.any() or not prob_mask.any():
+                #region agent log
+                _agent_log(
+                    "H2",
+                    "ablate.main:empty_masks",
+                    "Empty mask detected, skipping batch",
+                    {
+                        "source_lang": source_lang,
+                        "target_lang": target_lang,
+                        "ablate_any": bool(ablate_mask.any()),
+                        "prob_any": bool(prob_mask.any()),
+                        "batch_start": i,
+                    },
+                )
+                #endregion
                 continue
 
             try:
@@ -367,9 +456,32 @@ def main(args):
                 
                 batch_means.append(delta_p.mean().item())
                 batch_mins.append(delta_p.min().item())
+                #region agent log
+                _agent_log(
+                    "H3",
+                    "ablate.main:batch_result",
+                    "Batch ablation result",
+                    {
+                        "source_lang": source_lang,
+                        "target_lang": target_lang,
+                        "batch_start": i,
+                        "delta_mean": float(batch_means[-1]),
+                        "delta_min": float(batch_mins[-1]),
+                        "batch_size": len(b_ctx),
+                    },
+                )
+                #endregion
 
             except Exception as e:
                 logging.error(f"Batch failed for {source_lang}->{target_lang}: {e}")
+                #region agent log
+                _agent_log(
+                    "H3",
+                    "ablate.main:batch_error",
+                    "Batch failed during ablate_batch",
+                    {"source_lang": source_lang, "target_lang": target_lang, "batch_start": i, "error": str(e)},
+                )
+                #endregion
                 continue
             
             # Cleanup
@@ -398,6 +510,14 @@ def main(args):
             save_result_jsonl(output_file, result_entry)
         else:
             logging.warning(f"No results for {source_lang}->{target_lang}")
+            #region agent log
+            _agent_log(
+                "H4",
+                "ablate.main:no_results",
+                "No batch results to save",
+                {"source_lang": source_lang, "target_lang": target_lang},
+            )
+            #endregion
         
         gc.collect()
 
@@ -408,7 +528,7 @@ if __name__ == "__main__":
     parser.add_argument("--concept", type=str, default="Tense")
     parser.add_argument("--value", type=str, default="Past")
     parser.add_argument("--k", type=int, default=1, help="Number of features to ablate")
-    parser.add_argument("--max_samples", type=int, default=16)
+    parser.add_argument("--max_samples", type=int, default=32)
     parser.add_argument("--batch_size", type=int, default=16)
     parser.add_argument("--output_dir", type=str, default="outputs/ablation_results", help="Directory to save jsonl files")
     

@@ -36,7 +36,7 @@ def main(args):
     df = pd.concat(df_list, ignore_index=True)
 
     # 2. Filter: only include num_samples == 256
-    df = df[df['num_samples'] == 256]
+    df = df[df['num_samples'] == 128]
     
     # Ensure output directory exists
     os.makedirs(args.output_dir, exist_ok=True)

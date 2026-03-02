@@ -28,6 +28,11 @@ SAE_ID = "jbrinkma/sae-llama-3-8b-layer16"
 LAYER_NUM = 16
 SAE_DIM = 32768
 
+MODEL_TO_ID = {
+    "llama": "meta-llama/Llama-3.1-8B",
+    "aya": "CohereForAI/aya-23-8B",
+}
+
 # Languages to process (expandible)
 LANGUAGES_NOVA = ["English", "Spanish", "Turkish", "Arabic", "German", "Chinese", "French", "Japanese"]
 LANGUAGES = [

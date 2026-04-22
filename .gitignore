@@ -25,6 +25,7 @@ logs/
 
 # Keep example files
 !examples/*.txt
+!_archive/examples/*.txt
 
 # Keep requirement file
 !requirements.txt

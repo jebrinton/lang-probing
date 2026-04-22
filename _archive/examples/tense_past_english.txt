@@ -1,0 +1,14 @@
+positive
+The boy walked to school yesterday.
+She ate breakfast this morning.
+They finished their homework last night.
+He visited his grandmother last week.
+We watched a movie on Saturday.
+
+negative
+The boy walks to school every day.
+She eats breakfast every morning.
+They finish their homework quickly.
+He visits his grandmother often.
+We watch movies on weekends.
+

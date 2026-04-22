@@ -170,6 +170,9 @@ cython_debug/
 # VS Code
 .vscode/
 
+# Claude Code runtime state
+.claude/
+
 # Cursor
 .cursor/
 

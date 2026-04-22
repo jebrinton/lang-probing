@@ -162,7 +162,7 @@ def aggregate_cell(per_pair, k=50):
     top_abs_grad = _topk(mean_abs_grad, mean_signed_grad, k)
     top_abs_gxa = _topk(mean_abs_gxa, mean_signed_gxa, k)
 
-    n_single = sum(1 for p in per_pair if p["_tok_strategy"] == "single")
+    n_single = sum(1 for p in per_pair if p.get("tok_strategy") == "single")
     source_counts = defaultdict(int)
     for p in per_pair:
         source_counts[p.get("source", "unknown")] += 1

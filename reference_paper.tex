@@ -1,0 +1,475 @@
+\documentclass[11pt]{article}
+
+% Change "review" to "final" to generate the final (sometimes called camera-ready) version.
+% Change to "preprint" to generate a non-anonymous version with page numbers.
+\usepackage[review]{acl}
+
+% Standard package includes
+\usepackage{times}
+\usepackage{latexsym}
+
+% For proper rendering and hyphenation of words containing Latin characters (including in bib files)
+\usepackage[T1]{fontenc}
+% For Vietnamese characters
+% \usepackage[T5]{fontenc}
+% See https://www.latex-project.org/help/documentation/encguide.pdf for other character sets
+
+% This assumes your files are encoded as UTF8
+\usepackage[utf8]{inputenc}
+
+% This is not strictly necessary, and may be commented out,
+% but it will improve the layout of the manuscript,
+% and will typically save some space.
+\usepackage{microtype}
+
+% This is also not strictly necessary, and may be commented out.
+% However, it will improve the aesthetics of text in
+% the typewriter font.
+\usepackage{inconsolata}
+
+%Including images in your LaTeX document requires adding
+%additional package(s)
+\usepackage{graphicx}
+
+%Project-specific packages
+\usepackage{amsmath}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[colorinlistoftodos]{todonotes}
+
+\newcommand{\jake}[1]{\todo[inline, color=RoyalPurple!30, author=Jake]{#1}}
+\newcommand{\aaron}[1]{\todo[inline, color=ForestGreen!30, author=Aaron]{#1}}
+\newcommand{\jannik}[1]{\todo[inline, color=RoyalBlue!30, author=Jannik]{#1}}
+
+
+% If the title and author information does not fit in the area allocated, uncomment the following
+%
+%\setlength\titlebox{<dim>}
+%
+% and set <dim> to something 5cm or larger.
+
+\title{Read, Translate, Write: LLMs Translate with Fuzzy Semantic Hubs}
+
+% Author information can be set in various styles:
+% For several authors from the same institution:
+% \author{Author 1 \and ... \and Author n \\
+%         Address line \\ ... \\ Address line}
+% if the names do not fit well on one line use
+%         Author 1 \\ {\bf Author 2} \\ ... \\ {\bf Author n} \\
+% For authors from different institutions:
+% \author{Author 1 \\ Address line \\  ... \\ Address line
+%         \And  ... \And
+%         Author n \\ Address line \\ ... \\ Address line}
+% To start a separate ``row'' of authors use \AND, as in
+% \author{Author 1 \\ Address line \\  ... \\ Address line
+%         \AND
+%         Author 2 \\ Address line \\ ... \\ Address line \And
+%         Author 3 \\ Address line \\ ... \\ Address line}
+
+\author{First Author \\
+  Affiliation / Address line 1 \\
+  Affiliation / Address line 2 \\
+  Affiliation / Address line 3 \\
+  \texttt{email@domain} \\\And
+  Second Author \\
+  Affiliation / Address line 1 \\
+  Affiliation / Address line 2 \\
+  Affiliation / Address line 3 \\
+  \texttt{email@domain} \\}
+
+%\author{
+%  \textbf{First Author\textsuperscript{1}},
+%  \textbf{Second Author\textsuperscript{1,2}},
+%  \textbf{Third T. Author\textsuperscript{1}},
+%  \textbf{Fourth Author\textsuperscript{1}},
+%\\
+%  \textbf{Fifth Author\textsuperscript{1,2}},
+%  \textbf{Sixth Author\textsuperscript{1}},
+%  \textbf{Seventh Author\textsuperscript{1}},
+%  \textbf{Eighth Author \textsuperscript{1,2,3,4}},
+%\\
+%  \textbf{Ninth Author\textsuperscript{1}},
+%  \textbf{Tenth Author\textsuperscript{1}},
+%  \textbf{Eleventh E. Author\textsuperscript{1,2,3,4,5}},
+%  \textbf{Twelfth Author\textsuperscript{1}},
+%\\
+%  \textbf{Thirteenth Author\textsuperscript{3}},
+%  \textbf{Fourteenth F. Author\textsuperscript{2,4}},
+%  \textbf{Fifteenth Author\textsuperscript{1}},
+%  \textbf{Sixteenth Author\textsuperscript{1}},
+%\\
+%  \textbf{Seventeenth S. Author\textsuperscript{4,5}},
+%  \textbf{Eighteenth Author\textsuperscript{3,4}},
+%  \textbf{Nineteenth N. Author\textsuperscript{2,5}},
+%  \textbf{Twentieth Author\textsuperscript{1}}
+%\\
+%\\
+%  \textsuperscript{1}Affiliation 1,
+%  \textsuperscript{2}Affiliation 2,
+%  \textsuperscript{3}Affiliation 3,
+%  \textsuperscript{4}Affiliation 4,
+%  \textsuperscript{5}Affiliation 5
+%\\
+%  \small{
+%    \textbf{Correspondence:} \href{mailto:email@domain}{email@domain}
+%  }
+%}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+TODO
+\end{abstract}
+
+\section{Introduction}
+
+Machine translation has long been an influential area of natural language processing. The attention mechanism was first proposed to improve machine translation performance \citep{bahdanau2015neuralmachinetranslationjointly,luong-etal-2015-effective,vaswani2017attention}; one consequence of attention was the emergence of language models that could be efficiently trained on massive corpora \citep{devlin-etal-2019-bert,radford2018improving}. So-called large language models (LLMs) have revolutionized many areas of natural language processing, but have been relatively slowly adopted in machine translation (MT).
+
+A reason for the slow adoption of LLMs in MT has been a focus on low-resource languages, where LLMs face significant challenges \citep{hendy2023goodgptmodelsmachine,robinson2023chatgptmtcompetitivehigh}. Because LLMs require large training corpora, they are difficult to train effectively on low-resource languages. However, they also hold significant promise: even when not trained on a given language, LLMs can be prompted to translate from or into a language they have seen very little of in their training data \citep{cahyawijaya-etal-2024-llms}---e.g., by prompting with a grammar book \citep{tanzer2024a}. Moreover, their representations of high-resource languages could enable cross-lingual transfer \citep{conneau-etal-2020-unsupervised} with little data in the target language.
+
+Whether LLMs can deliver on this promise depends in part on the mechanisms underlying how they translate. Specifically, do LLMs rely on task- and language-agnostic mechanisms to translate, or are they more specialized to specific language pairs? If the former, this opens up a clear path toward improving MT performance, potentially without large parallel corpora \citep{artetxe2018unsupervised}. Much recent work provides mechanistic evidence supporting this hypothesis in the language modeling context \citep{wendler-etal-2024-llamas,brinkmann-etal-2025-large,wu2025the}. We therefore posit that LLMs might translate using the same mechanisms they use to language model: the ``stages of inference'' hypothesis  \citep{lad2024the} holds that LLMs devote the first half of their layers to reading an input and composing increasingly abstract concept representations . Then, the latter half of the model reads these concept representations, and uses them to decide which token should be predicted given prior context. This implies that translation would not necessarily require language pair--specific mechanisms: instead, it only requires that a model be capable of reading inputs from a source language, and generating text for the target language.
+% This means that the middle layers of a model are essentially ``semantic hubs'' \aaron{cite} containing a few concepts that explain much of the variance in the pretraining corpus.
+
+If this hypothesis is true, it has three main implications for MT. (1) Given language pair $(S,T)$, translation performance should be predictable from monolingual capabilities in $S$ and $T$ in isolation without cross-linguistic interaction terms. (2) There should exist task-agnostic and potentially language-agnostic representations that encode grammatical concepts. Finally, (3) adding translation capabilities for a new language should only require improvements to monolingual capabilities for that language---i.e., monolingual corpora should yield similar improvements in translation performance as parallel corpora, assuming the model can already effectively handle the other language in the language pair.
+
+We investigate each of these three implications, and find positive evidence for each. These findings could justify a new line of research leveraging LLMs to translate low-resource languages.
+
+% \begin{itemize}
+%     \item Machine translation is now often performed using LLMs
+%     \item Potential benefit of LLMs: massively multilingual capabilities, good foundation for fine-tuning for low-resource languages
+%     \item This is \emph{only} useful if LMs rely on general mechanisms to translate, rather than language pair--specific mechanisms
+%     \item We test whether such general mechanisms exist. \textbf{Hypothesis}: LLMs implicitly implement noisy channel translation models
+%     \item For the purpose of low-resource translation, it is important that the model use a noisy channel, and that the channel be broadly applied for most languages
+% \end{itemize}
+
+\section{Related Work}
+
+\paragraph{LLMs in machine translation.} 
+
+\paragraph{Mechanistic interpretability.} 
+
+\paragraph{Machine translation without parallel corpora.}
+
+\section{A Motivating Observation: Translation Performance Is a Function of Language-specific Competence}
+
+Mark's linear model
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\linewidth]{images/linear_effects_ranks.png}
+    \caption{Relative error with respect to rank of approximation}
+    \label{fig:linear-effects-ranks}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.2\linewidth]{images/linear_effects_llama.png}
+    \caption{Comparison of rank-1 approximation with actual BLEU scores}
+    \label{fig:linear-effects-llama}
+\end{figure}
+
+For Llama, rank-1 approximation is 88\% faithful to actual BLEU scores
+
+\section{Related Work}
+\begin{itemize}
+    \item LLMs for translation
+    \item Interpretability methods used in this paper
+    \begin{itemize}
+        \item Training mass-mean probes
+    \end{itemize}
+\end{itemize}
+
+\subsection{Adding a New Language to a Pretrained LLM}
+% \jake{Continual Pretraining Language Augmentation}
+
+\subsection{Representation}
+
+\subsection{Interpretability of Machine Translation}
+
+\section{Experiments}
+\jake{Use for methodology: https://arxiv.org/pdf/2505.20063 (SAEs Are Good for Steering – If You Select the Right Features)}
+
+\subsection{Finding multilingual features}
+\begin{itemize}
+    \item Train linear probes, use gradient attributions from their logits to find general grammatical concept features. Same as procedure in Brinkmann et al. (2025)
+    \item Measure the size of the input and output space of these features: are they all multilingual?
+    \item More relevant to our main thesis: measure the overlap in the input and output spaces
+    \item \textbf{Hypothesis:} There will be significant (ideally, complete) overlap in the languages in a feature's input and output spaces. Implies noisy channel modeling, or reading/writing from a more universal latent representation space
+    \jake{This might have changed slightly over the past couple of meetings}
+    \item \textbf{Counter-hypothesis 1 (Translation mechanisms):} There could be disjoint input and output spaces. This would imply that a model is implementing more of a translation mechanism
+    \item \textbf{Counter-hypothesis 2 (Narrow noisy channels):} The model does use noisy channel mechanisms, but they are very specific to particular languages
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/noisy_vs_module.png}
+    \caption{\textbf{potentially a good figure 1.}The noisy channel vs. translation module hypotheses. Implications: (1) for interp people: evidence for semantic hub hypothesis, (2) machine translation people: monolingual training gets you most of the performance.}
+    \label{fig:noisy-channel-vs-translation-module}
+\end{figure}
+
+Methods:
+% concepts:
+
+% q1: correlation by diff-in-means
+% top 100 features per language in input space (mean difference)
+% Spearman-length correlation accross all pairs (so maybe use all SAE features for this
+% each language has a vector (top diff in means, 2nd most, 3rd most, ) 
+% (for each concept) heatmap {input, output}: each lang in rows and cols, value=Spearman correlation of ordered input correlation
+% general {input, output} feature heatmap: mean pool across all concepts
+
+\subsection{BLEU and Perplexity}
+\includegraphics[]{images/aya_source_competence.png}
+\includegraphics[]{images/aya_target_competence.png}
+
+
+\begin{itemize}
+    \item Linear model (include equation, but not much else?)
+    \item Train binary probes
+    \item \emph{Input features:} ones we find via difference-in-means for a given language and concept
+    \item \emph{Output features:} ones we find via gradient attribution from a late-layer probe for a given language and concept
+    % \item Characterize input space of top features: collect mean difference in activations between positive and negative instances of a concept for each language
+    % \begin{itemize}
+        % \item E.g., for tense=present: positive example is "The man is here", negative would be "The man was here"
+    % \end{itemize}
+    \item \textbf{Q1:} how multilingual are the features that read into the latent space? (Cross-lingual overlap in input features)
+
+    Sentence-wise procedure
+    \begin{itemize}
+        \item Iterate over sentences ($s^+$, $s^-$) in a given language $l$ in UD. $s^+$ are sentences with the target concept, $s^-$ without
+        \item For each sentence, collect mean (secondary importance: max) of activations across token positions of all features
+        \item Take mean of summed activations across all $s^+$, and separately for all $s^-$
+        \item Take difference in means
+    \end{itemize}
+
+    Word-level procedure
+    \begin{itemize}
+        \item Iterate over words ($w^+$, $w^-$) in a given language $l$ in UD. $w^+$ are words with the target concept, $w^-$ without
+        (for all downstream considerations, the word = the last token in the word)
+        \item How to sample $w^-$?
+        \begin{itemize}
+            \item (priority) Any other word in the same sentence as $w^+$ that is not a special token nor punctuation
+            \item Any word with the concept
+            \item Any word in a sentence that contains no $w^+$
+            \item (priority) Words that specifically have that concept, but a different value (e.g., if we're looking for plural noun features, take activations from singular or dual nouns) - no rebalancing needed
+        \end{itemize}
+        \item Take difference-in-means of all $w^+$ and $w^-$
+    \end{itemize}
+
+    Analysis (for both methods)
+    \begin{itemize}
+        \item Take top-K features by difference in means
+        \item Degree of multilinguality (per concept) is quantified by the number of languages for which a given feature is in the top-K set
+        \item If degree of multilinguality is high for many concepts, we take it as evidence that the model is reading into a shared representation space for that concept
+        \item Analysis: mean pool over the diff-in-means vectors for each language, identify $k$ for which those features outside the top $k$ are close to 0
+    \end{itemize}
+    
+    \item \textbf{Q2:} how multilingual are the features that are read from to produce some output for a given language (cross-lingual overlap in output features)
+    \begin{itemize}
+        \item Do in-context translation after giving the model a couple demonstrations
+        \item Prefill the correct translation. At all target sequence positions, use probe
+        \item At any position where late-layer probe produces a positive prediction, do gradient attribution from the probe's logit
+        \item Use these to find the top-K features contributing to the probe's predictions
+        \item Compute degree of multilinguality similarly to before
+        \item If degree of multilinguality is high for many concepts, we take it as evidence that the model is writing from a shared representation space for that concept
+    \end{itemize}
+\end{itemize}
+
+If we see high multilinguality in both of the above experiments, this would be good evidence for our main hypothesis
+
+\textbf{Causal validation: ablations during translation}
+\begin{itemize}
+    \item Input features: pick a concept and language, and ablate all of the top-$k$ features at the input sequence (source language) positions.
+    \item Output features: pick a concept and language, and ablate all of the top-$k$ features at the output sequence (target language) positions. (This looks similar to how Jannik was steering in our previous paper -- just ablate at the last position for each generation step when measuring BLEU. When measuring output sequence probability, ablate at all target language positions.)
+
+
+% Notes for ablation experiments 3/9:
+% High-level idea: use probes to ablate features at targeted token positions
+
+% Obtain probe logits for each token
+% Create an ablation mask for token positions which have a probe logit above a certain threshold
+% Threshold is p(0.5)
+
+% feats[:, :, ablation\_mask] = 0
+
+% As before, have a separate intervention/tracing context, get logprobs of ablation / no ablate, and compare
+
+Procedure for ablation experiments:
+\begin{itemize}
+    \item Consider a particular language, concept, value, $k$
+    \item Zero-ablate the top-$k$ SAE features that correlate with the concept and value
+    \item Ablate features over the token positions where a late-layer probe detects presence of the grammatical concept value
+    \item 
+\end{itemize}
+
+
+% Certain threshold could be the proportion of sequence according to the probe that has the grammatical concept
+
+% Ratio of ablating the token / ablating the whole sequence
+
+
+% 100 or 1000 steps on new language
+% look at loss function from CRISP https://arxiv.org/abs/2508.13650
+% corpus
+% TODO: lit review of adding languages to a model
+
+    [1st] Comparison of input and output features
+    \begin{itemize}
+        \item Grid of bar charts language x k—
+        \item Threshold of indirect effect for output
+        \item For each value of k, the y-axis value is \% or number of features in the intersection of input/output features for that language-concept-value
+    \end{itemize}
+    \item Metrics:
+    \begin{itemize}
+        \item $\Delta$BLEU: BLEU after ablation minus BLEU before
+        \begin{itemize}
+            \item One pair with English, one pair without
+            \item a couple different concepts
+            \item Goal is to prototype the pipeline, $\Delta p$ is more important for now
+        \end{itemize}
+        \item $\Delta p(\text{reference})$: change in (log-)probability of the correct reference sequence before and after ablations. Pre-fill the correct sequence and measure the logits of the correct token at all target language positions
+        \begin{itemize}
+            \item Translation: give a 2-shot example
+            \item Non-translation: no examples, single sentence
+            \item Normalize by the original probability (new - old) / old
+            \item Try this with input and output features
+            \item Also do a random baseline
+            \item Input features translation: ablate features at source sentence token indices, measure prob of target sequence before and after ablation
+            \item Input features monolingual: ablate features for sentence, measure prob of sentence before and after ablation
+            \item Output features translation: ablate features at target sequence token indices, measure prob of target sequence before and after ablation
+            % possible for a model to perform grammatical computations before we start the ablation (during the source sequence), then copy it over in layers after the 16th layer and it won't get ablated
+            \item Output features monolingual: ablate features for sentence, measure prob of sequence before and after ablation
+            \item Cache activations before ablating features. We'll show average activations in translation and monolingual contexts (prediction: no significant difference across the settings if noisy channel hypothesis is true)
+            % if little difference, evidence against widespread existence of translation modules, but we could still have narrow noisy channels
+            % possibility for input/output features along with input and output features?
+            % Ways to measure these?
+            
+        \end{itemize}
+    \end{itemize}
+
+    \item Possible idea
+    \begin{itemize}
+        \item Identify monolingual and multilingual 
+    \end{itemize}
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/typological_similarity.png}
+    \caption{[placeholder] Input features: Spearman correlation of differences in mean activations}
+    \label{fig:input-features}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/cosine_sim_llama_normalized.png}
+    \caption{[placeholder] Output features: Spearman correlation of gradient attributions from probe trained on the last layer}
+    \label{fig:output-features}
+\end{figure}
+
+\subsection{Assessing feature impact in a translation task setting}
+Now that we've found these general features, let's see if they're actually used while doing translation.
+
+\begin{itemize}
+    \item Does ablating these features affect the probability of generating the correct translation---regardless of language pair?
+
+    % prefill output with correct translation and measure probabilty with/without ablation
+    % sum of logprobs of correct tokens
+\end{itemize}
+
+
+\subsection{Correlating Multi-BLiMP}
+
+
+\subsection{Applying our understanding: Is language-specific fine-tuning all that's needed to produce better translations \emph{for any language pair?}}
+If a model truly uses universal mechanisms to do translation, this would be beneficial: it implies that we only need to teach the model how to effectively model that language to make it better at translating for that language.
+
+Methods: fine-tune on new language not originally in the model's training set, then measure BLEU for all language pairs (still using FLORES)
+
+% \begin{itemize}
+%     \item People have done work on supporting the new language with existing related languages
+%     https://www.sciencedirect.com/science/article/pii/S0306457322002497
+%     \item Finetuning on multiple low-resource languages:
+%     https://aclanthology.org/2022.coling-1.382/
+%     \item Finetuning cross-attention nearly as effective as the whole model:
+%     https://arxiv.org/pdf/2104.08771
+%     \item From 2025:
+%     https://www.sciencedirect.com/science/article/pii/S0169260725000720 
+%     \item From Aaron:
+%     https://aclanthology.org/2025.wmt-1.87.pdf
+% Aaron's intuition: not as many methods-focused finetuning papers as of late
+% \end{itemize}
+% However, all of these are relatively old (2022 or before)
+
+\begin{itemize}
+    \item Finetune on parallel corpus and monolingual corpus
+    \item $x$ axis: FLOPs, number of samples, number of tokens
+    \item $y$ axis: BLEU score on FLORES, perplexity error rate on BLiMP, cosine similarity of representations
+\end{itemize}
+
+
+\section{Limitations}
+\begin{itemize}
+    % \item Our findings don't necessarily show the multilinguality of the noisy channel
+    \item 
+\end{itemize}
+
+\section{Potential Experiment}
+\begin{itemize}
+    \item Prototyping with 30 English sentences (original + counterfactual that differ by one token)
+    \begin{itemize}
+        \item Counterfactual change should be clearly a single concept
+        \item Try for a diversity of concepts
+    \end{itemize}
+    \item Calculate the delta logprob between original and counterfactual generation
+    \item Compute indirect effect of SAE features
+    \item Then manually investigate the top k (say 50) features based off indirect effect size
+\end{itemize}
+
+
+
+Metric to backpropagate from—relative change in difference between original and counterfactual
+
+Attribution patching https://arxiv.org/abs/2602.16080
+Backprop from the sum of logprobs to get SAE features that are responsible for the generation
+
+% Bibliography entries for the entire Anthology, followed by custom entries
+%\bibliography{custom,anthology-overleaf-1,anthology-overleaf-2}
+
+% Custom bibliography entries only
+\bibliography{custom}
+
+\appendix
+
+\section{Example Appendix}
+\label{sec:appendix}
+
+This is an appendix.
+
+
+
+
+
+
+
+\jake{Rerun ablation experiments only only specific token sequences (those which are tagged with the grammatical concept)}
+\jake{Rerun linear model without Turkish/Hebrew to see if at least we have good performance on most languages}
+\jake{Plot residuals of the simple linear model to see what it might be missing}
+\jannik{(if needed) Figure out a better dataset for Xhosa / misc. debugging of finetuning setup}
+\todo[inline]{Run a very basic analysis on the base model and +Xhosa variant? Something like the cosine similarity between activations of languages (this wouldn't necessarily confirm any hypotheses, it would just be interesting)}
+\aaron{Fill in introduction section}
+\aaron{Add representative papers to related work section}
+\todo[inline]{Write limitations section}
+\todo[inline]{Write discussion section}
+\todo[inline]{Create a good figure 1}
+\todo[inline]{Compile a list of figures we already have + ones we need to generate}
+
+\todo[inline]{Add explanations for how the probes were trained, as there are some details not covered by Jannik/Aaron's previous paper}
+\clearpage
+
+\begingroup
+\makeatletter
+\let\Hy@linktoc\Hy@linktoc@none
+\makeatother
+\listoftodos
+\endgroup
+
+\end{document}

@@ -9,6 +9,7 @@ BASE_DIR = "/projectnb/mcnet/jbrin/lang-probing"
 # Output directories
 OUTPUTS_DIR = os.path.join(BASE_DIR, "outputs")
 PROBES_DIR = os.path.join(OUTPUTS_DIR, "probes")
+WORD_PROBES_DIR = os.path.join(PROBES_DIR, "word_probes")
 FEATURES_DIR = os.path.join(OUTPUTS_DIR, "features")
 ABLATIONS_DIR = os.path.join(OUTPUTS_DIR, "ablations")
 ACTIVATIONS_DIR = os.path.join(OUTPUTS_DIR, "activations")

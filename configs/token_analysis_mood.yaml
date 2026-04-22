@@ -1,0 +1,95 @@
+defaults:
+  k: 5
+  feats: "input"
+  ablate_loc: "source"
+  prob_loc: "source"
+  use_probe: false
+  prompt_type: "free_form"
+
+experiments:
+  # ========== English ==========
+  - name: "mood_indicative_english"
+    text: "She studies linguistics at the university every morning before class."
+    source_lang: "English"
+    concept: "Mood"
+    value: "Ind"
+
+  - name: "mood_imperative_english"
+    text: "Close the door quietly and sit down at the table right now."
+    source_lang: "English"
+    concept: "Mood"
+    value: "Imp"
+
+  - name: "mood_subjunctive_english"
+    text: "The committee insists that he be present at the meeting tomorrow."
+    source_lang: "English"
+    concept: "Mood"
+    value: "Sub"
+
+  # ========== Spanish ==========
+  - name: "mood_indicative_spanish"
+    text: "María estudia lingüística en la universidad todas las mañanas antes de clase."
+    source_lang: "Spanish"
+    concept: "Mood"
+    value: "Ind"
+
+  - name: "mood_imperative_spanish"
+    text: "Cierra la puerta con cuidado y siéntate a la mesa ahora mismo."
+    source_lang: "Spanish"
+    concept: "Mood"
+    value: "Imp"
+
+  - name: "mood_subjunctive_spanish"
+    text: "Quiero que vengas a la fiesta con nosotros mañana por la noche."
+    source_lang: "Spanish"
+    concept: "Mood"
+    value: "Sub"
+
+  - name: "mood_conditional_spanish"
+    text: "Yo estudiaría lingüística en esa universidad si tuviera más tiempo libre."
+    source_lang: "Spanish"
+    concept: "Mood"
+    value: "Cnd"
+
+  # ========== Turkish ==========
+  - name: "mood_indicative_turkish"
+    text: "Maria her sabah dersten önce üniversitede dilbilim okuyor."
+    source_lang: "Turkish"
+    concept: "Mood"
+    value: "Ind"
+
+  - name: "mood_imperative_turkish"
+    text: "Kapıyı sessizce kapat ve hemen masaya otur."
+    source_lang: "Turkish"
+    concept: "Mood"
+    value: "Imp"
+
+  - name: "mood_conditional_turkish"
+    text: "Eve giderse bize mutlaka haber verecek."
+    source_lang: "Turkish"
+    concept: "Mood"
+    value: "Cnd"
+
+  - name: "mood_potential_turkish"
+    text: "O, yarın sabah erkenden eve gidebilir."
+    source_lang: "Turkish"
+    concept: "Mood"
+    value: "Pot"
+
+  - name: "mood_optative_turkish"
+    text: "Haydi bu akşam birlikte eve gidelim."
+    source_lang: "Turkish"
+    concept: "Mood"
+    value: "Opt"
+
+  - name: "mood_necessitative_turkish"
+    text: "Ayşe yarın erkenden eve gitmeli."
+    source_lang: "Turkish"
+    concept: "Mood"
+    value: "Nec"
+
+  - name: "mood_interrogative_turkish"
+    text: "Sen dün akşam geç saatte eve gittin mi?"
+    source_lang: "Turkish"
+    concept: "Mood"
+    value: "Int"

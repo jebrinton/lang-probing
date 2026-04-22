@@ -19,7 +19,6 @@ import itertools
 import logging
 import gc
 import json
-import time
 
 from nnsight import LanguageModel
 from torch.utils.data import DataLoader
@@ -28,8 +27,9 @@ import numpy as np
 import torch
 
 from lang_probing_src.utils import setup_model, get_device_info
-from lang_probing_src.config import MODEL_ID, SAE_ID, NAME_TO_LANG_CODE, LANGUAGES_DEC
-from lang_probing_src.ablate import ablate, ablate_batch
+from lang_probing_src.config import MODEL_ID, SAE_ID, NAME_TO_LANG_CODE, LANGUAGES_DEC, WORD_PROBES_DIR
+from lang_probing_src.ablate import ablate, ablate_batch, get_probe_ablation_mask
+from lang_probing_src.probe import load_probe
 from lang_probing_src.utils_input_output import get_output_features_vector, get_input_features_vector, load_effects_files, get_language_pairs_and_concepts
 
 
@@ -63,24 +63,6 @@ EXP_CONFIGS = {
         "mode": "multilingual", "ablate_loc": "target", "prob_loc": "target", "feats": "random"
     },
 }
-
-#region agent log
-def _agent_log(hypothesis_id, location, message, data):
-    """
-    Lightweight NDJSON logger for debug mode.
-    """
-    entry = {
-        "sessionId": "debug-session",
-        "runId": "pre-fix",
-        "hypothesisId": hypothesis_id,
-        "location": location,
-        "message": message,
-        "data": data,
-        "timestamp": int(time.time() * 1000),
-    }
-    with open("/projectnb/mcnet/jbrin/.cursor/debug.log", "a", encoding="utf-8") as _f:
-        _f.write(json.dumps(entry) + "\n")
-#endregion
 
 def get_feature_indices(K, feature_vector):
     """Return the top K feature indices from a feature vector"""
@@ -281,14 +263,6 @@ def main(args):
     
     # Configuration
     exp_cfg = EXP_CONFIGS[args.experiment]
-    #region agent log
-    _agent_log(
-        "H1",
-        "ablate.main:config",
-        "Loaded experiment config",
-        {"experiment": args.experiment, "config": exp_cfg, "k": args.k, "max_samples": args.max_samples},
-    )
-    #endregion
     input_features_dir = Path("/projectnb/mcnet/jbrin/lang-probing/outputs/sentence_input_features/")
     effects_files = load_effects_files() if "output" in exp_cfg['feats'] else None
     language_pairs_available = None
@@ -310,14 +284,6 @@ def main(args):
 
     for source_lang, target_lang in iterator:
         logging.info(f"Running {args.experiment}: {source_lang} -> {target_lang}")
-        #region agent log
-        _agent_log(
-            "H2",
-            "ablate.main:loop_start",
-            "Loop start for language pair",
-            {"source_lang": source_lang, "target_lang": target_lang},
-        )
-        #endregion
 
         if source_lang is not None:
             source_dataset = load_dataset("gsarti/flores_101", NAME_TO_LANG_CODE[source_lang], split="devtest")
@@ -366,23 +332,23 @@ def main(args):
                 feature_indices = np.random.choice(sae_dim, args.k, replace=False)
         except Exception as e:
             logging.warning(f"Could not load features for {source_lang}->{target_lang}: {e}")
-            #region agent log
-            _agent_log(
-                "H1",
-                "ablate.main:feature_load_error",
-                "Failed to load feature indices",
-                {"source_lang": source_lang, "target_lang": target_lang, "error": str(e)},
-            )
-            #endregion
             continue
-        #region agent log
-        _agent_log(
-            "H1",
-            "ablate.main:feature_indices",
-            "Selected feature indices",
-            {"source_lang": source_lang, "target_lang": target_lang, "num_indices": len(feature_indices)},
-        )
-        #endregion
+
+        # --- LOAD PROBE (if use_probe) ---
+        probe = None
+        probe_path = None
+        if args.use_probe:
+            # Language of the segment we ablate: for mono_output, source_lang is None and we ablate target-language sentences
+            if exp_cfg["ablate_loc"] == "source":
+                probe_lang = source_lang if source_lang is not None else target_lang
+            else:
+                probe_lang = target_lang
+            probe_path = Path(WORD_PROBES_DIR) / f"{probe_lang}_{args.concept}_{args.value}_l{args.probe_layer}_n{args.probe_n}.joblib"
+            if not probe_path.exists():
+                logging.warning(f"Probe not found: {probe_path}, skipping {source_lang}->{target_lang}")
+                continue
+            probe = load_probe(str(probe_path))
+            logging.info(f"Loaded probe from {probe_path}")
 
         # --- PREPARE BATCHES ---
         all_contexts, all_sources, all_targets = [], [], []
@@ -409,6 +375,9 @@ def main(args):
         # --- BATCH LOOP ---
         batch_means = []
         batch_mins = []
+        batch_log_means = []
+        batch_log_mins = []
+        batch_frac_active = []
 
         for i in range(0, num_samples, args.batch_size):
             b_ctx = all_contexts[i : i + args.batch_size]
@@ -419,31 +388,21 @@ def main(args):
             input_ids, src_mask, tgt_mask = get_batch_positions_masks(
                 tokenizer, b_ctx, b_src, b_tgt, device=device
             )
-            
-            ablate_mask = src_mask if exp_cfg['ablate_loc'] == 'source' else tgt_mask
-            prob_mask = src_mask if exp_cfg['prob_loc'] == 'source' else tgt_mask
+
+            ablate_region_mask = src_mask if exp_cfg["ablate_loc"] == "source" else tgt_mask
+            if probe is not None:
+                ablate_mask = get_probe_ablation_mask(
+                    model, input_ids, probe, args.probe_layer, ablate_region_mask, device=device
+                )
+            else:
+                ablate_mask = ablate_region_mask
+            prob_mask = src_mask if exp_cfg["prob_loc"] == "source" else tgt_mask
 
             if not ablate_mask.any() or not prob_mask.any():
-                #region agent log
-                _agent_log(
-                    "H2",
-                    "ablate.main:empty_masks",
-                    "Empty mask detected, skipping batch",
-                    {
-                        "source_lang": source_lang,
-                        "target_lang": target_lang,
-                        "ablate_any": bool(ablate_mask.any()),
-                        "prob_any": bool(prob_mask.any()),
-                        "batch_start": i,
-                    },
-                )
-                #endregion
                 continue
 
             try:
-                # Assuming feature_indices is numpy, convert to list or tensor if needed by ablate_batch
-                # usually list is fine for nnsight logic, or tensor
-                delta_p = ablate_batch(
+                out = ablate_batch(
                     model,
                     submodule,
                     autoencoder,
@@ -451,50 +410,38 @@ def main(args):
                     input_ids=input_ids,
                     feature_indices=feature_indices,
                     ablate_mask=ablate_mask,
-                    prob_mask=prob_mask
+                    prob_mask=prob_mask,
                 )
-                
+                delta_p = out["result_intervention"]
                 batch_means.append(delta_p.mean().item())
                 batch_mins.append(delta_p.min().item())
-                #region agent log
-                _agent_log(
-                    "H3",
-                    "ablate.main:batch_result",
-                    "Batch ablation result",
-                    {
-                        "source_lang": source_lang,
-                        "target_lang": target_lang,
-                        "batch_start": i,
-                        "delta_mean": float(batch_means[-1]),
-                        "delta_min": float(batch_mins[-1]),
-                        "batch_size": len(b_ctx),
-                    },
-                )
-                #endregion
+                batch_log_means.append(out["mean_logprob_delta"])
+                batch_log_mins.append(out["min_logprob_delta"])
+                frac = out["frac_active_at_ablated"]
+                if not (frac != frac):  # not nan
+                    batch_frac_active.append(frac)
 
             except Exception as e:
                 logging.error(f"Batch failed for {source_lang}->{target_lang}: {e}")
-                #region agent log
-                _agent_log(
-                    "H3",
-                    "ablate.main:batch_error",
-                    "Batch failed during ablate_batch",
-                    {"source_lang": source_lang, "target_lang": target_lang, "batch_start": i, "error": str(e)},
-                )
-                #endregion
                 continue
-            
+
             # Cleanup
-            del input_ids, src_mask, tgt_mask, delta_p
+            del input_ids, src_mask, tgt_mask, ablate_mask, out, delta_p
             torch.cuda.empty_cache()
 
         # --- SAVE RESULTS ---
         if batch_means:
             final_mean = np.mean(batch_means)
             final_min = np.min(batch_mins)
-            
-            print(f"\n\n\n\n\n\n\n\n\n\n\n\n\n[{args.experiment}] {source_lang}->{target_lang} | Mean: {final_mean:.4f} | Min: {final_min:.4f}")
-            
+            final_mean_log = np.mean(batch_log_means)
+            final_min_log = np.min(batch_log_mins)
+
+            print(
+                f"\n\n\n\n\n\n\n\n\n\n\n\n\n[{args.experiment}] {source_lang}->{target_lang} | "
+                f"mean_delta (exp-1): {final_mean:.4f} | min_delta: {final_min:.4f} | "
+                f"mean_logprob_delta: {final_mean_log:.4f} | min_logprob_delta: {final_min_log:.4f}"
+            )
+
             result_entry = {
                 "experiment": args.experiment,
                 "source_lang": source_lang,
@@ -504,21 +451,19 @@ def main(args):
                 "k": args.k,
                 "mean_delta": float(final_mean),
                 "min_delta": float(final_min),
-                "num_samples": num_samples
+                "mean_logprob_delta": float(final_mean_log),
+                "min_logprob_delta": float(final_min_log),
+                "num_samples": num_samples,
             }
-            
+            if args.use_probe:
+                result_entry["probe_path"] = str(probe_path)
+                result_entry["probe_layer"] = args.probe_layer
+                result_entry["frac_active_at_ablated"] = float(np.mean(batch_frac_active)) if batch_frac_active else None
+
             save_result_jsonl(output_file, result_entry)
         else:
             logging.warning(f"No results for {source_lang}->{target_lang}")
-            #region agent log
-            _agent_log(
-                "H4",
-                "ablate.main:no_results",
-                "No batch results to save",
-                {"source_lang": source_lang, "target_lang": target_lang},
-            )
-            #endregion
-        
+
         gc.collect()
 
 
@@ -531,6 +476,8 @@ if __name__ == "__main__":
     parser.add_argument("--max_samples", type=int, default=32)
     parser.add_argument("--batch_size", type=int, default=16)
     parser.add_argument("--output_dir", type=str, default="outputs/ablation_results", help="Directory to save jsonl files")
-    
+    parser.add_argument("--use_probe", action="store_true", help="Use word probe to ablate only at positions where concept=value (logit > 0)")
+    parser.add_argument("--probe_layer", type=int, default=32, help="Layer the probe was trained on (for loading activations)")
+    parser.add_argument("--probe_n", type=int, default=1024, help="Probe filename suffix n (e.g. ..._n1024.joblib)")
     args = parser.parse_args()
     main(args)

@@ -1,0 +1,127 @@
+defaults:
+  k: 5
+  feats: "input"
+  ablate_loc: "source"
+  prob_loc: "source"
+  use_probe: false
+
+experiments:
+  # ------------------------------------------------------------------
+  # Number = Plur  (richer context than a single NP)
+  # ------------------------------------------------------------------
+  - name: "number_plur_english"
+    prompt_type: "free_form"
+    text: "The students are waiting in the library for their books."
+    source_lang: "English"
+    concept: "Number"
+    value: "Plur"
+
+  - name: "number_plur_spanish"
+    prompt_type: "free_form"
+    text: "Los niños juegan felizmente en el parque grande."
+    source_lang: "Spanish"
+    concept: "Number"
+    value: "Plur"
+
+  - name: "number_plur_turkish"
+    prompt_type: "free_form"
+    text: "Öğrenciler kütüphanede kitaplarını bekliyorlar."
+    source_lang: "Turkish"
+    concept: "Number"
+    value: "Plur"
+
+  # ------------------------------------------------------------------
+  # Number = Sing  (minimal-pair counterparts to Plur sentences above)
+  # ------------------------------------------------------------------
+  - name: "number_sing_english"
+    prompt_type: "free_form"
+    text: "The student is waiting in the library for his book."
+    source_lang: "English"
+    concept: "Number"
+    value: "Sing"
+
+  - name: "number_sing_spanish"
+    prompt_type: "free_form"
+    text: "El niño juega felizmente en el parque grande."
+    source_lang: "Spanish"
+    concept: "Number"
+    value: "Sing"
+
+  - name: "number_sing_turkish"
+    prompt_type: "free_form"
+    text: "Öğrenci kütüphanede kitabını bekliyor."
+    source_lang: "Turkish"
+    concept: "Number"
+    value: "Sing"
+
+  # ------------------------------------------------------------------
+  # Tense = Past  (overt past-tense morphology + temporal adverb)
+  # ------------------------------------------------------------------
+  - name: "tense_past_english"
+    prompt_type: "free_form"
+    text: "Yesterday she baked a delicious chocolate cake for her grandmother."
+    source_lang: "English"
+    concept: "Tense"
+    value: "Past"
+
+  - name: "tense_past_spanish"
+    prompt_type: "free_form"
+    text: "Ayer ella horneó un delicioso pastel de chocolate para su abuela."
+    source_lang: "Spanish"
+    concept: "Tense"
+    value: "Past"
+
+  - name: "tense_past_turkish"
+    prompt_type: "free_form"
+    text: "Dün büyükannesi için lezzetli bir çikolatalı kek pişirdi."
+    source_lang: "Turkish"
+    concept: "Tense"
+    value: "Past"
+
+  # ------------------------------------------------------------------
+  # Tense = Pres  (habitual present)
+  # ------------------------------------------------------------------
+  - name: "tense_pres_english"
+    prompt_type: "free_form"
+    text: "Every morning the baker prepares fresh bread for his customers."
+    source_lang: "English"
+    concept: "Tense"
+    value: "Pres"
+
+  - name: "tense_pres_spanish"
+    prompt_type: "free_form"
+    text: "Cada mañana el panadero prepara pan fresco para sus clientes."
+    source_lang: "Spanish"
+    concept: "Tense"
+    value: "Pres"
+
+  - name: "tense_pres_turkish"
+    prompt_type: "free_form"
+    text: "Her sabah fırıncı müşterileri için taze ekmek hazırlıyor."
+    source_lang: "Turkish"
+    concept: "Tense"
+    value: "Pres"
+
+  # ------------------------------------------------------------------
+  # Tense = Fut  (explicit future-tense morphology / auxiliary)
+  # ------------------------------------------------------------------
+  - name: "tense_fut_english"
+    prompt_type: "free_form"
+    text: "Tomorrow they will travel to the beautiful old city by train."
+    source_lang: "English"
+    concept: "Tense"
+    value: "Fut"
+
+  - name: "tense_fut_spanish"
+    prompt_type: "free_form"
+    text: "Mañana viajarán a la hermosa ciudad antigua en tren."
+    source_lang: "Spanish"
+    concept: "Tense"
+    value: "Fut"
+
+  - name: "tense_fut_turkish"
+    prompt_type: "free_form"
+    text: "Yarın trenle o güzel eski şehre seyahat edecekler."
+    source_lang: "Turkish"
+    concept: "Tense"
+    value: "Fut"

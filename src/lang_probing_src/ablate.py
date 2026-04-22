@@ -16,8 +16,6 @@ from nnsight import LanguageModel
 import torch
 import torch.nn.functional as F
 from einops import rearrange
-import json
-import os
 import numpy as np
 
 def get_log_probs(logits, input_ids):
@@ -88,7 +86,7 @@ def ablate(model, submodule, autoencoder, tokenizer, input_ids, feature_indices,
             logits = model.lm_head.output
             relevant_logits = logits[:, logit_start:logit_end, :]
 
-            relevant_log_probs = F.log_softmax(relevant_logits, dim=-1)
+            relevant_log_probs = F.log_softmax(relevant_logits.float(), dim=-1)
             
             log_probs_intervention = relevant_log_probs.gather(
                 dim=-1, 
@@ -99,7 +97,7 @@ def ablate(model, submodule, autoencoder, tokenizer, input_ids, feature_indices,
             logits = model.lm_head.output
             relevant_logits = logits[:, logit_start:logit_end, :]
 
-            relevant_log_probs = F.log_softmax(relevant_logits, dim=-1)
+            relevant_log_probs = F.log_softmax(relevant_logits.float(), dim=-1)
         
             log_probs_original = relevant_log_probs.gather(
                 dim=-1, 
@@ -111,9 +109,48 @@ def ablate(model, submodule, autoencoder, tokenizer, input_ids, feature_indices,
     return torch.exp(log_diff) - 1 # return ratio of (new prob - old prob) / old prob
 
 
+def get_probe_ablation_mask(model, input_ids, probe, probe_layer, ablate_region_mask, device="cpu"):
+    """
+    Get ablation mask from probe: True only where probe predicts concept=value (logit > 0)
+    and the position is inside the ablation region (source/target).
+
+    Args:
+        model: nnsight LanguageModel
+        input_ids: [Batch, Seq]
+        probe: sklearn LogisticRegression (e.g. from probe.load_probe)
+        probe_layer: int, layer index the probe was trained on
+        ablate_region_mask: BoolTensor [Batch, Seq] (True = source or target segment)
+        device: device for tensors
+
+    Returns:
+        BoolTensor [Batch, Seq]: True where we should ablate (region AND probe logit > 0)
+    """
+    if input_ids.ndim == 1:
+        input_ids = input_ids.unsqueeze(0)
+    # Probe filenames use HuggingFace convention: hidden_states[layer_num] where layer_num can be 32
+    # for the last layer. model.model.layers has indices 0..num_layers-1, so clamp to valid range.
+    num_layers = len(model.model.layers)
+    layer_index = min(probe_layer, num_layers - 1)
+    with torch.no_grad():
+        with model.trace() as tracer:
+            with tracer.invoke(input_ids):
+                out = model.model.layers[layer_index].output
+                acts = out[0] if isinstance(out, tuple) else out
+                acts = acts.cpu().save()
+    acts = getattr(acts, "value", acts)
+    B, S, H = acts.shape
+    # NumPy does not support BFloat16; convert to float32 for probe.decision_function
+    acts_np = acts.float().reshape(B * S, H).numpy()
+    logits = probe.decision_function(acts_np)
+    probe_logits = torch.tensor(logits, dtype=torch.float32, device=device).reshape(B, S)
+    ablate_mask_probe = (probe_logits > 0) & ablate_region_mask
+    return ablate_mask_probe
+
+
 def logits_to_probs(logits, input_ids):
     # Shift logits/labels for Causal LM (logit[i] predicts input[i+1])
-    shifted_logits = logits[:, :-1, :]
+    # Compute in float32 to avoid bfloat16 quantization flipping signs when deltas are tiny.
+    shifted_logits = logits[:, :-1, :].float()
     shifted_labels = input_ids[:, 1:]
 
     # Compute log probs for the whole sequence
@@ -132,10 +169,12 @@ def logits_to_probs(logits, input_ids):
 def ablate_batch(model, submodule, autoencoder, tokenizer, input_ids, feature_indices, ablate_mask, prob_mask):
     """
     Ablate features and measure change in log-probability using batch masks.
-    
-    Args:
-        ablate_mask: BoolTensor [Batch, Seq] (True where we ablate)
-        prob_mask: BoolTensor [Batch, Seq] (True where we measure probability)
+
+    Returns:
+        dict with:
+        - result_intervention: 1D tensor, exp(Δ log p) - 1 per scored token (~relative prob change)
+        - mean_logprob_delta, min_logprob_delta: scalars, mean/min of Δ log p on scored tokens
+        - frac_active_at_ablated: fraction of ablated SAE coeffs > 0 pre-ablation (nan if no sites)
     """
     if isinstance(input_ids, list):
         input_ids = torch.tensor(input_ids)
@@ -146,91 +185,54 @@ def ablate_batch(model, submodule, autoencoder, tokenizer, input_ids, feature_in
     # We cannot predict the first token (no context), so ensure mask is False there
     prob_mask[:, 0] = False 
     
+    feature_indices = np.asarray(feature_indices)
     with torch.no_grad():
-        # random features
-        # actual features
         with model.trace() as tracer:
             with tracer.invoke(input_ids):
                 acts = submodule.output
-
                 encoded_acts = autoencoder.encode(acts)
                 encoded_acts_clean = encoded_acts.clone()
-                
-                feature_indices = np.random.choice(encoded_acts.shape[2], 5, replace=False)
-                # Select only the features to ablate
                 # Shape: [Batch, Seq, K]
                 selected_features = encoded_acts[:, :, feature_indices]
-
-                print("acts at selected features", selected_features)
-                
-                # Apply the ablation mask (True where we want to ablate)
-                # We keep the value only if the mask is True
+                pre_abl_slice = selected_features.clone().cpu().save()
                 mask_reshaped = rearrange(ablate_mask, 'b s -> b s 1')
                 ablated_slice = selected_features.masked_fill(mask_reshaped, 0.0)
-
                 encoded_acts[:, :, feature_indices] = ablated_slice
-
                 decoded_acts = autoencoder.decode(encoded_acts)
                 decoded_acts_clean = autoencoder.decode(encoded_acts_clean)
-
                 submodule.output = submodule.output + (decoded_acts - decoded_acts_clean)
-
-                logits = model.lm_head.output
-                token_log_probs_random = logits_to_probs(logits, input_ids).cpu().save()
-            
-            with tracer.invoke(input_ids):
-                acts = submodule.output
-
-                encoded_acts = autoencoder.encode(acts)
-                encoded_acts_clean = encoded_acts.clone()
-                
-                # Select only the features to ablate
-                # Shape: [Batch, Seq, K]
-                selected_features = encoded_acts[:, :, feature_indices]
-
-                print("acts at selected features", selected_features)
-                
-                # Apply the ablation mask (True where we want to ablate)
-                # We keep the value only if the mask is True
-                mask_reshaped = rearrange(ablate_mask, 'b s -> b s 1')
-                ablated_slice = selected_features.masked_fill(mask_reshaped, 0.0)
-
-                encoded_acts[:, :, feature_indices] = ablated_slice
-
-                decoded_acts = autoencoder.decode(encoded_acts)
-                decoded_acts_clean = autoencoder.decode(encoded_acts_clean)
-
-                submodule.output = submodule.output + (decoded_acts - decoded_acts_clean)
-
                 logits = model.lm_head.output
                 token_log_probs_interv = logits_to_probs(logits, input_ids).cpu().save()
-            
+
             with tracer.invoke(input_ids):
                 logits = model.lm_head.output
                 token_log_probs_orig = logits_to_probs(logits, input_ids).cpu().save()
-    
-    # We must slice the mask because our log_probs are shifted (Seq-1)
-    # prob_mask[:, i] corresponds to input_ids[:, i], which is predicted by logits[:, i-1]
-    valid_mask = prob_mask[:, 1:].cpu()
 
-    # Select only the relevant tokens (flattens the output to 1D)
-    log_probs_intervention = token_log_probs_interv[valid_mask]
-    log_probs_original = token_log_probs_orig[valid_mask]
-    log_probs_random = token_log_probs_random[valid_mask]
+    valid_mask = prob_mask[:, 1:].cpu()  # aligns with logits_to_probs output: [B, S-1]
+    log_probs_interv = getattr(token_log_probs_interv, "value", token_log_probs_interv)
+    log_probs_orig = getattr(token_log_probs_orig, "value", token_log_probs_orig)
 
-    log_diff_intervention = log_probs_intervention - log_probs_original
-    log_diff_random = log_probs_random - log_probs_original
-
-    print("log_diff_intervention", log_diff_intervention)
-    print("log_diff_random", log_diff_random)
+    token_log_diff_full = log_probs_interv - log_probs_orig  # [B, S-1]
+    log_diff_intervention = token_log_diff_full[valid_mask]
 
     result_intervention = torch.exp(log_diff_intervention) - 1
-    result_random = torch.exp(log_diff_random) - 1
+    mean_log_d = float(log_diff_intervention.float().mean().item())
+    min_log_d = float(log_diff_intervention.float().min().item())
 
-    print("result_intervention", result_intervention)
-    print("result_random", result_random)
-    
-    return result_intervention
+    # Fraction of selected SAE features that were active (>0) at ablated positions, pre-ablation
+    ablate_mask_cpu = ablate_mask.cpu()
+    pre_abl = getattr(pre_abl_slice, "value", pre_abl_slice)
+    if ablate_mask_cpu.any() and pre_abl is not None:
+        active_at_ablated = (pre_abl[ablate_mask_cpu] > 0).float().mean().item()
+    else:
+        active_at_ablated = float("nan")
+
+    return {
+        "result_intervention": result_intervention,
+        "mean_logprob_delta": mean_log_d,
+        "min_logprob_delta": min_log_d,
+        "frac_active_at_ablated": active_at_ablated,
+    }
 
 
 # old code that went between acts = submodule.input and submodule.output = submodule.output + (decoded_acts - decoded_acts_clean)

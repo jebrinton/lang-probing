@@ -72,7 +72,7 @@ class TestAblateBatchCore(unittest.TestCase):
         """Test that ablating features results in negative delta (lower probability)"""
         # This test verifies the function runs and returns correct format
         # In practice with real model, delta should be negative
-        delta_p = ablate_batch(
+        out = ablate_batch(
             self.model,
             self.submodule,
             self.sae,
@@ -82,8 +82,11 @@ class TestAblateBatchCore(unittest.TestCase):
             ablate_mask=self.ablate_mask,
             prob_mask=self.prob_mask
         )
-        
+        delta_p = out["result_intervention"]
         # Check return value format
+        self.assertIsInstance(out, dict)
+        self.assertIn("result_intervention", out)
+        self.assertIn("frac_active_at_ablated", out)
         self.assertIsInstance(delta_p, torch.Tensor)
         self.assertGreater(len(delta_p), 0)
         
@@ -100,7 +103,7 @@ class TestAblateBatchCore(unittest.TestCase):
         
     def test_return_value_format(self):
         """Test that return value has correct format"""
-        delta_p = ablate_batch(
+        out = ablate_batch(
             self.model,
             self.submodule,
             self.sae,
@@ -110,7 +113,7 @@ class TestAblateBatchCore(unittest.TestCase):
             ablate_mask=self.ablate_mask,
             prob_mask=self.prob_mask
         )
-        
+        delta_p = out["result_intervention"]
         # Should be 1D tensor
         self.assertEqual(len(delta_p.shape), 1)
         
@@ -127,7 +130,7 @@ class TestAblateBatchCore(unittest.TestCase):
     def test_random_baseline_less_effective(self):
         """Test that random features have less effect than targeted features"""
         # Targeted features (top K)
-        delta_p_targeted = ablate_batch(
+        out_t = ablate_batch(
             self.model,
             self.model.model.layers[16],
             self.sae,
@@ -137,11 +140,11 @@ class TestAblateBatchCore(unittest.TestCase):
             ablate_mask=self.ablate_mask,
             prob_mask=self.prob_mask
         )
-        
+        delta_p_targeted = out_t["result_intervention"]
         # Random features
         np.random.seed(42)
         random_indices = np.random.choice(32768, self.K, replace=False)
-        delta_p_random = ablate_batch(
+        out_r = ablate_batch(
             self.model,
             self.model.model.layers[16],
             self.sae,
@@ -151,7 +154,7 @@ class TestAblateBatchCore(unittest.TestCase):
             ablate_mask=self.ablate_mask,
             prob_mask=self.prob_mask
         )
-        
+        delta_p_random = out_r["result_intervention"]
         # Both should return valid results
         self.assertIsInstance(delta_p_targeted, torch.Tensor)
         self.assertIsInstance(delta_p_random, torch.Tensor)
@@ -198,7 +201,7 @@ class TestAblateBatchMasks(unittest.TestCase):
         prob_mask[:, 0] = False  # Can't predict first token
         
         # Function should handle this correctly
-        delta_p = ablate_batch(
+        out = ablate_batch(
             self.model,
             self.submodule,
             self.sae,
@@ -208,6 +211,7 @@ class TestAblateBatchMasks(unittest.TestCase):
             ablate_mask=prob_mask.clone(),
             prob_mask=prob_mask
         )
+        delta_p = out["result_intervention"]
         
         # Should return results for seq_len - 1 positions (after shift)
         expected_len = (seq_len - 1) if seq_len > 1 else 0
@@ -229,7 +233,7 @@ class TestAblateBatchMasks(unittest.TestCase):
         prob_mask[:, 0] = False
         
         # Should handle gracefully
-        delta_p = ablate_batch(
+        out = ablate_batch(
             self.model,
             self.submodule,
             self.sae,
@@ -239,6 +243,7 @@ class TestAblateBatchMasks(unittest.TestCase):
             ablate_mask=ablate_mask,
             prob_mask=prob_mask
         )
+        delta_p = out["result_intervention"]
         
         # With no ablation, delta should be close to zero
         # (or empty if no positions to measure)
@@ -259,7 +264,7 @@ class TestAblateBatchMasks(unittest.TestCase):
         prob_mask = torch.zeros((batch_size, seq_len), dtype=torch.bool, device=self.device)
         
         # Should return empty tensor
-        delta_p = ablate_batch(
+        out = ablate_batch(
             self.model,
             self.submodule,
             self.sae,
@@ -269,6 +274,7 @@ class TestAblateBatchMasks(unittest.TestCase):
             ablate_mask=ablate_mask,
             prob_mask=prob_mask
         )
+        delta_p = out["result_intervention"]
         
         # Should be empty
         self.assertEqual(len(delta_p), 0)
@@ -291,7 +297,7 @@ class TestAblateBatchMasks(unittest.TestCase):
         prob_mask[:, 0] = False  # Can't predict first
         
         # Should handle this case
-        delta_p = ablate_batch(
+        out = ablate_batch(
             self.model,
             self.submodule,
             self.sae,
@@ -301,6 +307,7 @@ class TestAblateBatchMasks(unittest.TestCase):
             ablate_mask=ablate_mask,
             prob_mask=prob_mask
         )
+        delta_p = out["result_intervention"]
         
         # Should return valid results (measuring downstream effects)
         self.assertIsInstance(delta_p, torch.Tensor)
@@ -344,7 +351,7 @@ class TestAblateBatchFeatureSelection(unittest.TestCase):
         """Test with numpy array feature indices"""
         feature_indices = np.array([100, 200, 300], dtype=np.int32)
         
-        delta_p = ablate_batch(
+        out = ablate_batch(
             self.model,
             self.submodule,
             self.sae,
@@ -354,6 +361,7 @@ class TestAblateBatchFeatureSelection(unittest.TestCase):
             ablate_mask=self.ablate_mask,
             prob_mask=self.prob_mask
         )
+        delta_p = out["result_intervention"]
         
         self.assertIsInstance(delta_p, torch.Tensor)
         
@@ -366,7 +374,7 @@ class TestAblateBatchFeatureSelection(unittest.TestCase):
         """Test with list feature indices"""
         feature_indices = [100, 200, 300]
         
-        delta_p = ablate_batch(
+        out = ablate_batch(
             self.model,
             self.submodule,
             self.sae,
@@ -376,6 +384,7 @@ class TestAblateBatchFeatureSelection(unittest.TestCase):
             ablate_mask=self.ablate_mask,
             prob_mask=self.prob_mask
         )
+        delta_p = out["result_intervention"]
         
         self.assertIsInstance(delta_p, torch.Tensor)
         
@@ -388,7 +397,7 @@ class TestAblateBatchFeatureSelection(unittest.TestCase):
         """Test with torch tensor feature indices"""
         feature_indices = torch.tensor([100, 200, 300], dtype=torch.int64)
         
-        delta_p = ablate_batch(
+        out = ablate_batch(
             self.model,
             self.submodule,
             self.sae,
@@ -398,6 +407,7 @@ class TestAblateBatchFeatureSelection(unittest.TestCase):
             ablate_mask=self.ablate_mask,
             prob_mask=self.prob_mask
         )
+        delta_p = out["result_intervention"]
         
         self.assertIsInstance(delta_p, torch.Tensor)
         
@@ -411,7 +421,7 @@ class TestAblateBatchFeatureSelection(unittest.TestCase):
         for k in [1, 5, 10, 50]:
             feature_indices = np.random.choice(32768, k, replace=False)
             
-            delta_p = ablate_batch(
+            out = ablate_batch(
                 self.model,
                 self.submodule,
                 self.sae,
@@ -419,9 +429,9 @@ class TestAblateBatchFeatureSelection(unittest.TestCase):
                 input_ids=self.input_ids,
                 feature_indices=feature_indices,
                 ablate_mask=self.ablate_mask,
-                prob_mask=self.prob_mask
-            )
-            
+            prob_mask=self.prob_mask
+        )
+            delta_p = out["result_intervention"]
             self.assertIsInstance(delta_p, torch.Tensor)
             
             # Cleanup after each iteration

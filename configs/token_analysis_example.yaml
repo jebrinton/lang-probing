@@ -1,0 +1,67 @@
+defaults:
+  k: 5
+  feats: "input"
+  ablate_loc: "source"
+  prob_loc: "source"
+  use_probe: false
+
+experiments:
+  - name: "number_plural_spanish_mono"
+    prompt_type: "free_form"
+    text: "Los arcos son grandes."
+    source_lang: "Spanish"
+    concept: "Number"
+    value: "Plur"
+
+  - name: "number_plural_turkish_mono"
+    prompt_type: "free_form"
+    text: "Kitaplar çok güzel. Onlar okuyorlar."
+    source_lang: "Turkish"
+    concept: "Number"
+    value: "Plur"
+
+  - name: "gender_feminine_spanish_mono"
+    prompt_type: "free_form"
+    text: "La niña es lista y quiere a su gata."
+    source_lang: "Spanish"
+    concept: "Gender"
+    value: "Fem"
+
+  # # Free-form monolingual
+  # - name: "tense_past_spanish_mono"
+  #   prompt_type: "free_form"
+  #   text: "El gato comió el pescado ayer por la tarde."
+  #   source_lang: "Spanish"
+  #   concept: "Tense"
+  #   value: "Past"
+
+  # # Free-form multilingual
+  # - name: "tense_past_spa_eng_freeform"
+  #   prompt_type: "free_form"
+  #   context: "La casa es grande. >> The house is big.\nEl perro corre. >> The dog runs.\n"
+  #   source_text: "El gato comió el pescado."
+  #   target_text: "The cat ate the fish."
+  #   source_lang: "Spanish"
+  #   target_lang: "English"
+  #   concept: "Tense"
+  #   value: "Past"
+  #   k: 10
+  #   feats: "output"
+  #   ablate_loc: "target"
+  #   prob_loc: "target"
+
+  # # FLORES-based (auto-constructs 2-shot prompt)
+  # - name: "tense_past_spa_eng_flores"
+  #   prompt_type: "flores"
+  #   source_lang: "Spanish"
+  #   target_lang: "English"
+  #   flores_index: 0
+  #   concept: "Tense"
+  #   value: "Past"
+  #   k: 10
+  #   feats: "output"
+  #   ablate_loc: "target"
+  #   prob_loc: "target"
+  #   use_probe: true
+  #   probe_layer: 16
+  #   probe_n: 1024

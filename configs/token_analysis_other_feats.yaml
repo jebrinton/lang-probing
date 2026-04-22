@@ -1,0 +1,46 @@
+defaults:
+  k: 5
+  feats: "input"
+  ablate_loc: "source"
+  prob_loc: "source"
+  use_probe: false
+  prompt_type: "free_form"
+
+experiments:
+  - name: "gender_spanish"
+    text: "El niño juega con la niña en el parque grande cerca de la escuela."
+    source_lang: "Spanish"
+    concept: "Gender"
+    value: "Masc"
+
+  - name: "gender_french"
+    text: "Le garçon joue avec la fille dans le grand parc près de l'école."
+    source_lang: "French"
+    concept: "Gender"
+    value: "Masc"
+
+  - name: ""
+
+  # ------------------------------------------------------------------
+  # Tense = Fut  (explicit future-tense morphology / auxiliary)
+  # ------------------------------------------------------------------
+  - name: "tense_fut_english"
+    prompt_type: "free_form"
+    text: "Tomorrow they will travel to the beautiful old city by train."
+    source_lang: "English"
+    concept: "Tense"
+    value: "Fut"
+
+  - name: "tense_fut_spanish"
+    prompt_type: "free_form"
+    text: "Mañana viajarán a la hermosa ciudad antigua en tren."
+    source_lang: "Spanish"
+    concept: "Tense"
+    value: "Fut"
+
+  - name: "tense_fut_turkish"
+    prompt_type: "free_form"
+    text: "Yarın trenle o güzel eski şehre seyahat edecekler."
+    source_lang: "Turkish"
+    concept: "Tense"
+    value: "Fut"

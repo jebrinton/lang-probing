@@ -46,7 +46,7 @@ class TestMockModel(unittest.TestCase):
         feature_indices = np.array([100, 200, 300])
         
         # Should run without errors
-        delta_p = ablate_batch(
+        out = ablate_batch(
             self.model,
             self.model.model.layers[16],
             self.sae,
@@ -56,6 +56,7 @@ class TestMockModel(unittest.TestCase):
             ablate_mask=ablate_mask,
             prob_mask=prob_mask
         )
+        delta_p = out["result_intervention"]
         
         self.assertIsInstance(delta_p, torch.Tensor)
         self.assertGreater(len(delta_p), 0)
@@ -105,7 +106,7 @@ class TestMockModel(unittest.TestCase):
         prob_mask = torch.ones((batch_size, seq_len), dtype=torch.bool)
         prob_mask[:, 0] = False
         
-        delta_p = ablate_batch(
+        out = ablate_batch(
             self.model,
             self.model.model.layers[16],
             self.sae,
@@ -115,6 +116,7 @@ class TestMockModel(unittest.TestCase):
             ablate_mask=ablate_mask,
             prob_mask=prob_mask
         )
+        delta_p = out["result_intervention"]
         
         self.assertIsInstance(delta_p, torch.Tensor)
 
@@ -191,7 +193,7 @@ class TestFastSmokeTests(unittest.TestCase):
         feature_indices = np.array([100, 200, 300])
         
         # Should run without errors
-        delta_p = ablate_batch(
+        out = ablate_batch(
             self.model,
             self.model.model.layers[16],
             self.sae,
@@ -201,6 +203,7 @@ class TestFastSmokeTests(unittest.TestCase):
             ablate_mask=ablate_mask,
             prob_mask=prob_mask
         )
+        delta_p = out["result_intervention"]
         
         self.assertIsInstance(delta_p, torch.Tensor)
     
@@ -223,7 +226,7 @@ class TestFastSmokeTests(unittest.TestCase):
         feature_indices = np.array([100, 200, 300])
         
         # Should run without errors
-        delta_p = ablate_batch(
+        out = ablate_batch(
             self.model,
             self.model.model.layers[16],
             self.sae,
@@ -233,6 +236,7 @@ class TestFastSmokeTests(unittest.TestCase):
             ablate_mask=ablate_mask,
             prob_mask=prob_mask
         )
+        delta_p = out["result_intervention"]
         
         self.assertIsInstance(delta_p, torch.Tensor)
     
@@ -250,7 +254,7 @@ class TestFastSmokeTests(unittest.TestCase):
         for k in [1, 5, 10, 50]:
             feature_indices = np.random.choice(32768, k, replace=False)
             
-            delta_p = ablate_batch(
+            out = ablate_batch(
                 self.model,
                 self.model.model.layers[16],
                 self.sae,
@@ -260,7 +264,7 @@ class TestFastSmokeTests(unittest.TestCase):
                 ablate_mask=ablate_mask,
                 prob_mask=prob_mask
             )
-            
+            delta_p = out["result_intervention"]
             self.assertIsInstance(delta_p, torch.Tensor)
 
 

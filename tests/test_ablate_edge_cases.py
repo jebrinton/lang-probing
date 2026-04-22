@@ -67,7 +67,7 @@ class TestEdgeCases(unittest.TestCase):
         feature_indices = np.array([])
         
         # Should handle empty feature list
-        delta_p = ablate_batch(
+        out = ablate_batch(
             self.model,
             self.submodule,
             self.sae,
@@ -77,6 +77,7 @@ class TestEdgeCases(unittest.TestCase):
             ablate_mask=self.ablate_mask,
             prob_mask=self.prob_mask
         )
+        delta_p = out["result_intervention"]
         
         # With no features ablated, delta should be close to zero
         if len(delta_p) > 0:
@@ -103,7 +104,7 @@ class TestEdgeCases(unittest.TestCase):
         feature_indices = np.arange(sae_dim)
         
         # Should handle this case
-        delta_p = ablate_batch(
+        out = ablate_batch(
             self.model,
             self.submodule,
             self.sae,
@@ -113,6 +114,7 @@ class TestEdgeCases(unittest.TestCase):
             ablate_mask=self.ablate_mask,
             prob_mask=self.prob_mask
         )
+        delta_p = out["result_intervention"]
         
         self.assertIsInstance(delta_p, torch.Tensor)
         
@@ -134,7 +136,7 @@ class TestEdgeCases(unittest.TestCase):
         ablate_mask = ablate_mask.to(self.device)
         prob_mask = prob_mask.to(self.device)
         
-        delta_p = ablate_batch(
+        out = ablate_batch(
             self.model,
             self.submodule,
             self.sae,
@@ -144,6 +146,7 @@ class TestEdgeCases(unittest.TestCase):
             ablate_mask=ablate_mask,
             prob_mask=prob_mask
         )
+        delta_p = out["result_intervention"]
         
         # Should return empty tensor (no positions to measure)
         self.assertEqual(len(delta_p), 0)
@@ -166,7 +169,7 @@ class TestEdgeCases(unittest.TestCase):
         ablate_mask = ablate_mask.to(self.device)
         prob_mask = prob_mask.to(self.device)
         
-        delta_p = ablate_batch(
+        out = ablate_batch(
             self.model,
             self.submodule,
             self.sae,
@@ -176,6 +179,7 @@ class TestEdgeCases(unittest.TestCase):
             ablate_mask=ablate_mask,
             prob_mask=prob_mask
         )
+        delta_p = out["result_intervention"]
         
         # Should return one value
         self.assertGreaterEqual(len(delta_p), 0)
@@ -188,7 +192,7 @@ class TestEdgeCases(unittest.TestCase):
     def test_device_handling(self):
         """Test that tensors are on correct device"""
         # Inputs should already be on correct device from setUp
-        delta_p = ablate_batch(
+        out = ablate_batch(
             self.model,
             self.submodule,
             self.sae,
@@ -198,6 +202,7 @@ class TestEdgeCases(unittest.TestCase):
             ablate_mask=self.ablate_mask,
             prob_mask=self.prob_mask
         )
+        delta_p = out["result_intervention"]
         
         # Result should be on CPU (ablate_batch returns CPU tensors)
         self.assertEqual(delta_p.device.type, "cpu")
@@ -209,7 +214,7 @@ class TestEdgeCases(unittest.TestCase):
     
     def test_nan_handling(self):
         """Test that results don't contain NaN values"""
-        delta_p = ablate_batch(
+        out = ablate_batch(
             self.model,
             self.submodule,
             self.sae,
@@ -219,6 +224,7 @@ class TestEdgeCases(unittest.TestCase):
             ablate_mask=self.ablate_mask,
             prob_mask=self.prob_mask
         )
+        delta_p = out["result_intervention"]
         
         # Should not contain NaN
         self.assertFalse(torch.isnan(delta_p).any())
@@ -230,7 +236,7 @@ class TestEdgeCases(unittest.TestCase):
     
     def test_inf_handling(self):
         """Test that results don't contain Inf values"""
-        delta_p = ablate_batch(
+        out = ablate_batch(
             self.model,
             self.submodule,
             self.sae,
@@ -240,6 +246,7 @@ class TestEdgeCases(unittest.TestCase):
             ablate_mask=self.ablate_mask,
             prob_mask=self.prob_mask
         )
+        delta_p = out["result_intervention"]
         
         # Should not contain Inf
         self.assertFalse(torch.isinf(delta_p).any())
@@ -267,7 +274,7 @@ class TestEdgeCases(unittest.TestCase):
         ablate_mask = ablate_mask.to(self.device)
         prob_mask = prob_mask.to(self.device)
         
-        delta_p = ablate_batch(
+        out = ablate_batch(
             self.model,
             self.submodule,
             self.sae,
@@ -277,6 +284,7 @@ class TestEdgeCases(unittest.TestCase):
             ablate_mask=ablate_mask,
             prob_mask=prob_mask
         )
+        delta_p = out["result_intervention"]
         
         self.assertIsInstance(delta_p, torch.Tensor)
         # Should have many values (batch_size * (seq_len - 1) positions)
@@ -305,7 +313,7 @@ class TestEdgeCases(unittest.TestCase):
         ablate_mask = ablate_mask.to(self.device)
         prob_mask = prob_mask.to(self.device)
         
-        delta_p = ablate_batch(
+        out = ablate_batch(
             self.model,
             self.submodule,
             self.sae,
@@ -315,6 +323,7 @@ class TestEdgeCases(unittest.TestCase):
             ablate_mask=ablate_mask,
             prob_mask=prob_mask
         )
+        delta_p = out["result_intervention"]
         
         self.assertIsInstance(delta_p, torch.Tensor)
         self.assertEqual(len(delta_p), seq_len - 1)

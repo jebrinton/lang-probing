@@ -17,6 +17,27 @@ Will produce wrong outputs or crash if the scenario hits.
 - [ ] **`scripts/attribution_flores.py`** — uses `from src.config` (wrong module; the package is `lang_probing_src`). There's a `sys.path.insert` hack that may or may not work depending on CWD. Replace with `from lang_probing_src.config import …`. Drop the sys.path hack.
 - [ ] **`scripts/analyze_tokens.py`** probe reader — expects filenames of the form `probe_layer{layer}_n{n}.joblib`, but `scripts/word_probes.py:201` writes `l{layer}_n{n}.joblib`. Probe filtering in `token_analysis` runs today without ever loading probes (silent no-op). Canonical is `l{layer}_n{n}`; fix the reader.
 
+## Wave 4 follow-up — hardcoded path rewrites
+
+After the `outputs/` and `img/` dir renames in Wave 4, many scripts still reference the OLD paths. Scripts will write to new paths? No — the paths are hardcoded in the scripts themselves, so the renames will break reads and cause old-path writes until these are fixed.
+
+Old → new map:
+- `outputs/sentence_input_features` → `outputs/input_features`
+- `outputs/attributions` → `outputs/output_features`
+- `outputs/ablation_results_3_23` → `outputs/ablation`
+- `outputs/perplexity_bleu` → `outputs/perplexity_bleu_linear/bleu_and_ppl`
+- `outputs/perplexity_comparison` → `outputs/perplexity_bleu_linear/per`
+- `outputs/token_analysis_html` → `outputs/token_analysis/html`
+- `img/ablate_v3_prob_bar` → `img/ablation`
+- `img/input_output` → `img/input_output_overlap`
+- `img/perplexity_bleu` → `img/perplexity_bleu_linear`
+- `img/probe_performance` → `img/probes`
+- `img/sentence_input_features` → `img/input_features`
+
+Also: `config.py` constants (e.g., `PROBES_DIR`) should follow suit — paths built from `config.OUTPUTS_DIR` automatically pick up the tree, so only the leaf names in hardcoded strings need updating.
+
+Action: grep + sed across `experiments/`, `src/lang_probing_src/config.py`, and any remaining module that hardcodes an output path.
+
 ## Important — silent failures, wrong outputs, off-by-one
 
 - [ ] **`src/lang_probing_src/config.py:71,74`** — `"zho_simpl"` key defined twice; second definition (`"Chinese"`) silently overwrites the first (`"Chinese (Simplified)"`). Line 76 builds `NAME_TO_LANG_CODE` from the post-override dict. Remove one; pick the right one.

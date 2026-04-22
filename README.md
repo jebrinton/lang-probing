@@ -1,72 +1,47 @@
-# Language probing -> steering vector activation project
+# lang-probing
 
-## Description
+Mechanistic investigation of how multilingual LLMs translate. We probe for grammatical concepts in Llama-3.1-8B (compared with Aya-23-8B), look for shared multilingual features in the layer-16 SAE (`jbrinkma/sae-llama-3-8b-layer16`), and causally test their role with ablations and counterfactual attribution.
 
-I'll put more information here later, but so far this has been a project in probing for grammatical concepts in Llama across languages. I'm currently working on learning steering vectors for grammatical concept values across languages and layers. Further work will investigate relations between them, causal verification, and the implications for how language models implement translation.
+## Where to start
 
-## Usage
+- **[LEDGER.md](LEDGER.md)** — curated per-experiment view. What each experiment measures, current status, findings, caveats, figure links.
+- **[LAB_NOTEBOOK.md](LAB_NOTEBOOK.md)** — chronological log (append-only). What was done each day, what surprised us.
+- **[TODO.md](TODO.md)** — blockers, silent-failure fixes, scientific anomalies to investigate, nice-to-haves.
 
-As there are dozens of grammatical concepts and values, we first collect all activations alongside a dictionary of treebank tags for each sentence.
+## Layout
 
-Use `scripts/collect_activations.py` with a list of `--languages` to collect layer outputs (mean-pooled over token positions) for each sentence of that language in Universal Dependencies (`UD_BASE_FOLDER`) and each layer in `COLLECTION_LAYERS`. These outputs will be stored in `ACTIVATIONS_DIR` by `language={Language}/layer={layer_num}/data.parquet`.
+```
+src/lang_probing_src/        # library — primitives for activations, probes, features, interventions, eval, viz
+experiments/<name>/          # one folder per experiment; thin run scripts + YAML configs + co-located run/ job scripts
+outputs/<name>/              # each experiment writes its outputs here (latest only)
+img/<name>/                  # each experiment writes its figures here (latest only)
+data/                        # small committed data (grammatical_pairs.json)
+tests/                       # mirrors src/
+docs/                        # paper, slides, old inventory
+_archive/                    # legacy code / outputs / figures (git-tracked, in-repo)
+```
 
-The file `scripts/collect_steering_vectors.py` expects activations to be stored in this format.
+Large legacy blobs (multi-GB tar.gz backups and the 19.7 GB `zzz_dep_activations/`) live off-tree at `/projectnb/mcnet/jbrin/archive/lang-probing/`.
 
-## Current Project State
+## Running an experiment
 
-### What's Been Implemented
+Every experiment has a YAML config and a one-liner. From the repo root:
 
-The core infrastructure is in place and most experiments have been run. Here's what's working:
+```bash
+python experiments/<name>/run.py --config experiments/<name>/configs/<variant>.yaml
+```
 
-**Activation Collection**: Activations have been collected for 23 languages across 9 layers (0, 4, 8, 12, 16, 20, 24, 28, 31) and stored in Parquet format. The system supports multi-treebank concatenation automatically.
+For BU SCC batch jobs, each experiment has its own `run/` folder with qsub-ready scripts. See `experiments/<name>/README.md` for specifics.
 
-**Probe Training**: Linear probes have been trained for multiple grammatical concepts (Tense, Number, Gender, etc.) across languages. Probes are saved in `outputs/probes/` as `.joblib` files.
+## Hypotheses
 
-**Input Features**: Difference-in-means vectors have been computed for sentence-level input features across multiple languages. These are stored in `outputs/sentence_input_features/{language}/{concept}/{value}/diff_vector.pt`. Both sentence-level and word-level procedures are implemented.
+- **H1** — BLEU predictable from monolingual src/tgt competence.
+- **H2** — The "noisy channel" is multilingual. Input and output feature spaces overlap across languages.
+- **H3** — Adding a language ≈ improving monolingual capability.
+- **H4** — Translation uses the same monolingual circuits the model uses for language modeling.
 
-**Output Features**: Attribution patching has been implemented and run extensively to find output features during translation. Results are in `outputs/attributions/` with effects files for various language pairs. The system uses integrated gradients to compute feature attributions from probe logits.
-
-**Ablation Experiments**: The main ablation pipeline is implemented and has been executed. Seven experimental configurations are available:
-- Monolingual input/output feature ablation
-- Multilingual input/output feature ablation (ablating source/target and measuring target)
-- Random baselines for all configurations
-
-Results are saved in `outputs/ablation_results/` as JSONL files. The system measures Δp(reference) - the change in log-probability of the correct reference sequence before and after ablations, normalized as (new - old) / old.
-
-**Feature Analysis**: Code exists for comparing input and output features, finding shared features across languages, and computing Jaccard similarity between feature sets.
-
-### What Still Needs Work
-
-Some visualization and analysis components from the paper outline are still pending:
-- Spearman correlation plots for input features (Figure 4 in outline)
-- Spearman correlation plots for output features (Figure 5 in outline)  
-- Systematic grid of bar charts showing input/output feature overlap by language and k
-- Analysis comparing average activations in translation vs monolingual contexts
-
-The BLEU measurement code (`ablate_bleu()`) is partially implemented but needs completion.
-
-### Key Scripts
-
-- `scripts/collect_activations.py` - Collect activations from UD treebanks
-- `scripts/train_probes.py` - Train linear probes for concepts
-- `scripts/sentence_input_features.py` - Compute input feature vectors (difference-in-means)
-- `scripts/attribution_flores.py` - Find output features via attribution patching
-- `scripts/ablate.py` - Run ablation experiments (monolingual/multilingual, input/output, with baselines)
-- `scripts/input_output_features_visualize.py` - Compare input and output features
-
-### Results Location
-
-- Activations: `outputs/activations/language={Language}/layer={layer}/data.parquet`
-- Probes: `outputs/probes/{language}_{concept}_{value}.joblib`
-- Input features: `outputs/sentence_input_features/{language}/{concept}/{value}/diff_vector.pt`
-- Output features (attributions): `outputs/attributions/{timestamp}/effects_{source}_{target}.pt`
-- Ablation results: `outputs/ablation_results/results_{experiment_type}.jsonl`
-- Feature analysis: `outputs/features/{concept}_{value}.json` and `{concept}_{value}_shared.json`
-
-## Note
-
-If you download the full UD treebank, keep in mind that the `UD_Arabic-NYUAD` treebank needs to be combined with its data; look at its README for more information.
+See [LEDGER.md](LEDGER.md) for which experiments speak to which hypothesis.
 
 ## Acknowledgements
 
-A significant amount of code for the sentence-level probing experiments is from Jannik Brinkmann's code at https://github.com/jannik-brinkmann/multilingual-features
+Much of the sentence-level probing code is derived from Jannik Brinkmann's [multilingual-features](https://github.com/jannik-brinkmann/multilingual-features).

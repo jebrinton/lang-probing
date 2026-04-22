@@ -11,27 +11,32 @@ Mechanistic investigation of how multilingual LLMs translate. We probe for gramm
 ## Layout
 
 ```
-src/lang_probing_src/        # library — primitives for activations, probes, features, interventions, eval, viz
-experiments/<name>/          # one folder per experiment; thin run scripts + YAML configs + co-located run/ job scripts
+src/lang_probing_src/        # library — primitives for activations, probes, features, interventions, eval, viz, io
+experiments/<name>/          # one folder per experiment; thin run scripts + YAML configs + run/ job scripts
 outputs/<name>/              # each experiment writes its outputs here (latest only)
 img/<name>/                  # each experiment writes its figures here (latest only)
-data/                        # small committed data (grammatical_pairs.json)
+data/                        # small committed data (grammatical_pairs.json + README)
 tests/                       # mirrors src/
-docs/                        # paper, slides, old inventory
-_archive/                    # legacy code / outputs / figures (git-tracked, in-repo)
+docs/                        # paper, slides (reference material only)
+_archive/                    # legacy code / outputs / figures / docs
 ```
 
 Large legacy blobs (multi-GB tar.gz backups and the 19.7 GB `zzz_dep_activations/`) live off-tree at `/projectnb/mcnet/jbrin/archive/lang-probing/`.
 
-## Running an experiment
+## Experiments
 
-Every experiment has a YAML config and a one-liner. From the repo root:
-
-```bash
-python experiments/<name>/run.py --config experiments/<name>/configs/<variant>.yaml
-```
-
-For BU SCC batch jobs, each experiment has its own `run/` folder with qsub-ready scripts. See `experiments/<name>/README.md` for specifics.
+| Folder | Hypothesis | Status | What it does |
+|---|---|---|---|
+| [experiments/ablation/](experiments/ablation/) | H2, H4 | active (v3) | Zero-ablate top-K SAE features; measure Δp(reference). 7 configs (mono/multi × input/output/random). |
+| [experiments/counterfactual_attribution/](experiments/counterfactual_attribution/) | H2 | prototype | Gradient attribution on English minimal pairs; multilingual extension planned. |
+| [experiments/token_analysis/](experiments/token_analysis/) | H2 | active | Per-token SAE ablation with HTML visualization. |
+| [experiments/perplexity_bleu_linear/](experiments/perplexity_bleu_linear/) | H1 | active | `BLEU ≈ f(P_src, P_tgt)` + rank-1 SVD (**88% faithful for Llama**). |
+| [experiments/input_features/](experiments/input_features/) | H2 | active | Diff-in-means in SAE latent space per (language, concept, value). |
+| [experiments/output_features/](experiments/output_features/) | H2 | active | Gradient attribution from probe logits during translation. |
+| [experiments/input_output_overlap/](experiments/input_output_overlap/) | H2 | active | Jaccard + signal plots: input features ↔ output features. |
+| [experiments/probes/](experiments/probes/) | INFRA | active | cuML word-level logistic regression probes. |
+| [experiments/activations_collection/](experiments/activations_collection/) | INFRA | stable | UD residual-stream activation cache. |
+| [experiments/monolingual_ft/](experiments/monolingual_ft/) | H3 | scaffold | Evaluation stub; actual training lives in Jannik's separate repo. |
 
 ## Hypotheses
 
@@ -41,6 +46,16 @@ For BU SCC batch jobs, each experiment has its own `run/` folder with qsub-ready
 - **H4** — Translation uses the same monolingual circuits the model uses for language modeling.
 
 See [LEDGER.md](LEDGER.md) for which experiments speak to which hypothesis.
+
+## Running an experiment
+
+Every experiment has a README with exact commands. Generally:
+
+```bash
+python experiments/<name>/run.py --config experiments/<name>/configs/<variant>.yaml
+```
+
+Most experiments need a GPU (Llama-3.1-8B + SAE). Per-experiment `run/*.sh` scripts are qsub-ready templates for BU SCC batch jobs.
 
 ## Acknowledgements
 

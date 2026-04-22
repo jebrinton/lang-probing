@@ -45,21 +45,38 @@ Ordered by current activity (most active first). Each folder under `experiments/
 
 ### `counterfactual_attribution`
 
-- **Hypotheses:** H2
-- **Status:** prototype (English-only); multilingual extension in progress
-- **Question:** For each grammatical minimal pair (e.g., "The cat sat on the mat" vs. "… mats"), which SAE features mediate the model's preference? Are they the same features we find with diff-in-means + probe attribution?
-- **Method:** For each pair, forward through model + SAE at layer 16, compute `log p(preferred) − log p(alternative)`, backpropagate to SAE feature activations. Rank features by `grad` and `grad × activation` (indirect effect).
+- **Hypotheses:** H2, H4
+- **Status:** active — multilingual (eng/fra/spa/tur/ara) run complete 2026-04-22; full REPORT at `outputs/counterfactual_attribution/REPORT.md`
+- **Question:** For each grammatical minimal pair (e.g., "The cat sat on the mat" vs. "… mats"), which SAE features mediate the model's preference? Are they the same features across languages? Do they transfer?
+- **Method:** For each pair, forward through model + SAE at layer 16, compute `log p(preferred) − log p(alternative)`, backpropagate to SAE feature activations. Rank features by `grad` and `grad × activation` (indirect effect). Multilingual pipeline adds: (A1) multi-token-counterfactual handling via last-BPE strategy; (A2) drop unprincipled sum-over-all-positions secondary ranking, keep only `grad[cf_pos]`; (A4) per-`(lang, concept, value)` signed + abs aggregation for sign-flip analysis; (A5) sanity logging (`metric_mean`, `neg_frac`, token-strategy counts); 20% holdout per cell for ablation validation.
 - **Version history:**
   - v1 (2026-04-13) — core pipeline. 30 English pairs; 29 processed; 1 skipped (multi-token counterfactual).
   - v1.1 (2026-04-17) — added visualization (bar, jaccard, scatter).
-- **Findings (so far):** Feature rankings are reproducible per-pair. But per-concept aggregation is underpowered: Polarity has only 2 pairs, Aspect/Mood have 3 each. Meaningful cross-concept comparison needs more data.
-- **Caveats / uncertainties:** English-only. Small per-concept sample sizes (top-50 rankings from 2–6 pairs are fragile). Multilingual extension means expanding `data/grammatical_pairs.json`.
+  - v2 (2026-04-22, overnight) — `attribute_multilingual.py` as a parallel script (leaves English prototype untouched). Multi-BLiMP pair builder (`build_multiblimp_pairs.py`): fra=2212, spa=2165, tur=1556, ara=1137 pairs. 5 L40S GPU jobs (eng/fra/spa/tur/ara), 300 pairs/cell cap. Added analyses: bug-audit, cross-concept, sign-flip, Arabic-dual→English transfer, ablation validation, input-vs-output overlap. Outputs at `outputs/counterfactual_attribution/`.
+- **Findings (so far):**
+  - **Universal feature candidates.** Feature 9539 ranks top-50 in every cell of every language (10/11 eng, 6/6 fra, 6/6 spa, 4/4 tur, 8/8 ara); f14366, f12731 similar. Either "general grammatical-prediction" features firing on every morphological-choice site, or dead-to-SAE artifacts. Requires max-activating-context follow-up.
+  - **Sign-flip effect is real.** fra vs ara Gender=Masc: 44% opposite-sign top-200 features. ara vs tur Number=Sing: 32%. Same SAE feature can attribute positively in one language and negatively in another.
+  - **Arabic-dual → English: honest null.** Top Arabic Dual=Dual attribution features, measured on English "two/both/pair" sentences, give Cohen's d = −0.075 vs null 0.003. Arabic-dual features do NOT selectively fire on English dual-meaning contexts. Evidence against simple cross-lingual feature reuse for dual-number.
+  - **Ablation validation: top features are causal.** 35/35 cells show strong top-20 causal effect; Δorig −0.5 to −3.3 on top-20 ablation vs ~0 on random-20, effect ratios 100×–10⁶×.
+  - **Bug-audit: data quality healthy.** Most cells metric_mean ∈ [7, 13] (model strongly prefers orig over cf); neg_frac < 0.15 everywhere; multi-token strategy dominates fra/spa/ara (95%+), all single-token for eng.
+  - Feature rankings are reproducible per-pair. English per-concept aggregation still underpowered (Polarity=2, Aspect/Mood=3 pairs); multilingual Multi-BLiMP cells are now well-populated.
+- **Caveats / uncertainties:**
+  - **Turkish Number=Sing anomaly: +1.05 Δorig on ablation** (opposite direction vs. all other cells). Top-20 signed_gxa has mixed signs (sum +0.08) where spa Number=Sing has uniformly positive (sum +0.33). Possible sign-convention interaction with Turkish agglutinative morphology. See TODO.
+  - **ara/Person/3 ablation also positive (+0.556).** Same investigation as Turkish.
+  - **fra/Person/{1,2} effect ratios ~10⁶** driven by random baseline = exactly 0. Need per-pair inspection.
+  - Multi-BLiMP does not cover Tense (template supplement deferred).
+  - Arabic Multi-BLiMP had ~350 rows with `prefix=None` — filtered silently; data-quality question open.
+  - STE fix for Heaviside gate turned out to be **moot**: existing code wraps `encode()` in `torch.no_grad()` and treats `z = f_saved.detach().clone().requires_grad_(True)` as a leaf variable, so gradients only flow through `decode()`. Dropped from overnight plan.
 - **TODOs:**
-  - Expand `grammatical_pairs.json` to non-English (H2 point — the claim is cross-lingual).
-  - Add more pairs per concept, especially Polarity / Aspect / Mood.
+  - Investigate f9539/f14366/f12731 universality: max-activating contexts, ablation specificity on non-grammatical-decision sites, decoder logit-lens (`W_dec[f] @ W_unembed.T`).
+  - Investigate Turkish Number=Sing and ara/Person/3 positive-delta ablation (sign-convention sanity check).
+  - Confirm fra/Person/{1,2} random baseline is genuinely zero vs. sampling artifact.
   - Cross-reference top features against `input_features` / `output_features` rankings.
-- **Figures:** [outputs/counterfactual_attribution/plots/](outputs/counterfactual_attribution/plots/).
-- **Run:** `python experiments/counterfactual_attribution/run.py` (post-restructure)
+  - Add Tense via template supplement.
+  - Investigate null Arabic prefixes in Multi-BLiMP.
+  - Expand per-concept English sample sizes (Polarity / Aspect / Mood).
+- **Figures:** [outputs/counterfactual_attribution/plots/](outputs/counterfactual_attribution/plots/) (v1), [outputs/counterfactual_attribution/](outputs/counterfactual_attribution/) bug_audit, cross_concept, sign_flip, ablation, input_vs_output subdirs (v2). Full write-up: [outputs/counterfactual_attribution/REPORT.md](outputs/counterfactual_attribution/REPORT.md).
+- **Run:** `python experiments/counterfactual_attribution/run.py` (English v1, post-restructure); multilingual v2 script (`attribute_multilingual.py`) pending relocation into `experiments/counterfactual_attribution/` from its overnight `scripts/` path.
 
 ### `token_analysis`
 
@@ -199,6 +216,7 @@ See [_archive/experiments/README.md](_archive/experiments/README.md) for legacy 
 
 ## Cross-experiment notes
 
+- **Parallel overnight stream (2026-04-22).** While main's Waves 3–6 structural rehaul was in progress, a parallel worktree (`lang-probing-overnight`) branched off Wave 2 and ran the multilingual `counterfactual_attribution` extension (eng/fra/spa/tur/ara) on the OLD flat `scripts/` paths. Research artifacts live at `outputs/counterfactual_attribution/` on main; scripts (`attribute_multilingual.py`, `build_multiblimp_pairs.py`, `write_report.py`) will be relocated into `experiments/counterfactual_attribution/` in a follow-up.
 - **Layer 31 vs 32 is a naming artifact, NOT a bug** (investigated 2026-04-22). Llama-3.1-8B has 32 transformer layers. PyTorch indexes `outputs.hidden_states` as a 33-entry tuple (embedding + 32 layer outputs), so `hidden_states[32]` is the final layer's output. `model.model.layers` is a 32-entry list indexed 0..31, so `model.model.layers[31]` is the same layer. Probes use the hidden_states convention (`_l32`); cached activations use the module-list convention (`layer=31`). They refer to the same tensor. `src/lang_probing_src/ablate.py:130-133` explicitly clamps `probe_layer=32` to index 31. Rename or add a comment for future-you; no semantic change needed.
 - **Probe filename format:** canonical is `l{layer}_n{n}.joblib`. Any consumer expecting `probe_layer{layer}_n{n}` must be fixed.
 - **Ablation config naming:** canonical is `multi_input_random` / `multi_output_random` (not `*_src` / `*_tgt`).

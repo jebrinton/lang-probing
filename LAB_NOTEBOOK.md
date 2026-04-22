@@ -20,6 +20,70 @@ Also:
 
 ---
 
+## 2026-04-22 — overnight multilingual counterfactual attribution (parallel worktree)
+
+Ran a session in a parallel worktree (`lang-probing-overnight`, branched off Wave 2 so as not to collide with main's in-progress Waves 3–6 rehaul). All timestamps UTC-4. Outputs will land on main as `outputs/counterfactual_attribution/` (renamed from overnight's `outputs/overnight_multilingual/`). Overnight scripts are still under the OLD flat `scripts/` / `run/` layout — relocation into `experiments/counterfactual_attribution/` is a follow-up.
+
+### ~03:50  Wave 0 — worktree + skeleton docs
+
+`git worktree add … -b overnight-multilingual HEAD` off commit `3a61624` (library scaffolded, flat shims kept, scripts pre-wave-3). Copied `data/grammatical_pairs.json`. Skeleton session-scoped LEDGER / LAB_NOTEBOOK / TODO written inside the worktree's outputs dir (now being merged up into these main files).
+
+### ~03:55  Wave 1 — attribution rewrite
+
+Read full `scripts/counterfactual_attribution.py` and discovered A3 (Heaviside STE fix) is **moot** — existing code already wraps `encode()` in `torch.no_grad()` and treats `z = f_saved.detach().clone().requires_grad_(True)` as a leaf variable. Gradients only flow through `decode()`. Non-differentiable gate is irrelevant. Dropped A3.
+
+Wrote `scripts/attribute_multilingual.py` (parallel script; English prototype untouched):
+- **A1** multi-token last-BPE strategy: feeds `prefix + orig_toks[:-1]`, compares logP of last orig vs last cf tokens at `logits[-1]`.
+- **A2** drop unprincipled sum-over-all-positions secondary ranking. Only `grad[cf_pos]`.
+- **A4** per-value signed aggregation: groups pairs by `(lang, concept, value)`; saves `aggregated_signed.pt`, `aggregated_abs.pt`, `aggregated_signed_gxa.pt`, `aggregated_abs_gxa.pt` per cell.
+- **A5** sanity logging: distribution, fraction<0, token-strategy counts in `summary.json`.
+- 20% holdout per cell for Wave 6 ablation validation.
+
+Skips degenerate multi-token pairs where orig/cf share the same last BPE (rare).
+
+### ~03:58  Wave 2 — multilingual pair build
+
+Ran `scripts/build_multiblimp_pairs.py` against `jumelet/multiblimp`. Per-language counts:
+
+| lang | n_pairs | notable cells |
+|---|---|---|
+| fra | 2212 | Number\|Sing 500, Number\|Plur 500, Gender\|Masc 217, Gender\|Fem 200, Person 1/2/3 |
+| spa | 2165 | similar to fra; Gender better represented (185 pairs) |
+| tur | 1556 | Number + Person only (Turkish has no grammatical gender, as expected) |
+| ara | 1137 | Dual\|Dual 37, Dual\|Sing 209, Gender\|Fem 192, Gender\|Masc 110, Number\|Sing 202, Person |
+
+Surprise: Arabic had ~350 rows with `prefix=None`, silently filtered. Flagged in TODO. **Tense** not in Multi-BLiMP as expected; template supplement deferred.
+
+### ~04:00  Wave 3 — submit parallel attribution jobs
+
+`run/run_attribute.sh`: 1× L40S (gpu_c=8.9), 32G VRAM, h_rt=2:00:00. Submitted 5 jobs:
+
+- 4475490 attr_fra, 4475491 attr_spa, 4475492 attr_tur, 4475493 attr_ara, 4475494 attr_eng (bug-fixed pipeline on existing 30 English pairs for baseline).
+
+Each capped at 300 pairs/cell with 20% holdout.
+
+### ~04:30  Waves 4–5 — analyses complete
+
+- **Bug-audit.** Metric_mean ∈ [7, 13] across cells (model strongly prefers orig over cf — healthy). Multi-token strategy dominates fra/spa/ara (95%+); all single-token for eng. neg_frac < 0.15 everywhere. Data quality looks good.
+- **Cross-concept (E1).** Feature 9539 ranks top-50 in EVERY cell of EVERY language (eng 10/11, fra 6/6, spa 6/6, tur 4/4, ara 8/8). Similarly f14366, f12731. Either universal grammatical-prediction features (strong H4 evidence) or dead-to-SAE artifacts. Flagged for max-activating-context follow-up.
+- **Sign-flip (E3).** fra vs ara Gender=Masc has 44% opposite-sign top-200 features. ara vs tur Number=Sing has 32%. Real effect.
+- **Arabic dual → English (E2).** HONEST NULL. Target features' Cohen's d = −0.075 vs null 0.003. Arabic-dual attribution features do NOT selectively fire on English "two/both/pair" sentences. Important negative result — evidence against simple cross-lingual feature reuse for dual-number.
+
+### ~05:00  Waves 6–7 — ablation validation + input-vs-output
+
+- Ablation validation went smoothly after an nnsight-indexing fix (multiplicative mask instead of direct index assignment).
+- 35/35 cells show strong top-feature causal effect: Δorig −0.5 to −3.3 on top-20 ablation vs ~0 on random-20. Effect ratios 100×–10⁶×.
+- **Turkish Number=Sing anomaly: +1.05 Δorig on ablation (opposite direction!).** Top-20 signed_gxa has mixed signs (sum +0.08) whereas spa Number=Sing is uniformly positive (sum +0.33). Not a clean sign-convention bug; may reflect Turkish agglutinative morphology interacting with the SAE in unanticipated ways.
+- **fra/Person/{1,2} effect ratio ~10⁶** because random baseline was exactly 0. Need per-pair inspection to confirm real-vs-sampling.
+
+### ~05:25  Wave 10 — REPORT compiled
+
+Report at `outputs/counterfactual_attribution/REPORT.md` (via `scripts/write_report.py`). TL;DR: universal f9539, Turkish anomaly, sign-flip, Arabic-dual null.
+
+Dashboards (W9) and aux characterizations (W8) cut for budget. Decoder logit-lens and max-activating tokens remain as follow-up items in TODO.
+
+---
+
 ## 2026-04-22 — restructure kickoff (Wave 0 + 1)
 
 Started a multi-wave restructure of this repo. Plan at `~/.claude/plans/h2-is-about-the-idempotent-cascade.md`. Goal: library + thin experiments + curated ledger + chronological notebook + TODO.

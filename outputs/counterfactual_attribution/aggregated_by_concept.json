@@ -1,0 +1,4251 @@
+{
+  "Aspect": {
+    "num_pairs": 3,
+    "top_50_by_mean_grad": [
+      {
+        "feature_idx": 17244,
+        "mean_abs_grad": 0.3345007002353668,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 5133,
+        "mean_abs_grad": 0.31711098551750183,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 2957,
+        "mean_abs_grad": 0.25134655833244324,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 641,
+        "mean_abs_grad": 0.24916522204875946,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 29628,
+        "mean_abs_grad": 0.23549143970012665,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 8533,
+        "mean_abs_grad": 0.23147404193878174,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 9081,
+        "mean_abs_grad": 0.2191341072320938,
+        "mean_abs_grad_x_act": 0.037914883345365524,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 31969,
+        "mean_abs_grad": 0.21377678215503693,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 31129,
+        "mean_abs_grad": 0.19547487795352936,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 6034,
+        "mean_abs_grad": 0.18208391964435577,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 15614,
+        "mean_abs_grad": 0.17997677624225616,
+        "mean_abs_grad_x_act": 0.11536157131195068,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 8633,
+        "mean_abs_grad": 0.17268328368663788,
+        "mean_abs_grad_x_act": 0.05050543323159218,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 14430,
+        "mean_abs_grad": 0.171969473361969,
+        "mean_abs_grad_x_act": 0.02802887372672558,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 7092,
+        "mean_abs_grad": 0.17015337944030762,
+        "mean_abs_grad_x_act": 0.05272799730300903,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 7795,
+        "mean_abs_grad": 0.16871507465839386,
+        "mean_abs_grad_x_act": 0.10322029143571854,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 7993,
+        "mean_abs_grad": 0.16843189299106598,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 30431,
+        "mean_abs_grad": 0.15997754037380219,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 14606,
+        "mean_abs_grad": 0.15781909227371216,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 31444,
+        "mean_abs_grad": 0.15507905185222626,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 3000,
+        "mean_abs_grad": 0.1538020670413971,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 11086,
+        "mean_abs_grad": 0.14832048118114471,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 2533,
+        "mean_abs_grad": 0.146475687623024,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 1061,
+        "mean_abs_grad": 0.14319807291030884,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 13669,
+        "mean_abs_grad": 0.13853858411312103,
+        "mean_abs_grad_x_act": 0.02012348361313343,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 24698,
+        "mean_abs_grad": 0.1369268149137497,
+        "mean_abs_grad_x_act": 0.022520773112773895,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 27980,
+        "mean_abs_grad": 0.13628242909908295,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 29012,
+        "mean_abs_grad": 0.1362302154302597,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 23818,
+        "mean_abs_grad": 0.13371528685092926,
+        "mean_abs_grad_x_act": 0.003257231554016471,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 22215,
+        "mean_abs_grad": 0.1262062042951584,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 13778,
+        "mean_abs_grad": 0.12385287880897522,
+        "mean_abs_grad_x_act": 0.017763853073120117,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 19780,
+        "mean_abs_grad": 0.12274211645126343,
+        "mean_abs_grad_x_act": 0.07729588449001312,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 31,
+        "mean_abs_grad": 0.12187937647104263,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 31296,
+        "mean_abs_grad": 0.11817639321088791,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 24880,
+        "mean_abs_grad": 0.11742743104696274,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 474,
+        "mean_abs_grad": 0.11739196628332138,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 25403,
+        "mean_abs_grad": 0.11684498935937881,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 5946,
+        "mean_abs_grad": 0.11605515331029892,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 10405,
+        "mean_abs_grad": 0.11498371511697769,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 27078,
+        "mean_abs_grad": 0.11449237912893295,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 2260,
+        "mean_abs_grad": 0.11416786909103394,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 2324,
+        "mean_abs_grad": 0.1140771135687828,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 26067,
+        "mean_abs_grad": 0.11400127410888672,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 27061,
+        "mean_abs_grad": 0.1137729287147522,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 12646,
+        "mean_abs_grad": 0.11359868198633194,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 27046,
+        "mean_abs_grad": 0.1117718294262886,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 26500,
+        "mean_abs_grad": 0.11162760108709335,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 32099,
+        "mean_abs_grad": 0.1108303889632225,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 31116,
+        "mean_abs_grad": 0.11036687344312668,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 23913,
+        "mean_abs_grad": 0.10963895916938782,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 21275,
+        "mean_abs_grad": 0.10803326964378357,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      }
+    ],
+    "top_50_by_mean_grad_x_act": [
+      {
+        "feature_idx": 2243,
+        "mean_abs_grad": 0.04774288460612297,
+        "mean_abs_grad_x_act": 0.13970689475536346,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 10870,
+        "mean_abs_grad": 0.07263223081827164,
+        "mean_abs_grad_x_act": 0.13673697412014008,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 15614,
+        "mean_abs_grad": 0.17997677624225616,
+        "mean_abs_grad_x_act": 0.11536157131195068,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 7795,
+        "mean_abs_grad": 0.16871507465839386,
+        "mean_abs_grad_x_act": 0.10322029143571854,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 11132,
+        "mean_abs_grad": 0.08671293407678604,
+        "mean_abs_grad_x_act": 0.09781068563461304,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 17276,
+        "mean_abs_grad": 0.06038740649819374,
+        "mean_abs_grad_x_act": 0.09062101691961288,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 20383,
+        "mean_abs_grad": 0.10004016757011414,
+        "mean_abs_grad_x_act": 0.08364888280630112,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 19780,
+        "mean_abs_grad": 0.12274211645126343,
+        "mean_abs_grad_x_act": 0.07729588449001312,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 17551,
+        "mean_abs_grad": 0.060791607946157455,
+        "mean_abs_grad_x_act": 0.07138300687074661,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 22117,
+        "mean_abs_grad": 0.05622777342796326,
+        "mean_abs_grad_x_act": 0.06190229952335358,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 30528,
+        "mean_abs_grad": 0.03596995770931244,
+        "mean_abs_grad_x_act": 0.05779730901122093,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 7092,
+        "mean_abs_grad": 0.17015337944030762,
+        "mean_abs_grad_x_act": 0.05272799730300903,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 8633,
+        "mean_abs_grad": 0.17268328368663788,
+        "mean_abs_grad_x_act": 0.05050543323159218,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 24916,
+        "mean_abs_grad": 0.10340746492147446,
+        "mean_abs_grad_x_act": 0.05000532045960426,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 19506,
+        "mean_abs_grad": 0.08743426948785782,
+        "mean_abs_grad_x_act": 0.04953080415725708,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 2468,
+        "mean_abs_grad": 0.04013325646519661,
+        "mean_abs_grad_x_act": 0.04799767956137657,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 28848,
+        "mean_abs_grad": 0.05743150785565376,
+        "mean_abs_grad_x_act": 0.0413333922624588,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 21043,
+        "mean_abs_grad": 0.052395883947610855,
+        "mean_abs_grad_x_act": 0.04127221927046776,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 6369,
+        "mean_abs_grad": 0.06992173939943314,
+        "mean_abs_grad_x_act": 0.04121113941073418,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 7223,
+        "mean_abs_grad": 0.10345641523599625,
+        "mean_abs_grad_x_act": 0.0382063053548336,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 9081,
+        "mean_abs_grad": 0.2191341072320938,
+        "mean_abs_grad_x_act": 0.037914883345365524,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 32524,
+        "mean_abs_grad": 0.05550092086195946,
+        "mean_abs_grad_x_act": 0.036879245191812515,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 21952,
+        "mean_abs_grad": 0.1045447587966919,
+        "mean_abs_grad_x_act": 0.03551272675395012,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 32150,
+        "mean_abs_grad": 0.061851877719163895,
+        "mean_abs_grad_x_act": 0.03458959981799126,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 3485,
+        "mean_abs_grad": 0.04697728157043457,
+        "mean_abs_grad_x_act": 0.03291049227118492,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 15412,
+        "mean_abs_grad": 0.03448593243956566,
+        "mean_abs_grad_x_act": 0.0323888324201107,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 8349,
+        "mean_abs_grad": 0.046194445341825485,
+        "mean_abs_grad_x_act": 0.032244663685560226,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 5347,
+        "mean_abs_grad": 0.07563017308712006,
+        "mean_abs_grad_x_act": 0.030703729018568993,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 22730,
+        "mean_abs_grad": 0.053708840161561966,
+        "mean_abs_grad_x_act": 0.030336812138557434,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 14309,
+        "mean_abs_grad": 0.07267708331346512,
+        "mean_abs_grad_x_act": 0.028274288401007652,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 14430,
+        "mean_abs_grad": 0.171969473361969,
+        "mean_abs_grad_x_act": 0.02802887372672558,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 24442,
+        "mean_abs_grad": 0.031465936452150345,
+        "mean_abs_grad_x_act": 0.026145070791244507,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 4708,
+        "mean_abs_grad": 0.03539299964904785,
+        "mean_abs_grad_x_act": 0.025075003504753113,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 8391,
+        "mean_abs_grad": 0.07390540838241577,
+        "mean_abs_grad_x_act": 0.023237882182002068,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 31932,
+        "mean_abs_grad": 0.041563455015420914,
+        "mean_abs_grad_x_act": 0.02317000925540924,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 24698,
+        "mean_abs_grad": 0.1369268149137497,
+        "mean_abs_grad_x_act": 0.022520773112773895,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 972,
+        "mean_abs_grad": 0.052684154361486435,
+        "mean_abs_grad_x_act": 0.022183867171406746,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 12974,
+        "mean_abs_grad": 0.021700503304600716,
+        "mean_abs_grad_x_act": 0.021024631336331367,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 656,
+        "mean_abs_grad": 0.00940829049795866,
+        "mean_abs_grad_x_act": 0.02076530084013939,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 13669,
+        "mean_abs_grad": 0.13853858411312103,
+        "mean_abs_grad_x_act": 0.02012348361313343,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 19269,
+        "mean_abs_grad": 0.09320366382598877,
+        "mean_abs_grad_x_act": 0.019793285056948662,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 31364,
+        "mean_abs_grad": 0.05063427612185478,
+        "mean_abs_grad_x_act": 0.019118601456284523,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 20819,
+        "mean_abs_grad": 0.05164356157183647,
+        "mean_abs_grad_x_act": 0.019024763256311417,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 22807,
+        "mean_abs_grad": 0.06697050482034683,
+        "mean_abs_grad_x_act": 0.018997786566615105,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 11988,
+        "mean_abs_grad": 0.06609530746936798,
+        "mean_abs_grad_x_act": 0.018479159101843834,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 9212,
+        "mean_abs_grad": 0.10234726220369339,
+        "mean_abs_grad_x_act": 0.01847885362803936,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 2589,
+        "mean_abs_grad": 0.0777706652879715,
+        "mean_abs_grad_x_act": 0.018460102379322052,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 13802,
+        "mean_abs_grad": 0.05007876455783844,
+        "mean_abs_grad_x_act": 0.01838446967303753,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 3294,
+        "mean_abs_grad": 0.052738845348358154,
+        "mean_abs_grad_x_act": 0.017976542934775352,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 13778,
+        "mean_abs_grad": 0.12385287880897522,
+        "mean_abs_grad_x_act": 0.017763853073120117,
+        "num_pairs_in_top100": 1
+      }
+    ]
+  },
+  "Gender": {
+    "num_pairs": 5,
+    "top_50_by_mean_grad": [
+      {
+        "feature_idx": 27021,
+        "mean_abs_grad": 0.7021874189376831,
+        "mean_abs_grad_x_act": 0.5227745175361633,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 4090,
+        "mean_abs_grad": 0.6891991496086121,
+        "mean_abs_grad_x_act": 0.054485440254211426,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 28013,
+        "mean_abs_grad": 0.4391215443611145,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 20383,
+        "mean_abs_grad": 0.24798181653022766,
+        "mean_abs_grad_x_act": 0.21448174118995667,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 22860,
+        "mean_abs_grad": 0.22833208739757538,
+        "mean_abs_grad_x_act": 0.15092416107654572,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 15178,
+        "mean_abs_grad": 0.2155168503522873,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 31364,
+        "mean_abs_grad": 0.21327707171440125,
+        "mean_abs_grad_x_act": 0.06220529228448868,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 20347,
+        "mean_abs_grad": 0.20723095536231995,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 14051,
+        "mean_abs_grad": 0.20573437213897705,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 30611,
+        "mean_abs_grad": 0.20092329382896423,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 25361,
+        "mean_abs_grad": 0.1967952847480774,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 12731,
+        "mean_abs_grad": 0.19372622668743134,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 13858,
+        "mean_abs_grad": 0.1923542469739914,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 4404,
+        "mean_abs_grad": 0.19154705107212067,
+        "mean_abs_grad_x_act": 0.06223997473716736,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 11451,
+        "mean_abs_grad": 0.1913190633058548,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 25639,
+        "mean_abs_grad": 0.19010312855243683,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 7221,
+        "mean_abs_grad": 0.1851368397474289,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 20666,
+        "mean_abs_grad": 0.1848808377981186,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 25038,
+        "mean_abs_grad": 0.18399444222450256,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 30431,
+        "mean_abs_grad": 0.18315835297107697,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 3781,
+        "mean_abs_grad": 0.18124647438526154,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 19077,
+        "mean_abs_grad": 0.18108956515789032,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 11011,
+        "mean_abs_grad": 0.17889773845672607,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 23181,
+        "mean_abs_grad": 0.17821365594863892,
+        "mean_abs_grad_x_act": 0.15775127708911896,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 9757,
+        "mean_abs_grad": 0.177666574716568,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 2589,
+        "mean_abs_grad": 0.17634308338165283,
+        "mean_abs_grad_x_act": 0.028061365708708763,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 23228,
+        "mean_abs_grad": 0.17595767974853516,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 25485,
+        "mean_abs_grad": 0.17400415241718292,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 17151,
+        "mean_abs_grad": 0.17255444824695587,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 14856,
+        "mean_abs_grad": 0.17008431255817413,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 7121,
+        "mean_abs_grad": 0.16952557861804962,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 1104,
+        "mean_abs_grad": 0.1690213531255722,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 1948,
+        "mean_abs_grad": 0.16776849329471588,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 10389,
+        "mean_abs_grad": 0.16763392090797424,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 16363,
+        "mean_abs_grad": 0.16758283972740173,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 22391,
+        "mean_abs_grad": 0.16707229614257812,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 32002,
+        "mean_abs_grad": 0.16654542088508606,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 18390,
+        "mean_abs_grad": 0.16480828821659088,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 12892,
+        "mean_abs_grad": 0.16441090404987335,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 22169,
+        "mean_abs_grad": 0.16301050782203674,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 29738,
+        "mean_abs_grad": 0.16222414374351501,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 26512,
+        "mean_abs_grad": 0.16197440028190613,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 24608,
+        "mean_abs_grad": 0.16157563030719757,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 3920,
+        "mean_abs_grad": 0.1613769233226776,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 5079,
+        "mean_abs_grad": 0.16112233698368073,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 7947,
+        "mean_abs_grad": 0.16107423603534698,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 31095,
+        "mean_abs_grad": 0.16088038682937622,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 5245,
+        "mean_abs_grad": 0.15970216691493988,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 14545,
+        "mean_abs_grad": 0.15966923534870148,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 2426,
+        "mean_abs_grad": 0.1595822125673294,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 5
+      }
+    ],
+    "top_50_by_mean_grad_x_act": [
+      {
+        "feature_idx": 27021,
+        "mean_abs_grad": 0.7021874189376831,
+        "mean_abs_grad_x_act": 0.5227745175361633,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 15844,
+        "mean_abs_grad": 0.11560597270727158,
+        "mean_abs_grad_x_act": 0.27098774909973145,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 20383,
+        "mean_abs_grad": 0.24798181653022766,
+        "mean_abs_grad_x_act": 0.21448174118995667,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 23181,
+        "mean_abs_grad": 0.17821365594863892,
+        "mean_abs_grad_x_act": 0.15775127708911896,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 22860,
+        "mean_abs_grad": 0.22833208739757538,
+        "mean_abs_grad_x_act": 0.15092416107654572,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 24001,
+        "mean_abs_grad": 0.0935751423239708,
+        "mean_abs_grad_x_act": 0.12691067159175873,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 10870,
+        "mean_abs_grad": 0.10946259647607803,
+        "mean_abs_grad_x_act": 0.12503907084465027,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 21223,
+        "mean_abs_grad": 0.1493893712759018,
+        "mean_abs_grad_x_act": 0.11865143477916718,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 20819,
+        "mean_abs_grad": 0.12623874843120575,
+        "mean_abs_grad_x_act": 0.08515943586826324,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 15614,
+        "mean_abs_grad": 0.121073879301548,
+        "mean_abs_grad_x_act": 0.0784435048699379,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 2468,
+        "mean_abs_grad": 0.10845641791820526,
+        "mean_abs_grad_x_act": 0.07642842829227448,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 8167,
+        "mean_abs_grad": 0.08669047802686691,
+        "mean_abs_grad_x_act": 0.07249708473682404,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 24069,
+        "mean_abs_grad": 0.07857910543680191,
+        "mean_abs_grad_x_act": 0.07241953909397125,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 28347,
+        "mean_abs_grad": 0.12515485286712646,
+        "mean_abs_grad_x_act": 0.06568913906812668,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 4404,
+        "mean_abs_grad": 0.19154705107212067,
+        "mean_abs_grad_x_act": 0.06223997473716736,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 31364,
+        "mean_abs_grad": 0.21327707171440125,
+        "mean_abs_grad_x_act": 0.06220529228448868,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 31117,
+        "mean_abs_grad": 0.05549855902791023,
+        "mean_abs_grad_x_act": 0.06058531254529953,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 12673,
+        "mean_abs_grad": 0.08217555284500122,
+        "mean_abs_grad_x_act": 0.05529125779867172,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 4090,
+        "mean_abs_grad": 0.6891991496086121,
+        "mean_abs_grad_x_act": 0.054485440254211426,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 12974,
+        "mean_abs_grad": 0.10663540661334991,
+        "mean_abs_grad_x_act": 0.052758075296878815,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 24516,
+        "mean_abs_grad": 0.06243760138750076,
+        "mean_abs_grad_x_act": 0.05236779525876045,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 26040,
+        "mean_abs_grad": 0.08694944530725479,
+        "mean_abs_grad_x_act": 0.04540710896253586,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 4509,
+        "mean_abs_grad": 0.07997961342334747,
+        "mean_abs_grad_x_act": 0.04515863209962845,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 23251,
+        "mean_abs_grad": 0.0857260674238205,
+        "mean_abs_grad_x_act": 0.04513627290725708,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 12387,
+        "mean_abs_grad": 0.1023782268166542,
+        "mean_abs_grad_x_act": 0.04497065022587776,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 17551,
+        "mean_abs_grad": 0.14416643977165222,
+        "mean_abs_grad_x_act": 0.04160652309656143,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 5356,
+        "mean_abs_grad": 0.0951426550745964,
+        "mean_abs_grad_x_act": 0.04097961261868477,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 15311,
+        "mean_abs_grad": 0.05391285941004753,
+        "mean_abs_grad_x_act": 0.04037319868803024,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 15773,
+        "mean_abs_grad": 0.06775889545679092,
+        "mean_abs_grad_x_act": 0.040060389786958694,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 5347,
+        "mean_abs_grad": 0.07451163977384567,
+        "mean_abs_grad_x_act": 0.03976084664463997,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 14641,
+        "mean_abs_grad": 0.07812536507844925,
+        "mean_abs_grad_x_act": 0.03966546058654785,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 4995,
+        "mean_abs_grad": 0.11980694532394409,
+        "mean_abs_grad_x_act": 0.039183855056762695,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 25509,
+        "mean_abs_grad": 0.13514494895935059,
+        "mean_abs_grad_x_act": 0.03875723481178284,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 21879,
+        "mean_abs_grad": 0.13194920122623444,
+        "mean_abs_grad_x_act": 0.03609202057123184,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 9053,
+        "mean_abs_grad": 0.1560187041759491,
+        "mean_abs_grad_x_act": 0.03600019961595535,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 4167,
+        "mean_abs_grad": 0.10504449903964996,
+        "mean_abs_grad_x_act": 0.035067372024059296,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 1691,
+        "mean_abs_grad": 0.03146050497889519,
+        "mean_abs_grad_x_act": 0.034657128155231476,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 21559,
+        "mean_abs_grad": 0.08143017441034317,
+        "mean_abs_grad_x_act": 0.03252367302775383,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 19506,
+        "mean_abs_grad": 0.1033468246459961,
+        "mean_abs_grad_x_act": 0.03235407918691635,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 1097,
+        "mean_abs_grad": 0.06027231737971306,
+        "mean_abs_grad_x_act": 0.032011497765779495,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 1530,
+        "mean_abs_grad": 0.049264341592788696,
+        "mean_abs_grad_x_act": 0.031023243442177773,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 16426,
+        "mean_abs_grad": 0.06487630307674408,
+        "mean_abs_grad_x_act": 0.03098597563803196,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 12290,
+        "mean_abs_grad": 0.08491607010364532,
+        "mean_abs_grad_x_act": 0.030880186706781387,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 7213,
+        "mean_abs_grad": 0.07608100026845932,
+        "mean_abs_grad_x_act": 0.03062739409506321,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 21880,
+        "mean_abs_grad": 0.11631642282009125,
+        "mean_abs_grad_x_act": 0.030511215329170227,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 15980,
+        "mean_abs_grad": 0.02063821256160736,
+        "mean_abs_grad_x_act": 0.03025205060839653,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 19428,
+        "mean_abs_grad": 0.08186569064855576,
+        "mean_abs_grad_x_act": 0.030111828818917274,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 17646,
+        "mean_abs_grad": 0.09336346387863159,
+        "mean_abs_grad_x_act": 0.029155412688851357,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 8354,
+        "mean_abs_grad": 0.09336928278207779,
+        "mean_abs_grad_x_act": 0.028076017275452614,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 2589,
+        "mean_abs_grad": 0.17634308338165283,
+        "mean_abs_grad_x_act": 0.028061365708708763,
+        "num_pairs_in_top100": 2
+      }
+    ]
+  },
+  "Mood": {
+    "num_pairs": 3,
+    "top_50_by_mean_grad": [
+      {
+        "feature_idx": 14430,
+        "mean_abs_grad": 0.40839752554893494,
+        "mean_abs_grad_x_act": 0.01880730129778385,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 8533,
+        "mean_abs_grad": 0.24832725524902344,
+        "mean_abs_grad_x_act": 0.014624781906604767,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 32524,
+        "mean_abs_grad": 0.2424870729446411,
+        "mean_abs_grad_x_act": 0.012864316813647747,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 19842,
+        "mean_abs_grad": 0.2137666493654251,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 13441,
+        "mean_abs_grad": 0.2116892784833908,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 22302,
+        "mean_abs_grad": 0.20608456432819366,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 16894,
+        "mean_abs_grad": 0.18910031020641327,
+        "mean_abs_grad_x_act": 0.023723488673567772,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 8362,
+        "mean_abs_grad": 0.17750996351242065,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 4391,
+        "mean_abs_grad": 0.1723625212907791,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 1967,
+        "mean_abs_grad": 0.15168870985507965,
+        "mean_abs_grad_x_act": 0.0015256245387718081,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 32174,
+        "mean_abs_grad": 0.1514209657907486,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 10710,
+        "mean_abs_grad": 0.14692935347557068,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 16063,
+        "mean_abs_grad": 0.14546386897563934,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 30926,
+        "mean_abs_grad": 0.14539088308811188,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 10434,
+        "mean_abs_grad": 0.14500096440315247,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 7879,
+        "mean_abs_grad": 0.14469929039478302,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 9596,
+        "mean_abs_grad": 0.14271403849124908,
+        "mean_abs_grad_x_act": 0.02905389666557312,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 12595,
+        "mean_abs_grad": 0.1426718384027481,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 886,
+        "mean_abs_grad": 0.14027483761310577,
+        "mean_abs_grad_x_act": 0.0009283028193749487,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 24125,
+        "mean_abs_grad": 0.13940422236919403,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 17565,
+        "mean_abs_grad": 0.13794875144958496,
+        "mean_abs_grad_x_act": 0.00684809684753418,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 11181,
+        "mean_abs_grad": 0.13394032418727875,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 16945,
+        "mean_abs_grad": 0.1310179978609085,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 16497,
+        "mean_abs_grad": 0.13000279664993286,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 12825,
+        "mean_abs_grad": 0.12938165664672852,
+        "mean_abs_grad_x_act": 0.09675181657075882,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 12754,
+        "mean_abs_grad": 0.12857657670974731,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 26483,
+        "mean_abs_grad": 0.12847532331943512,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 27106,
+        "mean_abs_grad": 0.1263689398765564,
+        "mean_abs_grad_x_act": 0.013317585922777653,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 10120,
+        "mean_abs_grad": 0.12496865540742874,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 30511,
+        "mean_abs_grad": 0.12429524213075638,
+        "mean_abs_grad_x_act": 0.005921509116888046,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 21952,
+        "mean_abs_grad": 0.12355604767799377,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 25104,
+        "mean_abs_grad": 0.12286355346441269,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 25408,
+        "mean_abs_grad": 0.12048118561506271,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 8324,
+        "mean_abs_grad": 0.12041857093572617,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 23706,
+        "mean_abs_grad": 0.11970654875040054,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 23399,
+        "mean_abs_grad": 0.11918026208877563,
+        "mean_abs_grad_x_act": 0.018123341724276543,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 7993,
+        "mean_abs_grad": 0.11899334192276001,
+        "mean_abs_grad_x_act": 0.004786588717252016,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 12874,
+        "mean_abs_grad": 0.11855336278676987,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 1993,
+        "mean_abs_grad": 0.11848538368940353,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 8532,
+        "mean_abs_grad": 0.11848127096891403,
+        "mean_abs_grad_x_act": 0.006566139403730631,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 1691,
+        "mean_abs_grad": 0.11794698238372803,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 14254,
+        "mean_abs_grad": 0.1175493374466896,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 17256,
+        "mean_abs_grad": 0.11731462925672531,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 32694,
+        "mean_abs_grad": 0.11609664559364319,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 13238,
+        "mean_abs_grad": 0.1160261407494545,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 12837,
+        "mean_abs_grad": 0.11587425321340561,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 7648,
+        "mean_abs_grad": 0.11545106768608093,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 4052,
+        "mean_abs_grad": 0.11531110852956772,
+        "mean_abs_grad_x_act": 0.005017813760787249,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 5482,
+        "mean_abs_grad": 0.11530359834432602,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 16444,
+        "mean_abs_grad": 0.11528587341308594,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 3
+      }
+    ],
+    "top_50_by_mean_grad_x_act": [
+      {
+        "feature_idx": 2468,
+        "mean_abs_grad": 0.10330024361610413,
+        "mean_abs_grad_x_act": 0.1603792905807495,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 15980,
+        "mean_abs_grad": 0.026471314951777458,
+        "mean_abs_grad_x_act": 0.11113489419221878,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 17551,
+        "mean_abs_grad": 0.07343322038650513,
+        "mean_abs_grad_x_act": 0.10749421268701553,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 10870,
+        "mean_abs_grad": 0.06010742112994194,
+        "mean_abs_grad_x_act": 0.10747382789850235,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 4404,
+        "mean_abs_grad": 0.04930344223976135,
+        "mean_abs_grad_x_act": 0.10211386531591415,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 12825,
+        "mean_abs_grad": 0.12938165664672852,
+        "mean_abs_grad_x_act": 0.09675181657075882,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 15614,
+        "mean_abs_grad": 0.11047390848398209,
+        "mean_abs_grad_x_act": 0.07992363721132278,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 13868,
+        "mean_abs_grad": 0.08233053237199783,
+        "mean_abs_grad_x_act": 0.061649080365896225,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 23708,
+        "mean_abs_grad": 0.10140588134527206,
+        "mean_abs_grad_x_act": 0.06017202511429787,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 20383,
+        "mean_abs_grad": 0.1025615930557251,
+        "mean_abs_grad_x_act": 0.056836169213056564,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 12788,
+        "mean_abs_grad": 0.06645213812589645,
+        "mean_abs_grad_x_act": 0.04315474256873131,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 4855,
+        "mean_abs_grad": 0.05634357035160065,
+        "mean_abs_grad_x_act": 0.03789861872792244,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 22669,
+        "mean_abs_grad": 0.11135690659284592,
+        "mean_abs_grad_x_act": 0.03153891861438751,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 27021,
+        "mean_abs_grad": 0.04161908105015755,
+        "mean_abs_grad_x_act": 0.031390201300382614,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 7418,
+        "mean_abs_grad": 0.05382302403450012,
+        "mean_abs_grad_x_act": 0.031366463750600815,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 27216,
+        "mean_abs_grad": 0.064759761095047,
+        "mean_abs_grad_x_act": 0.029511965811252594,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 25330,
+        "mean_abs_grad": 0.07695239037275314,
+        "mean_abs_grad_x_act": 0.029299797490239143,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 9596,
+        "mean_abs_grad": 0.14271403849124908,
+        "mean_abs_grad_x_act": 0.02905389666557312,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 7196,
+        "mean_abs_grad": 0.052702147513628006,
+        "mean_abs_grad_x_act": 0.027566513046622276,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 21923,
+        "mean_abs_grad": 0.09838005155324936,
+        "mean_abs_grad_x_act": 0.02723071165382862,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 31364,
+        "mean_abs_grad": 0.06994113326072693,
+        "mean_abs_grad_x_act": 0.027107303962111473,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 14324,
+        "mean_abs_grad": 0.048079218715429306,
+        "mean_abs_grad_x_act": 0.026790102943778038,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 4232,
+        "mean_abs_grad": 0.08264712244272232,
+        "mean_abs_grad_x_act": 0.026074206456542015,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 20605,
+        "mean_abs_grad": 0.0381266213953495,
+        "mean_abs_grad_x_act": 0.02496408112347126,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 13569,
+        "mean_abs_grad": 0.04925152659416199,
+        "mean_abs_grad_x_act": 0.024312755092978477,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 30691,
+        "mean_abs_grad": 0.06810156255960464,
+        "mean_abs_grad_x_act": 0.024271994829177856,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 26602,
+        "mean_abs_grad": 0.05886177346110344,
+        "mean_abs_grad_x_act": 0.02385934256017208,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 16894,
+        "mean_abs_grad": 0.18910031020641327,
+        "mean_abs_grad_x_act": 0.023723488673567772,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 29283,
+        "mean_abs_grad": 0.090067557990551,
+        "mean_abs_grad_x_act": 0.022948140278458595,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 6237,
+        "mean_abs_grad": 0.08965873718261719,
+        "mean_abs_grad_x_act": 0.022630950435996056,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 8587,
+        "mean_abs_grad": 0.07048160582780838,
+        "mean_abs_grad_x_act": 0.022099146619439125,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 1845,
+        "mean_abs_grad": 0.03164953365921974,
+        "mean_abs_grad_x_act": 0.021891944110393524,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 24529,
+        "mean_abs_grad": 0.035864535719156265,
+        "mean_abs_grad_x_act": 0.02155720442533493,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 20312,
+        "mean_abs_grad": 0.0915089026093483,
+        "mean_abs_grad_x_act": 0.021483132615685463,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 20819,
+        "mean_abs_grad": 0.04103507474064827,
+        "mean_abs_grad_x_act": 0.020869320258498192,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 30723,
+        "mean_abs_grad": 0.021853692829608917,
+        "mean_abs_grad_x_act": 0.020751221105456352,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 10044,
+        "mean_abs_grad": 0.07377473264932632,
+        "mean_abs_grad_x_act": 0.020595144480466843,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 8552,
+        "mean_abs_grad": 0.05617828667163849,
+        "mean_abs_grad_x_act": 0.020467368885874748,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 8053,
+        "mean_abs_grad": 0.04773421958088875,
+        "mean_abs_grad_x_act": 0.02045421116054058,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 6758,
+        "mean_abs_grad": 0.03159365430474281,
+        "mean_abs_grad_x_act": 0.01972821354866028,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 7937,
+        "mean_abs_grad": 0.040522970259189606,
+        "mean_abs_grad_x_act": 0.01971404068171978,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 11132,
+        "mean_abs_grad": 0.02474992908537388,
+        "mean_abs_grad_x_act": 0.019563814625144005,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 24604,
+        "mean_abs_grad": 0.09339623898267746,
+        "mean_abs_grad_x_act": 0.01947353594005108,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 27250,
+        "mean_abs_grad": 0.0852939784526825,
+        "mean_abs_grad_x_act": 0.019353700801730156,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 9631,
+        "mean_abs_grad": 0.05766807869076729,
+        "mean_abs_grad_x_act": 0.019264033064246178,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 13146,
+        "mean_abs_grad": 0.041502971202135086,
+        "mean_abs_grad_x_act": 0.01902146451175213,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 14430,
+        "mean_abs_grad": 0.40839752554893494,
+        "mean_abs_grad_x_act": 0.01880730129778385,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 15990,
+        "mean_abs_grad": 0.0505337119102478,
+        "mean_abs_grad_x_act": 0.0187404602766037,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 30980,
+        "mean_abs_grad": 0.03126243129372597,
+        "mean_abs_grad_x_act": 0.018643679097294807,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 23399,
+        "mean_abs_grad": 0.11918026208877563,
+        "mean_abs_grad_x_act": 0.018123341724276543,
+        "num_pairs_in_top100": 1
+      }
+    ]
+  },
+  "Number": {
+    "num_pairs": 6,
+    "top_50_by_mean_grad": [
+      {
+        "feature_idx": 32443,
+        "mean_abs_grad": 0.6039707660675049,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 17244,
+        "mean_abs_grad": 0.5322650074958801,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 5694,
+        "mean_abs_grad": 0.5304631590843201,
+        "mean_abs_grad_x_act": 0.10415131598711014,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 31536,
+        "mean_abs_grad": 0.5103980898857117,
+        "mean_abs_grad_x_act": 0.26074108481407166,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 5133,
+        "mean_abs_grad": 0.453756719827652,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 4826,
+        "mean_abs_grad": 0.3783632814884186,
+        "mean_abs_grad_x_act": 6.0648020735243335e-05,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 641,
+        "mean_abs_grad": 0.3297436535358429,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 2491,
+        "mean_abs_grad": 0.3226657211780548,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 18789,
+        "mean_abs_grad": 0.3134000599384308,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 29955,
+        "mean_abs_grad": 0.30217352509498596,
+        "mean_abs_grad_x_act": 0.025864476338028908,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 8533,
+        "mean_abs_grad": 0.3016336262226105,
+        "mean_abs_grad_x_act": 0.00545915262773633,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 29628,
+        "mean_abs_grad": 0.3003801107406616,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 15614,
+        "mean_abs_grad": 0.29738232493400574,
+        "mean_abs_grad_x_act": 0.03934599831700325,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 22230,
+        "mean_abs_grad": 0.27469632029533386,
+        "mean_abs_grad_x_act": 0.01631951332092285,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 100,
+        "mean_abs_grad": 0.2734185755252838,
+        "mean_abs_grad_x_act": 0.010506995022296906,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 11699,
+        "mean_abs_grad": 0.2588820159435272,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 4917,
+        "mean_abs_grad": 0.24795566499233246,
+        "mean_abs_grad_x_act": 0.08452651649713516,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 8972,
+        "mean_abs_grad": 0.2463817596435547,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 4391,
+        "mean_abs_grad": 0.24489200115203857,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 461,
+        "mean_abs_grad": 0.2395041435956955,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 31129,
+        "mean_abs_grad": 0.23653829097747803,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 1845,
+        "mean_abs_grad": 0.23584170639514923,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 2957,
+        "mean_abs_grad": 0.2300134301185608,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 1061,
+        "mean_abs_grad": 0.22460629045963287,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 22302,
+        "mean_abs_grad": 0.22137361764907837,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 16320,
+        "mean_abs_grad": 0.21823382377624512,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 31969,
+        "mean_abs_grad": 0.20603476464748383,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 19842,
+        "mean_abs_grad": 0.20562027394771576,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 30273,
+        "mean_abs_grad": 0.20302855968475342,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 30431,
+        "mean_abs_grad": 0.20168612897396088,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 17705,
+        "mean_abs_grad": 0.20140378177165985,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 24916,
+        "mean_abs_grad": 0.20132122933864594,
+        "mean_abs_grad_x_act": 0.04283043369650841,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 20515,
+        "mean_abs_grad": 0.20104314386844635,
+        "mean_abs_grad_x_act": 0.008990379981696606,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 3836,
+        "mean_abs_grad": 0.19710974395275116,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 15883,
+        "mean_abs_grad": 0.19515125453472137,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 8633,
+        "mean_abs_grad": 0.19464267790317535,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 9212,
+        "mean_abs_grad": 0.19383810460567474,
+        "mean_abs_grad_x_act": 0.0017362646758556366,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 8598,
+        "mean_abs_grad": 0.1932990998029709,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 20383,
+        "mean_abs_grad": 0.19150499999523163,
+        "mean_abs_grad_x_act": 0.0827428475022316,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 3247,
+        "mean_abs_grad": 0.19038178026676178,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 27486,
+        "mean_abs_grad": 0.18865084648132324,
+        "mean_abs_grad_x_act": 0.0617365688085556,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 4064,
+        "mean_abs_grad": 0.1846163421869278,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 15178,
+        "mean_abs_grad": 0.18454764783382416,
+        "mean_abs_grad_x_act": 0.05421217158436775,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 24698,
+        "mean_abs_grad": 0.18379877507686615,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 8374,
+        "mean_abs_grad": 0.18187475204467773,
+        "mean_abs_grad_x_act": 0.029240339994430542,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 474,
+        "mean_abs_grad": 0.1806187629699707,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 9363,
+        "mean_abs_grad": 0.17980481684207916,
+        "mean_abs_grad_x_act": 0.1013353243470192,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 23343,
+        "mean_abs_grad": 0.1791064292192459,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 13771,
+        "mean_abs_grad": 0.1757756471633911,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 7993,
+        "mean_abs_grad": 0.17490254342556,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      }
+    ],
+    "top_50_by_mean_grad_x_act": [
+      {
+        "feature_idx": 10870,
+        "mean_abs_grad": 0.15006855130195618,
+        "mean_abs_grad_x_act": 0.3073624074459076,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 31536,
+        "mean_abs_grad": 0.5103980898857117,
+        "mean_abs_grad_x_act": 0.26074108481407166,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 17551,
+        "mean_abs_grad": 0.08264801651239395,
+        "mean_abs_grad_x_act": 0.18164706230163574,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 10167,
+        "mean_abs_grad": 0.1355549693107605,
+        "mean_abs_grad_x_act": 0.172024205327034,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 15980,
+        "mean_abs_grad": 0.04465889930725098,
+        "mean_abs_grad_x_act": 0.11250855773687363,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 5694,
+        "mean_abs_grad": 0.5304631590843201,
+        "mean_abs_grad_x_act": 0.10415131598711014,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 28347,
+        "mean_abs_grad": 0.08221188187599182,
+        "mean_abs_grad_x_act": 0.10185215622186661,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 9363,
+        "mean_abs_grad": 0.17980481684207916,
+        "mean_abs_grad_x_act": 0.1013353243470192,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 27021,
+        "mean_abs_grad": 0.08636017888784409,
+        "mean_abs_grad_x_act": 0.09367325156927109,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 187,
+        "mean_abs_grad": 0.07259839028120041,
+        "mean_abs_grad_x_act": 0.09029000252485275,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 4917,
+        "mean_abs_grad": 0.24795566499233246,
+        "mean_abs_grad_x_act": 0.08452651649713516,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 20383,
+        "mean_abs_grad": 0.19150499999523163,
+        "mean_abs_grad_x_act": 0.0827428475022316,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 22188,
+        "mean_abs_grad": 0.05673632398247719,
+        "mean_abs_grad_x_act": 0.0772702768445015,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 12788,
+        "mean_abs_grad": 0.0537552572786808,
+        "mean_abs_grad_x_act": 0.07601650059223175,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 5356,
+        "mean_abs_grad": 0.09009028226137161,
+        "mean_abs_grad_x_act": 0.07056993991136551,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 27486,
+        "mean_abs_grad": 0.18865084648132324,
+        "mean_abs_grad_x_act": 0.0617365688085556,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 195,
+        "mean_abs_grad": 0.047893062233924866,
+        "mean_abs_grad_x_act": 0.05597880482673645,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 26580,
+        "mean_abs_grad": 0.0551556833088398,
+        "mean_abs_grad_x_act": 0.05480613932013512,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 15178,
+        "mean_abs_grad": 0.18454764783382416,
+        "mean_abs_grad_x_act": 0.05421217158436775,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 20058,
+        "mean_abs_grad": 0.07890856266021729,
+        "mean_abs_grad_x_act": 0.051137879490852356,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 20487,
+        "mean_abs_grad": 0.11993801593780518,
+        "mean_abs_grad_x_act": 0.04992653429508209,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 5743,
+        "mean_abs_grad": 0.0679091364145279,
+        "mean_abs_grad_x_act": 0.04837825521826744,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 12974,
+        "mean_abs_grad": 0.05184679105877876,
+        "mean_abs_grad_x_act": 0.04681737348437309,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 14309,
+        "mean_abs_grad": 0.08325967937707901,
+        "mean_abs_grad_x_act": 0.04636938497424126,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 25404,
+        "mean_abs_grad": 0.05848356708884239,
+        "mean_abs_grad_x_act": 0.04442928358912468,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 27411,
+        "mean_abs_grad": 0.0766022726893425,
+        "mean_abs_grad_x_act": 0.04345477744936943,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 7795,
+        "mean_abs_grad": 0.17228055000305176,
+        "mean_abs_grad_x_act": 0.04310305789113045,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 24916,
+        "mean_abs_grad": 0.20132122933864594,
+        "mean_abs_grad_x_act": 0.04283043369650841,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 14430,
+        "mean_abs_grad": 0.12226741760969162,
+        "mean_abs_grad_x_act": 0.04048293083906174,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 15614,
+        "mean_abs_grad": 0.29738232493400574,
+        "mean_abs_grad_x_act": 0.03934599831700325,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 22860,
+        "mean_abs_grad": 0.12450054287910461,
+        "mean_abs_grad_x_act": 0.038178447633981705,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 32706,
+        "mean_abs_grad": 0.030154213309288025,
+        "mean_abs_grad_x_act": 0.034763727337121964,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 19185,
+        "mean_abs_grad": 0.05830631032586098,
+        "mean_abs_grad_x_act": 0.033458057790994644,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 3779,
+        "mean_abs_grad": 0.04839752987027168,
+        "mean_abs_grad_x_act": 0.0329667329788208,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 8374,
+        "mean_abs_grad": 0.18187475204467773,
+        "mean_abs_grad_x_act": 0.029240339994430542,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 19612,
+        "mean_abs_grad": 0.14157156646251678,
+        "mean_abs_grad_x_act": 0.029198840260505676,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 26,
+        "mean_abs_grad": 0.05063089355826378,
+        "mean_abs_grad_x_act": 0.029065271839499474,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 28550,
+        "mean_abs_grad": 0.03910447284579277,
+        "mean_abs_grad_x_act": 0.027727345004677773,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 17834,
+        "mean_abs_grad": 0.11145880073308945,
+        "mean_abs_grad_x_act": 0.0265947375446558,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 6612,
+        "mean_abs_grad": 0.05041325464844704,
+        "mean_abs_grad_x_act": 0.026016997173428535,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 29955,
+        "mean_abs_grad": 0.30217352509498596,
+        "mean_abs_grad_x_act": 0.025864476338028908,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 22964,
+        "mean_abs_grad": 0.15292902290821075,
+        "mean_abs_grad_x_act": 0.02558170258998871,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 19506,
+        "mean_abs_grad": 0.07619685679674149,
+        "mean_abs_grad_x_act": 0.02532702125608921,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 4086,
+        "mean_abs_grad": 0.0280477125197649,
+        "mean_abs_grad_x_act": 0.02440550923347473,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 12992,
+        "mean_abs_grad": 0.08414929360151291,
+        "mean_abs_grad_x_act": 0.02416972815990448,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 18278,
+        "mean_abs_grad": 0.04310952499508858,
+        "mean_abs_grad_x_act": 0.023842761293053627,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 27222,
+        "mean_abs_grad": 0.10092532634735107,
+        "mean_abs_grad_x_act": 0.023655377328395844,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 10072,
+        "mean_abs_grad": 0.0753515213727951,
+        "mean_abs_grad_x_act": 0.02297207899391651,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 9777,
+        "mean_abs_grad": 0.0999968871474266,
+        "mean_abs_grad_x_act": 0.022546490654349327,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 8943,
+        "mean_abs_grad": 0.07849196344614029,
+        "mean_abs_grad_x_act": 0.022496579214930534,
+        "num_pairs_in_top100": 2
+      }
+    ]
+  },
+  "Person": {
+    "num_pairs": 4,
+    "top_50_by_mean_grad": [
+      {
+        "feature_idx": 5133,
+        "mean_abs_grad": 0.6547448635101318,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 17244,
+        "mean_abs_grad": 0.5671535730361938,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 641,
+        "mean_abs_grad": 0.5254702568054199,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 8533,
+        "mean_abs_grad": 0.5249404907226562,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 29628,
+        "mean_abs_grad": 0.48968642950057983,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 31969,
+        "mean_abs_grad": 0.4816650152206421,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 2957,
+        "mean_abs_grad": 0.4529740810394287,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 31129,
+        "mean_abs_grad": 0.4306862950325012,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 24698,
+        "mean_abs_grad": 0.3105127811431885,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 11925,
+        "mean_abs_grad": 0.3013472557067871,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 22302,
+        "mean_abs_grad": 0.3006630837917328,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 7993,
+        "mean_abs_grad": 0.29497480392456055,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 6034,
+        "mean_abs_grad": 0.28502586483955383,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 15614,
+        "mean_abs_grad": 0.2819036841392517,
+        "mean_abs_grad_x_act": 0.14307992160320282,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 2491,
+        "mean_abs_grad": 0.280500590801239,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 7418,
+        "mean_abs_grad": 0.2779546082019806,
+        "mean_abs_grad_x_act": 0.06014326959848404,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 31536,
+        "mean_abs_grad": 0.2754130959510803,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 2533,
+        "mean_abs_grad": 0.2741376459598541,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 14606,
+        "mean_abs_grad": 0.2700815200805664,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 32058,
+        "mean_abs_grad": 0.26934415102005005,
+        "mean_abs_grad_x_act": 0.08741960674524307,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 8633,
+        "mean_abs_grad": 0.2667575478553772,
+        "mean_abs_grad_x_act": 0.012860395014286041,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 4391,
+        "mean_abs_grad": 0.2561076581478119,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 11086,
+        "mean_abs_grad": 0.25155943632125854,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 20187,
+        "mean_abs_grad": 0.24856162071228027,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 474,
+        "mean_abs_grad": 0.24108026921749115,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 16018,
+        "mean_abs_grad": 0.2409971058368683,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 1570,
+        "mean_abs_grad": 0.23804646730422974,
+        "mean_abs_grad_x_act": 0.2563183903694153,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 22860,
+        "mean_abs_grad": 0.23393617570400238,
+        "mean_abs_grad_x_act": 0.041769616305828094,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 22215,
+        "mean_abs_grad": 0.2279822826385498,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 31949,
+        "mean_abs_grad": 0.2264007031917572,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 7795,
+        "mean_abs_grad": 0.22607024013996124,
+        "mean_abs_grad_x_act": 0.09855449199676514,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 19842,
+        "mean_abs_grad": 0.22295568883419037,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 11321,
+        "mean_abs_grad": 0.21938148140907288,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 21744,
+        "mean_abs_grad": 0.2184874713420868,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 1061,
+        "mean_abs_grad": 0.21628163754940033,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 4064,
+        "mean_abs_grad": 0.21442803740501404,
+        "mean_abs_grad_x_act": 0.00789029523730278,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 22190,
+        "mean_abs_grad": 0.21160724759101868,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 12368,
+        "mean_abs_grad": 0.20747217535972595,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 24353,
+        "mean_abs_grad": 0.20674285292625427,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 12230,
+        "mean_abs_grad": 0.20651556551456451,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 3302,
+        "mean_abs_grad": 0.204814612865448,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 521,
+        "mean_abs_grad": 0.2024824321269989,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 17484,
+        "mean_abs_grad": 0.20114414393901825,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 11229,
+        "mean_abs_grad": 0.19971542060375214,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 17737,
+        "mean_abs_grad": 0.1996241956949234,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 15345,
+        "mean_abs_grad": 0.19922757148742676,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 29012,
+        "mean_abs_grad": 0.198523610830307,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 12417,
+        "mean_abs_grad": 0.19716735184192657,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 20213,
+        "mean_abs_grad": 0.19612973928451538,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 31362,
+        "mean_abs_grad": 0.19588452577590942,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 4
+      }
+    ],
+    "top_50_by_mean_grad_x_act": [
+      {
+        "feature_idx": 17236,
+        "mean_abs_grad": 0.1331111639738083,
+        "mean_abs_grad_x_act": 0.4541808068752289,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 1570,
+        "mean_abs_grad": 0.23804646730422974,
+        "mean_abs_grad_x_act": 0.2563183903694153,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 656,
+        "mean_abs_grad": 0.12777097523212433,
+        "mean_abs_grad_x_act": 0.2341364026069641,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 10239,
+        "mean_abs_grad": 0.14160332083702087,
+        "mean_abs_grad_x_act": 0.21936488151550293,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 15811,
+        "mean_abs_grad": 0.11665704101324081,
+        "mean_abs_grad_x_act": 0.1551225483417511,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 15614,
+        "mean_abs_grad": 0.2819036841392517,
+        "mean_abs_grad_x_act": 0.14307992160320282,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 26854,
+        "mean_abs_grad": 0.10604938864707947,
+        "mean_abs_grad_x_act": 0.12854516506195068,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 4404,
+        "mean_abs_grad": 0.11756190657615662,
+        "mean_abs_grad_x_act": 0.12804315984249115,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 12974,
+        "mean_abs_grad": 0.06521894037723541,
+        "mean_abs_grad_x_act": 0.12226878851652145,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 20819,
+        "mean_abs_grad": 0.10319460928440094,
+        "mean_abs_grad_x_act": 0.11696498095989227,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 9053,
+        "mean_abs_grad": 0.09482435882091522,
+        "mean_abs_grad_x_act": 0.11520376801490784,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 7795,
+        "mean_abs_grad": 0.22607024013996124,
+        "mean_abs_grad_x_act": 0.09855449199676514,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 32058,
+        "mean_abs_grad": 0.26934415102005005,
+        "mean_abs_grad_x_act": 0.08741960674524307,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 17329,
+        "mean_abs_grad": 0.07933004200458527,
+        "mean_abs_grad_x_act": 0.07939139008522034,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 17551,
+        "mean_abs_grad": 0.04192105308175087,
+        "mean_abs_grad_x_act": 0.07523371279239655,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 10870,
+        "mean_abs_grad": 0.04604285955429077,
+        "mean_abs_grad_x_act": 0.06970923393964767,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 2468,
+        "mean_abs_grad": 0.06760741025209427,
+        "mean_abs_grad_x_act": 0.06738369166851044,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 20407,
+        "mean_abs_grad": 0.12581866979599,
+        "mean_abs_grad_x_act": 0.06508766114711761,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 27021,
+        "mean_abs_grad": 0.05862955003976822,
+        "mean_abs_grad_x_act": 0.061531443148851395,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 7418,
+        "mean_abs_grad": 0.2779546082019806,
+        "mean_abs_grad_x_act": 0.06014326959848404,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 19969,
+        "mean_abs_grad": 0.08054730296134949,
+        "mean_abs_grad_x_act": 0.05637239292263985,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 26502,
+        "mean_abs_grad": 0.06297896802425385,
+        "mean_abs_grad_x_act": 0.0505540668964386,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 5834,
+        "mean_abs_grad": 0.06584613025188446,
+        "mean_abs_grad_x_act": 0.05043378099799156,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 23289,
+        "mean_abs_grad": 0.10208113491535187,
+        "mean_abs_grad_x_act": 0.05011771619319916,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 15980,
+        "mean_abs_grad": 0.02907886728644371,
+        "mean_abs_grad_x_act": 0.04971662163734436,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 460,
+        "mean_abs_grad": 0.07443772256374359,
+        "mean_abs_grad_x_act": 0.0495503693819046,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 23818,
+        "mean_abs_grad": 0.177816241979599,
+        "mean_abs_grad_x_act": 0.049375563859939575,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 15178,
+        "mean_abs_grad": 0.18639212846755981,
+        "mean_abs_grad_x_act": 0.04333034157752991,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 32706,
+        "mean_abs_grad": 0.0798582211136818,
+        "mean_abs_grad_x_act": 0.0431705042719841,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 22860,
+        "mean_abs_grad": 0.23393617570400238,
+        "mean_abs_grad_x_act": 0.041769616305828094,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 20383,
+        "mean_abs_grad": 0.09405224025249481,
+        "mean_abs_grad_x_act": 0.0409582182765007,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 23181,
+        "mean_abs_grad": 0.07478228211402893,
+        "mean_abs_grad_x_act": 0.034804634749889374,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 27031,
+        "mean_abs_grad": 0.06636406481266022,
+        "mean_abs_grad_x_act": 0.03257729485630989,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 27530,
+        "mean_abs_grad": 0.07033716142177582,
+        "mean_abs_grad_x_act": 0.03250175714492798,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 26242,
+        "mean_abs_grad": 0.16275203227996826,
+        "mean_abs_grad_x_act": 0.03155354782938957,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 1691,
+        "mean_abs_grad": 0.15556885302066803,
+        "mean_abs_grad_x_act": 0.030399272218346596,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 3294,
+        "mean_abs_grad": 0.14027822017669678,
+        "mean_abs_grad_x_act": 0.028714898973703384,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 16996,
+        "mean_abs_grad": 0.09946063160896301,
+        "mean_abs_grad_x_act": 0.028568409383296967,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 32322,
+        "mean_abs_grad": 0.08673796057701111,
+        "mean_abs_grad_x_act": 0.027137480676174164,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 24916,
+        "mean_abs_grad": 0.10081940144300461,
+        "mean_abs_grad_x_act": 0.025991126894950867,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 12788,
+        "mean_abs_grad": 0.07104001939296722,
+        "mean_abs_grad_x_act": 0.0257783941924572,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 30008,
+        "mean_abs_grad": 0.13074055314064026,
+        "mean_abs_grad_x_act": 0.02559535764157772,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 18540,
+        "mean_abs_grad": 0.13586939871311188,
+        "mean_abs_grad_x_act": 0.02409321255981922,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 21180,
+        "mean_abs_grad": 0.19441096484661102,
+        "mean_abs_grad_x_act": 0.023788632825016975,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 22754,
+        "mean_abs_grad": 0.15994694828987122,
+        "mean_abs_grad_x_act": 0.02326469123363495,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 3449,
+        "mean_abs_grad": 0.04025227203965187,
+        "mean_abs_grad_x_act": 0.02300620637834072,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 9081,
+        "mean_abs_grad": 0.13247039914131165,
+        "mean_abs_grad_x_act": 0.022855672985315323,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 15874,
+        "mean_abs_grad": 0.0718015730381012,
+        "mean_abs_grad_x_act": 0.02281528152525425,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 1188,
+        "mean_abs_grad": 0.04379379749298096,
+        "mean_abs_grad_x_act": 0.021463165059685707,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 11110,
+        "mean_abs_grad": 0.08402624726295471,
+        "mean_abs_grad_x_act": 0.020879313349723816,
+        "num_pairs_in_top100": 2
+      }
+    ]
+  },
+  "Polarity": {
+    "num_pairs": 2,
+    "top_50_by_mean_grad": [
+      {
+        "feature_idx": 7198,
+        "mean_abs_grad": 0.13132163882255554,
+        "mean_abs_grad_x_act": 0.02111813612282276,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 10348,
+        "mean_abs_grad": 0.11075117439031601,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 807,
+        "mean_abs_grad": 0.10805778205394745,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 30899,
+        "mean_abs_grad": 0.10711455345153809,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 30204,
+        "mean_abs_grad": 0.1070394366979599,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 18856,
+        "mean_abs_grad": 0.09956438839435577,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 19806,
+        "mean_abs_grad": 0.09886416792869568,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 17686,
+        "mean_abs_grad": 0.09884171932935715,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 22730,
+        "mean_abs_grad": 0.09785041213035583,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 32694,
+        "mean_abs_grad": 0.09719276428222656,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 2557,
+        "mean_abs_grad": 0.09272614121437073,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 15370,
+        "mean_abs_grad": 0.09152443706989288,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 11482,
+        "mean_abs_grad": 0.08951514214277267,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 26361,
+        "mean_abs_grad": 0.08867299556732178,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 30782,
+        "mean_abs_grad": 0.08647868037223816,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 23228,
+        "mean_abs_grad": 0.08647287636995316,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 26915,
+        "mean_abs_grad": 0.08567683398723602,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 11983,
+        "mean_abs_grad": 0.08466543257236481,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 360,
+        "mean_abs_grad": 0.08213984966278076,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 21043,
+        "mean_abs_grad": 0.08147196471691132,
+        "mean_abs_grad_x_act": 0.019180752336978912,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 3435,
+        "mean_abs_grad": 0.08116474002599716,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 5280,
+        "mean_abs_grad": 0.07967306673526764,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 10095,
+        "mean_abs_grad": 0.07878604531288147,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 29016,
+        "mean_abs_grad": 0.0779227614402771,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 10405,
+        "mean_abs_grad": 0.0775216668844223,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 27633,
+        "mean_abs_grad": 0.07654935866594315,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 31884,
+        "mean_abs_grad": 0.07588540762662888,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 24604,
+        "mean_abs_grad": 0.07559047639369965,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 12611,
+        "mean_abs_grad": 0.07404910027980804,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 625,
+        "mean_abs_grad": 0.07343581318855286,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 16773,
+        "mean_abs_grad": 0.07342881709337234,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 2624,
+        "mean_abs_grad": 0.07333841919898987,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 18022,
+        "mean_abs_grad": 0.07331088185310364,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 18815,
+        "mean_abs_grad": 0.07322230935096741,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 14682,
+        "mean_abs_grad": 0.07311785966157913,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 6924,
+        "mean_abs_grad": 0.073117196559906,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 3587,
+        "mean_abs_grad": 0.07249879091978073,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 1570,
+        "mean_abs_grad": 0.07217130810022354,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 23900,
+        "mean_abs_grad": 0.0720425695180893,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 26339,
+        "mean_abs_grad": 0.07202237099409103,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 9010,
+        "mean_abs_grad": 0.07113464176654816,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 1638,
+        "mean_abs_grad": 0.0710526704788208,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 17300,
+        "mean_abs_grad": 0.07096962630748749,
+        "mean_abs_grad_x_act": 0.010945129208266735,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 13257,
+        "mean_abs_grad": 0.07079870253801346,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 27278,
+        "mean_abs_grad": 0.07068395614624023,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 2175,
+        "mean_abs_grad": 0.0706104189157486,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 29968,
+        "mean_abs_grad": 0.07046999037265778,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 29342,
+        "mean_abs_grad": 0.07039196789264679,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 27133,
+        "mean_abs_grad": 0.0703403502702713,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 19510,
+        "mean_abs_grad": 0.0702952966094017,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 2
+      }
+    ],
+    "top_50_by_mean_grad_x_act": [
+      {
+        "feature_idx": 17329,
+        "mean_abs_grad": 0.028344113379716873,
+        "mean_abs_grad_x_act": 0.08854997158050537,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 20383,
+        "mean_abs_grad": 0.06300075352191925,
+        "mean_abs_grad_x_act": 0.0711260735988617,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 4404,
+        "mean_abs_grad": 0.043546997010707855,
+        "mean_abs_grad_x_act": 0.0689932331442833,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 15980,
+        "mean_abs_grad": 0.017455214634537697,
+        "mean_abs_grad_x_act": 0.06672967970371246,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 17276,
+        "mean_abs_grad": 0.041555825620889664,
+        "mean_abs_grad_x_act": 0.060448579490184784,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 21290,
+        "mean_abs_grad": 0.0238563884049654,
+        "mean_abs_grad_x_act": 0.05880647152662277,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 2468,
+        "mean_abs_grad": 0.037299856543540955,
+        "mean_abs_grad_x_act": 0.05566621571779251,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 10870,
+        "mean_abs_grad": 0.028791353106498718,
+        "mean_abs_grad_x_act": 0.05300541967153549,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 17551,
+        "mean_abs_grad": 0.02586878463625908,
+        "mean_abs_grad_x_act": 0.04595683887600899,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 24442,
+        "mean_abs_grad": 0.04790070280432701,
+        "mean_abs_grad_x_act": 0.04157517850399017,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 16552,
+        "mean_abs_grad": 0.04268139973282814,
+        "mean_abs_grad_x_act": 0.03556772693991661,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 21952,
+        "mean_abs_grad": 0.04517702758312225,
+        "mean_abs_grad_x_act": 0.027925953269004822,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 14309,
+        "mean_abs_grad": 0.02975710667669773,
+        "mean_abs_grad_x_act": 0.023989474400877953,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 9081,
+        "mean_abs_grad": 0.04389850050210953,
+        "mean_abs_grad_x_act": 0.023512041196227074,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 15811,
+        "mean_abs_grad": 0.020571257919073105,
+        "mean_abs_grad_x_act": 0.021923700347542763,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 972,
+        "mean_abs_grad": 0.06853469461202621,
+        "mean_abs_grad_x_act": 0.021625779569149017,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 7198,
+        "mean_abs_grad": 0.13132163882255554,
+        "mean_abs_grad_x_act": 0.02111813612282276,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 23708,
+        "mean_abs_grad": 0.0452524796128273,
+        "mean_abs_grad_x_act": 0.020810550078749657,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 17236,
+        "mean_abs_grad": 0.025866076350212097,
+        "mean_abs_grad_x_act": 0.02021126262843609,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 7135,
+        "mean_abs_grad": 0.01155097596347332,
+        "mean_abs_grad_x_act": 0.0198283102363348,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 20819,
+        "mean_abs_grad": 0.033802591264247894,
+        "mean_abs_grad_x_act": 0.019639331847429276,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 21043,
+        "mean_abs_grad": 0.08147196471691132,
+        "mean_abs_grad_x_act": 0.019180752336978912,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 27021,
+        "mean_abs_grad": 0.009856341406702995,
+        "mean_abs_grad_x_act": 0.019131530076265335,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 25330,
+        "mean_abs_grad": 0.03254452347755432,
+        "mean_abs_grad_x_act": 0.01910853385925293,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 30937,
+        "mean_abs_grad": 0.01988697610795498,
+        "mean_abs_grad_x_act": 0.017289789393544197,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 21180,
+        "mean_abs_grad": 0.03243684023618698,
+        "mean_abs_grad_x_act": 0.01697411760687828,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 2589,
+        "mean_abs_grad": 0.06262466311454773,
+        "mean_abs_grad_x_act": 0.016871163621544838,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 12974,
+        "mean_abs_grad": 0.011279290542006493,
+        "mean_abs_grad_x_act": 0.01660546287894249,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 2727,
+        "mean_abs_grad": 0.026589568704366684,
+        "mean_abs_grad_x_act": 0.01647327095270157,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 19780,
+        "mean_abs_grad": 0.047926437109708786,
+        "mean_abs_grad_x_act": 0.01571829617023468,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 8167,
+        "mean_abs_grad": 0.028711939230561256,
+        "mean_abs_grad_x_act": 0.015708941966295242,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 7660,
+        "mean_abs_grad": 0.054464951157569885,
+        "mean_abs_grad_x_act": 0.014804380014538765,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 28983,
+        "mean_abs_grad": 0.05814822018146515,
+        "mean_abs_grad_x_act": 0.013863874599337578,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 27530,
+        "mean_abs_grad": 0.007568748202174902,
+        "mean_abs_grad_x_act": 0.013302294537425041,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 22860,
+        "mean_abs_grad": 0.024830346927046776,
+        "mean_abs_grad_x_act": 0.013282767497003078,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 24916,
+        "mean_abs_grad": 0.02505117654800415,
+        "mean_abs_grad_x_act": 0.013254079967737198,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 31364,
+        "mean_abs_grad": 0.05060122534632683,
+        "mean_abs_grad_x_act": 0.012747799046337605,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 656,
+        "mean_abs_grad": 0.017801493406295776,
+        "mean_abs_grad_x_act": 0.01221836544573307,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 10239,
+        "mean_abs_grad": 0.04856756702065468,
+        "mean_abs_grad_x_act": 0.01154018472880125,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 8516,
+        "mean_abs_grad": 0.03578066825866699,
+        "mean_abs_grad_x_act": 0.011367973871529102,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 2684,
+        "mean_abs_grad": 0.03420179337263107,
+        "mean_abs_grad_x_act": 0.011192581616342068,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 17300,
+        "mean_abs_grad": 0.07096962630748749,
+        "mean_abs_grad_x_act": 0.010945129208266735,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 22754,
+        "mean_abs_grad": 0.049158643931150436,
+        "mean_abs_grad_x_act": 0.010209809988737106,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 7795,
+        "mean_abs_grad": 0.016276096925139427,
+        "mean_abs_grad_x_act": 0.009409604594111443,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 9192,
+        "mean_abs_grad": 0.037351831793785095,
+        "mean_abs_grad_x_act": 0.009277397766709328,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 15614,
+        "mean_abs_grad": 0.013051901943981647,
+        "mean_abs_grad_x_act": 0.009230176918208599,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 16951,
+        "mean_abs_grad": 0.05582085996866226,
+        "mean_abs_grad_x_act": 0.009153640829026699,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 4234,
+        "mean_abs_grad": 0.02700284868478775,
+        "mean_abs_grad_x_act": 0.00899531226605177,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 3516,
+        "mean_abs_grad": 0.010023407638072968,
+        "mean_abs_grad_x_act": 0.008843970485031605,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 22119,
+        "mean_abs_grad": 0.041215021163225174,
+        "mean_abs_grad_x_act": 0.00861888937652111,
+        "num_pairs_in_top100": 2
+      }
+    ]
+  },
+  "Tense": {
+    "num_pairs": 6,
+    "top_50_by_mean_grad": [
+      {
+        "feature_idx": 32524,
+        "mean_abs_grad": 0.6912181973457336,
+        "mean_abs_grad_x_act": 0.03494606912136078,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 18540,
+        "mean_abs_grad": 0.456002801656723,
+        "mean_abs_grad_x_act": 0.1472850739955902,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 10710,
+        "mean_abs_grad": 0.3301341235637665,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 22928,
+        "mean_abs_grad": 0.3062724173069,
+        "mean_abs_grad_x_act": 0.06836967915296555,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 1691,
+        "mean_abs_grad": 0.3008405268192291,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 20383,
+        "mean_abs_grad": 0.2661572992801666,
+        "mean_abs_grad_x_act": 0.17878252267837524,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 8310,
+        "mean_abs_grad": 0.2467128485441208,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 7223,
+        "mean_abs_grad": 0.24425089359283447,
+        "mean_abs_grad_x_act": 0.04063872620463371,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 20487,
+        "mean_abs_grad": 0.2304256111383438,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 31969,
+        "mean_abs_grad": 0.22915680706501007,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 31808,
+        "mean_abs_grad": 0.2239551544189453,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 8533,
+        "mean_abs_grad": 0.2120022028684616,
+        "mean_abs_grad_x_act": 0.0031701691914349794,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 6748,
+        "mean_abs_grad": 0.207382932305336,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 17551,
+        "mean_abs_grad": 0.20241586863994598,
+        "mean_abs_grad_x_act": 0.32476428151130676,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 12974,
+        "mean_abs_grad": 0.2022598534822464,
+        "mean_abs_grad_x_act": 0.1881827861070633,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 19361,
+        "mean_abs_grad": 0.20026344060897827,
+        "mean_abs_grad_x_act": 0.2965135872364044,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 13569,
+        "mean_abs_grad": 0.19808746874332428,
+        "mean_abs_grad_x_act": 0.03340860456228256,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 29628,
+        "mean_abs_grad": 0.19558513164520264,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 9438,
+        "mean_abs_grad": 0.19250798225402832,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 16855,
+        "mean_abs_grad": 0.1889563649892807,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 15614,
+        "mean_abs_grad": 0.18891103565692902,
+        "mean_abs_grad_x_act": 0.10571926832199097,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 6353,
+        "mean_abs_grad": 0.1852983683347702,
+        "mean_abs_grad_x_act": 0.014668076299130917,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 5133,
+        "mean_abs_grad": 0.1782953292131424,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 32298,
+        "mean_abs_grad": 0.17819954454898834,
+        "mean_abs_grad_x_act": 0.004646313842386007,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 31612,
+        "mean_abs_grad": 0.17384743690490723,
+        "mean_abs_grad_x_act": 0.1283828616142273,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 7196,
+        "mean_abs_grad": 0.17287732660770416,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 2957,
+        "mean_abs_grad": 0.1715368777513504,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 18680,
+        "mean_abs_grad": 0.16912387311458588,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 10089,
+        "mean_abs_grad": 0.16817069053649902,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 32694,
+        "mean_abs_grad": 0.16539299488067627,
+        "mean_abs_grad_x_act": 0.0321563221514225,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 21801,
+        "mean_abs_grad": 0.16360212862491608,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 19061,
+        "mean_abs_grad": 0.1598612517118454,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 7993,
+        "mean_abs_grad": 0.15965412557125092,
+        "mean_abs_grad_x_act": 0.00841426569968462,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 2533,
+        "mean_abs_grad": 0.15773029625415802,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 1692,
+        "mean_abs_grad": 0.1563013643026352,
+        "mean_abs_grad_x_act": 0.023617850616574287,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 23399,
+        "mean_abs_grad": 0.1560009866952896,
+        "mean_abs_grad_x_act": 0.00797359086573124,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 641,
+        "mean_abs_grad": 0.15398500859737396,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 17244,
+        "mean_abs_grad": 0.15287159383296967,
+        "mean_abs_grad_x_act": 0.017307860776782036,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 30937,
+        "mean_abs_grad": 0.1527147740125656,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 22754,
+        "mean_abs_grad": 0.14981180429458618,
+        "mean_abs_grad_x_act": 0.049624647945165634,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 15108,
+        "mean_abs_grad": 0.1497875154018402,
+        "mean_abs_grad_x_act": 0.011854510754346848,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 26361,
+        "mean_abs_grad": 0.14928178489208221,
+        "mean_abs_grad_x_act": 0.017509978264570236,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 9816,
+        "mean_abs_grad": 0.14890925586223602,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 23301,
+        "mean_abs_grad": 0.1480216085910797,
+        "mean_abs_grad_x_act": 0.002602863823994994,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 1061,
+        "mean_abs_grad": 0.14747337996959686,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 16484,
+        "mean_abs_grad": 0.14642468094825745,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 16018,
+        "mean_abs_grad": 0.14451439678668976,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 17834,
+        "mean_abs_grad": 0.14425110816955566,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 7003,
+        "mean_abs_grad": 0.14387761056423187,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 8088,
+        "mean_abs_grad": 0.142671599984169,
+        "mean_abs_grad_x_act": 0.0,
+        "num_pairs_in_top100": 6
+      }
+    ],
+    "top_50_by_mean_grad_x_act": [
+      {
+        "feature_idx": 17551,
+        "mean_abs_grad": 0.20241586863994598,
+        "mean_abs_grad_x_act": 0.32476428151130676,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 19361,
+        "mean_abs_grad": 0.20026344060897827,
+        "mean_abs_grad_x_act": 0.2965135872364044,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 1845,
+        "mean_abs_grad": 0.09114235639572144,
+        "mean_abs_grad_x_act": 0.21136049926280975,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 10870,
+        "mean_abs_grad": 0.12728871405124664,
+        "mean_abs_grad_x_act": 0.21075676381587982,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 12974,
+        "mean_abs_grad": 0.2022598534822464,
+        "mean_abs_grad_x_act": 0.1881827861070633,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 20383,
+        "mean_abs_grad": 0.2661572992801666,
+        "mean_abs_grad_x_act": 0.17878252267837524,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 18540,
+        "mean_abs_grad": 0.456002801656723,
+        "mean_abs_grad_x_act": 0.1472850739955902,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 11223,
+        "mean_abs_grad": 0.1346331089735031,
+        "mean_abs_grad_x_act": 0.128967747092247,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 31612,
+        "mean_abs_grad": 0.17384743690490723,
+        "mean_abs_grad_x_act": 0.1283828616142273,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 15614,
+        "mean_abs_grad": 0.18891103565692902,
+        "mean_abs_grad_x_act": 0.10571926832199097,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 4404,
+        "mean_abs_grad": 0.08705352991819382,
+        "mean_abs_grad_x_act": 0.10024183988571167,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 13802,
+        "mean_abs_grad": 0.10860264301300049,
+        "mean_abs_grad_x_act": 0.08300210535526276,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 15980,
+        "mean_abs_grad": 0.01800212636590004,
+        "mean_abs_grad_x_act": 0.07121995836496353,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 187,
+        "mean_abs_grad": 0.10248875617980957,
+        "mean_abs_grad_x_act": 0.0697740837931633,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 22928,
+        "mean_abs_grad": 0.3062724173069,
+        "mean_abs_grad_x_act": 0.06836967915296555,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 2468,
+        "mean_abs_grad": 0.04252932593226433,
+        "mean_abs_grad_x_act": 0.058015331625938416,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 10615,
+        "mean_abs_grad": 0.10641464591026306,
+        "mean_abs_grad_x_act": 0.05753438174724579,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 1570,
+        "mean_abs_grad": 0.11871766299009323,
+        "mean_abs_grad_x_act": 0.05356049910187721,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 27486,
+        "mean_abs_grad": 0.07690377533435822,
+        "mean_abs_grad_x_act": 0.053305406123399734,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 7418,
+        "mean_abs_grad": 0.07015540450811386,
+        "mean_abs_grad_x_act": 0.04988687112927437,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 22754,
+        "mean_abs_grad": 0.14981180429458618,
+        "mean_abs_grad_x_act": 0.049624647945165634,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 30723,
+        "mean_abs_grad": 0.06715589761734009,
+        "mean_abs_grad_x_act": 0.0494573600590229,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 7795,
+        "mean_abs_grad": 0.09409786015748978,
+        "mean_abs_grad_x_act": 0.046008676290512085,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 26854,
+        "mean_abs_grad": 0.0584133118391037,
+        "mean_abs_grad_x_act": 0.04379124939441681,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 21180,
+        "mean_abs_grad": 0.055664122104644775,
+        "mean_abs_grad_x_act": 0.04331980645656586,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 972,
+        "mean_abs_grad": 0.09264648705720901,
+        "mean_abs_grad_x_act": 0.043017804622650146,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 7223,
+        "mean_abs_grad": 0.24425089359283447,
+        "mean_abs_grad_x_act": 0.04063872620463371,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 27106,
+        "mean_abs_grad": 0.11064156889915466,
+        "mean_abs_grad_x_act": 0.04014238342642784,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 15156,
+        "mean_abs_grad": 0.09131649881601334,
+        "mean_abs_grad_x_act": 0.03999993950128555,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 32524,
+        "mean_abs_grad": 0.6912181973457336,
+        "mean_abs_grad_x_act": 0.03494606912136078,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 13569,
+        "mean_abs_grad": 0.19808746874332428,
+        "mean_abs_grad_x_act": 0.03340860456228256,
+        "num_pairs_in_top100": 2
+      },
+      {
+        "feature_idx": 20819,
+        "mean_abs_grad": 0.09687971323728561,
+        "mean_abs_grad_x_act": 0.033322181552648544,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 2088,
+        "mean_abs_grad": 0.03626388683915138,
+        "mean_abs_grad_x_act": 0.03318851813673973,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 32694,
+        "mean_abs_grad": 0.16539299488067627,
+        "mean_abs_grad_x_act": 0.0321563221514225,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 13778,
+        "mean_abs_grad": 0.12265094369649887,
+        "mean_abs_grad_x_act": 0.031032880768179893,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 19506,
+        "mean_abs_grad": 0.05853760242462158,
+        "mean_abs_grad_x_act": 0.030781595036387444,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 32706,
+        "mean_abs_grad": 0.05767742916941643,
+        "mean_abs_grad_x_act": 0.030775079503655434,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 7092,
+        "mean_abs_grad": 0.13312982022762299,
+        "mean_abs_grad_x_act": 0.029780039563775063,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 5172,
+        "mean_abs_grad": 0.048874542117118835,
+        "mean_abs_grad_x_act": 0.029611758887767792,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 16496,
+        "mean_abs_grad": 0.019573403522372246,
+        "mean_abs_grad_x_act": 0.02872318960726261,
+        "num_pairs_in_top100": 1
+      },
+      {
+        "feature_idx": 29436,
+        "mean_abs_grad": 0.021367786452174187,
+        "mean_abs_grad_x_act": 0.028405822813510895,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 9081,
+        "mean_abs_grad": 0.12012924998998642,
+        "mean_abs_grad_x_act": 0.027891283854842186,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 24916,
+        "mean_abs_grad": 0.06116604432463646,
+        "mean_abs_grad_x_act": 0.026003485545516014,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 22730,
+        "mean_abs_grad": 0.059346213936805725,
+        "mean_abs_grad_x_act": 0.023837098851799965,
+        "num_pairs_in_top100": 3
+      },
+      {
+        "feature_idx": 8167,
+        "mean_abs_grad": 0.08289965242147446,
+        "mean_abs_grad_x_act": 0.02372591383755207,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 1692,
+        "mean_abs_grad": 0.1563013643026352,
+        "mean_abs_grad_x_act": 0.023617850616574287,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 14309,
+        "mean_abs_grad": 0.07344572991132736,
+        "mean_abs_grad_x_act": 0.020878637209534645,
+        "num_pairs_in_top100": 4
+      },
+      {
+        "feature_idx": 31364,
+        "mean_abs_grad": 0.052509039640426636,
+        "mean_abs_grad_x_act": 0.02073756419122219,
+        "num_pairs_in_top100": 6
+      },
+      {
+        "feature_idx": 5743,
+        "mean_abs_grad": 0.046536579728126526,
+        "mean_abs_grad_x_act": 0.020497512072324753,
+        "num_pairs_in_top100": 5
+      },
+      {
+        "feature_idx": 21818,
+        "mean_abs_grad": 0.04448999837040901,
+        "mean_abs_grad_x_act": 0.01985577866435051,
+        "num_pairs_in_top100": 2
+      }
+    ]
+  }
+}

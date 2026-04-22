@@ -1,0 +1,12 @@
+[
+  {
+    "id": "person_03",
+    "prefix": "You often",
+    "original_token": " forget",
+    "counterfactual_token": " forgets",
+    "concept": "Person",
+    "concept_value_orig": "2",
+    "concept_value_cf": "3",
+    "note": "Second person verb form"
+  }
+]

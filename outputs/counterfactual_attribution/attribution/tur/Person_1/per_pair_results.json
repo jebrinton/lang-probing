@@ -1,0 +1,1682 @@
+[
+  {
+    "pair_id": "tur_SV-P_00353",
+    "metric_value": 4.46875,
+    "cf_pos": 18,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00308",
+    "metric_value": 10.953125,
+    "cf_pos": 12,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00339",
+    "metric_value": 7.3125,
+    "cf_pos": 7,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00013",
+    "metric_value": 17.46875,
+    "cf_pos": 25,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00357",
+    "metric_value": 15.5859375,
+    "cf_pos": 22,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00846",
+    "metric_value": 13.0625,
+    "cf_pos": 8,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00359",
+    "metric_value": 3.8125,
+    "cf_pos": 3,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00225",
+    "metric_value": 7.750000476837158,
+    "cf_pos": 14,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00047",
+    "metric_value": 2.4375,
+    "cf_pos": 14,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00093",
+    "metric_value": 7.8125,
+    "cf_pos": 8,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00360",
+    "metric_value": 18.0,
+    "cf_pos": 10,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00201",
+    "metric_value": 4.25,
+    "cf_pos": 20,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00288",
+    "metric_value": 22.4375,
+    "cf_pos": 15,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00826",
+    "metric_value": 11.734375,
+    "cf_pos": 10,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00823",
+    "metric_value": 13.703125,
+    "cf_pos": 15,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00282",
+    "metric_value": 14.40625,
+    "cf_pos": 15,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00030",
+    "metric_value": 0.9374997615814209,
+    "cf_pos": 14,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00848",
+    "metric_value": 10.4375,
+    "cf_pos": 18,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00241",
+    "metric_value": 21.5166015625,
+    "cf_pos": 17,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00025",
+    "metric_value": 6.1875,
+    "cf_pos": 8,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00853",
+    "metric_value": 2.187499761581421,
+    "cf_pos": 10,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00271",
+    "metric_value": 20.970703125,
+    "cf_pos": 16,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00245",
+    "metric_value": 12.53125,
+    "cf_pos": 32,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00266",
+    "metric_value": 8.3125,
+    "cf_pos": 15,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00008",
+    "metric_value": -1.875,
+    "cf_pos": 21,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00859",
+    "metric_value": 20.236328125,
+    "cf_pos": 16,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00028",
+    "metric_value": 23.5625,
+    "cf_pos": 33,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00044",
+    "metric_value": -4.375,
+    "cf_pos": 18,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00205",
+    "metric_value": 2.25,
+    "cf_pos": 11,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00379",
+    "metric_value": 12.677734375,
+    "cf_pos": 5,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00002",
+    "metric_value": 19.40625,
+    "cf_pos": 16,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00835",
+    "metric_value": 1.3125,
+    "cf_pos": 6,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00829",
+    "metric_value": 19.75,
+    "cf_pos": 11,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00032",
+    "metric_value": 22.1875,
+    "cf_pos": 23,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00053",
+    "metric_value": 13.5625,
+    "cf_pos": 23,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00358",
+    "metric_value": 5.6875,
+    "cf_pos": 8,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00852",
+    "metric_value": 14.46875,
+    "cf_pos": 15,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00244",
+    "metric_value": 13.609375,
+    "cf_pos": 7,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00362",
+    "metric_value": 20.203125,
+    "cf_pos": 27,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00326",
+    "metric_value": 6.5625,
+    "cf_pos": 26,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00058",
+    "metric_value": -2.5,
+    "cf_pos": 26,
+    "source": "multiblimp",
+    "tok_strategy": "single"
+  },
+  {
+    "pair_id": "tur_SV-P_00857",
+    "metric_value": 14.15625,
+    "cf_pos": 15,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00041",
+    "metric_value": 1.5,
+    "cf_pos": 19,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00048",
+    "metric_value": 8.625,
+    "cf_pos": 12,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00033",
+    "metric_value": 12.4375,
+    "cf_pos": 6,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00344",
+    "metric_value": 2.375,
+    "cf_pos": 16,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00355",
+    "metric_value": 1.8749998807907104,
+    "cf_pos": 11,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00223",
+    "metric_value": 17.888671875,
+    "cf_pos": 32,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00017",
+    "metric_value": 2.875,
+    "cf_pos": 6,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00874",
+    "metric_value": 6.1875,
+    "cf_pos": 10,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00082",
+    "metric_value": -3.5,
+    "cf_pos": 20,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00010",
+    "metric_value": 1.812499761581421,
+    "cf_pos": 11,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00338",
+    "metric_value": 9.9375,
+    "cf_pos": 67,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00388",
+    "metric_value": 18.125,
+    "cf_pos": 12,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00361",
+    "metric_value": 11.1875,
+    "cf_pos": 10,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00878",
+    "metric_value": 16.640625,
+    "cf_pos": 16,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00346",
+    "metric_value": 24.287109375,
+    "cf_pos": 28,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00305",
+    "metric_value": 15.296875953674316,
+    "cf_pos": 21,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00003",
+    "metric_value": 11.3125,
+    "cf_pos": 9,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00068",
+    "metric_value": 0.8750000596046448,
+    "cf_pos": 23,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00364",
+    "metric_value": 5.3125,
+    "cf_pos": 10,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00881",
+    "metric_value": 4.3125,
+    "cf_pos": 7,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00217",
+    "metric_value": 9.1875,
+    "cf_pos": 18,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00274",
+    "metric_value": 9.15625,
+    "cf_pos": 9,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00320",
+    "metric_value": 12.125,
+    "cf_pos": 8,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00875",
+    "metric_value": 4.5,
+    "cf_pos": 18,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00092",
+    "metric_value": -0.75,
+    "cf_pos": 20,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00203",
+    "metric_value": 15.171875,
+    "cf_pos": 13,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00363",
+    "metric_value": 8.3125,
+    "cf_pos": 11,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00239",
+    "metric_value": 16.6484375,
+    "cf_pos": 8,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00007",
+    "metric_value": -1.875,
+    "cf_pos": 2,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00378",
+    "metric_value": 7.4375,
+    "cf_pos": 16,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00211",
+    "metric_value": 10.9375,
+    "cf_pos": 10,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00323",
+    "metric_value": 14.125,
+    "cf_pos": 16,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00851",
+    "metric_value": 8.375,
+    "cf_pos": 13,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00275",
+    "metric_value": 12.484375,
+    "cf_pos": 15,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00863",
+    "metric_value": 13.21875,
+    "cf_pos": 8,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00237",
+    "metric_value": 14.3203125,
+    "cf_pos": 7,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00332",
+    "metric_value": 5.5625,
+    "cf_pos": 11,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00372",
+    "metric_value": 19.377944946289062,
+    "cf_pos": 12,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00884",
+    "metric_value": 14.765625,
+    "cf_pos": 10,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00858",
+    "metric_value": 12.84375,
+    "cf_pos": 15,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00321",
+    "metric_value": 10.0,
+    "cf_pos": 12,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00222",
+    "metric_value": 17.74609375,
+    "cf_pos": 8,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00403",
+    "metric_value": 23.15625,
+    "cf_pos": 15,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00005",
+    "metric_value": 12.1328125,
+    "cf_pos": 19,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00099",
+    "metric_value": 2.5625,
+    "cf_pos": 9,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00371",
+    "metric_value": 4.0,
+    "cf_pos": 17,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00866",
+    "metric_value": 8.625,
+    "cf_pos": 10,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00015",
+    "metric_value": 12.03125,
+    "cf_pos": 10,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00397",
+    "metric_value": 9.25,
+    "cf_pos": 15,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00219",
+    "metric_value": 6.437499523162842,
+    "cf_pos": 10,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00369",
+    "metric_value": 14.53125,
+    "cf_pos": 21,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00084",
+    "metric_value": 3.3125,
+    "cf_pos": 24,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00204",
+    "metric_value": 8.9375,
+    "cf_pos": 11,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00335",
+    "metric_value": 8.3125,
+    "cf_pos": 24,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00016",
+    "metric_value": 7.375,
+    "cf_pos": 3,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00054",
+    "metric_value": 0.625,
+    "cf_pos": 26,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00039",
+    "metric_value": -0.4375,
+    "cf_pos": 3,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00328",
+    "metric_value": 4.75,
+    "cf_pos": 16,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00880",
+    "metric_value": 1.0625001192092896,
+    "cf_pos": 30,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00907",
+    "metric_value": 1.25,
+    "cf_pos": 7,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00392",
+    "metric_value": 12.1875,
+    "cf_pos": 31,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00872",
+    "metric_value": 8.71875,
+    "cf_pos": 30,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00238",
+    "metric_value": 10.28125,
+    "cf_pos": 15,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00291",
+    "metric_value": 5.1875,
+    "cf_pos": 30,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00356",
+    "metric_value": 11.96875,
+    "cf_pos": 6,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00069",
+    "metric_value": 19.875,
+    "cf_pos": 18,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00351",
+    "metric_value": 8.8125,
+    "cf_pos": 20,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00073",
+    "metric_value": 0.625,
+    "cf_pos": 12,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00820",
+    "metric_value": 0.875,
+    "cf_pos": 52,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00212",
+    "metric_value": 3.187499523162842,
+    "cf_pos": 11,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00277",
+    "metric_value": 17.078125,
+    "cf_pos": 24,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00061",
+    "metric_value": -9.78125,
+    "cf_pos": 6,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00390",
+    "metric_value": 6.25,
+    "cf_pos": 17,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00224",
+    "metric_value": 7.265625,
+    "cf_pos": 33,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00824",
+    "metric_value": 17.921875,
+    "cf_pos": 9,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00070",
+    "metric_value": 9.75,
+    "cf_pos": 7,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00263",
+    "metric_value": 11.140625,
+    "cf_pos": 9,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00307",
+    "metric_value": 16.765625,
+    "cf_pos": 9,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00066",
+    "metric_value": 20.390625,
+    "cf_pos": 36,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00215",
+    "metric_value": 11.9375,
+    "cf_pos": 19,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00341",
+    "metric_value": 16.234375,
+    "cf_pos": 23,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00040",
+    "metric_value": 15.46875,
+    "cf_pos": 8,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00839",
+    "metric_value": 10.375,
+    "cf_pos": 6,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00240",
+    "metric_value": 12.15625,
+    "cf_pos": 19,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00365",
+    "metric_value": 11.3125,
+    "cf_pos": 26,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00229",
+    "metric_value": 20.671875,
+    "cf_pos": 32,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00284",
+    "metric_value": 15.0,
+    "cf_pos": 10,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00340",
+    "metric_value": 16.34375,
+    "cf_pos": 30,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00845",
+    "metric_value": 9.875,
+    "cf_pos": 30,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00850",
+    "metric_value": 15.03125,
+    "cf_pos": 13,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00252",
+    "metric_value": 18.1875,
+    "cf_pos": 8,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00243",
+    "metric_value": 6.0625,
+    "cf_pos": 18,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00821",
+    "metric_value": 18.0625,
+    "cf_pos": 28,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00854",
+    "metric_value": 14.34375,
+    "cf_pos": 7,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00310",
+    "metric_value": 17.125,
+    "cf_pos": 23,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00034",
+    "metric_value": 8.09375,
+    "cf_pos": 18,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00336",
+    "metric_value": 17.109375,
+    "cf_pos": 10,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00031",
+    "metric_value": 4.125,
+    "cf_pos": 15,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00879",
+    "metric_value": 14.15625,
+    "cf_pos": 8,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00862",
+    "metric_value": 15.09375,
+    "cf_pos": 16,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00838",
+    "metric_value": 11.0,
+    "cf_pos": 7,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00218",
+    "metric_value": 3.46875,
+    "cf_pos": 21,
+    "source": "multiblimp",
+    "tok_strategy": "single"
+  },
+  {
+    "pair_id": "tur_SV-P_00232",
+    "metric_value": 9.59375,
+    "cf_pos": 9,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00618",
+    "metric_value": 15.34375,
+    "cf_pos": 28,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00312",
+    "metric_value": 19.7265625,
+    "cf_pos": 33,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00045",
+    "metric_value": 11.4375,
+    "cf_pos": 9,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00056",
+    "metric_value": 27.21875,
+    "cf_pos": 27,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00208",
+    "metric_value": 17.9140625,
+    "cf_pos": 9,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00306",
+    "metric_value": 5.875,
+    "cf_pos": 10,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00027",
+    "metric_value": 1.2499998807907104,
+    "cf_pos": 11,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00822",
+    "metric_value": 27.84375,
+    "cf_pos": 28,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00352",
+    "metric_value": 10.65625,
+    "cf_pos": 15,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00001",
+    "metric_value": 3.500000476837158,
+    "cf_pos": 7,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00617",
+    "metric_value": 13.21875,
+    "cf_pos": 28,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00384",
+    "metric_value": 7.875,
+    "cf_pos": 22,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00614",
+    "metric_value": 19.21875,
+    "cf_pos": 28,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00843",
+    "metric_value": 7.750000476837158,
+    "cf_pos": 7,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00844",
+    "metric_value": 15.59765625,
+    "cf_pos": 10,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00226",
+    "metric_value": 11.28125,
+    "cf_pos": 15,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00380",
+    "metric_value": 5.375,
+    "cf_pos": 18,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00278",
+    "metric_value": 11.34375,
+    "cf_pos": 10,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00871",
+    "metric_value": 13.40625,
+    "cf_pos": 15,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00049",
+    "metric_value": -1.0625,
+    "cf_pos": 18,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00247",
+    "metric_value": 13.515625,
+    "cf_pos": 10,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00261",
+    "metric_value": 15.28125,
+    "cf_pos": 24,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00387",
+    "metric_value": 9.03125,
+    "cf_pos": 6,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00206",
+    "metric_value": 6.84375,
+    "cf_pos": 11,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00840",
+    "metric_value": 10.03125,
+    "cf_pos": 7,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00882",
+    "metric_value": 10.5625,
+    "cf_pos": 30,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00296",
+    "metric_value": 12.6875,
+    "cf_pos": 8,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00324",
+    "metric_value": 13.28125,
+    "cf_pos": 18,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00841",
+    "metric_value": 12.46875,
+    "cf_pos": 24,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00860",
+    "metric_value": 7.3125,
+    "cf_pos": 8,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00062",
+    "metric_value": 15.546875,
+    "cf_pos": 10,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00011",
+    "metric_value": 7.3125,
+    "cf_pos": 13,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00006",
+    "metric_value": 20.5234375,
+    "cf_pos": 10,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00037",
+    "metric_value": 0.6250002384185791,
+    "cf_pos": 9,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00050",
+    "metric_value": 0.625,
+    "cf_pos": 17,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00383",
+    "metric_value": 11.625,
+    "cf_pos": 15,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00908",
+    "metric_value": 3.125,
+    "cf_pos": 7,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00861",
+    "metric_value": 6.09375,
+    "cf_pos": 18,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00272",
+    "metric_value": 11.796875,
+    "cf_pos": 10,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00060",
+    "metric_value": 1.874999761581421,
+    "cf_pos": 85,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00292",
+    "metric_value": 23.65625,
+    "cf_pos": 15,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00350",
+    "metric_value": 4.5625,
+    "cf_pos": 13,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00385",
+    "metric_value": 5.375,
+    "cf_pos": 12,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00023",
+    "metric_value": 12.25,
+    "cf_pos": 21,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00085",
+    "metric_value": -7.3125,
+    "cf_pos": 2,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00883",
+    "metric_value": 11.1875,
+    "cf_pos": 30,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00262",
+    "metric_value": 11.96875,
+    "cf_pos": 40,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00391",
+    "metric_value": 23.03125,
+    "cf_pos": 16,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00231",
+    "metric_value": 10.0546875,
+    "cf_pos": 33,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00072",
+    "metric_value": -3.562499761581421,
+    "cf_pos": 6,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00043",
+    "metric_value": 3.75,
+    "cf_pos": 19,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00086",
+    "metric_value": 6.4375,
+    "cf_pos": 7,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00349",
+    "metric_value": 5.1875,
+    "cf_pos": 6,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00209",
+    "metric_value": 2.4375,
+    "cf_pos": 14,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00830",
+    "metric_value": 11.1875,
+    "cf_pos": 10,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00333",
+    "metric_value": 13.0625,
+    "cf_pos": 21,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00345",
+    "metric_value": 19.0703125,
+    "cf_pos": 24,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00264",
+    "metric_value": 17.96875,
+    "cf_pos": 8,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00869",
+    "metric_value": 23.734375,
+    "cf_pos": 15,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00870",
+    "metric_value": 10.0,
+    "cf_pos": 8,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00246",
+    "metric_value": 17.830078125,
+    "cf_pos": 32,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00255",
+    "metric_value": 15.1640625,
+    "cf_pos": 7,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00398",
+    "metric_value": 3.0625,
+    "cf_pos": 9,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00314",
+    "metric_value": 5.5,
+    "cf_pos": 18,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00254",
+    "metric_value": 16.90625,
+    "cf_pos": 16,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00089",
+    "metric_value": 17.6875,
+    "cf_pos": 21,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00294",
+    "metric_value": 13.0,
+    "cf_pos": 16,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00322",
+    "metric_value": 6.406250476837158,
+    "cf_pos": 19,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00837",
+    "metric_value": 0.1875,
+    "cf_pos": 21,
+    "source": "multiblimp",
+    "tok_strategy": "single"
+  },
+  {
+    "pair_id": "tur_SV-P_00912",
+    "metric_value": 2.5,
+    "cf_pos": 7,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00251",
+    "metric_value": 14.3671875,
+    "cf_pos": 7,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00313",
+    "metric_value": 10.0625,
+    "cf_pos": 16,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00267",
+    "metric_value": 13.859375,
+    "cf_pos": 7,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00316",
+    "metric_value": 15.046875,
+    "cf_pos": 19,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00258",
+    "metric_value": 12.0390625,
+    "cf_pos": 18,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00366",
+    "metric_value": 11.21875,
+    "cf_pos": 6,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00253",
+    "metric_value": 15.59375,
+    "cf_pos": 17,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00063",
+    "metric_value": 15.546875,
+    "cf_pos": 8,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00616",
+    "metric_value": 15.84375,
+    "cf_pos": 28,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00827",
+    "metric_value": -3.71875,
+    "cf_pos": 21,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00833",
+    "metric_value": 7.25,
+    "cf_pos": 18,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00877",
+    "metric_value": 11.75,
+    "cf_pos": 10,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00873",
+    "metric_value": 7.875,
+    "cf_pos": 18,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00200",
+    "metric_value": 10.8125,
+    "cf_pos": 6,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00382",
+    "metric_value": -0.65625,
+    "cf_pos": 18,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00373",
+    "metric_value": 7.218750476837158,
+    "cf_pos": 12,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00000",
+    "metric_value": 18.71875,
+    "cf_pos": 10,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00615",
+    "metric_value": 0.5625,
+    "cf_pos": 3,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00022",
+    "metric_value": 21.2578125,
+    "cf_pos": 12,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00230",
+    "metric_value": 5.625000476837158,
+    "cf_pos": 14,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00097",
+    "metric_value": 0.125,
+    "cf_pos": 13,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00402",
+    "metric_value": 1.812499761581421,
+    "cf_pos": 22,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00297",
+    "metric_value": 14.59375,
+    "cf_pos": 10,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00825",
+    "metric_value": 28.40625,
+    "cf_pos": 11,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  },
+  {
+    "pair_id": "tur_SV-P_00368",
+    "metric_value": 12.125,
+    "cf_pos": 13,
+    "source": "multiblimp",
+    "tok_strategy": "last"
+  }
+]

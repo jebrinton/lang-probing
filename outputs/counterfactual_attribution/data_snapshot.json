@@ -1,0 +1,47 @@
+{
+  "fra": {
+    "n_pairs": 2212,
+    "per_cell": {
+      "Number|Sing": 500,
+      "Person|1": 464,
+      "Number|Plur": 313,
+      "Person|2": 305,
+      "Person|3": 500,
+      "Gender|Masc": 129,
+      "Gender|Fem": 1
+    }
+  },
+  "spa": {
+    "n_pairs": 2165,
+    "per_cell": {
+      "Number|Sing": 500,
+      "Person|1": 306,
+      "Person|2": 259,
+      "Person|3": 500,
+      "Number|Plur": 400,
+      "Gender|Masc": 200
+    }
+  },
+  "tur": {
+    "n_pairs": 1556,
+    "per_cell": {
+      "Person|1": 378,
+      "Number|Sing": 421,
+      "Person|2": 257,
+      "Person|3": 500
+    }
+  },
+  "ara": {
+    "n_pairs": 1137,
+    "per_cell": {
+      "Person|1": 6,
+      "Person|2": 8,
+      "Dual|Dual": 37,
+      "Gender|Fem": 192,
+      "Number|Sing": 202,
+      "Dual|Sing": 209,
+      "Gender|Masc": 110,
+      "Person|3": 373
+    }
+  }
+}

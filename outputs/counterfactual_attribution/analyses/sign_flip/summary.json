@@ -1,0 +1,410 @@
+[
+  {
+    "pair": "fra vs spa",
+    "cell": "Gender=Masc",
+    "n_same_sign": 211,
+    "n_opp_sign": 81,
+    "top_10_opposite": [
+      {
+        "feature_idx": 26040,
+        "fra_signed_gxa": 0.03203660994768143,
+        "spa_signed_gxa": -0.06001175567507744,
+        "magnitude_sum": 0.09204836189746857
+      },
+      {
+        "feature_idx": 14366,
+        "fra_signed_gxa": -0.025648940354585648,
+        "spa_signed_gxa": 0.03950715810060501,
+        "magnitude_sum": 0.06515610218048096
+      },
+      {
+        "feature_idx": 17484,
+        "fra_signed_gxa": -0.05944746732711792,
+        "spa_signed_gxa": 0.0002795956388581544,
+        "magnitude_sum": 0.05972706153988838
+      },
+      {
+        "feature_idx": 12731,
+        "fra_signed_gxa": -0.0015222086803987622,
+        "spa_signed_gxa": 0.05406952649354935,
+        "magnitude_sum": 0.05559173598885536
+      },
+      {
+        "feature_idx": 17348,
+        "fra_signed_gxa": 0.014587407931685448,
+        "spa_signed_gxa": -0.016059957444667816,
+        "magnitude_sum": 0.030647365376353264
+      },
+      {
+        "feature_idx": 10585,
+        "fra_signed_gxa": 0.026644736528396606,
+        "spa_signed_gxa": -0.003560395212844014,
+        "magnitude_sum": 0.03020513243973255
+      },
+      {
+        "feature_idx": 14530,
+        "fra_signed_gxa": -0.019730214029550552,
+        "spa_signed_gxa": 0.003804859472438693,
+        "magnitude_sum": 0.023535072803497314
+      },
+      {
+        "feature_idx": 24442,
+        "fra_signed_gxa": -0.0061729890294373035,
+        "spa_signed_gxa": 0.016630832105875015,
+        "magnitude_sum": 0.02280382066965103
+      },
+      {
+        "feature_idx": 21958,
+        "fra_signed_gxa": -0.0019442773191258311,
+        "spa_signed_gxa": 0.02012399211525917,
+        "magnitude_sum": 0.022068269550800323
+      },
+      {
+        "feature_idx": 25677,
+        "fra_signed_gxa": -0.0052339499816298485,
+        "spa_signed_gxa": 0.016714636236429214,
+        "magnitude_sum": 0.021948587149381638
+      }
+    ]
+  },
+  {
+    "pair": "fra vs ara",
+    "cell": "Gender=Masc",
+    "n_same_sign": 154,
+    "n_opp_sign": 121,
+    "top_10_opposite": [
+      {
+        "feature_idx": 28847,
+        "fra_signed_gxa": -0.08519001305103302,
+        "ara_signed_gxa": 0.07263672351837158,
+        "magnitude_sum": 0.1578267365694046
+      },
+      {
+        "feature_idx": 10585,
+        "fra_signed_gxa": 0.026644736528396606,
+        "ara_signed_gxa": -0.01675623282790184,
+        "magnitude_sum": 0.04340096935629845
+      },
+      {
+        "feature_idx": 26040,
+        "fra_signed_gxa": 0.03203660994768143,
+        "ara_signed_gxa": -0.010274240747094154,
+        "magnitude_sum": 0.04231084883213043
+      },
+      {
+        "feature_idx": 8552,
+        "fra_signed_gxa": 0.00884050689637661,
+        "ara_signed_gxa": -0.03285163640975952,
+        "magnitude_sum": 0.04169214516878128
+      },
+      {
+        "feature_idx": 4714,
+        "fra_signed_gxa": -0.005553083959966898,
+        "ara_signed_gxa": 0.031047794967889786,
+        "magnitude_sum": 0.036600880324840546
+      },
+      {
+        "feature_idx": 14366,
+        "fra_signed_gxa": -0.025648940354585648,
+        "ara_signed_gxa": 0.00912756659090519,
+        "magnitude_sum": 0.034776508808135986
+      },
+      {
+        "feature_idx": 9805,
+        "fra_signed_gxa": 0.002224477706477046,
+        "ara_signed_gxa": -0.031267400830984116,
+        "magnitude_sum": 0.03349187970161438
+      },
+      {
+        "feature_idx": 26333,
+        "fra_signed_gxa": -0.020443111658096313,
+        "ara_signed_gxa": 0.013024297542870045,
+        "magnitude_sum": 0.033467408269643784
+      },
+      {
+        "feature_idx": 20569,
+        "fra_signed_gxa": -0.0006064340705052018,
+        "ara_signed_gxa": 0.03206479921936989,
+        "magnitude_sum": 0.032671231776475906
+      },
+      {
+        "feature_idx": 31219,
+        "fra_signed_gxa": 0.0004276763938833028,
+        "ara_signed_gxa": -0.02841837704181671,
+        "magnitude_sum": 0.028846053406596184
+      }
+    ]
+  },
+  {
+    "pair": "fra vs spa",
+    "cell": "Number=Plur",
+    "n_same_sign": 224,
+    "n_opp_sign": 61,
+    "top_10_opposite": [
+      {
+        "feature_idx": 17484,
+        "fra_signed_gxa": 0.05766825005412102,
+        "spa_signed_gxa": -0.0005579313146881759,
+        "magnitude_sum": 0.05822618305683136
+      },
+      {
+        "feature_idx": 32516,
+        "fra_signed_gxa": 0.054418087005615234,
+        "spa_signed_gxa": -0.0022859659511595964,
+        "magnitude_sum": 0.05670405179262161
+      },
+      {
+        "feature_idx": 20713,
+        "fra_signed_gxa": 0.034250739961862564,
+        "spa_signed_gxa": -1.4692040167574305e-05,
+        "magnitude_sum": 0.0342654325067997
+      },
+      {
+        "feature_idx": 11844,
+        "fra_signed_gxa": -0.00356299034319818,
+        "spa_signed_gxa": 0.02436366118490696,
+        "magnitude_sum": 0.027926651760935783
+      },
+      {
+        "feature_idx": 13146,
+        "fra_signed_gxa": 0.02030254527926445,
+        "spa_signed_gxa": -0.003933358937501907,
+        "magnitude_sum": 0.024235904216766357
+      },
+      {
+        "feature_idx": 17348,
+        "fra_signed_gxa": 0.0026821508072316647,
+        "spa_signed_gxa": -0.020306462422013283,
+        "magnitude_sum": 0.022988613694906235
+      },
+      {
+        "feature_idx": 8782,
+        "fra_signed_gxa": -0.020223503932356834,
+        "spa_signed_gxa": 0.00249437871389091,
+        "magnitude_sum": 0.022717881947755814
+      },
+      {
+        "feature_idx": 2714,
+        "fra_signed_gxa": 0.012140979990363121,
+        "spa_signed_gxa": -0.006814797408878803,
+        "magnitude_sum": 0.0189557783305645
+      },
+      {
+        "feature_idx": 2479,
+        "fra_signed_gxa": -0.005668950732797384,
+        "spa_signed_gxa": 0.012940112501382828,
+        "magnitude_sum": 0.0186090636998415
+      },
+      {
+        "feature_idx": 1691,
+        "fra_signed_gxa": 0.015803802758455276,
+        "spa_signed_gxa": -0.0018300347728654742,
+        "magnitude_sum": 0.017633836716413498
+      }
+    ]
+  },
+  {
+    "pair": "fra vs spa",
+    "cell": "Number=Sing",
+    "n_same_sign": 220,
+    "n_opp_sign": 68,
+    "top_10_opposite": [
+      {
+        "feature_idx": 8633,
+        "fra_signed_gxa": 0.001102508744224906,
+        "spa_signed_gxa": -0.11481416970491409,
+        "magnitude_sum": 0.1159166768193245
+      },
+      {
+        "feature_idx": 28847,
+        "fra_signed_gxa": -0.06781085580587387,
+        "spa_signed_gxa": 0.006693437695503235,
+        "magnitude_sum": 0.0745042935013771
+      },
+      {
+        "feature_idx": 17484,
+        "fra_signed_gxa": -0.07094912230968475,
+        "spa_signed_gxa": 0.0001259966375073418,
+        "magnitude_sum": 0.07107511907815933
+      },
+      {
+        "feature_idx": 26040,
+        "fra_signed_gxa": 0.018072353675961494,
+        "spa_signed_gxa": -0.007102052215486765,
+        "magnitude_sum": 0.025174405425786972
+      },
+      {
+        "feature_idx": 14530,
+        "fra_signed_gxa": 0.00808048713952303,
+        "spa_signed_gxa": -0.014772248454391956,
+        "magnitude_sum": 0.022852735593914986
+      },
+      {
+        "feature_idx": 9859,
+        "fra_signed_gxa": -0.019951196387410164,
+        "spa_signed_gxa": 0.0021900497376918793,
+        "magnitude_sum": 0.022141246125102043
+      },
+      {
+        "feature_idx": 20474,
+        "fra_signed_gxa": -0.019244352355599403,
+        "spa_signed_gxa": 0.0011483069974929094,
+        "magnitude_sum": 0.020392660051584244
+      },
+      {
+        "feature_idx": 1312,
+        "fra_signed_gxa": -0.008835560642182827,
+        "spa_signed_gxa": 0.010945410467684269,
+        "magnitude_sum": 0.019780971109867096
+      },
+      {
+        "feature_idx": 30104,
+        "fra_signed_gxa": -0.014210909605026245,
+        "spa_signed_gxa": 0.004593257792294025,
+        "magnitude_sum": 0.018804166465997696
+      },
+      {
+        "feature_idx": 11105,
+        "fra_signed_gxa": -0.011291945353150368,
+        "spa_signed_gxa": 0.00718656787648797,
+        "magnitude_sum": 0.01847851276397705
+      }
+    ]
+  },
+  {
+    "pair": "fra vs ara",
+    "cell": "Number=Sing",
+    "n_same_sign": 190,
+    "n_opp_sign": 105,
+    "top_10_opposite": [
+      {
+        "feature_idx": 9539,
+        "fra_signed_gxa": 0.004486018791794777,
+        "ara_signed_gxa": -0.10063072293996811,
+        "magnitude_sum": 0.10511673986911774
+      },
+      {
+        "feature_idx": 28847,
+        "fra_signed_gxa": -0.06781085580587387,
+        "ara_signed_gxa": 0.032129254192113876,
+        "magnitude_sum": 0.09994010627269745
+      },
+      {
+        "feature_idx": 17451,
+        "fra_signed_gxa": -0.004957980941981077,
+        "ara_signed_gxa": 0.08098286390304565,
+        "magnitude_sum": 0.08594084531068802
+      },
+      {
+        "feature_idx": 17484,
+        "fra_signed_gxa": -0.07094912230968475,
+        "ara_signed_gxa": 0.0005531223141588271,
+        "magnitude_sum": 0.07150224596261978
+      },
+      {
+        "feature_idx": 5801,
+        "fra_signed_gxa": -0.06837987154722214,
+        "ara_signed_gxa": 0.0022752806544303894,
+        "magnitude_sum": 0.07065515220165253
+      },
+      {
+        "feature_idx": 17348,
+        "fra_signed_gxa": 0.008664758875966072,
+        "ara_signed_gxa": -0.056399911642074585,
+        "magnitude_sum": 0.06506466865539551
+      },
+      {
+        "feature_idx": 15744,
+        "fra_signed_gxa": -0.00020810663409065455,
+        "ara_signed_gxa": 0.06416961550712585,
+        "magnitude_sum": 0.06437772512435913
+      },
+      {
+        "feature_idx": 2479,
+        "fra_signed_gxa": -0.047820113599300385,
+        "ara_signed_gxa": 0.012493508867919445,
+        "magnitude_sum": 0.060313623398542404
+      },
+      {
+        "feature_idx": 26040,
+        "fra_signed_gxa": 0.018072353675961494,
+        "ara_signed_gxa": -0.03609924390912056,
+        "magnitude_sum": 0.0541715994477272
+      },
+      {
+        "feature_idx": 11720,
+        "fra_signed_gxa": 0.0027771538589149714,
+        "ara_signed_gxa": -0.041917912662029266,
+        "magnitude_sum": 0.04469506815075874
+      }
+    ]
+  },
+  {
+    "pair": "ara vs tur",
+    "cell": "Number=Sing",
+    "n_same_sign": 202,
+    "n_opp_sign": 96,
+    "top_10_opposite": [
+      {
+        "feature_idx": 9539,
+        "ara_signed_gxa": -0.10063072293996811,
+        "tur_signed_gxa": 0.09263377636671066,
+        "magnitude_sum": 0.19326449930667877
+      },
+      {
+        "feature_idx": 15744,
+        "ara_signed_gxa": 0.06416961550712585,
+        "tur_signed_gxa": -0.028940288349986076,
+        "magnitude_sum": 0.09310990571975708
+      },
+      {
+        "feature_idx": 14530,
+        "ara_signed_gxa": -0.03091711737215519,
+        "tur_signed_gxa": 0.03989793732762337,
+        "magnitude_sum": 0.0708150565624237
+      },
+      {
+        "feature_idx": 17348,
+        "ara_signed_gxa": -0.056399911642074585,
+        "tur_signed_gxa": 0.0007342364406213164,
+        "magnitude_sum": 0.057134147733449936
+      },
+      {
+        "feature_idx": 12788,
+        "ara_signed_gxa": 0.04106023907661438,
+        "tur_signed_gxa": -0.0037942826747894287,
+        "magnitude_sum": 0.04485452175140381
+      },
+      {
+        "feature_idx": 20312,
+        "ara_signed_gxa": -0.007840961217880249,
+        "tur_signed_gxa": 0.03661973774433136,
+        "magnitude_sum": 0.04446069896221161
+      },
+      {
+        "feature_idx": 11720,
+        "ara_signed_gxa": -0.041917912662029266,
+        "tur_signed_gxa": 0.00040298301610164344,
+        "magnitude_sum": 0.042320895940065384
+      },
+      {
+        "feature_idx": 31380,
+        "ara_signed_gxa": 0.0006537458975799382,
+        "tur_signed_gxa": -0.03800984472036362,
+        "magnitude_sum": 0.0386635921895504
+      },
+      {
+        "feature_idx": 9102,
+        "ara_signed_gxa": -0.023853054270148277,
+        "tur_signed_gxa": 0.011326928623020649,
+        "magnitude_sum": 0.0351799838244915
+      },
+      {
+        "feature_idx": 2479,
+        "ara_signed_gxa": 0.012493508867919445,
+        "tur_signed_gxa": -0.02064867690205574,
+        "magnitude_sum": 0.03314218670129776
+      }
+    ]
+  }
+]

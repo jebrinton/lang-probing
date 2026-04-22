@@ -44,6 +44,26 @@ Surprise: Arabic had ~350 rows with `prefix=None` — filtered silently. Flagged
 
 Saved `outputs/overnight_multilingual/data_snapshot.json` with per-cell counts.
 
+## ~04:30  Wave 4-5 — analyses complete
+
+- Bug-audit: most cells have metric_mean in [7, 13] (healthy — model strongly prefers orig over cf). Multi-token strategy dominates fra/spa/ara (95%+), all single-token for eng. neg_frac <0.15 everywhere, so data quality looks good.
+- Cross-concept (E1): **Feature 9539 ranks top-50 in every cell of every language** (4/4 tur, 6/6 spa, 6/6 fra, 8/8 ara, 10/11 eng). Similar for f14366, f12731. Either a universal grammatical-prediction feature (strong H4 evidence) or a dead-to-SAE artifact. Flagged for max-activating-context investigation in a follow-up.
+- Sign-flip (E3): fra vs ara Gender=Masc has 44% opposite-sign top-200 features. ara vs tur Number=Sing has 32%. Sign-flip effect is real.
+- Arabic dual → English (E2): HONEST NULL. Target features' Cohen's d = -0.075 vs null 0.003. Arabic-dual attribution features do NOT selectively fire on English "two/both/pair" sentences. Negative result is important: ~weak~ evidence against simple cross-lingual feature reuse for dual-number.
+
+## ~05:00  Wave 6-7 — ablation validation + input-vs-output
+
+- Ablation validation (W6) went smoothly after nnsight-indexing fix (used multiplicative mask instead of direct index assignment).
+- All 35 cells show strong top-feature causal effect: Δorig from -0.5 to -3.3 on top-20 ablation vs ~0 on random-20 features. Effect ratios 100–10^6×.
+- **Turkish Number=Sing anomaly: +1.05 Δorig on ablation (opposite direction!)** Investigation: top-20 signed_gxa has mixed signs (sum +0.08) whereas spa/Number/Sing has uniformly-positive (sum +0.33). Not a clean sign-convention bug; may reflect Turkish agglutinative morphology's interaction with the SAE in ways we didn't anticipate. Flagged in TODO.
+- fra/Person/{1,2} show effect ratios ~10^6 because random baseline was exactly 0. Need per-pair inspection to confirm this is real and not a sampling artifact. Flagged in TODO.
+
+## ~05:25  Wave 10 — REPORT compiled
+
+Report written via scripts/write_report.py. TL;DR highlights the universal f9539, Turkish anomaly, sign-flip, Arabic-dual null. Committed.
+
+Dashboards (W9) and aux characterizations (W8) cut for budget. Aux angles partially subsumed: decoder logit-lens and max-activating tokens remain as follow-up items in TODO.
+
 ## ~04:00  Wave 3 — submit parallel attribution jobs
 
 `run/run_attribute.sh`: 1 GPU L40S (gpu_c=8.9), 32G VRAM, h_rt=2:00:00, email on end/abort.

@@ -67,7 +67,7 @@ def plot_perplexity_error_rates(json_path, output_dir, sort_by_rate=False):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Plot language perplexity error rates from a JSON file.")
     parser.add_argument("--json_path", type=str, required=True, help="Path to the JSON file containing the error rates.")
-    parser.add_argument("--output_dir", type=str, default="img/perplexity_bleu", help="Output directory for the saved plot image.")
+    parser.add_argument("--output_dir", type=str, default="img/perplexity_bleu_linear", help="Output directory for the saved plot image.")
     parser.add_argument("--sort_by_rate", action="store_true", help="Flag to sort the chart by perplexity error rate. Defaults to alphabetical sort by language if omitted.")
     args = parser.parse_args()
 

@@ -221,14 +221,14 @@ def plot_jaccard_similarity_heatmap(output_dir, languages, concept, value, k=100
 def main():
     logging.basicConfig(level=logging.INFO)
 
-    output_dir = Path("/projectnb/mcnet/jbrin/lang-probing/outputs/sentence_input_features")
+    output_dir = Path("/projectnb/mcnet/jbrin/lang-probing/outputs/input_features")
     output_dir.mkdir(exist_ok=True)
 
     languages = ["English", "French", "German", "Spanish", "Turkish", "Arabic", "Hindi", "Chinese", "Indonesian"]
     concepts = {"Tense": ["Past", "Pres", "Fut"], "Number": ["Sing", "Dual", "Plur"]}
 
     # Create plots directory
-    plots_dir = Path("/projectnb/mcnet/jbrin/lang-probing/img/sentence_input_features")
+    plots_dir = Path("/projectnb/mcnet/jbrin/lang-probing/img/input_features")
     plots_dir.mkdir(exist_ok=True)
     
     # Generate magnitude plots for each language/concept/value

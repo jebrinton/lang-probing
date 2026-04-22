@@ -138,7 +138,7 @@ def run_comparison(
     batch_size: int = 64,
     device: str = "cuda",
     max_length: Optional[int] = None,
-    output_dir: str = "outputs/perplexity_comparison",
+    output_dir: str = "outputs/perplexity_bleu_linear/per",
     split: str = "train",
     config: Optional[str] = None,
     dataset: Optional[Union["Dataset", "DatasetDict"]] = None,
@@ -246,7 +246,7 @@ def run_comparison_multilang(
     batch_size: int = 64,
     device: str = "cuda",
     max_length: Optional[int] = None,
-    output_dir: str = "outputs/perplexity_comparison",
+    output_dir: str = "outputs/perplexity_bleu_linear/per",
     split: str = "train",
     language_codes: Optional[List[str]] = None,
 ) -> Tuple[Dict[str, float], np.ndarray, np.ndarray, List[str], np.ndarray]:
@@ -374,7 +374,7 @@ def main():
     parser.add_argument("--col_correct", type=str, default=COL_CORRECT, help="Column name for correct sentence")
     parser.add_argument("--col_wrong", type=str, default=COL_WRONG, help="Column name for wrong sentence")
     parser.add_argument("--batch_size", type=int, default=64)
-    parser.add_argument("--output_dir", type=str, default="outputs/perplexity_comparison")
+    parser.add_argument("--output_dir", type=str, default="outputs/perplexity_bleu_linear/per")
     parser.add_argument("--split", type=str, default="train")
     parser.add_argument("--config", type=str, default=None, help="Optional dataset config name (single-language run)")
     parser.add_argument("--multilang", action="store_true", help="Run for each language (each lang = dataset config)")
@@ -425,7 +425,7 @@ def main():
 if __name__ == "__main__":
     main()
 
-# python perplexity_comparison.py --dataset jumelet/multiblimp --model_id meta-llama/Meta-Llama-3.1-8B --col_correct sen --col_wrong wrong_sen --batch_size 64 --output_dir outputs/perplexity_comparison --split devtest --config eng_Latn --max_length 2048 --device cuda
+# python perplexity_comparison.py --dataset jumelet/multiblimp --model_id meta-llama/Meta-Llama-3.1-8B --col_correct sen --col_wrong wrong_sen --batch_size 64 --output_dir outputs/perplexity_bleu_linear/per --split devtest --config eng_Latn --max_length 2048 --device cuda
 
 # Todos los idiomas de LANG_CODE_TO_NAME (cada uno = config del dataset)
 # python scripts/perplexity_comparison.py --dataset jumelet/multiblimp --model_id meta-llama/Meta-Llama-3.1-8B --multilang --split train --device cuda --max_length 2048 --batch_size 64

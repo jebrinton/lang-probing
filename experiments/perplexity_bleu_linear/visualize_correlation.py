@@ -158,8 +158,8 @@ def main():
 if __name__ == "__main__":
     main()
 
-# python scripts/visualize_perplexity_bleu_correlation.py --per_json outputs/perplexity_comparison/error_rates_by_language_meta-llama_Meta-Llama-3_1-8B_jumelet_multiblimp.json --bleu_csv outputs/perplexity_bleu/bleu_results_llama.csv --save_dir img/perplexity_bleu --sorted
-# python scripts/visualize_perplexity_bleu_correlation.py --per_json outputs/perplexity_comparison/error_rates_by_language_CohereLabs_aya-23-8B_jumelet_multiblimp.json --bleu_csv outputs/perplexity_bleu/bleu_results_aya.csv --save_dir img/perplexity_bleu --sorted
+# python scripts/visualize_perplexity_bleu_correlation.py --per_json outputs/perplexity_bleu_linear/per/error_rates_by_language_meta-llama_Meta-Llama-3_1-8B_jumelet_multiblimp.json --bleu_csv outputs/perplexity_bleu_linear/bleu_and_ppl/bleu_results_llama.csv --save_dir img/perplexity_bleu_linear --sorted
+# python scripts/visualize_perplexity_bleu_correlation.py --per_json outputs/perplexity_bleu_linear/per/error_rates_by_language_CohereLabs_aya-23-8B_jumelet_multiblimp.json --bleu_csv outputs/perplexity_bleu_linear/bleu_and_ppl/bleu_results_aya.csv --save_dir img/perplexity_bleu_linear --sorted
 
-# python scripts/visualize_perplexity_bleu_correlation.py --per_json outputs/perplexity_comparison/error_rates_by_language_meta-llama_Meta-Llama-3_1-8B_jumelet_multiblimp.json --bleu_csv outputs/perplexity_bleu/bleu_results_llama.csv --save_dir img/perplexity_bleu
-# python scripts/visualize_perplexity_bleu_correlation.py --per_json outputs/perplexity_comparison/error_rates_by_language_CohereLabs_aya-23-8B_jumelet_multiblimp.json --bleu_csv outputs/perplexity_bleu/bleu_results_aya.csv --save_dir img/perplexity_bleu
+# python scripts/visualize_perplexity_bleu_correlation.py --per_json outputs/perplexity_bleu_linear/per/error_rates_by_language_meta-llama_Meta-Llama-3_1-8B_jumelet_multiblimp.json --bleu_csv outputs/perplexity_bleu_linear/bleu_and_ppl/bleu_results_llama.csv --save_dir img/perplexity_bleu_linear
+# python scripts/visualize_perplexity_bleu_correlation.py --per_json outputs/perplexity_bleu_linear/per/error_rates_by_language_CohereLabs_aya-23-8B_jumelet_multiblimp.json --bleu_csv outputs/perplexity_bleu_linear/bleu_and_ppl/bleu_results_aya.csv --save_dir img/perplexity_bleu_linear

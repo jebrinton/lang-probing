@@ -1,8 +1,8 @@
 import pandas as pd
 
 # Load the new data files
-perplexity_df = pd.read_csv('/projectnb/mcnet/jbrin/lang-probing/outputs/perplexity_bleu/perplexity_results_llama.csv')
-bleu_df = pd.read_csv('/projectnb/mcnet/jbrin/lang-probing/outputs/perplexity_bleu/bleu_results_llama.csv')
+perplexity_df = pd.read_csv('/projectnb/mcnet/jbrin/lang-probing/outputs/perplexity_bleu_linear/bleu_and_ppl/perplexity_results_llama.csv')
+bleu_df = pd.read_csv('/projectnb/mcnet/jbrin/lang-probing/outputs/perplexity_bleu_linear/bleu_and_ppl/bleu_results_llama.csv')
 
 # Prepare the perplexity dataframe for merging on the 'src' column
 src_perp = perplexity_df.rename(columns={
@@ -23,6 +23,6 @@ tgt_perp = perplexity_df.rename(columns={
 combined_df = combined_df.merge(tgt_perp, on='tgt', how='left')
 
 # Save the combined dataframe to the requested CSV filename
-combined_df.to_csv('/projectnb/mcnet/jbrin/lang-probing/outputs/perplexity_bleu/combined_results_llama.csv', index=False)
+combined_df.to_csv('/projectnb/mcnet/jbrin/lang-probing/outputs/perplexity_bleu_linear/bleu_and_ppl/combined_results_llama.csv', index=False)
 
 print(combined_df.head())

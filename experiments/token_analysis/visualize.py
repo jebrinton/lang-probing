@@ -5,7 +5,7 @@ Reads cached JSON files produced by analyze_tokens.py and generates
 self-contained HTML dashboards (inline CSS, no JS dependencies).
 
 Usage:
-    python scripts/visualize_tokens.py --input_dir outputs/token_analysis/ --output_dir outputs/token_analysis_html/
+    python scripts/visualize_tokens.py --input_dir outputs/token_analysis/ --output_dir outputs/token_analysis/html/
     python scripts/visualize_tokens.py --input outputs/token_analysis/foo.json
 """
 

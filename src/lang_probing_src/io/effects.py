@@ -18,7 +18,7 @@ def get_input_features_vector(output_dir, language, concept, value):
     return torch.load(save_path).numpy()
 
 
-def load_effects_files(out_dir="/projectnb/mcnet/jbrin/lang-probing/outputs/attributions"):
+def load_effects_files(out_dir="/projectnb/mcnet/jbrin/lang-probing/outputs/output_features"):
     # Iterate through the subfolders, each corresponding to a language pair
     effects_files = {}
     for subfolder in tqdm(os.listdir(out_dir)):

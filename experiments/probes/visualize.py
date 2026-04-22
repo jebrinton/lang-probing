@@ -11,7 +11,7 @@ import logging
 INPUT_CSV_FILE = "/projectnb/mcnet/jbrin/lang-probing/outputs/probes/all_probe_results_tense.csv"  # <--- SET YOUR CSV FILE PATH HERE
 
 # The output directory you specified
-IMG_OUTPUT_DIR = "/projectnb/mcnet/jbrin/lang-probing/img/probe_performance/"
+IMG_OUTPUT_DIR = "/projectnb/mcnet/jbrin/lang-probing/img/probes/"
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')

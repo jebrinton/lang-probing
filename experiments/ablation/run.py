@@ -263,7 +263,7 @@ def main(args):
     
     # Configuration
     exp_cfg = EXP_CONFIGS[args.experiment]
-    input_features_dir = Path("/projectnb/mcnet/jbrin/lang-probing/outputs/sentence_input_features/")
+    input_features_dir = Path("/projectnb/mcnet/jbrin/lang-probing/outputs/input_features/")
     effects_files = load_effects_files() if "output" in exp_cfg['feats'] else None
     language_pairs_available = None
     if effects_files is not None:

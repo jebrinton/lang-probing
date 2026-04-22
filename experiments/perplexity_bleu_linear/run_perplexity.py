@@ -144,9 +144,9 @@ def main(args):
 
     # 3. Present Results
     df_results = pd.DataFrame(results)
-    os.makedirs("/projectnb/mcnet/jbrin/lang-probing/outputs/perplexity_bleu", exist_ok=True)
+    os.makedirs("/projectnb/mcnet/jbrin/lang-probing/outputs/perplexity_bleu_linear/bleu_and_ppl", exist_ok=True)
     model_name = "llama" if "llama" in args.model_id else "aya"
-    df_results.to_csv(f"/projectnb/mcnet/jbrin/lang-probing/outputs/perplexity_bleu/perplexity_results_{model_name}.csv", index=False)
+    df_results.to_csv(f"/projectnb/mcnet/jbrin/lang-probing/outputs/perplexity_bleu_linear/bleu_and_ppl/perplexity_results_{model_name}.csv", index=False)
     print("\n=== Final Results ===")
     print(df_results.to_markdown(index=False))
 

@@ -119,11 +119,11 @@ def signal_plot(signal, title, xlabel, ylabel, save_path=None):
 
 
 def main():
-    input_features_dir = Path("/projectnb/mcnet/jbrin/lang-probing/outputs/sentence_input_features")
+    input_features_dir = Path("/projectnb/mcnet/jbrin/lang-probing/outputs/input_features")
     effects_files = load_effects_files()
     language_pairs, concepts = get_language_pairs_and_concepts(effects_files)
 
-    plots_dir = Path("/projectnb/mcnet/jbrin/lang-probing/img/input_output")
+    plots_dir = Path("/projectnb/mcnet/jbrin/lang-probing/img/input_output_overlap")
     plots_dir.mkdir(exist_ok=True)
 
     for (_, target_lang) in language_pairs:

@@ -30,9 +30,9 @@ Batch-submission template: `run/run_probes.sh`.
 
 ## Figures
 
-- `img/probe_performance/{C}_{V}_accuracy_vs_layer.png`
-- `img/probe_performance/{C}_{V}_test_accuracy_distribution.png`
-- `img/probe_performance/all_concepts_c_value_vs_layer.png`
+- `img/probes/{C}_{V}_accuracy_vs_layer.png`
+- `img/probes/{C}_{V}_test_accuracy_distribution.png`
+- `img/probes/all_concepts_c_value_vs_layer.png`
 
 ## Known caveats
 

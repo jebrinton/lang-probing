@@ -37,18 +37,18 @@ python experiments/perplexity_bleu_linear/visualize_error_bar.py
 
 ## Outputs
 
-- `outputs/perplexity_bleu/perplexity_results_{model}.csv` — raw PPL per language (tiny pilot files).
-- `outputs/perplexity_bleu/combined_results_{model}.csv` — joined BLEU + PPL (current source of truth, ~28 KB).
-- `outputs/perplexity_comparison/error_rates_by_language_{model}.json` — PER per language.
-- `outputs/perplexity_comparison/perplexity_matrices_{model}.npz`.
-- `outputs/perplexity_bleu/linear_models/linear_coeffs_{model}_{raw|log}_{joint|nojoint}.csv`.
-- `outputs/perplexity_bleu/linear_models/linear_predictions_*.csv`.
+- `outputs/perplexity_bleu_linear/bleu_and_ppl/perplexity_results_{model}.csv` — raw PPL per language (tiny pilot files).
+- `outputs/perplexity_bleu_linear/bleu_and_ppl/combined_results_{model}.csv` — joined BLEU + PPL (current source of truth, ~28 KB).
+- `outputs/perplexity_bleu_linear/per/error_rates_by_language_{model}.json` — PER per language.
+- `outputs/perplexity_bleu_linear/per/perplexity_matrices_{model}.npz`.
+- `outputs/perplexity_bleu_linear/bleu_and_ppl/linear_models/linear_coeffs_{model}_{raw|log}_{joint|nojoint}.csv`.
+- `outputs/perplexity_bleu_linear/bleu_and_ppl/linear_models/linear_predictions_*.csv`.
 
 ## Figures
 
-- `img/perplexity_bleu/{aya,llama}_{source,target,joint}_competence*.png` — current H1 figures.
-- `img/perplexity_bleu/perplexity_plot_{model}.png` (+ `_sorted`).
-- `img/perplexity_bleu/perplexity_vs_bleu_{model}_sorted.png`.
+- `img/perplexity_bleu_linear/{aya,llama}_{source,target,joint}_competence*.png` — current H1 figures.
+- `img/perplexity_bleu_linear/perplexity_plot_{model}.png` (+ `_sorted`).
+- `img/perplexity_bleu_linear/perplexity_vs_bleu_{model}_sorted.png`.
 
 ## Known caveats
 

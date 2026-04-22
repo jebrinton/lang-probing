@@ -19,9 +19,9 @@ python experiments/input_output_overlap/visualize.py
 
 ## Outputs
 
-- `img/input_output/{Lang}_{Concept}_{Value}/jaccard_topk.png`
-- `img/input_output/{Lang}_{Concept}_{Value}/signal_input.png`
-- `img/input_output/{Lang}_{Concept}_{Value}/signal_output.png`
+- `img/input_output_overlap/{Lang}_{Concept}_{Value}/jaccard_topk.png`
+- `img/input_output_overlap/{Lang}_{Concept}_{Value}/signal_input.png`
+- `img/input_output_overlap/{Lang}_{Concept}_{Value}/signal_output.png`
 
 Some signal-plot code paths are commented out in `visualize.py`; TODO to re-enable and verify.
 

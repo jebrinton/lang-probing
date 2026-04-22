@@ -33,7 +33,7 @@ Batch-submission templates: `run/run_token_analysis*.sh` (one per config).
 ## Outputs
 
 - `outputs/token_analysis/*.json` — one JSON per config, with per-token activations + logprobs.
-- `outputs/token_analysis_html/*.html` — three-panel renderings.
+- `outputs/token_analysis/html/*.html` — three-panel renderings.
 
 ## Status
 

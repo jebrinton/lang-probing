@@ -24,7 +24,7 @@ def setup_autoencoder():
 
 
 def load_diff_vector(language, concept, value):
-    output_dir = Path("/projectnb/mcnet/jbrin/lang-probing/outputs/sentence_input_features")
+    output_dir = Path("/projectnb/mcnet/jbrin/lang-probing/outputs/input_features")
     save_dir = output_dir / language / concept / value
     save_path = save_dir / "diff_vector.pt"
 
@@ -57,7 +57,7 @@ def get_input_feature_vector(model, sae, dataloader):
 def main():
     logging.basicConfig(level=logging.INFO)
     
-    output_dir = Path("/projectnb/mcnet/jbrin/lang-probing/outputs/sentence_input_features")
+    output_dir = Path("/projectnb/mcnet/jbrin/lang-probing/outputs/input_features")
     output_dir.mkdir(exist_ok=True)
 
     model = LanguageModel("meta-llama/Meta-Llama-3.1-8B-Instruct", device_map="cuda")

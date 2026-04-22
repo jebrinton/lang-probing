@@ -227,7 +227,7 @@ def build_prompt_flores(exp, num_shots=2):
 # Feature vector loading
 # ---------------------------------------------------------------------------
 
-INPUT_FEATURES_DIR = Path("/projectnb/mcnet/jbrin/lang-probing/outputs/sentence_input_features/")
+INPUT_FEATURES_DIR = Path("/projectnb/mcnet/jbrin/lang-probing/outputs/input_features/")
 
 
 def load_feature_vector(exp, effects_files=None, language_pairs_available=None):

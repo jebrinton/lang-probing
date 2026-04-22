@@ -338,5 +338,73 @@
         "magnitude_sum": 0.04469506815075874
       }
     ]
+  },
+  {
+    "pair": "ara vs tur",
+    "cell": "Number=Sing",
+    "n_same_sign": 202,
+    "n_opp_sign": 96,
+    "top_10_opposite": [
+      {
+        "feature_idx": 9539,
+        "ara_signed_gxa": -0.10063072293996811,
+        "tur_signed_gxa": 0.09263377636671066,
+        "magnitude_sum": 0.19326449930667877
+      },
+      {
+        "feature_idx": 15744,
+        "ara_signed_gxa": 0.06416961550712585,
+        "tur_signed_gxa": -0.028940288349986076,
+        "magnitude_sum": 0.09310990571975708
+      },
+      {
+        "feature_idx": 14530,
+        "ara_signed_gxa": -0.03091711737215519,
+        "tur_signed_gxa": 0.03989793732762337,
+        "magnitude_sum": 0.0708150565624237
+      },
+      {
+        "feature_idx": 17348,
+        "ara_signed_gxa": -0.056399911642074585,
+        "tur_signed_gxa": 0.0007342364406213164,
+        "magnitude_sum": 0.057134147733449936
+      },
+      {
+        "feature_idx": 12788,
+        "ara_signed_gxa": 0.04106023907661438,
+        "tur_signed_gxa": -0.0037942826747894287,
+        "magnitude_sum": 0.04485452175140381
+      },
+      {
+        "feature_idx": 20312,
+        "ara_signed_gxa": -0.007840961217880249,
+        "tur_signed_gxa": 0.03661973774433136,
+        "magnitude_sum": 0.04446069896221161
+      },
+      {
+        "feature_idx": 11720,
+        "ara_signed_gxa": -0.041917912662029266,
+        "tur_signed_gxa": 0.00040298301610164344,
+        "magnitude_sum": 0.042320895940065384
+      },
+      {
+        "feature_idx": 31380,
+        "ara_signed_gxa": 0.0006537458975799382,
+        "tur_signed_gxa": -0.03800984472036362,
+        "magnitude_sum": 0.0386635921895504
+      },
+      {
+        "feature_idx": 9102,
+        "ara_signed_gxa": -0.023853054270148277,
+        "tur_signed_gxa": 0.011326928623020649,
+        "magnitude_sum": 0.0351799838244915
+      },
+      {
+        "feature_idx": 2479,
+        "ara_signed_gxa": 0.012493508867919445,
+        "tur_signed_gxa": -0.02064867690205574,
+        "magnitude_sum": 0.03314218670129776
+      }
+    ]
   }
 ]

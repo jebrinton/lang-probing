@@ -92,6 +92,37 @@
       }
     ]
   },
+  "tur": {
+    "lang": "tur",
+    "n_cells": 4,
+    "n_features_in_any_topk": 83,
+    "n_features_k_ge_2": 52,
+    "n_features_k_ge_2_sig": 38,
+    "n_features_k_ge_3": 38,
+    "top_3_features": [
+      {
+        "feature_idx": 12646,
+        "n_cells": 4,
+        "cells": "Number/Sing;Person/1;Person/2;Person/3",
+        "pval": 5.421010862427522e-12,
+        "pval_bonferroni": 1.7763568394002505e-07
+      },
+      {
+        "feature_idx": 9539,
+        "n_cells": 4,
+        "cells": "Number/Sing;Person/1;Person/2;Person/3",
+        "pval": 5.421010862427522e-12,
+        "pval_bonferroni": 1.7763568394002505e-07
+      },
+      {
+        "feature_idx": 28847,
+        "n_cells": 4,
+        "cells": "Number/Sing;Person/1;Person/2;Person/3",
+        "pval": 5.421010862427522e-12,
+        "pval_bonferroni": 1.7763568394002505e-07
+      }
+    ]
+  },
   "ara": {
     "lang": "ara",
     "n_cells": 8,

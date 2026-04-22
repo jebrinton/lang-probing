@@ -25,7 +25,10 @@ from lang_probing_src.utils import setup_model, get_device_info
 def run_ablation_batch(model, submodule, autoencoder, tokenizer, pairs, feat_to_ablate, device):
     """For each pair, measure Δ logP(last_orig_id) at cf_pos when zeroing feat_to_ablate."""
     deltas = []
-    feat_idx_tensor = torch.tensor(list(feat_to_ablate), dtype=torch.long, device=device)
+    # Build mask [SAE_DIM]; 0 at features to ablate, 1 elsewhere
+    mask = torch.ones(32768, device=device)
+    for f in feat_to_ablate:
+        mask[int(f)] = 0.0
 
     for p in pairs:
         # Reconstruct input
@@ -61,13 +64,11 @@ def run_ablation_batch(model, submodule, autoencoder, tokenizer, pairs, feat_to_
         with model.trace(ids_t, **TRACER_KWARGS), torch.no_grad():
             x = submodule.output[0]
             f = autoencoder.encode(x)
-            # Zero the features
-            f[:, :, feat_idx_tensor] = 0
-            x_hat = autoencoder.decode(f)
-            # Residual from the *non-ablated* reconstruction path: preserve it
-            f_orig = autoencoder.encode(x)
-            residual = x - autoencoder.decode(f_orig)
-            recon = (x_hat + residual).to(layer_dtype)
+            f_abl = f * mask
+            x_hat_abl = autoencoder.decode(f_abl)
+            x_hat_orig = autoencoder.decode(f)
+            residual = x - x_hat_orig
+            recon = (x_hat_abl + residual).to(layer_dtype)
             submodule.output[0][:] = recon
             logits_abl = model.lm_head.output[:, cf_pos, :].save()
         lp_abl = F.log_softmax(logits_abl.float(), dim=-1)
@@ -115,14 +116,6 @@ def main():
     rng = np.random.default_rng(42)
 
     for lang in args.langs:
-        holdout_path = Path(args.attr_dir) / lang / "holdout_ids.json"
-        if not holdout_path.exists():
-            # Fall back: take a slice of pairs by ID
-            print(f"[{lang}] no holdout_ids.json; skipping")
-            continue
-        with open(holdout_path) as f:
-            holdouts = json.load(f)
-
         # Load pairs file
         pairs_file = Path(args.pairs_root) / f"{lang}.json"
         if lang == "eng":
@@ -131,16 +124,21 @@ def main():
             print(f"[{lang}] pairs file missing"); continue
         with open(pairs_file) as f:
             all_pairs = json.load(f)
-        pair_by_id = {p["id"]: p for p in all_pairs}
 
-        for cell_key, hold_ids in holdouts.items():
-            try:
-                lang_c, concept, value = cell_key.split("|")
-            except ValueError:
-                continue
-            if lang_c != lang: continue
+        # Group pairs by (concept, value) cell; first N per cell become holdout
+        from collections import defaultdict
+        by_cell_pairs = defaultdict(list)
+        for p in all_pairs:
+            p.setdefault("lang_code", lang)
+            p.setdefault("source", "multiblimp" if lang != "eng" else "handcrafted_en")
+            if lang == "eng":
+                p["id"] = p.get("id", "eng_" + str(id(p)))
+            cell_key = (p["concept"], p.get("concept_value_orig", ""))
+            by_cell_pairs[cell_key].append(p)
 
-            hold_pairs = [pair_by_id[i] for i in hold_ids if i in pair_by_id][: args.max_pairs]
+        for (concept, value), cell_pairs in by_cell_pairs.items():
+            # Take a slice of pairs as holdout
+            hold_pairs = cell_pairs[: args.max_pairs]
             if not hold_pairs:
                 continue
 

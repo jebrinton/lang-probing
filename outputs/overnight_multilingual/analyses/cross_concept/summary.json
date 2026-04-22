@@ -1,0 +1,126 @@
+{
+  "eng": {
+    "lang": "eng",
+    "n_cells": 11,
+    "n_features_in_any_topk": 326,
+    "n_features_k_ge_2": 98,
+    "n_features_k_ge_2_sig": 29,
+    "n_features_k_ge_3": 44,
+    "top_3_features": [
+      {
+        "feature_idx": 20383,
+        "n_cells": 10,
+        "cells": "Aspect/Prog;Gender/Fem;Gender/Masc;Mood/Sub;Number/Plur;Number/Sing;Person/3;Polarity/Neg;Tense/Past;Tense/Pres",
+        "pval": 7.516064936470825e-28,
+        "pval_bonferroni": 2.46286415838276e-23
+      },
+      {
+        "feature_idx": 10870,
+        "n_cells": 10,
+        "cells": "Aspect/Prog;Gender/Fem;Gender/Masc;Mood/Sub;Number/Plur;Number/Sing;Person/1;Person/3;Polarity/Neg;Tense/Past",
+        "pval": 7.516064936470825e-28,
+        "pval_bonferroni": 2.46286415838276e-23
+      },
+      {
+        "feature_idx": 15614,
+        "n_cells": 9,
+        "cells": "Aspect/Prog;Gender/Fem;Gender/Masc;Mood/Sub;Number/Plur;Number/Sing;Person/1;Person/3;Tense/Past",
+        "pval": 2.4595161405496373e-24,
+        "pval_bonferroni": 8.059342489353051e-20
+      }
+    ]
+  },
+  "fra": {
+    "lang": "fra",
+    "n_cells": 6,
+    "n_features_in_any_topk": 107,
+    "n_features_k_ge_2": 66,
+    "n_features_k_ge_2_sig": 48,
+    "n_features_k_ge_3": 48,
+    "top_3_features": [
+      {
+        "feature_idx": 12731,
+        "n_cells": 6,
+        "cells": "Gender/Masc;Number/Plur;Number/Sing;Person/1;Person/2;Person/3",
+        "pval": 1.2621774483536189e-17,
+        "pval_bonferroni": 4.1359030627651384e-13
+      },
+      {
+        "feature_idx": 14366,
+        "n_cells": 6,
+        "cells": "Gender/Masc;Number/Plur;Number/Sing;Person/1;Person/2;Person/3",
+        "pval": 1.2621774483536189e-17,
+        "pval_bonferroni": 4.1359030627651384e-13
+      },
+      {
+        "feature_idx": 9539,
+        "n_cells": 6,
+        "cells": "Gender/Masc;Number/Plur;Number/Sing;Person/1;Person/2;Person/3",
+        "pval": 1.2621774483536189e-17,
+        "pval_bonferroni": 4.1359030627651384e-13
+      }
+    ]
+  },
+  "spa": {
+    "lang": "spa",
+    "n_cells": 6,
+    "n_features_in_any_topk": 110,
+    "n_features_k_ge_2": 58,
+    "n_features_k_ge_2_sig": 46,
+    "n_features_k_ge_3": 46,
+    "top_3_features": [
+      {
+        "feature_idx": 8633,
+        "n_cells": 6,
+        "cells": "Gender/Masc;Number/Plur;Number/Sing;Person/1;Person/2;Person/3",
+        "pval": 1.2621774483536189e-17,
+        "pval_bonferroni": 4.1359030627651384e-13
+      },
+      {
+        "feature_idx": 9539,
+        "n_cells": 6,
+        "cells": "Gender/Masc;Number/Plur;Number/Sing;Person/1;Person/2;Person/3",
+        "pval": 1.2621774483536189e-17,
+        "pval_bonferroni": 4.1359030627651384e-13
+      },
+      {
+        "feature_idx": 12731,
+        "n_cells": 6,
+        "cells": "Gender/Masc;Number/Plur;Number/Sing;Person/1;Person/2;Person/3",
+        "pval": 1.2621774483536189e-17,
+        "pval_bonferroni": 4.1359030627651384e-13
+      }
+    ]
+  },
+  "ara": {
+    "lang": "ara",
+    "n_cells": 8,
+    "n_features_in_any_topk": 159,
+    "n_features_k_ge_2": 71,
+    "n_features_k_ge_2_sig": 57,
+    "n_features_k_ge_3": 57,
+    "top_3_features": [
+      {
+        "feature_idx": 9539,
+        "n_cells": 8,
+        "cells": "Dual/Dual;Dual/Sing;Gender/Fem;Gender/Masc;Number/Sing;Person/1;Person/2;Person/3",
+        "pval": 2.938735877055719e-23,
+        "pval_bonferroni": 9.62964972193618e-19
+      },
+      {
+        "feature_idx": 3650,
+        "n_cells": 8,
+        "cells": "Dual/Dual;Dual/Sing;Gender/Fem;Gender/Masc;Number/Sing;Person/1;Person/2;Person/3",
+        "pval": 2.938735877055719e-23,
+        "pval_bonferroni": 9.62964972193618e-19
+      },
+      {
+        "feature_idx": 14366,
+        "n_cells": 8,
+        "cells": "Dual/Dual;Dual/Sing;Gender/Fem;Gender/Masc;Number/Sing;Person/1;Person/2;Person/3",
+        "pval": 2.938735877055719e-23,
+        "pval_bonferroni": 9.62964972193618e-19
+      }
+    ]
+  }
+}

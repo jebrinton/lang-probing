@@ -1,0 +1,40 @@
+# Word-level input features config — STUB.
+#
+# Spec: docs/reference_paper.tex §"Word-level procedure". Priority-based
+# negative sampling:
+#   1. (priority) same-concept, different-value: e.g. for Number=Plur, sample
+#      from Number=Sing tokens within the same sentence
+#   2. any other content token in the same sentence (not special, not punct)
+#   3. any token in a sentence containing no w+ positive
+#
+# Word alignment follows the tokenizer's word_ids() (MWT-aware), with the
+# "word" defined as the last token spanning a word.
+#
+# NOT YET IMPLEMENTED — the loader needs to be added in Wave 3b.
+
+level: word                            # triggers the word-level loader (TODO)
+negative_sampling_priority:
+  - same_concept_different_value       # highest priority
+  - same_sentence_other_token
+  - other_sentence_without_positive
+
+treebank: PUD
+layer: 16
+pooling: last_token                    # the last token spanning each word
+languages:
+  - English
+  - Spanish
+  - French
+  - German
+  - Turkish
+  - Arabic
+  - Hindi
+  - Chinese
+  - Indonesian
+concepts:
+  Tense: [Past, Pres, Fut]
+  Number: [Sing, Plur, Dual]
+
+output_dir: outputs/input_features     # shares the sentence-level output tree;
+                                       # nest as word/{Lang}/{Concept}/{Value}/diff_vector.pt
+                                       # TODO (Wave 3b): actually support the word/ prefix

@@ -88,13 +88,14 @@ Ordered by current activity (most active first). Each folder under `experiments/
   - v1 (2026-02-09) — scatter + mixed-lm.
   - v2 (2026-02-20) — Pearson/Spearman + PER-based figures.
   - v3 (2026-03-02) — OLS fits with interaction toggle.
-- **Findings (so far):** R² = 0.02 (Llama) to 0.10 (Aya). Coefficients are consistently negative (higher perplexity → lower BLEU, correct direction). **But the fit is genuinely weak** — prediction MAE is ~5–6 BLEU points, predictions cluster near intercept. The monolingual-competence-only model is a surprisingly bad BLEU predictor for Llama.
+- **Findings (so far):** R² = 0.02 (Llama) to 0.10 (Aya). Coefficients are consistently negative (higher perplexity → lower BLEU, correct direction). **But the fit is genuinely weak** — prediction MAE is ~5–6 BLEU points, predictions cluster near intercept. The monolingual-competence-only linear-in-PER model is a surprisingly bad BLEU predictor for Llama. **However:** a rank-1 SVD decomposition of the BLEU(src, tgt) matrix is 88.31% faithful for Llama (matches the paper's 88% claim), and 82.37% for Aya. This says the BLEU surface is well-approximated by a single src×tgt outer product — i.e. BLEU decomposes multiplicatively by src and tgt competence even when a simple linear-in-PER model fails. The tension between R² ≈ 0.02 and rank-1 ≈ 88% is evidence that PER is a noisy proxy for the "true" competence vectors embedded in the rank-1 factors.
 - **Caveats / uncertainties:** Does H1 really hold if R² is this low? Or is this a data issue (MAE-vs-BLEU-range, noisy BLEU, outlier languages)?
 - **TODOs:**
-  - **Add rank-1 SVD approximation** (`.tex` cites "88% faithful" with no code; reproducible here, lightweight).
+  - ~~Add rank-1 SVD approximation~~ ✓ Done (`rank1_approximation.py`, 2026-04-22).
   - Refit without Turkish / Hebrew to see if specific languages dominate residuals.
   - Plot residuals.
   - Reconcile `perplexity_results_*.csv` (tiny pilot) vs `combined_results_*.csv` (likely canonical) as source of truth.
+  - Investigate why PER-based linear model is low-R² but rank-1 matrix decomposition is ~88% — is PER a bad proxy for the competence latents?
 - **Figures:** [img/perplexity_bleu/](img/perplexity_bleu/) — source_competence, target_competence, joint_competence_{scatter,contour}, perplexity_plot, perplexity_vs_bleu_sorted.
 - **Run:** `python experiments/perplexity_bleu_linear/run.py --config experiments/perplexity_bleu_linear/configs/llama.yaml` (post-restructure)
 

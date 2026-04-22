@@ -6,6 +6,20 @@ Cross-reference experiments by folder name (e.g., "see LEDGER::ablation"). New e
 
 ---
 
+## 2026-04-22 — Wave 5: rank-1 SVD reproduced, config stubs, data README
+
+Wrote `experiments/perplexity_bleu_linear/rank1_approximation.py`. Built the (src, tgt) BLEU matrix from `combined_results_{model}.csv` (24×24, 24 NaN cells imputed with column means), ran SVD, computed faithfulness = 1 − ‖M − M_k‖_F / ‖M‖_F.
+
+**Llama rank-1 = 88.31%, Aya = 82.37%.** Llama matches the paper's "88% faithful" claim exactly. Surprising that the rank-1 story holds despite the linear-in-PER model's R² of 0.02 — the BLEU matrix is well-approximated by a src-competence × tgt-competence outer product, but PER isn't capturing those competence latents well. Filed under LEDGER TODOs.
+
+Top-5 singular values: Llama [372.96, 25.83, 17.20, 14.00, 11.90] — the spectral gap between σ_1 and σ_2 is huge (14.4×), which is what rank-1 faithfulness means in geometric terms.
+
+Also:
+- Created `data/README.md` documenting `grammatical_pairs.json` schema + multilingual extension plan (pairs files named `grammatical_pairs_{lang}.json`, run CF attribution per-language).
+- Wrote `experiments/input_features/configs/{sentence,word}.yaml`. Sentence is informational (current CLI-driven code works); word is a detailed spec stub for the word-level procedure in the paper — negative-sampling priority order captured, loader to be wired in Wave 3b.
+
+---
+
 ## 2026-04-22 — restructure kickoff (Wave 0 + 1)
 
 Started a multi-wave restructure of this repo. Plan at `~/.claude/plans/h2-is-about-the-idempotent-cascade.md`. Goal: library + thin experiments + curated ledger + chronological notebook + TODO.

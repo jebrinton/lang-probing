@@ -62,7 +62,7 @@ Numbers that look off, based on spot-checking result files.
 
 ## Scientific — missing code
 
-- [ ] **Rank-1 SVD approximation of the BLEU-vs-perplexity linear fit.** `.tex` claims "88% faithful for Llama" — no code in this repo produces this. Reproducible here in `experiments/perplexity_bleu_linear/`. Lightweight. See Wave 5.
+- [x] **Rank-1 SVD approximation of the BLEU-vs-perplexity linear fit.** Reproduced in `experiments/perplexity_bleu_linear/rank1_approximation.py`. Llama rank-1 faithfulness = **88.31%** (matches the paper's 88% claim exactly). Aya = 82.37%. Figures at `img/perplexity_bleu_linear/linear_effects_ranks_{model}.png`, `linear_effects_{model}.png`.
 
 ## Nice-to-have
 

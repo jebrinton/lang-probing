@@ -26,7 +26,18 @@ python experiments/perplexity_bleu_linear/run_linear_fit.py --feature-transform 
 # 5. visualize
 python experiments/perplexity_bleu_linear/visualize_correlation.py
 python experiments/perplexity_bleu_linear/visualize_error_bar.py
+
+# 6. rank-1 SVD faithfulness of the BLEU matrix (the "88%" claim)
+python experiments/perplexity_bleu_linear/rank1_approximation.py --model llama
+python experiments/perplexity_bleu_linear/rank1_approximation.py --model aya
 ```
+
+### Rank-1 SVD result (added 2026-04-22)
+
+- **Llama:** rank-1 faithfulness = **88.31%**
+- **Aya:** rank-1 faithfulness = 82.37%
+
+Faithfulness = 1 − ‖M − M₁‖_F / ‖M‖_F where M is the (src, tgt) BLEU matrix. Produces `img/perplexity_bleu_linear/linear_effects_ranks_{model}.png` (error-vs-rank curve) and `linear_effects_{model}.png` (rank-1 predicted vs actual scatter). The rank-1 matrix factors into a src-competence vector outer-producted with a tgt-competence vector, which is the core H1 story despite the in-PER-space linear model's low R².
 
 ## Inputs
 

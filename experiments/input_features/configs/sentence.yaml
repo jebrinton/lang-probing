@@ -1,0 +1,30 @@
+# Sentence-level input features config.
+#
+# Current canonical pipeline (as implemented in run.py):
+#   for each (language, concept, value):
+#     - load UD sentences with/without the concept tag
+#     - extract SAE activations (layer 16), mean-pool over tokens
+#     - compute mean(positive) - mean(negative) → 32768-dim diff vector
+#     - save to outputs/input_features/{Lang}/{Concept}/{Value}/diff_vector.pt
+#
+# Today run.py is CLI-driven; this YAML is informational. Wave 3b will wire
+# the loader in run.py to accept this config.
+
+level: sentence
+treebank: PUD                          # Parallel Universal Dependencies
+layer: 16                              # SAE layer
+pooling: mean                          # "mean" | "max"
+languages:
+  - English
+  - Spanish
+  - French
+  - German
+  - Turkish
+  - Arabic
+  - Hindi
+  - Chinese
+  - Indonesian
+concepts:
+  Tense: [Past, Pres, Fut]
+  Number: [Sing, Plur, Dual]
+output_dir: outputs/input_features

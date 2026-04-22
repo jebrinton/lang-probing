@@ -12,9 +12,9 @@ import logging
 import datasets
 from datasets import load_dataset
 
-from .config import NAME_TO_LANG_CODE, UD_BASE_FOLDER
-from .config import FLORES_BASE_FOLDER
-from .config import PROBES_DIR
+from ..config import NAME_TO_LANG_CODE, UD_BASE_FOLDER
+from ..config import FLORES_BASE_FOLDER
+from ..config import PROBES_DIR
 
 
 def get_all_treebank_files(language, split, ud_base_folder=None):

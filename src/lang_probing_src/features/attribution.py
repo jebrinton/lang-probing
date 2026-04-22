@@ -1,6 +1,6 @@
 import torch
 
-from src.sparse_activations import SparseActivation
+from .sparse_activations import SparseActivation
 
 TRACER_KWARGS = {}
 

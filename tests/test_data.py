@@ -7,14 +7,14 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 import unittest
-from src.data import (
+from lang_probing_src.data import (
     get_ud_filepath, 
     get_available_concepts, 
     ProbingDataset, 
     balance_dataset,
     concept_filter
 )
-from src.config import UD_BASE_FOLDER, LANGUAGES
+from lang_probing_src.config import UD_BASE_FOLDER, LANGUAGES
 
 
 class TestDataLoading(unittest.TestCase):

@@ -9,8 +9,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 import unittest
 import numpy as np
 import tempfile
-from src.probe import train_probe
-from src.features import (
+from lang_probing_src.probe import train_probe
+from lang_probing_src.features import (
     find_top_correlating_features,
     find_top_positive_negative_features,
     save_features,

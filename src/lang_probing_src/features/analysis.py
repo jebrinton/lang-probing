@@ -3,7 +3,7 @@ Análisis de features SAE correlacionadas con conceptos gramaticales
 """
 
 import numpy as np
-from .utils import save_json, load_json
+from ..utils import save_json, load_json
 
 
 def find_top_correlating_features(probe, k=100):

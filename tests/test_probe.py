@@ -9,7 +9,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 import unittest
 import numpy as np
 import tempfile
-from src.probe import (
+from lang_probing_src.probe import (
     train_probe,
     evaluate_probe,
     save_probe,

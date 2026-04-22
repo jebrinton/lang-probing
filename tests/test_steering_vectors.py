@@ -9,8 +9,8 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 import logging
-from src.config import STEERING_VECTORS_DIR, LOGS_DIR, MAX_SAMPLES_FOR_STEERING
-from src.utils import ensure_dir, setup_logging
+from lang_probing_src.config import STEERING_VECTORS_DIR, LOGS_DIR, MAX_SAMPLES_FOR_STEERING
+from lang_probing_src.utils import ensure_dir, setup_logging
 
 
 

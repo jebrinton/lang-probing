@@ -10,6 +10,8 @@ Cross-reference `LEDGER.md` for where each item fits in the experiment tree.
 
 Will produce wrong outputs or crash if the scenario hits.
 
+- [ ] **`torchtyping` missing from `requirements.txt`** (pre-existing). `src/lang_probing_src/features/sparse_activations.py` imports `from torchtyping import TensorType`; `features/attribution.py` depends on it. The current `probes` conda env does not have it installed, so the output-features pipeline (`attribution_flores.py`) cannot import. Fix: `pip install torchtyping` + add to `requirements.txt`.
+
 - [ ] **`scripts/collect_activations.py:37-42`** — `except Exception` catches load failures but the following code still tries to use `sentences`, which is only defined in the successful branch. Will NameError on any UD load failure. Fix: `raise` after `logging.error`, or initialize `sentences = []` and `return` / `continue`.
 - [ ] **`scripts/attribution_flores.py`** — uses `from src.config` (wrong module; the package is `lang_probing_src`). There's a `sys.path.insert` hack that may or may not work depending on CWD. Replace with `from lang_probing_src.config import …`. Drop the sys.path hack.
 - [ ] **`scripts/analyze_tokens.py`** probe reader — expects filenames of the form `probe_layer{layer}_n{n}.joblib`, but `scripts/word_probes.py:201` writes `l{layer}_n{n}.joblib`. Probe filtering in `token_analysis` runs today without ever loading probes (silent no-op). Canonical is `l{layer}_n{n}`; fix the reader.

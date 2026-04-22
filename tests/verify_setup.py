@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 import logging
 
-from src.config import PROBES_DIR, FEATURES_DIR, ABLATIONS_DIR, LOGS_DIR
+from lang_probing_src.config import PROBES_DIR, FEATURES_DIR, ABLATIONS_DIR, LOGS_DIR
 
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 

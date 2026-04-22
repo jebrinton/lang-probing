@@ -6,7 +6,7 @@ import os
 from tqdm import tqdm
 from torch.utils.data import Dataset
 import einops
-from src.utils import print_gpu_memory_usage
+from ..utils import print_gpu_memory_usage
 
 class ActivationDataset(Dataset):
     """

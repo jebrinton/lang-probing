@@ -14,11 +14,11 @@ from torch.utils.data import DataLoader
 # Add src to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from src.config import ACTIVATIONS_DIR, SEED
-from src.data import load_sentences_with_tags
-from src.activations import collect_sentence_activations
-from src.utils import setup_model, ensure_dir
-from src.sentence_dataset_class import SentenceDataset, collate_fn
+from lang_probing_src.config import ACTIVATIONS_DIR, SEED
+from lang_probing_src.data import load_sentences_with_tags
+from lang_probing_src.activations import collect_sentence_activations
+from lang_probing_src.utils import setup_model, ensure_dir
+from lang_probing_src.sentence_dataset_class import SentenceDataset, collate_fn
 
 def test_activation_collection():
     """Test the activation collection pipeline on a small subset."""

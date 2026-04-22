@@ -1,0 +1,24 @@
+# Template config for H3 finetuned-checkpoint evaluation.
+# Fill in values when a real checkpoint exists.
+
+run_id: "2026-MM-DD_<slug>"
+
+checkpoint: "<path to finetuned llama>"
+baseline_checkpoint: "<path to baseline llama, e.g. meta-llama/Llama-3.1-8B>"
+
+bleu:
+  dataset: flores_101
+  languages: [English, Xhosa]   # adjust based on target language
+  language_pairs: all           # or explicit list of [src, tgt] pairs
+  max_samples_per_pair: 256
+
+per:
+  dataset: multiblimp
+  languages: [English, Xhosa]
+
+representation_similarity:
+  layer: 16
+  num_samples: 512
+  metric: cosine                # cosine | euclidean
+
+output_dir: outputs/monolingual_ft/${run_id}

@@ -13,8 +13,8 @@ from functools import partial
 from torch.utils.data import DataLoader
 import argparse
 
-# Add src to path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+# Safety net for running from a non-installed checkout; harmless otherwise.
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'src'))
 
 from lang_probing_src.config import (
     ACTIVATIONS_DIR, FLORES_ACTIVATIONS_DIR, LANGUAGES, LANG_CODE_TO_NAME, MODEL_ID, SEED,

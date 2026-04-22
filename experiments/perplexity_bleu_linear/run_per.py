@@ -13,10 +13,11 @@ import re
 import sys
 from typing import Dict, List, Optional, Tuple, Union
 
-# Ensure lang_probing_src is importable when run as script
-_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(_SCRIPT_DIR, ".."))
-sys.path.insert(0, os.path.join(_SCRIPT_DIR, "..", "src"))
+# lang_probing_src is installed via pyproject.toml; no path hack needed when
+# the package is installed. The inserts below are a safety net for running
+# the script from a non-installed checkout.
+_REPO_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")
+sys.path.insert(0, os.path.join(_REPO_ROOT, "src"))
 
 import numpy as np
 import pandas as pd

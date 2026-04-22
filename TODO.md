@@ -10,7 +10,8 @@ Cross-reference `LEDGER.md` for where each item fits in the experiment tree.
 
 Will produce wrong outputs or crash if the scenario hits.
 
-- [ ] **`torchtyping` missing from `requirements.txt`** (pre-existing). `src/lang_probing_src/features/sparse_activations.py` imports `from torchtyping import TensorType`; `features/attribution.py` depends on it. The current `probes` conda env does not have it installed, so the output-features pipeline (`attribution_flores.py`) cannot import. Fix: `pip install torchtyping` + add to `requirements.txt`.
+- [ ] **`torchtyping` missing from `requirements.txt`** (pre-existing). `src/lang_probing_src/features/sparse_activations.py` imports `from torchtyping import TensorType`; `features/attribution.py` depends on it. The current `probes` conda env does not have it installed, so the output-features pipeline cannot import. Fix: `pip install torchtyping` + add to `requirements.txt`.
+- [ ] **`SAE_FILENAME` undefined** (pre-existing). `experiments/output_features/run.py:152` references `SAE_FILENAME` but the symbol is not defined anywhere in `src/lang_probing_src/config.py`. The script will NameError at runtime. Either define it in `config.py` or replace the usage with the SAE repo's default filename.
 
 - [ ] **`scripts/collect_activations.py:37-42`** — `except Exception` catches load failures but the following code still tries to use `sentences`, which is only defined in the successful branch. Will NameError on any UD load failure. Fix: `raise` after `logging.error`, or initialize `sentences = []` and `return` / `continue`.
 - [ ] **`scripts/attribution_flores.py`** — uses `from src.config` (wrong module; the package is `lang_probing_src`). There's a `sys.path.insert` hack that may or may not work depending on CWD. Replace with `from lang_probing_src.config import …`. Drop the sys.path hack.

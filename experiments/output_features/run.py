@@ -1,13 +1,9 @@
 """
-Script to process Flores dataset with SAE feature extraction
+Output features via gradient attribution from a late-layer probe.
 
 Usage:
-    python scripts/process_flores.py [--languages LANG1,LANG2] [--max_samples N] [--batch_size N]
+    python experiments/output_features/run.py --languages English French [...] --max_samples N --batch_size N
 """
-
-import sys
-import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 import argparse
 import logging
@@ -23,15 +19,15 @@ import pickle
 from sklearn.pipeline import Pipeline
 import glob
 
-from src.config import (
-    MODEL_ID, SAE_ID, SAE_FILENAME, LAYER_NUM, ACTIVATIONS_DIR, LOGS_DIR, 
+from lang_probing_src.config import (
+    MODEL_ID, SAE_ID, LAYER_NUM, ACTIVATIONS_DIR, LOGS_DIR,
     TRACER_KWARGS, BATCH_SIZE as DEFAULT_BATCH_SIZE, PROBES_DIR
 )
-from src.utils import ensure_dir, setup_logging, save_json
-from src.activations import ActivationDataset
-from src.probe import load_probe
-from src.autoencoder import GatedAutoEncoder
-from src.attribution import attribution_patching, attribution_patching_per_token
+from lang_probing_src.utils import ensure_dir, setup_logging, save_json
+from lang_probing_src.activations.extraction import ActivationDataset
+from lang_probing_src.probe import load_probe
+from lang_probing_src.autoencoder import GatedAutoEncoder
+from lang_probing_src.features.attribution import attribution_patching, attribution_patching_per_token
 
 
 LANGUAGES = ["English", "French", "German", "Spanish", "Turkish", "Arabic", "Hindi", "Hebrew", "Chinese", "Indonesian"]

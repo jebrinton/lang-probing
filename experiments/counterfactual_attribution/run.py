@@ -29,8 +29,8 @@ from pathlib import Path
 import torch
 import torch.nn.functional as F
 
-# Add project root to path
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+# Safety net for running from a non-installed checkout; harmless otherwise.
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent / "src"))
 
 from lang_probing_src.config import (
     MODEL_ID,

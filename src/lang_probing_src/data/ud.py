@@ -30,7 +30,7 @@ def get_all_treebank_files(language, split, ud_base_folder=None):
         list: Lista de paths a archivos .conllu
     """
     if ud_base_folder is None:
-        from .config import UD_BASE_FOLDER
+        from ..config import UD_BASE_FOLDER
         ud_base_folder = UD_BASE_FOLDER
     
     # Buscar todos los directorios que empiecen con UD_{language}-
@@ -92,7 +92,7 @@ def get_ud_filepath(language, split='train', ud_base_folder=None):
         str: Path al archivo .conllu, o None si no se encuentra
     """
     if ud_base_folder is None:
-        from .config import UD_BASE_FOLDER
+        from ..config import UD_BASE_FOLDER
         ud_base_folder = UD_BASE_FOLDER
     
     # Intentar primero con el formato nuevo (nombre simple)
@@ -272,10 +272,9 @@ def balance_dataset(dataset, seed=42):
             random_state=seed
         )
     
-    # Combinar y mezclar
+    # Combinar y mezclar (using a local Generator to avoid touching the global RNG)
     balanced_dataset = positive_samples + negative_samples
-    np.random.seed(seed)
-    np.random.shuffle(balanced_dataset)
+    np.random.default_rng(seed).shuffle(balanced_dataset)
     
     logging.info(f"After balancing:")
     logging.info(f"  Total samples: {len(balanced_dataset)}")
@@ -339,8 +338,8 @@ def load_sentences_with_tags(language, max_samples=None, seed=42, ud_base_folder
     
     # Random sampling if max_samples specified
     if max_samples is not None and len(all_sentences) > max_samples:
-        np.random.seed(seed)
-        indices = np.random.choice(len(all_sentences), max_samples, replace=False)
+        rng = np.random.default_rng(seed)
+        indices = rng.choice(len(all_sentences), max_samples, replace=False)
         all_sentences = [all_sentences[i] for i in indices]
         logging.info(f"Sampled {max_samples} sentences for {language}")
     
@@ -348,28 +347,26 @@ def load_sentences_with_tags(language, max_samples=None, seed=42, ud_base_folder
 
 def load_flores_sentences_with_tags(language, max_samples=None, seed=42, flores_base_folder=FLORES_BASE_FOLDER, probes_dir=PROBES_DIR):
     """
-    Load sentences from FLORES; tag sentences according to the language/concept/value probe
+    Load sentences from FLORES; tag sentences according to the language/concept/value probe.
+
+    NOTE: Not yet implemented — this is currently a stub.
     """
+    raise NotImplementedError(
+        "load_flores_sentences_with_tags is not yet implemented. "
+        "Use FloresDataset (below) for raw FLORES sentences."
+    )
 
-    # iterate thru all sentences in flores_base_folder/language_code
-    flores_file = os.path.join(flores_base_folder, NAME_TO_LANG_CODE[language])
-    i = 0
-    for sentence in datasets.load_dataset(flores_file, split="train"):
-        print(sentence)
-        if i > 10:
-            break
-        i += 1
-
-from torch.utils.data import Dataset
 from collections import defaultdict
 
 class ConlluDataset(Dataset):
     def __init__(self, language, treebank="PUD", split="test"):
         """
-        Loads and parses a CoNLL-U file.
-        
+        Loads and parses a CoNLL-U treebank.
+
         Args:
-            conllu_path (str): Path to the .conllu file.
+            language (str): Language name (e.g. "English").
+            treebank (str): Treebank name (e.g. "PUD"); used to resolve ``UD_{language}-{treebank}``.
+            split (str): One of "train", "dev", "test".
         """
         conllu_dir = os.path.join(UD_BASE_FOLDER, f"UD_{language}-{treebank}")
         conllu_files = glob.glob(os.path.join(conllu_dir, f"*ud-{split}.conllu"))
@@ -394,10 +391,12 @@ class ConlluDataset(Dataset):
 class ConlluDatasetPooled(Dataset):
     def __init__(self, language, treebank="PUD", split="test"):
         """
-        Loads and parses a CoNLL-U file and pools the tags for each sentence.
-        
+        Loads and parses a CoNLL-U treebank and pools the tags per sentence.
+
         Args:
-            conllu_path (str): Path to the .conllu file.
+            language (str): Language name (e.g. "English").
+            treebank (str): Treebank name (e.g. "PUD"); used to resolve ``UD_{language}-{treebank}``.
+            split (str): One of "train", "dev", "test".
         """
         conllu_dir = os.path.join(UD_BASE_FOLDER, f"UD_{language}-{treebank}")
         conllu_files = glob.glob(os.path.join(conllu_dir, f"*ud-{split}.conllu"))
@@ -451,9 +450,6 @@ class ConlluDatasetPooled(Dataset):
             "sentence": sentence.meta_value("text"),
             "tags": self._pool_tags(sentence)
         }
-
-from datasets import load_dataset
-from torch.utils.data import Dataset
 
 class FloresDataset(Dataset):
     def __init__(self, language, split='dev'):

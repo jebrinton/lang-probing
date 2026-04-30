@@ -12,10 +12,17 @@ from nnsight import LanguageModel
 from transformers import AutoTokenizer
 from huggingface_hub import hf_hub_download
 
-# Import setup_autoencoder from the existing codebase
+# Optional dependency on the external `lang-similarity` repo.
+# If it is not on disk, `setup_autoencoder` is unavailable and any code path
+# that needs it will raise a clear error at call time rather than at import time.
 import sys
-sys.path.append('/projectnb/mcnet/jbrin/lang-similarity/src')
-from sae.utils import setup_autoencoder
+_LANG_SIMILARITY_PATH = '/projectnb/mcnet/jbrin/lang-similarity/src'
+try:
+    if _LANG_SIMILARITY_PATH not in sys.path:
+        sys.path.append(_LANG_SIMILARITY_PATH)
+    from sae.utils import setup_autoencoder
+except ImportError:
+    setup_autoencoder = None
 
 
 def get_device_info():
@@ -46,22 +53,27 @@ def get_device_info():
     return device, dtype
 
 
-def setup_model(model_id, sae_id=None):
+def setup_model(model_id, sae_id=None, layer=None):
     """
     Configura el modelo de lenguaje, tokenizer y opcionalmente autoencoder SAE.
 
     Args:
-        model_id: ID del modelo en HuggingFace
-        sae_id: ID del SAE en HuggingFace (opcional)
+        model_id: ID del modelo en HuggingFace.
+        sae_id: ID del SAE en HuggingFace (opcional).
+        layer: Layer index whose submodule to return. Defaults to ``LAYER_NUM``
+            from config when not specified.
 
     Returns:
         tuple: (model, submodule, autoencoder, tokenizer)
     """
     device, dtype = get_device_info()
-    
+
     # Load language model
     model = LanguageModel(model_id, torch_dtype=dtype, device_map=device)
-    submodule = model.model.layers[16]
+    if layer is None:
+        from .config import LAYER_NUM
+        layer = LAYER_NUM
+    submodule = model.model.layers[layer]
 
     # Load tokenizer
     tokenizer = AutoTokenizer.from_pretrained(
@@ -73,6 +85,12 @@ def setup_model(model_id, sae_id=None):
 
     # Load SAE from HuggingFace Hub (opcional)
     if sae_id is not None:
+        if setup_autoencoder is None:
+            raise ImportError(
+                "setup_autoencoder is unavailable. "
+                f"Install the lang-similarity package or ensure {_LANG_SIMILARITY_PATH} is on PYTHONPATH."
+            )
+        # SAE checkpoints are layer-specific; only layer 16 is currently supported.
         sae_filename = "aya-23-8b-layer16.pt" if "aya" in model_id.lower() else "llama-3-8b-layer16.pt"
         sae_path = hf_hub_download(repo_id=sae_id, filename=sae_filename)
         autoencoder = setup_autoencoder(sae_path)

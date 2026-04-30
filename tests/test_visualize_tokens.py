@@ -14,7 +14,15 @@ from pathlib import Path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 import pytest
-from scripts.visualize_tokens import _build_html, _orange_intensity, _logprob_delta_color, visualize_file
+import importlib.util as _importlib_util
+_VISUALIZE_PATH = os.path.join(os.path.dirname(__file__), "..", "experiments", "token_analysis", "visualize.py")
+_spec = _importlib_util.spec_from_file_location("experiments_token_analysis_visualize", _VISUALIZE_PATH)
+_visualize = _importlib_util.module_from_spec(_spec)
+_spec.loader.exec_module(_visualize)
+_build_html = _visualize._build_html
+_orange_intensity = _visualize._orange_intensity
+_logprob_delta_color = _visualize._logprob_delta_color
+visualize_file = _visualize.visualize_file
 
 
 # ---------------------------------------------------------------------------

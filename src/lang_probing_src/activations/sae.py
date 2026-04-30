@@ -91,11 +91,12 @@ class GatedAutoEncoder(Dictionary, nn.Module):
         else:
             return x_hat
 
+    @staticmethod
     def from_pretrained(path, device=None):
         """
         Load a pretrained autoencoder from a file.
         """
-        state_dict = torch.load(path)
+        state_dict = torch.load(path, weights_only=True)
         dict_size, activation_dim = state_dict['encoder.weight'].shape
         autoencoder = GatedAutoEncoder(activation_dim, dict_size)
         autoencoder.load_state_dict(state_dict)
@@ -103,6 +104,7 @@ class GatedAutoEncoder(Dictionary, nn.Module):
             autoencoder.to(device)
         return autoencoder
 
+    @staticmethod
     def from_hub(repo_id, filename, device=None):
         """
         Load a pretrained autoencoder from the HuggingFace Hub.

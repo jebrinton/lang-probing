@@ -10,7 +10,7 @@ import logging
 from torch.utils.data import DataLoader
 from huggingface_hub import hf_hub_download
 from lang_probing_src.autoencoder import GatedAutoEncoder
-from lang_probing_src.config import NAME_TO_LANG_CODE
+from lang_probing_src.config import MODEL_ID, NAME_TO_LANG_CODE, OUTPUTS_DIR, TRACER_KWARGS
 from lang_probing_src.data import ConlluDataset, ConlluDatasetPooled, collate_fn
 
 
@@ -24,7 +24,7 @@ def setup_autoencoder():
 
 
 def load_diff_vector(language, concept, value):
-    output_dir = Path("/projectnb/mcnet/jbrin/lang-probing/outputs/input_features")
+    output_dir = Path(OUTPUTS_DIR) / "input_features"
     save_dir = output_dir / language / concept / value
     save_path = save_dir / "diff_vector.pt"
 
@@ -37,30 +37,31 @@ def load_diff_vector(language, concept, value):
 
 def get_input_feature_vector(model, sae, dataloader):
     with torch.no_grad():
-        all_sae_acts = []
+        all_sentence_means = []
         for batch in tqdm(dataloader, desc="Extracting SAE activations"):
             sentence_batch = batch["sentence"]
 
-            with model.trace(sentence_batch):
-                acts = model.model.layers[16].output.save() # shape: [batch, seq, hidden_dim]
+            with model.trace(sentence_batch, **TRACER_KWARGS):
+                acts = model.model.layers[16].output.save()  # [batch, seq, hidden_dim]
 
-            sae_acts = sae.encode(acts) # shape: [batch, seq, sae_dim]
+            sae_acts = sae.encode(acts)  # [batch, seq, sae_dim]
 
-            sent_sae_acts = reduce(sae_acts, "b s d -> d", "mean").to("cpu") # shape: [sae_dim]
-            all_sae_acts.append(sent_sae_acts)
-        
-        all_sae_acts = torch.stack(all_sae_acts, dim=0) # shape: [batches, sae_dim]
-        mean = all_sae_acts.mean(dim=0) # shape: [sae_dim]
-        return mean
+            # Mean-pool per sentence first (over seq), then collect all per-sentence vectors.
+            # Avoids weighting longer sentences more heavily during the cross-sentence average.
+            per_sentence = reduce(sae_acts, "b s d -> b d", "mean").to("cpu")
+            all_sentence_means.append(per_sentence)
+
+        all_sentence_means = torch.cat(all_sentence_means, dim=0)  # [n_sentences, sae_dim]
+        return all_sentence_means.mean(dim=0)
 
 
 def main():
     logging.basicConfig(level=logging.INFO)
-    
-    output_dir = Path("/projectnb/mcnet/jbrin/lang-probing/outputs/input_features")
+
+    output_dir = Path(OUTPUTS_DIR) / "input_features"
     output_dir.mkdir(exist_ok=True)
 
-    model = LanguageModel("meta-llama/Meta-Llama-3.1-8B-Instruct", device_map="cuda")
+    model = LanguageModel(MODEL_ID, device_map="cuda")
     sae = setup_autoencoder()
     sae.to("cuda")
 
@@ -68,12 +69,6 @@ def main():
     tokenizer.pad_token = tokenizer.eos_token
 
     LANGUAGES = ["English", "French", "German", "Spanish", "Turkish", "Arabic", "Hindi", "Hebrew", "Chinese", "Indonesian"]
-
-    CONCEPTS_VALUES = {"Tense": ["Past", "Pres", "Fut"], "Number": ["Sing", "Dual", "Plur"]}
-
-    # for testing
-    LANGUAGES = ["English", "French", "German", "Spanish", "Turkish"]
-    LANGUAGES = ["Arabic", "Hindi", "Chinese", "Indonesian"]
     CONCEPTS_VALUES = {"Tense": ["Past", "Pres", "Fut"], "Number": ["Sing", "Dual", "Plur"]}
     batch_size = 64
 

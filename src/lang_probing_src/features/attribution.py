@@ -1,4 +1,6 @@
 import torch
+from torch.utils.data import DataLoader
+from tqdm import tqdm
 
 from .sparse_activations import SparseActivation
 
@@ -83,7 +85,9 @@ def attribution_patching_per_token(
         logits = logits_flat.view(bsz, seqlen)         # [1, seq_len]
 
         # Indices of tokens where probe predicts TRUE (logit > 0)
-        true_token_indices = (logits[0] > 0).nonzero(as_tuple=False).view(-1).tolist().save()
+        # `.save()` must run on the nnsight proxy, before `.tolist()` collapses it to a Python list.
+        true_token_indices = (logits[0] > 0).nonzero(as_tuple=False).view(-1).save()
+    true_token_indices = true_token_indices.tolist()
 
     if len(true_token_indices) == 0:
         # No TRUE tokens: return zero vectors per submodule
@@ -189,7 +193,6 @@ def attribution_patching_per_token(
             eff_act = effect_full.act
 
             # We assume batch size 1; handle [1, seq, feat] or [seq, feat]
-            print("eff_act.shape", eff_act.shape)
             if eff_act.dim() == 3:
                 # [1, seq, n_features] -> [n_features] at this token
                 eff_act_token = eff_act[0, token_idx, :]
@@ -214,14 +217,12 @@ def attribution_patching_per_token(
 
     # 7. Average over TRUE tokens so we get a single vector per sentence
     num_true = len(true_token_indices)
-    print("num_true", num_true)
     effects = {}
     for submodule in submodules:
         effects[submodule] = SparseActivation(
             act=sentence_effects[submodule].act.unsqueeze(0) / num_true,
             res=None,
         )
-    print("effects[sae_submodule].act.shape", effects[submodule].act.shape)
 
     # total_effect not very meaningful here; leave as None or sum of feature vectors if you want
     total_effect = None
@@ -427,8 +428,10 @@ def attribution_patching(
     submodules,
     dictionaries,
     steps=10,
-    metric_kwargs=dict(),
+    metric_kwargs=None,
 ):
+    if metric_kwargs is None:
+        metric_kwargs = {}
 
     clean_prefix = torch.cat([clean_prefix], dim=0).to("cuda")
 
@@ -448,7 +451,7 @@ def attribution_patching(
     is_tuple = {}
     with model.trace("_", **TRACER_KWARGS):
         for submodule in submodules:
-            is_tuple[submodule] = True # type(submodule.output) == tuple
+            is_tuple[submodule] = isinstance(submodule.output, tuple)
 
     hidden_states_clean = {}
     with model.trace(clean_prefix, **TRACER_KWARGS), torch.no_grad():
@@ -545,7 +548,14 @@ def attribution_patching_loop(dataset, model, torch_probe, submodule, autoencode
         if i >= 128:
             break
         tokens = model.tokenizer(example["sentence"][0], return_tensors="pt", padding=False)
-        e, _, _, _ = attribution_patching(tokens["input_ids"], model, torch_probe, [submodule], {submodule: autoencoder})
+        e, _, _, _ = attribution_patching(
+            tokens["input_ids"],
+            model,
+            torch_probe,
+            submodule,
+            [submodule],
+            {submodule: autoencoder},
+        )
         if submodule not in effects:
             effects[submodule] = e[submodule].sum(dim=0)
         else:

@@ -27,6 +27,7 @@ from lang_probing_src.sentence_dataset_class import SentenceDataset, collate_fn
 
 def collect_activations_by_language(model, tokenizer, language):
     logging.info(f"\nProcessing {language}...")
+    sentences = []
     try:
         sentences = load_sentences_with_tags(
             language=language,
@@ -36,6 +37,10 @@ def collect_activations_by_language(model, tokenizer, language):
         logging.info(f"✓ {language}: {len(sentences)} sentences")
     except Exception as e:
         logging.error(f"✗ Error loading {language}: {e}")
+        return None
+    if not sentences:
+        logging.warning(f"No sentences loaded for {language}; skipping.")
+        return None
 
     # Create dataloader
     logging.info("\nCreating dataloader...")
@@ -107,9 +112,10 @@ def main():
     
     for language in args.languages:
         df = collect_activations_by_language(model, tokenizer, language)
+        if df is None:
+            continue
 
-        # for layer in COLLECTION_LAYERS:
-        for layer in [32]: # TODO: remove when done
+        for layer in COLLECTION_LAYERS:
             df_layer = df[df['layer'] == layer]
 
             layer_dir = os.path.join(ACTIVATIONS_DIR, f"language={language}", f"layer={layer}")

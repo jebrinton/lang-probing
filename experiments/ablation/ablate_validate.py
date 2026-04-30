@@ -26,7 +26,7 @@ def run_ablation_batch(model, submodule, autoencoder, tokenizer, pairs, feat_to_
     """For each pair, measure Δ logP(last_orig_id) at cf_pos when zeroing feat_to_ablate."""
     deltas = []
     # Build mask [SAE_DIM]; 0 at features to ablate, 1 elsewhere
-    mask = torch.ones(32768, device=device)
+    mask = torch.ones(SAE_DIM, device=device)
     for f in feat_to_ablate:
         mask[int(f)] = 0.0
 

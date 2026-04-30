@@ -1,3 +1,5 @@
+import argparse
+import glob
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -7,11 +9,13 @@ import logging
 
 # --- Configuration ---
 
-# ! IMPORTANT: Update this to the path of your CSV file
-INPUT_CSV_FILE = "/projectnb/mcnet/jbrin/lang-probing/outputs/probes/all_probe_results_tense.csv"  # <--- SET YOUR CSV FILE PATH HERE
+# Default location for the probe-results CSVs. Override at the CLI with --input-csv.
+DEFAULT_PROBES_DIR = "/projectnb/mcnet/jbrin/lang-probing/outputs/probes"
+DEFAULT_INPUT_CSV_GLOB = os.path.join(DEFAULT_PROBES_DIR, "all_probe_results_*.csv")
+INPUT_CSV_FILE = None  # populated in main() from CLI args
 
 # The output directory you specified
-IMG_OUTPUT_DIR = "/projectnb/mcnet/jbrin/lang-probing/img/probes/"
+output_dir = "/projectnb/mcnet/jbrin/lang-probing/img/probes/"
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -150,17 +154,47 @@ def plot_accuracy_distribution(data, concept, value, output_dir):
 
 # --- Main Execution ---
 
+def _resolve_input_csv(cli_path):
+    """Pick a probe-results CSV, falling back to the most recent match if none is given."""
+    if cli_path:
+        return cli_path
+    matches = sorted(glob.glob(DEFAULT_INPUT_CSV_GLOB), key=os.path.getmtime, reverse=True)
+    if not matches:
+        return None
+    return matches[0]
+
+
 def main():
     """
     Main function to load data, preprocess, and generate all plots.
     """
+    parser = argparse.ArgumentParser(description="Visualize probe results CSVs.")
+    parser.add_argument(
+        "--input-csv",
+        type=str,
+        default=None,
+        help=f"Path to a probe-results CSV. Defaults to most recent match of {DEFAULT_INPUT_CSV_GLOB}.",
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=str,
+        default=output_dir,
+        help="Directory to write plots into.",
+    )
+    args = parser.parse_args()
+
+    input_csv = _resolve_input_csv(args.input_csv)
+    if input_csv is None:
+        logging.error(f"No input CSV found matching {DEFAULT_INPUT_CSV_GLOB} and --input-csv not set.")
+        return
+    output_dir = args.output_dir
+
     # --- 1. Load Data ---
-    logging.info(f"Loading data from {INPUT_CSV_FILE}...")
+    logging.info(f"Loading data from {input_csv}...")
     try:
-        df = pd.read_csv(INPUT_CSV_FILE)
+        df = pd.read_csv(input_csv)
     except FileNotFoundError:
-        logging.error(f"Error: Input file not found at {INPUT_CSV_FILE}")
-        logging.error("Please update the 'INPUT_CSV_FILE' variable in the script.")
+        logging.error(f"Error: Input file not found at {input_csv}")
         return
     except Exception as e:
         logging.error(f"Error loading CSV: {e}")
@@ -184,10 +218,10 @@ def main():
 
     # --- 3. Create Output Directory ---
     try:
-        os.makedirs(IMG_OUTPUT_DIR, exist_ok=True)
-        logging.info(f"Ensured output directory exists: {IMG_OUTPUT_DIR}")
+        os.makedirs(output_dir, exist_ok=True)
+        logging.info(f"Ensured output directory exists: {output_dir}")
     except OSError as e:
-        logging.error(f"Error: Could not create directory {IMG_OUTPUT_DIR}. {e}")
+        logging.error(f"Error: Could not create directory {output_dir}. {e}")
         logging.error("Please check permissions and the path.")
         return
 
@@ -208,13 +242,13 @@ def main():
             continue
             
         # Plot 1: Accuracy (Train/Test) vs. Layer
-        plot_accuracy_vs_layer(group_df, concept, value, IMG_OUTPUT_DIR)
+        plot_accuracy_vs_layer(group_df, concept, value, output_dir)
         
         # Plot 3: Test Accuracy Distribution by Language
-        plot_accuracy_distribution(group_df, concept, value, IMG_OUTPUT_DIR)
+        plot_accuracy_distribution(group_df, concept, value, output_dir)
 
         # Plot 4: C Value vs. Layer
-        plot_c_value_vs_layer(group_df, IMG_OUTPUT_DIR)
+        plot_c_value_vs_layer(group_df, output_dir)
 
 
     # --- 5. Generate Global Plots ---
@@ -222,7 +256,7 @@ def main():
     
     # Plot 2: 'C' Value vs. Layer (All concepts)
     # We pass the full dataframe 'df' here
-    plot_c_value_vs_layer(df, IMG_OUTPUT_DIR)
+    plot_c_value_vs_layer(df, output_dir)
 
     logging.info("--- Visualization script finished ---")
 

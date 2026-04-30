@@ -17,7 +17,14 @@ from datasets import load_dataset
 from lang_probing_src.config import MODEL_ID, SAE_ID, NAME_TO_LANG_CODE, LANGUAGES_DEC
 from lang_probing_src.utils import setup_model
 from lang_probing_src.utils_input_output import get_input_features_vector, get_output_features_vector, load_effects_files
-from scripts.ablate import EXP_CONFIGS, get_batch_positions_masks, save_result_jsonl
+import importlib.util as _importlib_util
+_ABLATE_RUN_PATH = os.path.join(os.path.dirname(__file__), '..', 'experiments', 'ablation', 'run.py')
+_spec = _importlib_util.spec_from_file_location("experiments_ablation_run", _ABLATE_RUN_PATH)
+_module = _importlib_util.module_from_spec(_spec)
+_spec.loader.exec_module(_module)
+EXP_CONFIGS = _module.EXP_CONFIGS
+get_batch_positions_masks = _module.get_batch_positions_masks
+save_result_jsonl = getattr(_module, 'save_result_jsonl', None)
 from tests.test_utils import create_test_prompts
 
 

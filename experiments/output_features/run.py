@@ -7,6 +7,7 @@ Usage:
 
 import argparse
 import logging
+import os
 import torch
 import torch.nn as nn
 import numpy as np
@@ -90,9 +91,14 @@ def convert_probe_to_pytorch(probe_pipeline):
 
 
 def setup_autoencoder(repo_id, filename, device="cuda"):
-    dict = GatedAutoEncoder.from_hub(repo_id=repo_id, filename=filename)
-    dict.to(device)
-    return dict
+    autoencoder = GatedAutoEncoder.from_hub(repo_id=repo_id, filename=filename)
+    autoencoder.to(device)
+    return autoencoder
+
+
+def _sae_filename_for(model_id):
+    """Mirror the convention in lang_probing_src.utils.setup_model."""
+    return "aya-23-8b-layer16.pt" if "aya" in model_id.lower() else "llama-3-8b-layer16.pt"
 
 
 def load_flores_dataset(language="eng", split="dev"):
@@ -143,13 +149,14 @@ def main(args):
     logging.info(f"Loading model: {MODEL_ID}")
     device = "cuda" if torch.cuda.is_available() else "cpu"
     logging.info(f"Using device: {device}")
-    model = LanguageModel(MODEL_ID, device_map=device, dtype=torch.float16)
+    model = LanguageModel(MODEL_ID, device_map=device, dtype=torch.bfloat16)
     tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
     tokenizer.pad_token = tokenizer.eos_token
 
     # Load SAE model
-    logging.info(f"Loading SAE: {SAE_ID}")
-    ae = setup_autoencoder(repo_id=SAE_ID, filename=SAE_FILENAME, device=device)
+    sae_filename = _sae_filename_for(MODEL_ID)
+    logging.info(f"Loading SAE: {SAE_ID}/{sae_filename}")
+    ae = setup_autoencoder(repo_id=SAE_ID, filename=sae_filename, device=device)
 
     for language in LANGUAGES:
         for concept in CONCEPTS:

@@ -326,7 +326,9 @@ def main():
     args = parser.parse_args()
 
     # Resolve data file path relative to project root
-    project_root = Path(__file__).resolve().parent.parent
+    # __file__ is at <project>/experiments/counterfactual_attribution/run.py,
+    # so the project root is three parents up.
+    project_root = Path(__file__).resolve().parent.parent.parent
     data_path = Path(args.data_file)
     if not data_path.is_absolute():
         data_path = project_root / data_path

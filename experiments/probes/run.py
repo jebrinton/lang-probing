@@ -241,8 +241,13 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Train word probes for linguistic concepts")
-    parser.add_argument("--concepts", nargs='+', default=CONCEPTS_VALUES.keys(), help="Concepts to process")
-    parser.add_argument("--values", nargs='+', default=CONCEPTS_VALUES.values(), help="Concept values to process")
+    parser.add_argument("--concepts", nargs='+', default=list(CONCEPTS_VALUES.keys()), help="Concepts to process")
+    parser.add_argument(
+        "--values",
+        nargs='+',
+        default=sorted({v for vs in CONCEPTS_VALUES.values() for v in vs}),
+        help="Concept values to process",
+    )
     parser.add_argument("--languages", nargs='+', default=LANGUAGES, help="Languages to process")
     parser.add_argument("--layers", type=int, nargs='+', default=LAYERS, help="Layers to process")
     parser.add_argument("--max_samples", type=int, default=1024, help="Maximum number of samples to process")

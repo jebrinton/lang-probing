@@ -9,6 +9,7 @@ import numpy as np
 
 import matplotlib.pyplot as plt
 
+from lang_probing_src.config import OUTPUTS_DIR, IMG_DIR
 from lang_probing_src.utils_input_output import get_output_features_vector, get_input_features_vector, load_effects_files, get_language_pairs_and_concepts
 
 def plot_jaccard_topk_similarity(
@@ -119,11 +120,11 @@ def signal_plot(signal, title, xlabel, ylabel, save_path=None):
 
 
 def main():
-    input_features_dir = Path("/projectnb/mcnet/jbrin/lang-probing/outputs/input_features")
+    input_features_dir = Path(OUTPUTS_DIR) / "input_features"
     effects_files = load_effects_files()
     language_pairs, concepts = get_language_pairs_and_concepts(effects_files)
 
-    plots_dir = Path("/projectnb/mcnet/jbrin/lang-probing/img/input_output_overlap")
+    plots_dir = Path(IMG_DIR) / "input_output_overlap"
     plots_dir.mkdir(exist_ok=True)
 
     for (_, target_lang) in language_pairs:

@@ -28,6 +28,7 @@ from lang_probing_src.config import (
     SAE_ID,
     NAME_TO_LANG_CODE,
     TRACER_KWARGS,
+    WORD_PROBES_DIR,
 )
 from lang_probing_src.probe import load_probe
 from lang_probing_src.utils import setup_model, get_device_info
@@ -374,10 +375,11 @@ def run_experiment(exp, model, submodule, sae, tokenizer, device,
         concept = exp["concept"]
         value = exp["value"]
         source_lang = exp.get("source_lang", "")
+        # Canonical probe path format used by experiments/probes/run.py:
+        # outputs/probes/word_probes/{Lang}_{Concept}_{Value}_l{N}_n{N}.joblib
         probe_path = (
-            Path("/projectnb/mcnet/jbrin/lang-probing/outputs/word_probes")
-            / source_lang / concept / value
-            / f"probe_layer{probe_layer}_n{probe_n}.joblib"
+            Path(WORD_PROBES_DIR)
+            / f"{source_lang}_{concept}_{value}_l{probe_layer}_n{probe_n}.joblib"
         )
         if probe_path.exists():
             probe = load_probe(probe_path)

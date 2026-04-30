@@ -16,13 +16,20 @@ from lang_probing_src.utils import ensure_dir, setup_logging
 
 def test_steering_vectors():
     """Prueba la generación de steering vectors con un subconjunto pequeño"""
-    
+
     logging.info("="*60)
     logging.info("PRUEBA DE NOVA DE STEERING VECTORS")
     logging.info("="*60)
-    
-    # Importar el script principal
-    from scripts.generate_steering_vectors import main
+
+    # The steering-vectors generator has been moved to _archive/scripts/.
+    # Import lazily so the rest of the suite doesn't fail to collect when the
+    # archive isn't on PYTHONPATH.
+    import importlib
+    try:
+        main = importlib.import_module("_archive.scripts.generate_steering_vectors").main
+    except ModuleNotFoundError:
+        import pytest
+        pytest.skip("scripts/generate_steering_vectors.py is archived; skipping integration test.")
     
     # Crear directorio de salida para la prueba
     test_output_dir = os.path.join(STEERING_VECTORS_DIR, "nova")

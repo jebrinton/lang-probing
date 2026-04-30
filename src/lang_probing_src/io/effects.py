@@ -1,8 +1,13 @@
 import os
 import glob
+import logging
 import torch
 import numpy as np
 from tqdm import tqdm
+
+from ..config import OUTPUTS_DIR
+
+logger = logging.getLogger(__name__)
 
 
 def get_output_features_vector(effects_files, language_pair, concept, value):
@@ -15,10 +20,14 @@ def get_input_features_vector(output_dir, language, concept, value):
     save_dir = output_dir / language / concept / value
     save_path = save_dir / "diff_vector.pt"
 
-    return torch.load(save_path).numpy()
+    return torch.load(save_path, weights_only=True).numpy()
 
 
-def load_effects_files(out_dir="/projectnb/mcnet/jbrin/lang-probing/outputs/output_features"):
+def load_effects_files(out_dir=None):
+    # Default to <OUTPUTS_DIR>/output_features so the path stays consistent
+    # if OUTPUTS_DIR is overridden.
+    if out_dir is None:
+        out_dir = os.path.join(OUTPUTS_DIR, "output_features")
     # Iterate through the subfolders, each corresponding to a language pair
     effects_files = {}
     for subfolder in tqdm(os.listdir(out_dir)):
@@ -29,17 +38,17 @@ def load_effects_files(out_dir="/projectnb/mcnet/jbrin/lang-probing/outputs/outp
             if len(effects_file) == 0:
                 raise ValueError(f"No effects file found for {subfolder}")
             effects_file = effects_file[0]
-        
+
             # The suffix is a language pair, such as effects_English_French.pt
             source_lang, target_lang = effects_file.split("/")[-1].split("_")[1:]
             target_lang, _ = target_lang.split(".")
             language_pair = (source_lang, target_lang)
 
-            print(f"Loading effects file for {language_pair}")
+            logger.debug("Loading effects file for %s", language_pair)
 
             # Load the effects file and, if necessary, overwrite with more recent version
             # Make sure they're on CPU
-            effects = torch.load(effects_file)
+            effects = torch.load(effects_file, weights_only=False)
             effects_files[language_pair] = effects
 
     return effects_files

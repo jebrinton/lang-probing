@@ -42,8 +42,8 @@ def check_ud_treebanks():
     """Verifica que los treebanks de UD están disponibles"""
     logging.info("\nChecking UD treebanks...")
     
-    from src.config import UD_BASE_FOLDER, LANGUAGES
-    from src.data import get_ud_filepath
+    from lang_probing_src.config import UD_BASE_FOLDER, LANGUAGES
+    from lang_probing_src.data import get_ud_filepath
     
     if not os.path.exists(UD_BASE_FOLDER):
         logging.error(f"  ✗ UD base folder not found: {UD_BASE_FOLDER}")
@@ -102,7 +102,7 @@ def check_model_access():
     """Verifica que se puede acceder al modelo y SAE"""
     logging.info("\nChecking model and SAE access...")
     
-    from src.config import MODEL_ID, SAE_ID
+    from lang_probing_src.config import MODEL_ID, SAE_ID
     
     try:
         from huggingface_hub import hf_hub_download
@@ -151,7 +151,7 @@ def test_data_loading():
     logging.info("\nTesting data loading...")
     
     try:
-        from src.data import get_ud_filepath, get_available_concepts, ProbingDataset
+        from lang_probing_src.data import get_ud_filepath, get_available_concepts, ProbingDataset
         
         # Try to load English-PUD
         train_file = get_ud_filepath("English-PUD", split='train')

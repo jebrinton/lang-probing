@@ -8,6 +8,8 @@ from torch.utils.data import Dataset
 import einops
 from ..utils import print_gpu_memory_usage
 
+logger = logging.getLogger(__name__)
+
 class ActivationDataset(Dataset):
     """
     Dataset that tokenizes sentences on the fly.
@@ -93,23 +95,22 @@ def extract_sae_activations(model, submodule, autoencoder, dataloader, tracer_kw
     """
     Extrae activaciones SAE para un dataset completo.
 
-    TODO: this is incorrect, you shouldn't mean pool before encoding
-    
+    TODO: this is incorrect — encoding should happen per token *before* mean-pooling.
+
     Args:
         model: LanguageModel (nnsight)
         submodule: Submodule del modelo (e.g., model.model.layers[16])
         autoencoder: SAE autoencoder
         dataloader: DataLoader con batches de sentences
-        layer_num: Número de capa a extraer
         tracer_kwargs: Argumentos para nnsight tracer
-        
+
     Returns:
         tuple: (activations, labels)
             - activations: np.array de shape (n_samples, dict_size)
             - labels: np.array de shape (n_samples,)
     """
     if tracer_kwargs is None:
-        from .config import TRACER_KWARGS
+        from ..config import TRACER_KWARGS
         tracer_kwargs = TRACER_KWARGS
     
     all_activations = []
@@ -412,7 +413,7 @@ def collect_sentence_activations(model, dataloader, layers, tracer_kwargs=None):
                 correct_attention_mask = model.inputs[1]['attention_mask']
 
                 for layer_num in layers:
-                    print(f"Attempting to trace layer: {layer_module[layer_num]}")
+                    logger.debug("Attempting to trace layer: %s", layer_module[layer_num])
 
                     # 1. Get a Proxy for the layer's output activations
                     # Important: use .output[0] for nnsight < v0.5

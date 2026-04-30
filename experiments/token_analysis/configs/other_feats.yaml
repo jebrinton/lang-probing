@@ -19,8 +19,6 @@ experiments:
     concept: "Gender"
     value: "Masc"
 
-  - name: ""
-
   # ------------------------------------------------------------------
   # Tense = Fut  (explicit future-tense morphology / auxiliary)
   # ------------------------------------------------------------------

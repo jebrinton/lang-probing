@@ -1,16 +1,10 @@
-""""
-\item $\Delta p(\text{reference})$: change in (log-)probability of the correct reference sequence before and after ablations. Pre-fill the correct sequence and measure the logits of the correct token at all target language positions
-\begin{itemize}
-    \item Translation: give a 2-shot example
-    \item Non-translation: no examples, single sentence
-    \item Normalize by the original probability (new - old) / old
-    \item Try this with input and output features
-    \item Also do a random baseline
-    \item [2nd] Input features translation: ablate features at source sentence token indices, measure prob of target sequence before and after ablation
-    \item Input features monolingual: ablate features for sentence, measure prob of sentence before and after ablation
-    \item Output features translation: ablate features at target sequence token indices, measure prob of target sequence before and after ablation
-    % possible for a model to perform grammatical computations before we start the ablation (during the source sequence), then copy it over in layers after the 16th layer and it won't get ablated
-    \item Output features monolingual: ablate features for sentence, measure prob of sequence before and after ablation
+"""
+Ablation experiments on SAE features.
+
+Measures Delta p(reference) — the change in log-probability of the correct
+reference sequence before and after ablating SAE features. Supports input
+and output features, monolingual and translation settings, and a random
+baseline (see EXP_CONFIGS).
 """
 
 import argparse
@@ -249,7 +243,7 @@ def main(args):
     logging.basicConfig(level=logging.INFO)
     model, submodule, autoencoder, tokenizer = setup_model(MODEL_ID, SAE_ID)
     device, _ = get_device_info()
-    
+
     # Create output directory if not exists
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -257,13 +251,11 @@ def main(args):
     # Define the specific output file for this experiment
     output_file = output_dir / f"results_{args.experiment}.jsonl"
     logging.info(f"Saving results to: {output_file}")
-    
-    # Setup Model
-    model, submodule, autoencoder, tokenizer = setup_model(MODEL_ID, SAE_ID)
-    
+
     # Configuration
     exp_cfg = EXP_CONFIGS[args.experiment]
-    input_features_dir = Path("/projectnb/mcnet/jbrin/lang-probing/outputs/input_features/")
+    from lang_probing_src.config import OUTPUTS_DIR
+    input_features_dir = Path(OUTPUTS_DIR) / "input_features"
     effects_files = load_effects_files() if "output" in exp_cfg['feats'] else None
     language_pairs_available = None
     if effects_files is not None:
@@ -436,10 +428,11 @@ def main(args):
             final_mean_log = np.mean(batch_log_means)
             final_min_log = np.min(batch_log_mins)
 
-            print(
-                f"\n\n\n\n\n\n\n\n\n\n\n\n\n[{args.experiment}] {source_lang}->{target_lang} | "
-                f"mean_delta (exp-1): {final_mean:.4f} | min_delta: {final_min:.4f} | "
-                f"mean_logprob_delta: {final_mean_log:.4f} | min_logprob_delta: {final_min_log:.4f}"
+            logging.info(
+                "[%s] %s->%s | mean_delta (exp-1): %.4f | min_delta: %.4f | "
+                "mean_logprob_delta: %.4f | min_logprob_delta: %.4f",
+                args.experiment, source_lang, target_lang,
+                final_mean, final_min, final_mean_log, final_min_log,
             )
 
             result_entry = {

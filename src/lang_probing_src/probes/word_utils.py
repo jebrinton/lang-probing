@@ -3,12 +3,34 @@ import numpy as np
 from torch.utils.data import Dataset
 import logging
 
-import cupy
-from cuml.preprocessing import StandardScaler
-from cuml.pipeline import Pipeline
-from cuml.model_selection import GridSearchCV
-from cuml.linear_model import LogisticRegression # You already have this
-from sklearn.metrics import make_scorer, accuracy_score # <--- IMPORT NEW SCORERS
+# cupy/cuml are GPU-only optional dependencies. They are required by the
+# probe-training functions below but not by the dataset/collate classes that
+# the rest of the codebase imports through `from .word_utils import *`.
+# Guard the imports so the package can be loaded on CPU-only machines.
+try:
+    import cupy
+    from cuml.preprocessing import StandardScaler
+    from cuml.pipeline import Pipeline
+    from cuml.model_selection import GridSearchCV
+    from cuml.linear_model import LogisticRegression
+    _CUML_AVAILABLE = True
+except ImportError:
+    cupy = None
+    StandardScaler = None
+    Pipeline = None
+    GridSearchCV = None
+    LogisticRegression = None
+    _CUML_AVAILABLE = False
+
+from sklearn.metrics import make_scorer, accuracy_score
+
+
+def _require_cuml():
+    if not _CUML_AVAILABLE:
+        raise ImportError(
+            "GPU-accelerated probe training requires cupy and cuml. "
+            "Install RAPIDS (https://rapids.ai/) to enable this code path."
+        )
 
 
 # This is our custom, GPU-aware scorer
@@ -20,10 +42,10 @@ def gpu_aware_accuracy(y_true, y_pred):
     y_true will be a NumPy array (from our previous fix).
     y_pred will be a CuPy array (from the cuML model's .predict()).
     """
-    if isinstance(y_pred, cupy.ndarray):
+    if cupy is not None and isinstance(y_pred, cupy.ndarray):
         y_pred = cupy.asnumpy(y_pred)
-    
-    if isinstance(y_true, cupy.ndarray):
+
+    if cupy is not None and isinstance(y_true, cupy.ndarray):
         y_true = cupy.asnumpy(y_true)
         
     # Now both are NumPy arrays, and sklearn.metrics.accuracy_score will work
@@ -96,6 +118,7 @@ class WordProbingDataset(Dataset):
 
 def get_best_classifier(train_activations, train_labels, seed):
     """Hyperparameter search for the logistic regression probe (GPU-accelerated)."""
+    _require_cuml()
 
     # 1. Create the cuML Pipeline
     probe_pipeline = Pipeline([
@@ -141,25 +164,18 @@ def get_best_classifier(train_activations, train_labels, seed):
     # - y_cpu (train_labels_cpu) for splitting
     # - custom_scorer for scoring (which handles y_pred_gpu)
     grid_search.fit(train_activations, train_labels_cpu)
-    
+
     # .best_estimator_ is already fitted on the best params
     best_classifier = grid_search.best_estimator_
 
     logging.info(f"Best parameters: {grid_search.best_params_}")
     logging.info(f"Best score: {grid_search.best_score_}")
-    
-    if isinstance(train_labels, cupy.ndarray):
-        train_labels_cpu = cupy.asnumpy(train_labels)
-    else:
-        train_labels_cpu = train_labels
-    
-    grid_search.fit(train_activations, train_labels_cpu)
-    best_classifier = grid_search.best_estimator_
 
     return best_classifier, grid_search.best_params_, grid_search.best_score_
 
 def train_and_evaluate_probe(train_activations, train_labels, test_activations, test_labels, seed):
     """Train a logistic regression probe and evaluate its performance."""
+    _require_cuml()
     logging.info("Training logistic regression model...")
 
     if not isinstance(train_activations, cupy.ndarray):

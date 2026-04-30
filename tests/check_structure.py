@@ -24,30 +24,30 @@ def main():
     
     checks = []
     
-    # Source files
+    # Source files (post-restructure layout: lang_probing_src package)
     print("\nSource files:")
-    checks.append(check_file_exists("src/__init__.py", "src/__init__.py"))
-    checks.append(check_file_exists("src/config.py", "src/config.py"))
-    checks.append(check_file_exists("src/utils.py", "src/utils.py"))
-    checks.append(check_file_exists("src/data.py", "src/data.py"))
-    checks.append(check_file_exists("src/activations.py", "src/activations.py"))
-    checks.append(check_file_exists("src/probe.py", "src/probe.py"))
-    checks.append(check_file_exists("src/features.py", "src/features.py"))
-    checks.append(check_file_exists("src/ablation.py", "src/ablation.py"))
-    
+    checks.append(check_file_exists("src/lang_probing_src/__init__.py", "src/lang_probing_src/__init__.py"))
+    checks.append(check_file_exists("src/lang_probing_src/config.py", "src/lang_probing_src/config.py"))
+    checks.append(check_file_exists("src/lang_probing_src/utils.py", "src/lang_probing_src/utils.py"))
+    checks.append(check_file_exists("src/lang_probing_src/data/ud.py", "src/lang_probing_src/data/ud.py"))
+    checks.append(check_file_exists("src/lang_probing_src/activations/extraction.py", "src/lang_probing_src/activations/extraction.py"))
+    checks.append(check_file_exists("src/lang_probing_src/probe.py", "src/lang_probing_src/probe.py"))
+    checks.append(check_file_exists("src/lang_probing_src/features/attribution.py", "src/lang_probing_src/features/attribution.py"))
+    checks.append(check_file_exists("src/lang_probing_src/interventions/ablate.py", "src/lang_probing_src/interventions/ablate.py"))
+
     # Test files
     print("\nTest files:")
     checks.append(check_file_exists("tests/__init__.py", "tests/__init__.py"))
     checks.append(check_file_exists("tests/test_data.py", "tests/test_data.py"))
     checks.append(check_file_exists("tests/test_probe.py", "tests/test_probe.py"))
     checks.append(check_file_exists("tests/test_features.py", "tests/test_features.py"))
-    
-    # Scripts
-    print("\nScripts:")
-    checks.append(check_file_exists("scripts/verify_setup.py", "scripts/verify_setup.py"))
-    checks.append(check_file_exists("scripts/train_probes.py", "scripts/train_probes.py"))
-    checks.append(check_file_exists("scripts/find_features.py", "scripts/find_features.py"))
-    checks.append(check_file_exists("scripts/run_ablation.py", "scripts/run_ablation.py"))
+
+    # Experiments (each pipeline now lives in its own experiments/<name>/run.py)
+    print("\nExperiments:")
+    checks.append(check_file_exists("tests/verify_setup.py", "tests/verify_setup.py"))
+    checks.append(check_file_exists("experiments/probes/run.py", "experiments/probes/run.py"))
+    checks.append(check_file_exists("experiments/output_features/run.py", "experiments/output_features/run.py"))
+    checks.append(check_file_exists("experiments/ablation/run.py", "experiments/ablation/run.py"))
     
     # Documentation
     print("\nDocumentation:")
@@ -80,8 +80,8 @@ def main():
         print("\n✓ All files and directories present!")
         print("\nNext steps:")
         print("  1. Install dependencies: pip install -r requirements.txt")
-        print("  2. Verify setup: python scripts/verify_setup.py")
-        print("  3. Train probes: python scripts/train_probes.py")
+        print("  2. Verify setup: python tests/verify_setup.py")
+        print("  3. Train probes: python experiments/probes/run.py")
         return 0
     else:
         print(f"\n⚠ {total - passed} items missing")

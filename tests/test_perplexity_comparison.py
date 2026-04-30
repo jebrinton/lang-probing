@@ -12,21 +12,24 @@ import numpy as np
 import torch
 from datasets import Dataset
 
-# Project root, src, and scripts on path so we can import the script module
+# Project root and src on path so we can import the relocated script module.
 _root = os.path.join(os.path.dirname(__file__), "..")
 sys.path.insert(0, _root)
 sys.path.insert(0, os.path.join(_root, "src"))
-sys.path.insert(0, os.path.join(_root, "scripts"))
 
-from perplexity_comparison import (
-    COL_CORRECT,
-    COL_WRONG,
-    compute_error_rate,
-    perplexity_per_sentence,
-    run_comparison,
-    run_comparison_multilang,
-    _slug,
-)
+import importlib.util as _importlib_util
+_RUN_PER_PATH = os.path.join(_root, "experiments", "perplexity_bleu_linear", "run_per.py")
+_spec = _importlib_util.spec_from_file_location("experiments_perplexity_run_per", _RUN_PER_PATH)
+_run_per = _importlib_util.module_from_spec(_spec)
+_spec.loader.exec_module(_run_per)
+
+COL_CORRECT = _run_per.COL_CORRECT
+COL_WRONG = _run_per.COL_WRONG
+compute_error_rate = _run_per.compute_error_rate
+perplexity_per_sentence = _run_per.perplexity_per_sentence
+run_comparison = _run_per.run_comparison
+run_comparison_multilang = _run_per.run_comparison_multilang
+_slug = _run_per._slug
 
 
 class TestComputeErrorRate(unittest.TestCase):

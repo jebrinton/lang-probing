@@ -208,7 +208,7 @@ def save_predictions(
 
 
 def parse_args() -> argparse.Namespace:
-    default_outputs_dir = Path(OUTPUTS_DIR) / "perplexity_bleu"
+    default_outputs_dir = Path(OUTPUTS_DIR) / "perplexity_bleu_linear"
 
     parser = argparse.ArgumentParser(
         description=(

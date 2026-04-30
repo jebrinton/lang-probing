@@ -68,10 +68,10 @@ LANG_CODE_TO_NAME = {
     "tur": "Turkish",
     "ukr": "Ukrainian",
     "vie": "Vietnamese",
-    "zho_simpl": "Chinese (Simplified)",
-    "zho_trad": "Chinese (Traditional)",
-    # TODO: check that you're using the one you want to use
+    # All callers in the codebase use "Chinese" (see LANGUAGES, LANGUAGES_DEC),
+    # so map zho_simpl -> "Chinese" for round-trip via NAME_TO_LANG_CODE.
     "zho_simpl": "Chinese",
+    "zho_trad": "Chinese (Traditional)",
 }
 NAME_TO_LANG_CODE = {v: k for k, v in LANG_CODE_TO_NAME.items()}
 
@@ -98,7 +98,7 @@ CONCEPTS_VALUES = {
     "Degree": ["Pos", "Cmp", "Sup"],
 }
 
-LAYERS = [0, 4, 8, 12, 16, 20, 24, 28, 32]
+LAYERS = [0, 4, 8, 12, 16, 20, 24, 28, 31]
 
 
 # LANGUAGES = ["English", "Spanish"]

@@ -13,7 +13,7 @@ import torch
 import numpy as np
 from transformers import AutoTokenizer
 from lang_probing_src.ablate import ablate_batch
-from lang_probing_src.config import MODEL_ID, SAE_ID, NAME_TO_LANG_CODE, LANGUAGES_DEC
+from lang_probing_src.config import MODEL_ID, SAE_ID, NAME_TO_LANG_CODE, LANGUAGES_DEC, OUTPUTS_DIR
 from lang_probing_src.utils import setup_model
 from tests.test_utils import create_test_prompts
 from lang_probing_src.utils_input_output import get_output_features_vector, get_input_features_vector, load_effects_files, get_language_pairs_and_concepts
@@ -47,7 +47,7 @@ class TestAblateBatchCore(unittest.TestCase):
 
         self.K = 10
         
-        input_features_dir = Path("/projectnb/mcnet/jbrin/lang-probing/outputs/sentence_input_features/")
+        input_features_dir = Path(OUTPUTS_DIR) / "sentence_input_features"
         feats_vec = get_input_features_vector(input_features_dir, "English", "Tense", "Past")
         self.feature_indices = np.argsort(feats_vec)[-self.K:]
     

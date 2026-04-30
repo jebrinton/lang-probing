@@ -2,7 +2,9 @@
 IMPLEMENTATION_SUMMARY.md
 
 # Directories to exclude
-run/
+# Anchor `run/` to repo root so it only ignores the top-level qsub-log dir,
+# not `experiments/<name>/run/` which holds tracked submission scripts.
+/run/
 outputs/
 logs/
 
@@ -31,7 +33,6 @@ logs/
 !requirements.txt
 
 # Python
-__init__.py
 __pycache__/
 *.py[cod]
 *$py.class

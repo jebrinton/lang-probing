@@ -127,9 +127,8 @@ class SparseActivation():
         return SparseActivation(**kwargs)
 
     def __neg__(self) -> SparseActivation:
-        sparse_result = -self.act
-        res_result = -self.res
-        return SparseActivation(act=sparse_result, res=res_result)
+        # Use _map so missing fields (None) are skipped and resc is preserved.
+        return self._map(lambda x, _: -x)
     
     def __invert__(self) -> SparseActivation:
             return self._map(lambda x, _: ~x)
@@ -222,9 +221,8 @@ class SparseActivation():
         return self
     
     def detach(self):
-        self.act = self.act.detach()
-        self.res = self.res.detach()
-        return SparseActivation(act=self.act, res=self.res)
+        # Return a new SparseActivation without mutating self; preserve resc and skip None fields.
+        return self._map(lambda x, _: x.detach())
     
     def to_tensor(self):
         if self.resc is None:

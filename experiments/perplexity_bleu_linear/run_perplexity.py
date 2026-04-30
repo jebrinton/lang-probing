@@ -10,7 +10,7 @@ import argparse
 import pathlib
 import os
 
-from lang_probing_src.config import LANG_CODE_TO_NAME
+from lang_probing_src.config import LANG_CODE_TO_NAME, MODEL_TO_ID, OUTPUTS_DIR
 
 def calculate_perplexity(
     model_id, 
@@ -144,9 +144,17 @@ def main(args):
 
     # 3. Present Results
     df_results = pd.DataFrame(results)
-    os.makedirs("/projectnb/mcnet/jbrin/lang-probing/outputs/perplexity_bleu_linear/bleu_and_ppl", exist_ok=True)
-    model_name = "llama" if "llama" in args.model_id else "aya"
-    df_results.to_csv(f"/projectnb/mcnet/jbrin/lang-probing/outputs/perplexity_bleu_linear/bleu_and_ppl/perplexity_results_{model_name}.csv", index=False)
+    out_dir = os.path.join(OUTPUTS_DIR, "perplexity_bleu_linear", "bleu_and_ppl")
+    os.makedirs(out_dir, exist_ok=True)
+    # Resolve a stable short model name from MODEL_TO_ID instead of fragile substring sniffing.
+    model_name = next(
+        (key for key, mid in MODEL_TO_ID.items() if mid == args.model_id),
+        None,
+    )
+    if model_name is None:
+        # Fall back to a sanitized form of the model id rather than silently mislabeling.
+        model_name = args.model_id.replace("/", "_")
+    df_results.to_csv(os.path.join(out_dir, f"perplexity_results_{model_name}.csv"), index=False)
     print("\n=== Final Results ===")
     print(df_results.to_markdown(index=False))
 

@@ -58,7 +58,7 @@ def plot_target_competence(df, save_dir, model_name, model_save_name):
                  fontsize=9, ha='center')
 
     plt.title(f"Target Competence vs. Inbound Quality ({model_name})\nPearson: {r:.3f} | Spearman: {rho:.3f}")
-    plt.xlabel("Source Perplexity Error Rate")
+    plt.xlabel("Target Perplexity Error Rate")
     plt.ylabel("Average Target Language BLEU")
     plt.grid(True, linestyle='--', alpha=0.6)
     
@@ -96,7 +96,8 @@ def plot_joint_competence(df_bleu, per_dict, save_dir, model_name, model_save_na
     plt.savefig(os.path.join(save_dir, f"{model_save_name}_joint_competence_scatter.png"), dpi=300)
     plt.close()
 
-    plt.tricontourf(df_plot['src_per'], df_plot['tgt_per'], df_plot['bleu'], 
+    plt.figure(figsize=(9, 7))
+    plt.tricontourf(df_plot['src_per'], df_plot['tgt_per'], df_plot['bleu'],
                     levels=15, cmap='viridis')
     plt.colorbar(label='Translation BLEU Score')
     plt.scatter(df_plot['src_per'], df_plot['tgt_per'], c='black', s=10, alpha=0.5)

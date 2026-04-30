@@ -378,7 +378,14 @@ def main():
     parser.add_argument("--split", type=str, default="train")
     parser.add_argument("--config", type=str, default=None, help="Optional dataset config name (single-language run)")
     parser.add_argument("--multilang", action="store_true", help="Run for each language (each lang = dataset config)")
-    parser.add_argument("--languages", type=str, default=None, help="Comma-separated config names for multilang (default: LANG_CODE_TO_NAME.keys())")
+    parser.add_argument(
+        "--languages",
+        nargs="+",
+        default=None,
+        help="Config names for multilang. Accepts either space-separated values "
+             "(--languages eng fra deu) or a single comma-separated string "
+             "(--languages eng,fra,deu). Default: LANG_CODE_TO_NAME.keys()",
+    )
     parser.add_argument("--max_length", type=int, default=None)
     parser.add_argument("--device", type=str, default="cuda")
     args = parser.parse_args()
@@ -386,7 +393,11 @@ def main():
     if args.multilang:
         language_codes = None
         if args.languages:
-            language_codes = [s.strip() for s in args.languages.split(",") if s.strip()]
+            # Accept both ["eng", "fra"] and ["eng,fra,deu"] forms.
+            tokens = []
+            for chunk in args.languages:
+                tokens.extend(s.strip() for s in chunk.split(",") if s.strip())
+            language_codes = tokens or None
         error_rates, ppl_sen_mat, ppl_wrong_mat, lang_codes, n_per_lang = run_comparison_multilang(
             dataset_path=args.dataset,
             model_id=args.model_id,

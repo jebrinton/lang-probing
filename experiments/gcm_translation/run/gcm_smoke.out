@@ -1,0 +1,768 @@
+[gcm_smoke] host=scc-603
+GPU 0: NVIDIA RTX A6000 (UUID: GPU-331f2906-a8d5-17ee-273c-0b62ff32d41d)
+GPU 1: NVIDIA RTX A6000 (UUID: GPU-449cd64f-f302-1593-9753-9a9c33f7a436)
+GPU 2: NVIDIA RTX A6000 (UUID: GPU-b2d31454-03c0-578f-178d-ea25d3ea53da)
+GPU 3: NVIDIA RTX A6000 (UUID: GPU-916a6ab8-4e87-3256-6d95-7b629d9f6f14)
+GPU 4: NVIDIA RTX A6000 (UUID: GPU-660ce602-925c-54a1-9c93-2d8a2c9d90b1)
+memory.free [MiB]
+43034 MiB
+45486 MiB
+45486 MiB
+45486 MiB
+45486 MiB
+[gcm_smoke] === pytest GPU tests ===
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.2, pluggy-1.6.0 -- /projectnb/mcnet/jbrin/.conda/envs/probes/bin/python
+cachedir: .pytest_cache
+rootdir: /projectnb/mcnet/jbrin/lang-probing
+configfile: pyproject.toml
+plugins: anyio-4.11.0
+collecting ... collected 15 items
+
+tests/test_gcm_translation.py::test_make_prompt_single_newlines PASSED   [  6%]
+tests/test_gcm_translation.py::test_make_prompt_trailing_space PASSED    [ 13%]
+tests/test_gcm_translation.py::test_truncate_response_token_space PASSED [ 20%]
+tests/test_gcm_translation.py::test_tokenize_pair_joint_consistency PASSED [ 26%]
+tests/test_gcm_translation.py::test_sample_pairs_no_shot_overlap PASSED  [ 33%]
+tests/test_gcm_translation.py::test_sample_pairs_no_duplicate_indices PASSED [ 40%]
+tests/test_gcm_translation.py::test_sum_response_logprobs_alignment PASSED [ 46%]
+tests/test_gcm_translation.py::test_sum_response_logprobs_invariant_under_irrelevant_logit_changes PASSED [ 53%]
+tests/test_gcm_translation.py::test_gcm_sae_grad_is_finite_and_nonzero FAILED [ 60%]
+tests/test_gcm_translation.py::test_gcm_heads_grad_flows_through_o_proj FAILED [ 66%]
+tests/test_gcm_translation.py::test_gcm_sae_finite_difference_sanity FAILED [ 73%]
+tests/test_gcm_translation.py::test_gcm_sae_eng_eng_null_control FAILED  [ 80%]
+tests/test_gcm_translation.py::test_gcm_heads_per_head_decomposition FAILED [ 86%]
+tests/test_gcm_translation.py::test_padded_position_correctness FAILED   [ 93%]
+tests/test_gcm_translation.py::test_no_partial_pair_record_desync PASSED [100%]
+
+=================================== FAILURES ===================================
+___________________ test_gcm_sae_grad_is_finite_and_nonzero ____________________
+tests/test_gcm_translation.py:368: in test_gcm_sae_grad_is_finite_and_nonzero
+    out = gcm_attribute_sae(
+experiments/gcm_translation/gcm_core.py:177: in gcm_attribute_sae
+    with model.trace(pr_or.input_ids, **TRACER_KWARGS), torch.no_grad():
+../.conda/envs/probes/lib/python3.11/site-packages/nnsight/intervention/tracing/base.py:599: in __exit__
+    self.backend(self)
+../.conda/envs/probes/lib/python3.11/site-packages/nnsight/intervention/backends/execution.py:24: in __call__
+    raise wrap_exception(e, tracer.info) from None
+E   nnsight.NNsightException: 
+E   
+E   Traceback (most recent call last):
+E     File "/projectnb/mcnet/jbrin/lang-probing/experiments/gcm_translation/gcm_core.py", line 180, in gcm_attribute_sae
+E       z_orig_proxy = f[:, pr_or.last_src_idx, :].clone().save()
+E   
+E   IndexError: too many indices for tensor of dimension 2
+---------------------------- Captured stderr setup -----------------------------
+`torch_dtype` is deprecated! Use `dtype` instead!
+----------------------------- Captured stderr call -----------------------------
+You're using a PreTrainedTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:03<00:10,  3.55s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:07<00:06,  3.49s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:10<00:03,  3.42s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:11<00:00,  2.41s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:11<00:00,  2.80s/it]
+___________________ test_gcm_heads_grad_flows_through_o_proj ___________________
+tests/test_gcm_translation.py:399: in test_gcm_heads_grad_flows_through_o_proj
+    out = gcm_attribute_heads(
+experiments/gcm_translation/gcm_core.py:320: in gcm_attribute_heads
+    z_orig = torch.stack([p.detach().squeeze(0) for p in z_orig_proxies])  # [n_layers, d_model]
+                                                         ^^^^^^^^^^^^^^
+E   UnboundLocalError: cannot access local variable 'z_orig_proxies' where it is not associated with a value
+____________________ test_gcm_sae_finite_difference_sanity _____________________
+tests/test_gcm_translation.py:446: in test_gcm_sae_finite_difference_sanity
+    out = gcm_attribute_sae(
+experiments/gcm_translation/gcm_core.py:177: in gcm_attribute_sae
+    with model.trace(pr_or.input_ids, **TRACER_KWARGS), torch.no_grad():
+../.conda/envs/probes/lib/python3.11/site-packages/nnsight/intervention/tracing/base.py:599: in __exit__
+    self.backend(self)
+../.conda/envs/probes/lib/python3.11/site-packages/nnsight/intervention/backends/execution.py:24: in __call__
+    raise wrap_exception(e, tracer.info) from None
+E   nnsight.NNsightException: 
+E   
+E   Traceback (most recent call last):
+E     File "/projectnb/mcnet/jbrin/lang-probing/experiments/gcm_translation/gcm_core.py", line 180, in gcm_attribute_sae
+E       z_orig_proxy = f[:, pr_or.last_src_idx, :].clone().save()
+E   
+E   IndexError: too many indices for tensor of dimension 2
+______________________ test_gcm_sae_eng_eng_null_control _______________________
+tests/test_gcm_translation.py:562: in test_gcm_sae_eng_eng_null_control
+    out = gcm_attribute_sae(
+experiments/gcm_translation/gcm_core.py:177: in gcm_attribute_sae
+    with model.trace(pr_or.input_ids, **TRACER_KWARGS), torch.no_grad():
+../.conda/envs/probes/lib/python3.11/site-packages/nnsight/intervention/tracing/base.py:599: in __exit__
+    self.backend(self)
+../.conda/envs/probes/lib/python3.11/site-packages/nnsight/intervention/backends/execution.py:24: in __call__
+    raise wrap_exception(e, tracer.info) from None
+E   nnsight.NNsightException: 
+E   
+E   Traceback (most recent call last):
+E     File "/projectnb/mcnet/jbrin/lang-probing/experiments/gcm_translation/gcm_core.py", line 180, in gcm_attribute_sae
+E       z_orig_proxy = f[:, pr_or.last_src_idx, :].clone().save()
+E   
+E   IndexError: too many indices for tensor of dimension 2
+____________________ test_gcm_heads_per_head_decomposition _____________________
+tests/test_gcm_translation.py:594: in test_gcm_heads_per_head_decomposition
+    out = gcm_attribute_heads(
+experiments/gcm_translation/gcm_core.py:320: in gcm_attribute_heads
+    z_orig = torch.stack([p.detach().squeeze(0) for p in z_orig_proxies])  # [n_layers, d_model]
+                                                         ^^^^^^^^^^^^^^
+E   UnboundLocalError: cannot access local variable 'z_orig_proxies' where it is not associated with a value
+_______________________ test_padded_position_correctness _______________________
+tests/test_gcm_translation.py:642: in test_padded_position_correctness
+    out = gcm_attribute_sae(
+experiments/gcm_translation/gcm_core.py:177: in gcm_attribute_sae
+    with model.trace(pr_or.input_ids, **TRACER_KWARGS), torch.no_grad():
+../.conda/envs/probes/lib/python3.11/site-packages/nnsight/intervention/tracing/base.py:599: in __exit__
+    self.backend(self)
+../.conda/envs/probes/lib/python3.11/site-packages/nnsight/intervention/backends/execution.py:24: in __call__
+    raise wrap_exception(e, tracer.info) from None
+E   nnsight.NNsightException: 
+E   
+E   Traceback (most recent call last):
+E     File "/projectnb/mcnet/jbrin/lang-probing/experiments/gcm_translation/gcm_core.py", line 180, in gcm_attribute_sae
+E       z_orig_proxy = f[:, pr_or.last_src_idx, :].clone().save()
+E   
+E   IndexError: too many indices for tensor of dimension 2
+=========================== short test summary info ============================
+FAILED tests/test_gcm_translation.py::test_gcm_sae_grad_is_finite_and_nonzero
+FAILED tests/test_gcm_translation.py::test_gcm_heads_grad_flows_through_o_proj
+FAILED tests/test_gcm_translation.py::test_gcm_sae_finite_difference_sanity
+FAILED tests/test_gcm_translation.py::test_gcm_sae_eng_eng_null_control - nns...
+FAILED tests/test_gcm_translation.py::test_gcm_heads_per_head_decomposition
+FAILED tests/test_gcm_translation.py::test_padded_position_correctness - nnsi...
+==================== 6 failed, 9 passed in 87.75s (0:01:27) ====================
+[gcm_smoke] GPU tests FAILED — aborting smoke run
+[gcm_smoke] host=scc-604
+GPU 0: NVIDIA RTX A6000 (UUID: GPU-00f7ae86-7ba2-5c53-344a-02616fbcb18a)
+GPU 1: NVIDIA RTX A6000 (UUID: GPU-dbf44dc2-ddee-b044-af78-c9e0614c8b0c)
+GPU 2: NVIDIA RTX A6000 (UUID: GPU-ef2b9190-b342-71d0-6cdc-75b0a93251ef)
+GPU 3: NVIDIA RTX A6000 (UUID: GPU-98a2953d-f7ef-9f31-6eaa-6d9047dcb0e0)
+GPU 4: NVIDIA RTX A6000 (UUID: GPU-e5ae0e83-ff79-c918-ba31-9e5dd651afca)
+GPU 5: NVIDIA RTX A6000 (UUID: GPU-8e3f57a1-9a4d-5be6-de0d-4c633f1da9eb)
+GPU 6: NVIDIA RTX A6000 (UUID: GPU-8d5d6153-dd0d-9ccd-9706-b00cbd62bfb2)
+GPU 7: NVIDIA RTX A6000 (UUID: GPU-b33c0280-93e4-db2d-379c-0eff2bc5aafc)
+memory.free [MiB]
+45486 MiB
+45486 MiB
+45486 MiB
+45486 MiB
+45486 MiB
+45486 MiB
+45486 MiB
+45486 MiB
+[gcm_smoke] === pytest GPU tests ===
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.2, pluggy-1.6.0 -- /projectnb/mcnet/jbrin/.conda/envs/probes/bin/python
+cachedir: .pytest_cache
+rootdir: /projectnb/mcnet/jbrin/lang-probing
+configfile: pyproject.toml
+plugins: anyio-4.11.0
+collecting ... collected 15 items
+
+tests/test_gcm_translation.py::test_make_prompt_single_newlines PASSED   [  6%]
+tests/test_gcm_translation.py::test_make_prompt_trailing_space PASSED    [ 13%]
+tests/test_gcm_translation.py::test_truncate_response_token_space PASSED [ 20%]
+tests/test_gcm_translation.py::test_tokenize_pair_joint_consistency PASSED [ 26%]
+tests/test_gcm_translation.py::test_sample_pairs_no_shot_overlap PASSED  [ 33%]
+tests/test_gcm_translation.py::test_sample_pairs_no_duplicate_indices PASSED [ 40%]
+tests/test_gcm_translation.py::test_sum_response_logprobs_alignment PASSED [ 46%]
+tests/test_gcm_translation.py::test_sum_response_logprobs_invariant_under_irrelevant_logit_changes PASSED [ 53%]
+tests/test_gcm_translation.py::test_gcm_sae_grad_is_finite_and_nonzero PASSED [ 60%]
+tests/test_gcm_translation.py::test_gcm_heads_grad_flows_through_o_proj PASSED [ 66%]
+tests/test_gcm_translation.py::test_gcm_sae_finite_difference_sanity FAILED [ 73%]
+tests/test_gcm_translation.py::test_gcm_sae_eng_eng_null_control PASSED  [ 80%]
+tests/test_gcm_translation.py::test_gcm_heads_per_head_decomposition PASSED [ 86%]
+tests/test_gcm_translation.py::test_padded_position_correctness PASSED   [ 93%]
+tests/test_gcm_translation.py::test_no_partial_pair_record_desync PASSED [100%]
+
+=================================== FAILURES ===================================
+____________________ test_gcm_sae_finite_difference_sanity _____________________
+tests/test_gcm_translation.py:490: in test_gcm_sae_finite_difference_sanity
+    z_orig, res_or = cache_z_and_res(pr_or)
+                     ^^^^^^^^^^^^^^^^^^^^^^
+../.conda/envs/probes/lib/python3.11/site-packages/torch/utils/_contextlib.py:116: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+tests/test_gcm_translation.py:477: in cache_z_and_res
+    with model.trace(pr.input_ids, **TRACER_KWARGS):
+../.conda/envs/probes/lib/python3.11/site-packages/nnsight/intervention/tracing/base.py:599: in __exit__
+    self.backend(self)
+../.conda/envs/probes/lib/python3.11/site-packages/nnsight/intervention/backends/execution.py:24: in __call__
+    raise wrap_exception(e, tracer.info) from None
+E   nnsight.NNsightException: 
+E   
+E   Traceback (most recent call last):
+E     File "/projectnb/mcnet/jbrin/lang-probing/tests/test_gcm_translation.py", line 484, in cache_z_and_res
+E       res_save = (x - x_hat)[:, pr.last_src_idx, :].save()
+E   
+E   IndexError: too many indices for tensor of dimension 2
+=========================== short test summary info ============================
+FAILED tests/test_gcm_translation.py::test_gcm_sae_finite_difference_sanity
+=================== 1 failed, 14 passed in 100.51s (0:01:40) ===================
+[gcm_smoke] GPU tests FAILED — aborting smoke run
+[gcm_smoke] host=scc-604
+GPU 0: NVIDIA RTX A6000 (UUID: GPU-00f7ae86-7ba2-5c53-344a-02616fbcb18a)
+GPU 1: NVIDIA RTX A6000 (UUID: GPU-dbf44dc2-ddee-b044-af78-c9e0614c8b0c)
+GPU 2: NVIDIA RTX A6000 (UUID: GPU-ef2b9190-b342-71d0-6cdc-75b0a93251ef)
+GPU 3: NVIDIA RTX A6000 (UUID: GPU-98a2953d-f7ef-9f31-6eaa-6d9047dcb0e0)
+GPU 4: NVIDIA RTX A6000 (UUID: GPU-e5ae0e83-ff79-c918-ba31-9e5dd651afca)
+GPU 5: NVIDIA RTX A6000 (UUID: GPU-8e3f57a1-9a4d-5be6-de0d-4c633f1da9eb)
+GPU 6: NVIDIA RTX A6000 (UUID: GPU-8d5d6153-dd0d-9ccd-9706-b00cbd62bfb2)
+GPU 7: NVIDIA RTX A6000 (UUID: GPU-b33c0280-93e4-db2d-379c-0eff2bc5aafc)
+memory.free [MiB]
+32208 MiB
+3300 MiB
+28978 MiB
+45486 MiB
+45486 MiB
+45486 MiB
+978 MiB
+510 MiB
+[gcm_smoke] === pytest GPU tests ===
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.2, pluggy-1.6.0 -- /projectnb/mcnet/jbrin/.conda/envs/probes/bin/python
+cachedir: .pytest_cache
+rootdir: /projectnb/mcnet/jbrin/lang-probing
+configfile: pyproject.toml
+plugins: anyio-4.11.0
+collecting ... collected 15 items
+
+tests/test_gcm_translation.py::test_make_prompt_single_newlines PASSED   [  6%]
+tests/test_gcm_translation.py::test_make_prompt_trailing_space PASSED    [ 13%]
+tests/test_gcm_translation.py::test_truncate_response_token_space PASSED [ 20%]
+tests/test_gcm_translation.py::test_tokenize_pair_joint_consistency PASSED [ 26%]
+tests/test_gcm_translation.py::test_sample_pairs_no_shot_overlap PASSED  [ 33%]
+tests/test_gcm_translation.py::test_sample_pairs_no_duplicate_indices PASSED [ 40%]
+tests/test_gcm_translation.py::test_sum_response_logprobs_alignment PASSED [ 46%]
+tests/test_gcm_translation.py::test_sum_response_logprobs_invariant_under_irrelevant_logit_changes PASSED [ 53%]
+tests/test_gcm_translation.py::test_gcm_sae_grad_is_finite_and_nonzero PASSED [ 60%]
+tests/test_gcm_translation.py::test_gcm_heads_grad_flows_through_o_proj PASSED [ 66%]
+tests/test_gcm_translation.py::test_gcm_sae_finite_difference_sanity FAILED [ 73%]
+tests/test_gcm_translation.py::test_gcm_sae_eng_eng_null_control PASSED  [ 80%]
+tests/test_gcm_translation.py::test_gcm_heads_per_head_decomposition PASSED [ 86%]
+tests/test_gcm_translation.py::test_padded_position_correctness PASSED   [ 93%]
+tests/test_gcm_translation.py::test_no_partial_pair_record_desync PASSED [100%]
+
+=================================== FAILURES ===================================
+____________________ test_gcm_sae_finite_difference_sanity _____________________
+tests/test_gcm_translation.py:538: in test_gcm_sae_finite_difference_sanity
+    assert rel_err < 0.05, (
+E   AssertionError: GCM 1st-order linearization check failed: grad.delta_z = -0.237, finite-diff (in delta basis) = -8.288, relative error = 33.967 > 5%. Likely cause: sign flip, wrong patch position, or broken backward pass.
+E   assert 33.96699060670906 < 0.05
+=========================== short test summary info ============================
+FAILED tests/test_gcm_translation.py::test_gcm_sae_finite_difference_sanity
+======================== 1 failed, 14 passed in 23.27s =========================
+[gcm_smoke] GPU tests FAILED — aborting smoke run
+[gcm_smoke] host=scc-603
+GPU 0: NVIDIA RTX A6000 (UUID: GPU-331f2906-a8d5-17ee-273c-0b62ff32d41d)
+GPU 1: NVIDIA RTX A6000 (UUID: GPU-449cd64f-f302-1593-9753-9a9c33f7a436)
+GPU 2: NVIDIA RTX A6000 (UUID: GPU-b2d31454-03c0-578f-178d-ea25d3ea53da)
+GPU 3: NVIDIA RTX A6000 (UUID: GPU-916a6ab8-4e87-3256-6d95-7b629d9f6f14)
+GPU 4: NVIDIA RTX A6000 (UUID: GPU-660ce602-925c-54a1-9c93-2d8a2c9d90b1)
+memory.free [MiB]
+34750 MiB
+32208 MiB
+4410 MiB
+34764 MiB
+45486 MiB
+[gcm_smoke] === pytest GPU tests ===
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.2, pluggy-1.6.0 -- /projectnb/mcnet/jbrin/.conda/envs/probes/bin/python
+cachedir: .pytest_cache
+rootdir: /projectnb/mcnet/jbrin/lang-probing
+configfile: pyproject.toml
+plugins: anyio-4.11.0
+collecting ... collected 15 items
+
+tests/test_gcm_translation.py::test_make_prompt_single_newlines PASSED   [  6%]
+tests/test_gcm_translation.py::test_make_prompt_trailing_space PASSED    [ 13%]
+tests/test_gcm_translation.py::test_truncate_response_token_space PASSED [ 20%]
+tests/test_gcm_translation.py::test_tokenize_pair_joint_consistency PASSED [ 26%]
+tests/test_gcm_translation.py::test_sample_pairs_no_shot_overlap PASSED  [ 33%]
+tests/test_gcm_translation.py::test_sample_pairs_no_duplicate_indices PASSED [ 40%]
+tests/test_gcm_translation.py::test_sum_response_logprobs_alignment PASSED [ 46%]
+tests/test_gcm_translation.py::test_sum_response_logprobs_invariant_under_irrelevant_logit_changes PASSED [ 53%]
+tests/test_gcm_translation.py::test_gcm_sae_grad_is_finite_and_nonzero PASSED [ 60%]
+tests/test_gcm_translation.py::test_gcm_heads_grad_flows_through_o_proj PASSED [ 66%]
+tests/test_gcm_translation.py::test_gcm_sae_finite_difference_sanity XFAIL [ 73%]
+tests/test_gcm_translation.py::test_gcm_sae_eng_eng_null_control PASSED  [ 80%]
+tests/test_gcm_translation.py::test_gcm_heads_per_head_decomposition PASSED [ 86%]
+tests/test_gcm_translation.py::test_padded_position_correctness PASSED   [ 93%]
+tests/test_gcm_translation.py::test_no_partial_pair_record_desync PASSED [100%]
+
+======================== 14 passed, 1 xfailed in 28.87s ========================
+[gcm_smoke] === GCM smoke run: English -> Spanish, 5 pairs ===
+2026-04-27 12:48:10,333 [INFO] === GCM translation: English__Spanish ===
+2026-04-27 12:48:10,333 [INFO]   n_pairs=5  components=both  out=outputs/gcm_translation_smoke/English__Spanish
+2026-04-27 12:48:10,333 [INFO] Loading model meta-llama/Llama-3.1-8B and SAE jbrinkma/sae-llama-3-8b-layer16...
+`torch_dtype` is deprecated! Use `dtype` instead!
+2026-04-27 12:48:21,301 [INFO]   loaded in 11.0s on cuda
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-27 12:48:21,454 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-04-27 12:48:21,470 [WARNING] Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-27 12:48:21,604 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'spa' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/spa/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:42:49 2025).
+2026-04-27 12:48:21,611 [WARNING] Found the latest cached dataset configuration 'spa' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/spa/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:42:49 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-27 12:48:21,693 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-04-27 12:48:21,699 [WARNING] Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-27 12:48:21,781 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'spa' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/spa/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:42:49 2025).
+2026-04-27 12:48:21,787 [WARNING] Found the latest cached dataset configuration 'spa' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/spa/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:42:49 2025).
+2026-04-27 12:48:21,817 [INFO] Sampled 5 pairs (split=dev); shots from indices (0,1).
+You're using a PreTrainedTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:02,  1.25it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:01<00:01,  1.35it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:02<00:00,  1.43it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  2.00it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.71it/s]
+2026-04-27 12:48:26,289 [WARNING]   [1/5] HEADS FAILED on eng__spa__798_115: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/lang-probing/experiments/gcm_translation/gcm_core.py", line 339, in gcm_attribute_heads
+    m_orig_clean_proxy = sum_response_logprobs(model.lm_head.output, pr_or.input_ids, pr_or.response_start).save()
+  File "/projectnb/mcnet/jbrin/lang-probing/experiments/gcm_translation/gcm_core.py", line 144, in sum_response_logprobs
+    log_probs = F.log_softmax(pred_logits.float(), dim=-1)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/functional.py", line 2248, in log_softmax
+    ret = input.log_softmax(dim)
+
+OutOfMemoryError: CUDA out of memory. Tried to allocate 22.00 MiB. GPU 0 has a total capacity of 44.42 GiB of which 9.62 MiB is free. Including non-PyTorch memory, this process has 44.40 GiB memory in use. Of the allocated memory 43.30 GiB is allocated by PyTorch, and 792.10 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2026-04-27 12:48:28,278 [WARNING]   [2/5] HEADS FAILED on eng__spa__58_55: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 395, in forward
+    hidden_states = decoder_layer(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/modeling_layers.py", line 94, in __call__
+    return super().__call__(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+    return func(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 309, in forward
+    hidden_states = self.mlp(hidden_states)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 155, in forward
+    down_proj = self.down_proj(self.act_fn(self.gate_proj(x)) * self.up_proj(x))
+
+OutOfMemoryError: CUDA out of memory. Tried to allocate 12.00 MiB. GPU 0 has a total capacity of 44.42 GiB of which 7.62 MiB is free. Including non-PyTorch memory, this process has 44.40 GiB memory in use. Of the allocated memory 43.43 GiB is allocated by PyTorch, and 664.00 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2026-04-27 12:48:29,266 [WARNING]   [3/5] SAE FAILED on eng__spa__931_874: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/_tensor.py", line 581, in backward
+    torch.autograd.backward(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/autograd/__init__.py", line 347, in backward
+    _engine_run_backward(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/autograd/graph.py", line 825, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+
+OutOfMemoryError: CUDA out of memory. Tried to allocate 80.00 MiB. GPU 0 has a total capacity of 44.42 GiB of which 53.62 MiB is free. Including non-PyTorch memory, this process has 44.36 GiB memory in use. Of the allocated memory 43.63 GiB is allocated by PyTorch, and 408.61 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2026-04-27 12:48:29,285 [WARNING]   [3/5] HEADS FAILED on eng__spa__931_874: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 395, in forward
+    hidden_states = decoder_layer(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/modeling_layers.py", line 94, in __call__
+    return super().__call__(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+    return func(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 309, in forward
+    hidden_states = self.mlp(hidden_states)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 155, in forward
+    down_proj = self.down_proj(self.act_fn(self.gate_proj(x)) * self.up_proj(x))
+
+OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacity of 44.42 GiB of which 13.62 MiB is free. Including non-PyTorch memory, this process has 44.40 GiB memory in use. Of the allocated memory 43.68 GiB is allocated by PyTorch, and 397.23 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2026-04-27 12:48:29,566 [WARNING]   [4/5] SAE FAILED on eng__spa__526_924: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 395, in forward
+    hidden_states = decoder_layer(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/modeling_layers.py", line 94, in __call__
+    return super().__call__(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+    return func(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 309, in forward
+    hidden_states = self.mlp(hidden_states)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 155, in forward
+    down_proj = self.down_proj(self.act_fn(self.gate_proj(x)) * self.up_proj(x))
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+
+OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacity of 44.42 GiB of which 11.62 MiB is free. Including non-PyTorch memory, this process has 44.40 GiB memory in use. Of the allocated memory 43.67 GiB is allocated by PyTorch, and 408.03 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2026-04-27 12:48:29,582 [WARNING]   [4/5] HEADS FAILED on eng__spa__526_924: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 395, in forward
+    hidden_states = decoder_layer(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/modeling_layers.py", line 94, in __call__
+    return super().__call__(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+    return func(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 309, in forward
+    hidden_states = self.mlp(hidden_states)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 155, in forward
+    down_proj = self.down_proj(self.act_fn(self.gate_proj(x)) * self.up_proj(x))
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+
+OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacity of 44.42 GiB of which 11.62 MiB is free. Including non-PyTorch memory, this process has 44.40 GiB memory in use. Of the allocated memory 43.67 GiB is allocated by PyTorch, and 408.02 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2026-04-27 12:48:29,749 [WARNING]   [5/5] SAE FAILED on eng__spa__335_430: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 395, in forward
+    hidden_states = decoder_layer(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/modeling_layers.py", line 94, in __call__
+    return super().__call__(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+    return func(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 308, in forward
+    hidden_states = self.post_attention_layernorm(hidden_states)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 64, in forward
+    hidden_states = hidden_states.to(torch.float32)
+
+OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacity of 44.42 GiB of which 9.62 MiB is free. Including non-PyTorch memory, this process has 44.40 GiB memory in use. Of the allocated memory 43.68 GiB is allocated by PyTorch, and 403.54 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2026-04-27 12:48:29,764 [WARNING]   [5/5] HEADS FAILED on eng__spa__335_430: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 395, in forward
+    hidden_states = decoder_layer(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/modeling_layers.py", line 94, in __call__
+    return super().__call__(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+    return func(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 308, in forward
+    hidden_states = self.post_attention_layernorm(hidden_states)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 64, in forward
+    hidden_states = hidden_states.to(torch.float32)
+
+OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacity of 44.42 GiB of which 9.62 MiB is free. Including non-PyTorch memory, this process has 44.40 GiB memory in use. Of the allocated memory 43.68 GiB is allocated by PyTorch, and 403.52 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2026-04-27 12:48:29,912 [INFO]   [5/5] 1.6s/pair  ETA 0.0min  sae_ok=2  heads_ok=0
+2026-04-27 12:48:29,914 [INFO] Saved heads_ie.pt  shape=(5, 32, 32)
+2026-04-27 12:48:29,916 [INFO] Saved sae_ie.pt  shape=(5, 32768)
+2026-04-27 12:48:30,023 [INFO] Done. Summary: {'src_lang': 'English', 'tgt_lang': 'Spanish', 'direction_key': 'English__Spanish', 'n_pairs_attempted': 5, 'n_pairs_successful_heads': 0, 'n_pairs_successful_sae': 2, 'seed': 42, 'split': 'dev', 'max_response_tokens': 128, 'elapsed_seconds': 8.204846858978271, 'model_id': 'meta-llama/Llama-3.1-8B', 'sae_id': 'jbrinkma/sae-llama-3-8b-layer16', 'sae_clean_frac_orig_preferred_pertoken': 1.0, 'sae_clean_mean_logp_orig_pertoken': -0.9680378199655773, 'sae_clean_mean_logp_cf_pertoken': -2.759960556986338, 'sae_max_orig_drift': 0.0, 'sae_mean_orig_drift': 0.0}
+[gcm_smoke] done
+[gcm_smoke] host=scc-608
+GPU 0: NVIDIA RTX A6000 (UUID: GPU-c7b820ce-75ba-5235-0346-5c2066f15e8f)
+GPU 1: NVIDIA RTX A6000 (UUID: GPU-e927a45c-cd9c-537f-5573-c99eeed7e4f2)
+GPU 2: NVIDIA RTX A6000 (UUID: GPU-96dc15e0-394a-5761-be45-162613f32766)
+GPU 3: NVIDIA RTX A6000 (UUID: GPU-ecd53955-5faf-bdfb-b89f-d8bab195f797)
+GPU 4: NVIDIA RTX A6000 (UUID: GPU-87e00d9e-17bf-4deb-b5af-b938812477bf)
+GPU 5: NVIDIA RTX A6000 (UUID: GPU-a7eed43c-b08a-c752-148c-aeebe0f2ba47)
+GPU 6: NVIDIA RTX A6000 (UUID: GPU-610a8ce9-8a3b-f767-70a4-35f116a8d294)
+GPU 7: NVIDIA RTX A6000 (UUID: GPU-b3e7f876-9f43-deb2-7051-c4ca682698b7)
+memory.free [MiB]
+45486 MiB
+45486 MiB
+45486 MiB
+45486 MiB
+30116 MiB
+32520 MiB
+27936 MiB
+45486 MiB
+[gcm_smoke] === pytest GPU tests ===
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.2, pluggy-1.6.0 -- /projectnb/mcnet/jbrin/.conda/envs/probes/bin/python
+cachedir: .pytest_cache
+rootdir: /projectnb/mcnet/jbrin/lang-probing
+configfile: pyproject.toml
+plugins: anyio-4.11.0
+collecting ... collected 15 items
+
+tests/test_gcm_translation.py::test_make_prompt_single_newlines PASSED   [  6%]
+tests/test_gcm_translation.py::test_make_prompt_trailing_space PASSED    [ 13%]
+tests/test_gcm_translation.py::test_truncate_response_token_space PASSED [ 20%]
+tests/test_gcm_translation.py::test_tokenize_pair_joint_consistency PASSED [ 26%]
+tests/test_gcm_translation.py::test_sample_pairs_no_shot_overlap PASSED  [ 33%]
+tests/test_gcm_translation.py::test_sample_pairs_no_duplicate_indices PASSED [ 40%]
+tests/test_gcm_translation.py::test_sum_response_logprobs_alignment PASSED [ 46%]
+tests/test_gcm_translation.py::test_sum_response_logprobs_invariant_under_irrelevant_logit_changes PASSED [ 53%]
+tests/test_gcm_translation.py::test_gcm_sae_grad_is_finite_and_nonzero PASSED [ 60%]
+tests/test_gcm_translation.py::test_gcm_heads_grad_flows_through_o_proj PASSED [ 66%]
+tests/test_gcm_translation.py::test_gcm_sae_finite_difference_sanity XFAIL [ 73%]
+tests/test_gcm_translation.py::test_gcm_sae_eng_eng_null_control PASSED  [ 80%]
+tests/test_gcm_translation.py::test_gcm_heads_per_head_decomposition PASSED [ 86%]
+tests/test_gcm_translation.py::test_padded_position_correctness PASSED   [ 93%]
+tests/test_gcm_translation.py::test_no_partial_pair_record_desync PASSED [100%]
+
+=================== 14 passed, 1 xfailed in 99.91s (0:01:39) ===================
+[gcm_smoke] === GCM smoke run: English -> Spanish, 5 pairs ===
+2026-04-27 14:56:28,862 [INFO] === GCM translation: English__Spanish ===
+2026-04-27 14:56:28,862 [INFO]   n_pairs=5  components=both  out=outputs/gcm_translation_smoke/English__Spanish
+2026-04-27 14:56:28,862 [INFO] Loading model meta-llama/Llama-3.1-8B and SAE jbrinkma/sae-llama-3-8b-layer16...
+`torch_dtype` is deprecated! Use `dtype` instead!
+2026-04-27 14:56:39,826 [INFO]   loaded in 11.0s on cuda
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-27 14:56:39,928 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-04-27 14:56:39,934 [WARNING] Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-27 14:56:40,040 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'spa' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/spa/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:42:49 2025).
+2026-04-27 14:56:40,046 [WARNING] Found the latest cached dataset configuration 'spa' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/spa/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:42:49 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-27 14:56:40,162 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-04-27 14:56:40,168 [WARNING] Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-27 14:56:40,251 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'spa' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/spa/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:42:49 2025).
+2026-04-27 14:56:40,257 [WARNING] Found the latest cached dataset configuration 'spa' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/spa/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:42:49 2025).
+2026-04-27 14:56:40,286 [INFO] Sampled 5 pairs (split=dev); shots from indices (0,1).
+You're using a PreTrainedTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:02,  1.22it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:01<00:01,  1.22it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:02<00:00,  1.24it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.78it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.53it/s]
+2026-04-27 14:56:47,702 [WARNING]   [2/5] HEADS FAILED on eng__spa__58_55: OutOfMemoryError: CUDA out of memory. Tried to allocate 1002.00 MiB. GPU 0 has a total capacity of 44.42 GiB of which 409.62 MiB is free. Including non-PyTorch memory, this process has 44.01 GiB memory in use. Of the allocated memory 42.82 GiB is allocated by PyTorch, and 885.87 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2026-04-27 14:56:55,741 [INFO]   [5/5] 3.1s/pair  ETA 0.0min  sae_ok=5  heads_ok=4
+2026-04-27 14:56:55,745 [INFO] Saved heads_ie.pt  shape=(5, 32, 32)
+2026-04-27 14:56:55,748 [INFO] Saved sae_ie.pt  shape=(5, 32768)
+2026-04-27 14:56:55,757 [INFO] Done. Summary: {'src_lang': 'English', 'tgt_lang': 'Spanish', 'direction_key': 'English__Spanish', 'n_pairs_attempted': 5, 'n_pairs_successful_heads': 4, 'n_pairs_successful_sae': 5, 'seed': 42, 'split': 'dev', 'max_response_tokens': 128, 'elapsed_seconds': 15.468807935714722, 'model_id': 'meta-llama/Llama-3.1-8B', 'sae_id': 'jbrinkma/sae-llama-3-8b-layer16', 'sae_clean_frac_orig_preferred_pertoken': 1.0, 'sae_clean_mean_logp_orig_pertoken': -0.853629819366323, 'sae_clean_mean_logp_cf_pertoken': -2.8543465560619894, 'sae_max_orig_drift': 0.0, 'sae_mean_orig_drift': 0.0, 'head_max_orig_drift': 0.0, 'head_mean_orig_drift': 0.0}
+[gcm_smoke] done
+[gcm_smoke] host=scc-504
+GPU 0: NVIDIA L40S (UUID: GPU-9dab95cd-93b6-8551-58e3-71a474c82587)
+GPU 1: NVIDIA L40S (UUID: GPU-f564bb82-1b41-d5fa-869d-d5356b3f9d38)
+GPU 2: NVIDIA L40S (UUID: GPU-1162bd60-cf43-e870-ae54-d62f78a3dc90)
+GPU 3: NVIDIA L40S (UUID: GPU-035b1d91-07d1-4d21-cbbf-5d4416ba7623)
+memory.free [MiB]
+920 MiB
+45458 MiB
+34118 MiB
+44886 MiB
+[gcm_smoke] === pytest GPU tests ===
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.2, pluggy-1.6.0 -- /projectnb/mcnet/jbrin/.conda/envs/probes/bin/python
+cachedir: .pytest_cache
+rootdir: /projectnb/mcnet/jbrin/lang-probing
+configfile: pyproject.toml
+plugins: anyio-4.11.0
+collecting ... collected 15 items
+
+tests/test_gcm_translation.py::test_make_prompt_single_newlines PASSED   [  6%]
+tests/test_gcm_translation.py::test_make_prompt_trailing_space PASSED    [ 13%]
+tests/test_gcm_translation.py::test_truncate_response_token_space PASSED [ 20%]
+tests/test_gcm_translation.py::test_tokenize_pair_joint_consistency PASSED [ 26%]
+tests/test_gcm_translation.py::test_sample_pairs_no_shot_overlap PASSED  [ 33%]
+tests/test_gcm_translation.py::test_sample_pairs_no_duplicate_indices PASSED [ 40%]
+tests/test_gcm_translation.py::test_sum_response_logprobs_alignment PASSED [ 46%]
+tests/test_gcm_translation.py::test_sum_response_logprobs_invariant_under_irrelevant_logit_changes PASSED [ 53%]
+tests/test_gcm_translation.py::test_gcm_sae_grad_is_finite_and_nonzero PASSED [ 60%]
+tests/test_gcm_translation.py::test_gcm_heads_grad_flows_through_o_proj PASSED [ 66%]
+tests/test_gcm_translation.py::test_gcm_sae_finite_difference_sanity XFAIL [ 73%]
+tests/test_gcm_translation.py::test_gcm_sae_eng_eng_null_control PASSED  [ 80%]
+tests/test_gcm_translation.py::test_gcm_heads_per_head_decomposition PASSED [ 86%]
+tests/test_gcm_translation.py::test_padded_position_correctness PASSED   [ 93%]
+tests/test_gcm_translation.py::test_no_partial_pair_record_desync PASSED [100%]
+
+=================== 14 passed, 1 xfailed in 91.24s (0:01:31) ===================
+[gcm_smoke] === GCM smoke run: English -> Spanish, 5 pairs ===
+2026-04-27 20:38:32,154 [INFO] === GCM translation: English__Spanish ===
+2026-04-27 20:38:32,154 [INFO]   n_pairs=5  components=both  out=outputs/gcm_translation_smoke/English__Spanish
+2026-04-27 20:38:32,154 [INFO] Loading model meta-llama/Llama-3.1-8B and SAE jbrinkma/sae-llama-3-8b-layer16...
+`torch_dtype` is deprecated! Use `dtype` instead!
+2026-04-27 20:38:38,529 [INFO]   loaded in 6.4s on cuda
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-27 20:38:38,716 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-04-27 20:38:38,725 [WARNING] Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-27 20:38:38,879 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'spa' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/spa/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:42:49 2025).
+2026-04-27 20:38:38,886 [WARNING] Found the latest cached dataset configuration 'spa' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/spa/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:42:49 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-27 20:38:38,974 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-04-27 20:38:38,980 [WARNING] Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-27 20:38:39,057 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'spa' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/spa/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:42:49 2025).
+2026-04-27 20:38:39,062 [WARNING] Found the latest cached dataset configuration 'spa' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/spa/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:42:49 2025).
+2026-04-27 20:38:39,092 [INFO] Sampled 5 pairs (split=dev); shots from indices (0,1).
+You're using a PreTrainedTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:02,  1.39it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:01<00:01,  1.38it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:02<00:00,  1.29it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.79it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.59it/s]
+2026-04-27 20:38:52,261 [INFO]   [5/5] 2.6s/pair  ETA 0.0min  sae_ok=5  heads_ok=5
+2026-04-27 20:38:52,263 [INFO] Saved heads_ie.pt  shape=(5, 32, 32)
+2026-04-27 20:38:52,266 [INFO] Saved sae_ie.pt  shape=(5, 32768)
+2026-04-27 20:38:52,273 [INFO] Done. Summary: {'src_lang': 'English', 'tgt_lang': 'Spanish', 'direction_key': 'English__Spanish', 'n_pairs_attempted': 5, 'n_pairs_successful_heads': 5, 'n_pairs_successful_sae': 5, 'seed': 42, 'split': 'dev', 'max_response_tokens': 128, 'elapsed_seconds': 13.17856740951538, 'model_id': 'meta-llama/Llama-3.1-8B', 'sae_id': 'jbrinkma/sae-llama-3-8b-layer16', 'sae_clean_frac_orig_preferred_pertoken': 1.0, 'sae_clean_mean_logp_orig_pertoken': -0.8522084223759638, 'sae_clean_mean_logp_cf_pertoken': -2.856827414461379, 'sae_max_orig_drift': 0.0, 'sae_mean_orig_drift': 0.0, 'head_max_orig_drift': 0.0, 'head_mean_orig_drift': 0.0}
+[gcm_smoke] done

@@ -1,0 +1,37 @@
+[gcm_same_lang.1] host=scc-511  same-lang real direction=English -> English
+GPU 0: NVIDIA L40S (UUID: GPU-152eaec9-c49d-5a86-551a-5848af113d56)
+GPU 1: NVIDIA L40S (UUID: GPU-80c435da-1343-03ff-f2af-030adb21f43c)
+GPU 2: NVIDIA L40S (UUID: GPU-e35b1cff-9011-cdde-5ac7-cf4dd39d17a2)
+GPU 3: NVIDIA L40S (UUID: GPU-82746912-97e1-059f-cf02-b2a0fbec4a00)
+2026-05-04 10:33:01,971 [INFO] === GCM translation: English__English ===
+2026-05-04 10:33:01,972 [INFO]   n_pairs=100  components=both  out=outputs/gcm_translation/English__English
+2026-05-04 10:33:02,159 [INFO] GPU compute capability: 8.9
+2026-05-04 10:33:02,159 [INFO] Loading model meta-llama/Llama-3.1-8B and SAE jbrinkma/sae-llama-3-8b-layer16...
+`torch_dtype` is deprecated! Use `dtype` instead!
+2026-05-04 10:33:08,927 [INFO]   loaded in 6.8s on cuda
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-05-04 10:33:09,221 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-05-04 10:33:09,259 [WARNING] Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-05-04 10:33:09,858 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-05-04 10:33:09,864 [WARNING] Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-05-04 10:33:09,964 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-05-04 10:33:09,969 [WARNING] Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-05-04 10:33:10,052 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-05-04 10:33:10,058 [WARNING] Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-05-04 10:33:10,089 [INFO] Sampled 100 pairs (split=dev); shots from indices (0,1).
+You're using a PreTrainedTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:03<00:10,  3.53s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:06<00:06,  3.43s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:10<00:03,  3.46s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:11<00:00,  2.46s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:11<00:00,  2.83s/it]
+2026-05-04 10:33:34,509 [INFO]   [5/100] 4.9s/pair  ETA 7.7min  sae_ok=5  heads_ok=5
+2026-05-04 10:33:42,957 [INFO]   [10/100] 3.3s/pair  ETA 4.9min  sae_ok=10  heads_ok=10
+2026-05-04 10:33:51,220 [INFO]   [15/100] 2.7s/pair  ETA 3.9min  sae_ok=15  heads_ok=15
+2026-05-04 10:33:59,576 [INFO]   [20/100] 2.5s/pair  ETA 3.3min  sae_ok=20  heads_ok=20
+2026-05-04 10:34:07,965 [INFO]   [25/100] 2.3s/pair  ETA 2.9min  sae_ok=25  heads_ok=25
+2026-05-04 10:34:16,469 [INFO]   [30/100] 2.2s/pair  ETA 2.6min  sae_ok=30  heads_ok=30
+2026-05-04 10:34:24,786 [INFO]   [35/100] 2.1s/pair  ETA 2.3min  sae_ok=35  heads_ok=35

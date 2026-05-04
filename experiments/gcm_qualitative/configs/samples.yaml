@@ -1,0 +1,62 @@
+# Qualitative-harness probe set.
+#
+# `inspect.py` reads this on startup and on every `reload`. Edit and re-run
+# `reload` in the REPL to pick up changes without reloading the model.
+
+samples:
+  - name: eng_spa_short
+    src_lang: English
+    tgt_lang: Spanish
+    src: "The cat sat on the mat."
+    tgt: "El gato se sentó en la alfombra."
+
+  - name: eng_spa_news
+    src_lang: English
+    tgt_lang: Spanish
+    src: "The minister announced new climate measures yesterday."
+    tgt: "El ministro anunció nuevas medidas climáticas ayer."
+
+  - name: eng_deu_idiom
+    src_lang: English
+    tgt_lang: German
+    src: "It's raining cats and dogs."
+    tgt: "Es regnet in Strömen."
+
+  - name: eng_ara_short
+    src_lang: English
+    tgt_lang: Arabic
+    src: "She opened the window because the room was hot."
+    tgt: "فتحت النافذة لأن الغرفة كانت حارة."
+
+components:
+  # Universal SAE features (top of outputs/gcm_translation/_aggregate/universal_sae.json).
+  sae_features: [20383, 24738, 17398, 15388, 31444]
+
+  # Universal heads, with their kv-group siblings to make GQA structure visible.
+  # (Edit `modes` per-head to override the global default.)
+  attention_heads:
+    - {layer: 17, head: 21}        # top-1 universal (56/56)
+    - {layer: 30, head: 25}        # +0.46 mean signed
+    - {layer: 30, head: 27}        # -0.43 — kv-group sibling of H25
+    - {layer: 31, head: 2}         # +0.23
+    - {layer: 31, head: 3}         # -0.32 — kv-group sibling of H2
+    - {layer: 16, head: 1}
+    - {layer: 23, head: 28}
+
+observe:
+  default_attn_modes: ["iii"]      # i / ii / iii — see core.py docstring
+  logit_lens_anchors: ["last_src_token", "first_tgt_token"]
+  max_response_tokens: 128
+
+intervene:
+  # Each op is run against every sample selected by `intervene <sample>`.
+  # `positions: all` ablates/steers across the whole sequence during generation;
+  # `positions: last_src_only` modifies only the last-source-token (matches the
+  # GCM patch site, but useful only if the effect should be highly localized).
+  ops:
+    - {kind: "ablate_head", layer: 30, head: 25, positions: "all"}
+    - {kind: "ablate_head", layer: 30, head: 27, positions: "all"}
+    - {kind: "ablate_head", layer: 17, head: 21, positions: "all"}
+    - {kind: "ablate_feature", feature_idx: 20383, positions: "all"}
+    - {kind: "steer_feature",  feature_idx: 20383, scale: 5.0, positions: "all"}
+  max_new_tokens: 64

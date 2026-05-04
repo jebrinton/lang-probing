@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>GCM qualitative — rendering test</title>
+<style>
+  :root {
+    --bg: #0e0f12;
+    --panel: #16181d;
+    --fg: #e7e9ee;
+    --muted: #9aa3b2;
+    --accent: #6aa6ff;
+    --border: #2a2e36;
+  }
+  html, body { background: var(--bg); color: var(--fg); margin: 0;
+    font: 14px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  header { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+  header h1 { margin: 0; font-size: 16px; }
+  header .sub { color: var(--muted); margin-top: 4px; font-size: 12px; }
+  main { padding: 16px 20px; }
+  .row { display: flex; gap: 16px; align-items: stretch; flex-wrap: wrap; }
+  .panel {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px;
+  }
+  .controls { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .controls button, .controls select {
+    background: #1f232b; color: var(--fg); border: 1px solid var(--border);
+    padding: 6px 12px; border-radius: 6px; cursor: pointer; font: inherit;
+  }
+  .controls button:hover { border-color: var(--accent); }
+  .controls .label { color: var(--muted); }
+  .stage { margin-top: 16px; }
+  .stage img { max-width: 100%; height: auto; display: block; border-radius: 6px;
+    background: #fff; }
+  .caption { color: var(--muted); margin-top: 8px; font-size: 12px; }
+  .meta { margin-top: 8px; }
+  .meta .k { color: var(--muted); margin-right: 6px; }
+  .hidden { display: none; }
+  kbd {
+    background: #1f232b; border: 1px solid var(--border); border-bottom-width: 2px;
+    border-radius: 4px; padding: 1px 6px; font-size: 11px;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>GCM qualitative — rendering test</h1>
+  <div class="sub">Click-through viewer skeleton. One figure visible at a time;
+    use the buttons or <kbd>&larr;</kbd>/<kbd>&rarr;</kbd> to step.</div>
+</header>
+
+<main>
+  <div class="panel">
+    <div class="controls">
+      <span class="label">view:</span>
+      <select id="kind">
+        <option value="head">attention heads</option>
+        <option value="sae">SAE features</option>
+        <option value="agg">aggregate</option>
+      </select>
+      <span class="label">item:</span>
+      <select id="item"></select>
+      <button id="prev">&larr; prev</button>
+      <button id="next">next &rarr;</button>
+      <span class="label" id="counter"></span>
+    </div>
+
+    <div class="stage">
+      <img id="fig" alt="">
+      <div class="meta">
+        <span class="k">title:</span><span id="title"></span>
+      </div>
+      <div class="caption" id="caption"></div>
+    </div>
+  </div>
+</main>
+
+<script>
+// In a real run, this object would be emitted by render.py with one entry
+// per (head, sample) and per (feature, sample). For the test we point at
+// the existing per-direction GCM figures so we can verify the click-through.
+const ITEMS = {
+  head: [
+    { id: "L17.H21", title: "L17.H21 — top-1 universal (56/56 directions)",
+      src: "img/English__Spanish_heads_heatmap.png",
+      caption: "Placeholder: per-direction heads mean-abs IE heatmap (eng→spa). In the real harness this would be the per-token attention pattern of L17.H21 on the sample sentence." },
+    { id: "L30.H25", title: "L30.H25 — signed mean +0.46 (translation-promoter candidate)",
+      src: "img/English__Spanish_heads_signed_heatmap.png",
+      caption: "Placeholder: signed-IE heatmap. Real harness: highlighter strip of L30.H25 attention over sample tokens + logit lens of head-output." },
+    { id: "L30.H27", title: "L30.H27 — signed mean −0.43 (kv-group sibling of H25)",
+      src: "img/English__Spanish_top_heads_bar.png",
+      caption: "Placeholder: top-20 heads bar chart. Real harness: same view as above, opposite-signed sibling." },
+    { id: "L31.H2",  title: "L31.H2 — final-layer write head (+0.23)",
+      src: "img/universal_heads_heatmap.png",
+      caption: "Placeholder: cross-direction universal-heads heatmap. Real harness: late-layer write pattern." }
+  ],
+  sae: [
+    { id: "f20383", title: "SAE feature 20383 — universal in 56/56 directions",
+      src: "img/English__Spanish_top_sae_bar.png",
+      caption: "Placeholder: top-50 SAE bar chart. Real harness: per-token activation strip of f20383 across the sample sentence + max-activating examples panel." },
+    { id: "f24738", title: "SAE feature 24738 — universal in 51/56",
+      src: "img/English__Spanish_top_sae_bar.png",
+      caption: "Placeholder: same chart. Real harness: per-token activation strip for f24738." },
+    { id: "f17398", title: "SAE feature 17398 — universal in 49/56",
+      src: "img/English__Spanish_top_sae_bar.png",
+      caption: "Placeholder: same chart. Real harness: per-token activation strip for f17398." }
+  ],
+  agg: [
+    { id: "universal_heads", title: "Cross-direction universal-heads heatmap",
+      src: "img/universal_heads_heatmap.png",
+      caption: "Number of directions (out of 56) in which each (layer, head) appears in the top-20 by mean-abs IE." }
+  ]
+};
+
+const $ = (id) => document.getElementById(id);
+const kindSel = $("kind"), itemSel = $("item");
+const fig = $("fig"), title = $("title"), caption = $("caption"), counter = $("counter");
+
+let idx = 0;
+
+function rebuildItemSelect() {
+  const kind = kindSel.value;
+  itemSel.innerHTML = "";
+  ITEMS[kind].forEach((it, i) => {
+    const o = document.createElement("option");
+    o.value = i; o.textContent = it.id;
+    itemSel.appendChild(o);
+  });
+  idx = 0;
+  itemSel.value = "0";
+  render();
+}
+
+function render() {
+  const kind = kindSel.value;
+  const list = ITEMS[kind];
+  if (idx < 0) idx = list.length - 1;
+  if (idx >= list.length) idx = 0;
+  itemSel.value = String(idx);
+  const it = list[idx];
+  fig.src = it.src;
+  fig.alt = it.title;
+  title.textContent = it.title;
+  caption.textContent = it.caption;
+  counter.textContent = `(${idx + 1} / ${list.length})`;
+}
+
+kindSel.addEventListener("change", rebuildItemSelect);
+itemSel.addEventListener("change", () => { idx = parseInt(itemSel.value, 10); render(); });
+$("prev").addEventListener("click", () => { idx -= 1; render(); });
+$("next").addEventListener("click", () => { idx += 1; render(); });
+window.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowLeft")  { idx -= 1; render(); }
+  if (e.key === "ArrowRight") { idx += 1; render(); }
+});
+
+rebuildItemSelect();
+</script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>GCM qualitative — dashboard</title>
+<style>
+  :root {
+    --bg: #0e0f12;
+    --panel: #15171c;
+    --panel-2: #1a1d23;
+    --fg: #e7e9ee;
+    --muted: #9aa3b2;
+    --accent: #6aa6ff;
+    --accent-2: #f08c3c;
+    --border: #292d36;
+    --good: #6cd09a;
+    --bad: #e57777;
+  }
+  html, body { background: var(--bg); color: var(--fg); margin: 0;
+    font: 13px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  header.topbar { padding: 10px 18px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    background: var(--panel); }
+  header.topbar h1 { margin: 0; font-size: 14px; font-weight: 600; }
+  header.topbar .status { color: var(--muted); }
+  header.topbar .pulse { display: inline-block; width: 8px; height: 8px;
+    border-radius: 50%; background: var(--good); margin-right: 6px;
+    box-shadow: 0 0 8px var(--good); }
+  header.topbar .pulse.stale { background: var(--muted); box-shadow: none; }
+
+  .controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  select, button {
+    background: #1f232b; color: var(--fg); border: 1px solid var(--border);
+    padding: 5px 10px; border-radius: 5px; cursor: pointer; font: inherit;
+  }
+  button:hover, select:hover { border-color: var(--accent); }
+  button.active { border-color: var(--accent); background: #243047; }
+  .label { color: var(--muted); margin-right: -4px; }
+  kbd { background: #1f232b; border: 1px solid var(--border);
+    border-bottom-width: 2px; border-radius: 4px; padding: 1px 5px; font-size: 11px; }
+
+  main { padding: 14px 18px; }
+  .stage { display: flex; flex-direction: column; gap: 14px; }
+
+  /* panel */
+  section.panel { background: var(--panel); border: 1px solid var(--border);
+    border-radius: 8px; padding: 14px 16px; }
+  section.panel.intervene { border-color: var(--accent-2); }
+  .panel-header h2 { margin: 0 0 4px; font-size: 13px; color: var(--accent); }
+  .panel-header .panel-sub { color: var(--muted); font-size: 12px; }
+  .panel-body { margin-top: 10px; }
+
+  /* sample header (shows above each observe panel) */
+  aside.sample-header { background: var(--panel-2); border: 1px solid var(--border);
+    border-radius: 6px; padding: 8px 10px; margin-bottom: 10px; font-size: 12px; }
+  aside.sample-header .sample-src, aside.sample-header .sample-tgt { color: var(--muted); margin-top: 2px; }
+  aside.sample-header .sample-tail { color: var(--muted); margin-top: 4px; }
+
+  /* token strip */
+  .strip-block { margin: 8px 0 12px; }
+  .strip-title { color: var(--muted); font-size: 11px; margin-bottom: 4px; }
+  .strip { white-space: pre-wrap; line-height: 1.7; padding: 6px 8px;
+    background: #0a0b0e; border: 1px solid var(--border); border-radius: 5px;
+    word-break: break-word; }
+  .strip .tok { padding: 1px 1px; border-radius: 3px; }
+  .strip-legend { color: var(--muted); font-size: 11px; margin-top: 3px; }
+
+  /* logit lens */
+  .ll-block { margin-top: 10px; }
+  .ll-anchor { margin-bottom: 10px; }
+  .ll-title { color: var(--muted); font-size: 11px; margin-bottom: 4px; }
+  .ll-pair { display: flex; gap: 12px; flex-wrap: wrap; }
+  .ll-col { flex: 1; min-width: 220px; }
+  .ll-sub { color: var(--muted); font-size: 10px; margin-bottom: 2px; text-transform: uppercase; }
+  .ll-table { width: 100%; border-collapse: collapse; background: #0a0b0e;
+    border: 1px solid var(--border); border-radius: 5px; overflow: hidden; font-size: 12px; }
+  .ll-table th, .ll-table td { padding: 3px 8px; border-bottom: 1px solid var(--border);
+    text-align: left; }
+  .ll-table th { background: #14161a; color: var(--muted); font-weight: normal; font-size: 11px; }
+  .ll-table td.num { font-variant-numeric: tabular-nums; color: var(--accent); text-align: right; }
+
+  /* intervene */
+  .kv { margin: 4px 0; }
+  .kv .k { color: var(--muted); margin-right: 6px; }
+  .generations { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+  .gen { background: #0a0b0e; border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; }
+  .gen-title { color: var(--muted); font-size: 11px; margin-bottom: 4px; text-transform: uppercase; }
+  .gen-text { margin: 0; white-space: pre-wrap; font: inherit; }
+  .gen-text.intervened { color: var(--accent-2); }
+
+  .empty { color: var(--muted); padding: 30px; text-align: center; }
+  .grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  @media (min-width: 1400px) { .grid { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <h1>GCM qualitative dashboard</h1>
+  <span class="status"><span id="pulse" class="pulse"></span><span id="status-text">connecting…</span></span>
+  <span class="status" id="counter"></span>
+  <div class="controls" style="margin-left:auto">
+    <span class="label">view</span>
+    <button id="view-stepper" class="active">stepper</button>
+    <button id="view-grid">grid</button>
+    <span class="label">mode</span>
+    <select id="filter-mode">
+      <option value="all">all</option>
+      <option value="observe">observe</option>
+      <option value="intervene">intervene</option>
+    </select>
+    <span class="label">sample</span>
+    <select id="filter-sample"><option value="all">all</option></select>
+    <span class="label">id</span>
+    <select id="filter-id"><option value="all">all</option></select>
+  </div>
+  <div class="controls" id="stepper-controls">
+    <button id="prev">&larr; prev</button>
+    <button id="next">next &rarr;</button>
+    <span class="status">(<kbd>&larr;</kbd>/<kbd>&rarr;</kbd>)</span>
+  </div>
+</header>
+
+<main>
+  <div id="stage" class="stage"></div>
+  <div id="empty" class="empty">no panels yet — submit an <code>observe</code> or <code>intervene</code> command in the REPL.</div>
+</main>
+
+<script>
+let ENTRIES = [];
+let LAST_UPDATED = 0;
+let CURRENT_VIEW = "stepper";   // "stepper" | "grid"
+let CURRENT_IDX = 0;
+let LAST_FETCH_OK = 0;
+
+const $ = (id) => document.getElementById(id);
+
+async function fetchManifest() {
+  try {
+    const r = await fetch("manifest.json?t=" + Date.now(), {cache: "no-store"});
+    if (!r.ok) throw new Error("manifest " + r.status);
+    const m = await r.json();
+    LAST_FETCH_OK = Date.now();
+    setStatus(true);
+    if ((m.updated_at || 0) > LAST_UPDATED || (m.entries || []).length !== ENTRIES.length) {
+      LAST_UPDATED = m.updated_at || 0;
+      ENTRIES = m.entries || [];
+      rebuildFilters();
+      render();
+    }
+  } catch (e) {
+    setStatus(false);
+  }
+}
+
+function setStatus(ok) {
+  const p = $("pulse"), t = $("status-text");
+  if (ok) { p.classList.remove("stale"); t.textContent = "live"; }
+  else    { p.classList.add("stale");    t.textContent = "waiting…"; }
+}
+
+function uniqueValues(field) {
+  return Array.from(new Set(ENTRIES.map(e => e[field]))).sort();
+}
+
+function rebuildFilters() {
+  const mode = $("filter-mode").value;
+  const sampleSel = $("filter-sample"), idSel = $("filter-id");
+  // sample filter
+  const samples = uniqueValues("sample");
+  const prevSample = sampleSel.value;
+  sampleSel.innerHTML = '<option value="all">all</option>' +
+    samples.map(s => `<option value="${s}">${s}</option>`).join("");
+  if (samples.includes(prevSample)) sampleSel.value = prevSample;
+  // id filter (filtered by selected mode + sample)
+  const ids = Array.from(new Set(filteredEntries({skipId:true}).map(e => e.id))).sort();
+  const prevId = idSel.value;
+  idSel.innerHTML = '<option value="all">all</option>' +
+    ids.map(s => `<option value="${s}">${s}</option>`).join("");
+  if (ids.includes(prevId)) idSel.value = prevId;
+}
+
+function filteredEntries(opts={}) {
+  const mode = $("filter-mode").value;
+  const sample = $("filter-sample").value;
+  const id = $("filter-id").value;
+  return ENTRIES.filter(e =>
+    (mode === "all" || e.mode === mode) &&
+    (sample === "all" || e.sample === sample) &&
+    (opts.skipId || id === "all" || e.id === id)
+  );
+}
+
+async function fetchFragment(name) {
+  const r = await fetch(name + "?t=" + Date.now(), {cache: "no-store"});
+  if (!r.ok) return `<div class="empty">missing fragment: ${name}</div>`;
+  return await r.text();
+}
+
+async function render() {
+  const stage = $("stage"), empty = $("empty");
+  const items = filteredEntries();
+  if (items.length === 0) {
+    empty.style.display = "block"; stage.innerHTML = "";
+    $("counter").textContent = "";
+    return;
+  }
+  empty.style.display = "none";
+  if (CURRENT_VIEW === "stepper") {
+    if (CURRENT_IDX >= items.length) CURRENT_IDX = 0;
+    if (CURRENT_IDX < 0) CURRENT_IDX = items.length - 1;
+    const e = items[CURRENT_IDX];
+    const html = await fetchFragment(e.fragment);
+    stage.className = "stage";
+    stage.innerHTML = html;
+    $("counter").textContent = `(${CURRENT_IDX+1} / ${items.length})  ${e.mode}: ${e.id} — ${e.sample}`;
+  } else {
+    stage.className = "grid";
+    const fragments = await Promise.all(items.map(e => fetchFragment(e.fragment)));
+    stage.innerHTML = fragments.join("");
+    $("counter").textContent = `${items.length} panels`;
+  }
+}
+
+function setView(v) {
+  CURRENT_VIEW = v;
+  $("view-stepper").classList.toggle("active", v === "stepper");
+  $("view-grid").classList.toggle("active", v === "grid");
+  $("stepper-controls").style.visibility = v === "stepper" ? "visible" : "hidden";
+  render();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  $("view-stepper").addEventListener("click", () => setView("stepper"));
+  $("view-grid").addEventListener("click", () => setView("grid"));
+  ["filter-mode", "filter-sample", "filter-id"].forEach(id => {
+    $(id).addEventListener("change", () => { CURRENT_IDX = 0; rebuildFilters(); render(); });
+  });
+  $("prev").addEventListener("click", () => { CURRENT_IDX -= 1; render(); });
+  $("next").addEventListener("click", () => { CURRENT_IDX += 1; render(); });
+  window.addEventListener("keydown", (e) => {
+    if (e.target.tagName === "SELECT" || e.target.tagName === "INPUT") return;
+    if (CURRENT_VIEW !== "stepper") return;
+    if (e.key === "ArrowLeft")  { CURRENT_IDX -= 1; render(); }
+    if (e.key === "ArrowRight") { CURRENT_IDX += 1; render(); }
+  });
+  fetchManifest();
+  setInterval(fetchManifest, 1500);
+  setInterval(() => {
+    if (Date.now() - LAST_FETCH_OK > 5000) setStatus(false);
+  }, 2000);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,907 @@
+[gcm_null_smoke] host=scc-b04
+GPU 0: NVIDIA RTX PRO 6000 Blackwell Server Edition (UUID: GPU-fb1b57ca-e4e8-23bb-788e-c26c36aaadcc)
+2026-04-29 13:53:59,570 [INFO] === GCM translation: English__Spanish ===
+2026-04-29 13:53:59,570 [INFO]   n_pairs=5  components=both  out=outputs/gcm_translation_null_smoke/English__Spanish
+2026-04-29 13:53:59,570 [INFO] Loading model meta-llama/Llama-3.1-8B and SAE jbrinkma/sae-llama-3-8b-layer16...
+`torch_dtype` is deprecated! Use `dtype` instead!
+/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/cuda/__init__.py:235: UserWarning: 
+NVIDIA RTX PRO 6000 Blackwell Server Edition with CUDA capability sm_120 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_50 sm_60 sm_61 sm_70 sm_75 sm_80 sm_86 sm_90.
+If you want to use the NVIDIA RTX PRO 6000 Blackwell Server Edition GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(
+2026-04-29 13:54:06,795 [INFO]   loaded in 7.2s on cuda
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-29 13:54:07,121 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-04-29 13:54:07,165 [WARNING] Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-29 13:54:07,658 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'spa' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/spa/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:42:49 2025).
+2026-04-29 13:54:07,664 [WARNING] Found the latest cached dataset configuration 'spa' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/spa/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:42:49 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-29 13:54:07,763 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-04-29 13:54:07,769 [WARNING] Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-29 13:54:07,857 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'spa' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/spa/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:42:49 2025).
+2026-04-29 13:54:07,862 [WARNING] Found the latest cached dataset configuration 'spa' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/spa/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:42:49 2025).
+2026-04-29 13:54:07,893 [INFO] NULL mode: sampled 5 (A, B, C) triples (split=dev); shots from indices (0,1). Neither tgt_B nor tgt_C is the gold translation of A.
+You're using a PreTrainedTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:03<00:11,  3.76s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:07<00:07,  3.75s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:11<00:03,  3.70s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:12<00:00,  2.62s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:12<00:00,  3.03s/it]
+2026-04-29 13:54:21,543 [WARNING]   [1/5] SAE FAILED on eng__spa__null__798_115_58: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 368, in forward
+    inputs_embeds: torch.Tensor = self.embed_tokens(input_ids)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/sparse.py", line 190, in forward
+    return F.embedding(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2026-04-29 13:54:21,715 [WARNING]   [1/5] HEADS FAILED on eng__spa__null__798_115_58: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 368, in forward
+    inputs_embeds: torch.Tensor = self.embed_tokens(input_ids)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/sparse.py", line 190, in forward
+    return F.embedding(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2026-04-29 13:54:21,810 [WARNING]   [2/5] SAE FAILED on eng__spa__null__55_931_874: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 368, in forward
+    inputs_embeds: torch.Tensor = self.embed_tokens(input_ids)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/sparse.py", line 190, in forward
+    return F.embedding(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2026-04-29 13:54:21,904 [WARNING]   [2/5] HEADS FAILED on eng__spa__null__55_931_874: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 368, in forward
+    inputs_embeds: torch.Tensor = self.embed_tokens(input_ids)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/sparse.py", line 190, in forward
+    return F.embedding(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2026-04-29 13:54:21,997 [WARNING]   [3/5] SAE FAILED on eng__spa__null__526_924_335: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 368, in forward
+    inputs_embeds: torch.Tensor = self.embed_tokens(input_ids)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/sparse.py", line 190, in forward
+    return F.embedding(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2026-04-29 13:54:22,092 [WARNING]   [3/5] HEADS FAILED on eng__spa__null__526_924_335: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 368, in forward
+    inputs_embeds: torch.Tensor = self.embed_tokens(input_ids)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/sparse.py", line 190, in forward
+    return F.embedding(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2026-04-29 13:54:22,186 [WARNING]   [4/5] SAE FAILED on eng__spa__null__430_291_907: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 368, in forward
+    inputs_embeds: torch.Tensor = self.embed_tokens(input_ids)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/sparse.py", line 190, in forward
+    return F.embedding(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2026-04-29 13:54:22,280 [WARNING]   [4/5] HEADS FAILED on eng__spa__null__430_291_907: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 368, in forward
+    inputs_embeds: torch.Tensor = self.embed_tokens(input_ids)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/sparse.py", line 190, in forward
+    return F.embedding(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2026-04-29 13:54:22,374 [WARNING]   [5/5] SAE FAILED on eng__spa__null__476_771_449: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 368, in forward
+    inputs_embeds: torch.Tensor = self.embed_tokens(input_ids)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/sparse.py", line 190, in forward
+    return F.embedding(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2026-04-29 13:54:22,469 [WARNING]   [5/5] HEADS FAILED on eng__spa__null__476_771_449: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 368, in forward
+    inputs_embeds: torch.Tensor = self.embed_tokens(input_ids)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/sparse.py", line 190, in forward
+    return F.embedding(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2026-04-29 13:54:22,550 [INFO]   [5/5] 2.9s/pair  ETA 0.0min  sae_ok=0  heads_ok=0
+2026-04-29 13:54:22,596 [INFO] Saved heads_ie.pt  shape=(5, 32, 32)
+2026-04-29 13:54:22,598 [INFO] Saved sae_ie.pt  shape=(5, 32768)
+2026-04-29 13:54:22,657 [INFO] Done. Summary: {'src_lang': 'English', 'tgt_lang': 'Spanish', 'direction_key': 'English__Spanish', 'null_control': True, 'n_pairs_attempted': 5, 'n_pairs_successful_heads': 0, 'n_pairs_successful_sae': 0, 'seed': 42, 'split': 'dev', 'max_response_tokens': 128, 'elapsed_seconds': 14.759332656860352, 'model_id': 'meta-llama/Llama-3.1-8B', 'sae_id': 'jbrinkma/sae-llama-3-8b-layer16'}
+2026-04-29 13:54:34,458 [INFO] === GCM translation: English__English ===
+2026-04-29 13:54:34,458 [INFO]   n_pairs=5  components=both  out=outputs/gcm_translation_null_smoke/English__English
+2026-04-29 13:54:34,458 [INFO] Loading model meta-llama/Llama-3.1-8B and SAE jbrinkma/sae-llama-3-8b-layer16...
+`torch_dtype` is deprecated! Use `dtype` instead!
+/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/cuda/__init__.py:235: UserWarning: 
+NVIDIA RTX PRO 6000 Blackwell Server Edition with CUDA capability sm_120 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_50 sm_60 sm_61 sm_70 sm_75 sm_80 sm_86 sm_90.
+If you want to use the NVIDIA RTX PRO 6000 Blackwell Server Edition GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(
+2026-04-29 13:54:40,232 [INFO]   loaded in 5.8s on cuda
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-29 13:54:40,592 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-04-29 13:54:40,615 [WARNING] Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-29 13:54:40,748 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-04-29 13:54:40,752 [WARNING] Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-29 13:54:40,836 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-04-29 13:54:40,841 [WARNING] Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-04-29 13:54:40,871 [INFO] NULL mode: sampled 5 (A, B, C) triples (split=dev); shots from indices (0,1). Neither tgt_B nor tgt_C is the gold translation of A.
+You're using a PreTrainedTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:03,  1.19s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:02<00:02,  1.19s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:03<00:01,  1.18s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.22it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.05it/s]
+2026-04-29 13:54:44,984 [WARNING]   [1/5] SAE FAILED on eng__eng__null__798_115_58: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 368, in forward
+    inputs_embeds: torch.Tensor = self.embed_tokens(input_ids)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/sparse.py", line 190, in forward
+    return F.embedding(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2026-04-29 13:54:45,150 [WARNING]   [1/5] HEADS FAILED on eng__eng__null__798_115_58: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 368, in forward
+    inputs_embeds: torch.Tensor = self.embed_tokens(input_ids)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/sparse.py", line 190, in forward
+    return F.embedding(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2026-04-29 13:54:45,245 [WARNING]   [2/5] SAE FAILED on eng__eng__null__55_931_874: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 368, in forward
+    inputs_embeds: torch.Tensor = self.embed_tokens(input_ids)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/sparse.py", line 190, in forward
+    return F.embedding(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2026-04-29 13:54:45,338 [WARNING]   [2/5] HEADS FAILED on eng__eng__null__55_931_874: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 368, in forward
+    inputs_embeds: torch.Tensor = self.embed_tokens(input_ids)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/sparse.py", line 190, in forward
+    return F.embedding(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2026-04-29 13:54:45,431 [WARNING]   [3/5] SAE FAILED on eng__eng__null__526_924_335: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 368, in forward
+    inputs_embeds: torch.Tensor = self.embed_tokens(input_ids)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/sparse.py", line 190, in forward
+    return F.embedding(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2026-04-29 13:54:45,524 [WARNING]   [3/5] HEADS FAILED on eng__eng__null__526_924_335: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 368, in forward
+    inputs_embeds: torch.Tensor = self.embed_tokens(input_ids)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/sparse.py", line 190, in forward
+    return F.embedding(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2026-04-29 13:54:45,617 [WARNING]   [4/5] SAE FAILED on eng__eng__null__430_291_907: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 368, in forward
+    inputs_embeds: torch.Tensor = self.embed_tokens(input_ids)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/sparse.py", line 190, in forward
+    return F.embedding(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2026-04-29 13:54:45,711 [WARNING]   [4/5] HEADS FAILED on eng__eng__null__430_291_907: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 368, in forward
+    inputs_embeds: torch.Tensor = self.embed_tokens(input_ids)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/sparse.py", line 190, in forward
+    return F.embedding(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2026-04-29 13:54:45,804 [WARNING]   [5/5] SAE FAILED on eng__eng__null__476_771_449: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 368, in forward
+    inputs_embeds: torch.Tensor = self.embed_tokens(input_ids)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/sparse.py", line 190, in forward
+    return F.embedding(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2026-04-29 13:54:45,897 [WARNING]   [5/5] HEADS FAILED on eng__eng__null__476_771_449: NNsightException: 
+
+Traceback (most recent call last):
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 918, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 459, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/transformers/models/llama/modeling_llama.py", line 368, in forward
+    inputs_embeds: torch.Tensor = self.embed_tokens(input_ids)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/modules/sparse.py", line 190, in forward
+    return F.embedding(
+  File "/projectnb/mcnet/jbrin/.conda/envs/probes/lib/python3.11/site-packages/torch/nn/functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2026-04-29 13:54:45,980 [INFO]   [5/5] 1.0s/pair  ETA 0.0min  sae_ok=0  heads_ok=0
+2026-04-29 13:54:45,984 [INFO] Saved heads_ie.pt  shape=(5, 32, 32)
+2026-04-29 13:54:45,986 [INFO] Saved sae_ie.pt  shape=(5, 32768)
+2026-04-29 13:54:45,993 [INFO] Done. Summary: {'src_lang': 'English', 'tgt_lang': 'English', 'direction_key': 'English__English', 'null_control': True, 'n_pairs_attempted': 5, 'n_pairs_successful_heads': 0, 'n_pairs_successful_sae': 0, 'seed': 42, 'split': 'dev', 'max_response_tokens': 128, 'elapsed_seconds': 5.118695259094238, 'model_id': 'meta-llama/Llama-3.1-8B', 'sae_id': 'jbrinkma/sae-llama-3-8b-layer16'}
+[gcm_null_smoke] done
+[gcm_null_smoke] host=scc-513
+GPU 0: NVIDIA L40S (UUID: GPU-b4ae01b1-5b22-4359-44e1-ed22bb71a886)
+GPU 1: NVIDIA L40S (UUID: GPU-e0d26ad8-21f3-4ed2-5fc1-31835bbdeb90)
+GPU 2: NVIDIA L40S (UUID: GPU-8ae0b493-ae73-ee89-1167-29d81cc784b9)
+GPU 3: NVIDIA L40S (UUID: GPU-cb7980c9-0b80-0611-e04c-0a2cd77f61e9)
+2026-04-29 20:00:31,504 [INFO] === GCM translation: English__Spanish ===
+2026-04-29 20:00:31,504 [INFO]   n_pairs=5  components=both  out=outputs/gcm_translation_null_smoke/English__Spanish
+2026-04-29 20:00:31,735 [INFO] GPU compute capability: 8.9
+2026-04-29 20:00:31,735 [INFO] Loading model meta-llama/Llama-3.1-8B and SAE jbrinkma/sae-llama-3-8b-layer16...
+`torch_dtype` is deprecated! Use `dtype` instead!
+2026-04-29 20:00:39,770 [INFO]   loaded in 8.0s on cuda
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-29 20:00:39,988 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-04-29 20:00:40,019 [WARNING] Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-29 20:00:40,507 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'spa' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/spa/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:42:49 2025).
+2026-04-29 20:00:40,513 [WARNING] Found the latest cached dataset configuration 'spa' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/spa/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:42:49 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-29 20:00:40,604 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-04-29 20:00:40,608 [WARNING] Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-29 20:00:40,687 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'spa' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/spa/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:42:49 2025).
+2026-04-29 20:00:40,692 [WARNING] Found the latest cached dataset configuration 'spa' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/spa/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:42:49 2025).
+2026-04-29 20:00:40,723 [INFO] NULL mode: sampled 5 (A, B, C) triples (split=dev); shots from indices (0,1). Neither tgt_B nor tgt_C is the gold translation of A.
+You're using a PreTrainedTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:02<00:08,  2.97s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:05<00:05,  2.93s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:08<00:02,  2.90s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:09<00:00,  2.15s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:09<00:00,  2.43s/it]
+2026-04-29 20:01:27,162 [INFO]   [5/5] 9.3s/pair  ETA 0.0min  sae_ok=5  heads_ok=5
+2026-04-29 20:01:27,167 [INFO] Saved heads_ie.pt  shape=(5, 32, 32)
+2026-04-29 20:01:27,170 [INFO] Saved sae_ie.pt  shape=(5, 32768)
+2026-04-29 20:01:27,341 [INFO] Done. Summary: {'src_lang': 'English', 'tgt_lang': 'Spanish', 'direction_key': 'English__Spanish', 'null_control': True, 'n_pairs_attempted': 5, 'n_pairs_successful_heads': 5, 'n_pairs_successful_sae': 5, 'seed': 42, 'split': 'dev', 'max_response_tokens': 128, 'elapsed_seconds': 46.613954067230225, 'model_id': 'meta-llama/Llama-3.1-8B', 'sae_id': 'jbrinkma/sae-llama-3-8b-layer16', 'sae_clean_frac_orig_preferred_pertoken': 0.4, 'sae_clean_mean_logp_orig_pertoken': -2.782742730775678, 'sae_clean_mean_logp_cf_pertoken': -2.662675407141273, 'sae_max_orig_drift': 4.667747497558594, 'sae_mean_orig_drift': 2.375262451171875, 'head_max_orig_drift': 17.32537841796875, 'head_mean_orig_drift': 9.324234008789062}
+2026-04-29 20:01:39,015 [INFO] === GCM translation: English__English ===
+2026-04-29 20:01:39,015 [INFO]   n_pairs=5  components=both  out=outputs/gcm_translation_null_smoke/English__English
+2026-04-29 20:01:39,178 [INFO] GPU compute capability: 8.9
+2026-04-29 20:01:39,178 [INFO] Loading model meta-llama/Llama-3.1-8B and SAE jbrinkma/sae-llama-3-8b-layer16...
+`torch_dtype` is deprecated! Use `dtype` instead!
+2026-04-29 20:01:46,108 [INFO]   loaded in 6.9s on cuda
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-29 20:01:46,370 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-04-29 20:01:46,385 [WARNING] Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-29 20:01:46,509 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-04-29 20:01:46,514 [WARNING] Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-29 20:01:46,598 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-04-29 20:01:46,603 [WARNING] Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-04-29 20:01:46,633 [INFO] NULL mode: sampled 5 (A, B, C) triples (split=dev); shots from indices (0,1). Neither tgt_B nor tgt_C is the gold translation of A.
+You're using a PreTrainedTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:02,  1.50it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:01<00:01,  1.49it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:01<00:00,  1.51it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.56it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.54it/s]
+2026-04-29 20:02:18,740 [INFO]   [5/5] 6.4s/pair  ETA 0.0min  sae_ok=5  heads_ok=5
+2026-04-29 20:02:18,745 [INFO] Saved heads_ie.pt  shape=(5, 32, 32)
+2026-04-29 20:02:18,748 [INFO] Saved sae_ie.pt  shape=(5, 32768)
+2026-04-29 20:02:18,755 [INFO] Done. Summary: {'src_lang': 'English', 'tgt_lang': 'English', 'direction_key': 'English__English', 'null_control': True, 'n_pairs_attempted': 5, 'n_pairs_successful_heads': 5, 'n_pairs_successful_sae': 5, 'seed': 42, 'split': 'dev', 'max_response_tokens': 128, 'elapsed_seconds': 32.11938285827637, 'model_id': 'meta-llama/Llama-3.1-8B', 'sae_id': 'jbrinkma/sae-llama-3-8b-layer16', 'sae_clean_frac_orig_preferred_pertoken': 0.6, 'sae_clean_mean_logp_orig_pertoken': -3.573524330682843, 'sae_clean_mean_logp_cf_pertoken': -3.6538172565064877, 'sae_max_orig_drift': 5.119010925292969, 'sae_mean_orig_drift': 3.6603240966796875, 'head_max_orig_drift': 16.385833740234375, 'head_mean_orig_drift': 10.43805389404297}
+[gcm_null_smoke] done

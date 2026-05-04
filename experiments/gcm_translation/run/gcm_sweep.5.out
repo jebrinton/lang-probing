@@ -1,0 +1,57 @@
+[gcm_sweep.5] host=scc-605  direction=English -> Arabic
+GPU 0: NVIDIA RTX A6000 (UUID: GPU-a1dee528-ffac-1f4b-78f5-85a3a15b85be)
+GPU 1: NVIDIA RTX A6000 (UUID: GPU-a5fc8098-e06f-9542-12b1-1bbc6a2142a4)
+GPU 2: NVIDIA RTX A6000 (UUID: GPU-ecb2222b-c333-9e4f-2cdb-5cc18aa43118)
+GPU 3: NVIDIA RTX A6000 (UUID: GPU-cc000dac-c6a5-86cf-72d0-a9cc43513ea1)
+GPU 4: NVIDIA RTX A6000 (UUID: GPU-0501934d-3c63-06f1-17c3-1911bb4c2178)
+GPU 5: NVIDIA RTX A6000 (UUID: GPU-3b8dbdab-6817-5c73-a3ab-6ae13a8388ea)
+GPU 6: NVIDIA RTX A6000 (UUID: GPU-ff35631d-ec1c-21fa-3fb3-65340c2f2e1c)
+GPU 7: NVIDIA RTX A6000 (UUID: GPU-143ddd19-c789-a2c2-67b5-7d61e46310cc)
+2026-04-28 01:41:58,207 [INFO] === GCM translation: English__Arabic ===
+2026-04-28 01:41:58,207 [INFO]   n_pairs=100  components=both  out=outputs/gcm_translation/English__Arabic
+2026-04-28 01:41:58,207 [INFO] Loading model meta-llama/Llama-3.1-8B and SAE jbrinkma/sae-llama-3-8b-layer16...
+`torch_dtype` is deprecated! Use `dtype` instead!
+2026-04-28 01:42:05,270 [INFO]   loaded in 7.1s on cuda
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-28 01:42:05,426 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-04-28 01:42:05,447 [WARNING] Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-28 01:42:05,806 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'ara' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/ara/1.0.0/bc58ae43b22607b3e1e2bf3ae1bc5cb053495abb (last modified on Tue Jun 17 11:30:57 2025).
+2026-04-28 01:42:05,840 [WARNING] Found the latest cached dataset configuration 'ara' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/ara/1.0.0/bc58ae43b22607b3e1e2bf3ae1bc5cb053495abb (last modified on Tue Jun 17 11:30:57 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-28 01:42:05,955 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+2026-04-28 01:42:05,961 [WARNING] Found the latest cached dataset configuration 'eng' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/eng/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:43:04 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-28 01:42:06,070 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'ara' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/ara/1.0.0/bc58ae43b22607b3e1e2bf3ae1bc5cb053495abb (last modified on Tue Jun 17 11:30:57 2025).
+2026-04-28 01:42:06,079 [WARNING] Found the latest cached dataset configuration 'ara' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/ara/1.0.0/bc58ae43b22607b3e1e2bf3ae1bc5cb053495abb (last modified on Tue Jun 17 11:30:57 2025).
+2026-04-28 01:42:06,110 [INFO] Sampled 100 pairs (split=dev); shots from indices (0,1).
+You're using a PreTrainedTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:05<00:17,  5.88s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:08<00:08,  4.17s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:09<00:02,  2.77s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:10<00:00,  1.77s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:10<00:00,  2.55s/it]
+2026-04-28 01:42:32,318 [INFO]   [5/100] 5.2s/pair  ETA 8.3min  sae_ok=5  heads_ok=5
+2026-04-28 01:42:47,434 [INFO]   [10/100] 4.1s/pair  ETA 6.2min  sae_ok=10  heads_ok=10
+2026-04-28 01:43:02,256 [INFO]   [15/100] 3.7s/pair  ETA 5.3min  sae_ok=15  heads_ok=15
+2026-04-28 01:43:17,277 [INFO]   [20/100] 3.6s/pair  ETA 4.7min  sae_ok=20  heads_ok=20
+2026-04-28 01:43:32,283 [INFO]   [25/100] 3.4s/pair  ETA 4.3min  sae_ok=25  heads_ok=25
+2026-04-28 01:43:47,330 [INFO]   [30/100] 3.4s/pair  ETA 3.9min  sae_ok=30  heads_ok=30
+2026-04-28 01:44:02,583 [INFO]   [35/100] 3.3s/pair  ETA 3.6min  sae_ok=35  heads_ok=35
+2026-04-28 01:44:17,613 [INFO]   [40/100] 3.3s/pair  ETA 3.3min  sae_ok=40  heads_ok=40
+2026-04-28 01:44:32,865 [INFO]   [45/100] 3.3s/pair  ETA 3.0min  sae_ok=45  heads_ok=45
+2026-04-28 01:44:47,863 [INFO]   [50/100] 3.2s/pair  ETA 2.7min  sae_ok=50  heads_ok=50
+2026-04-28 01:45:03,274 [INFO]   [55/100] 3.2s/pair  ETA 2.4min  sae_ok=55  heads_ok=55
+2026-04-28 01:45:18,246 [INFO]   [60/100] 3.2s/pair  ETA 2.1min  sae_ok=60  heads_ok=60
+2026-04-28 01:45:33,266 [INFO]   [65/100] 3.2s/pair  ETA 1.9min  sae_ok=65  heads_ok=65
+2026-04-28 01:45:48,464 [INFO]   [70/100] 3.2s/pair  ETA 1.6min  sae_ok=70  heads_ok=70
+2026-04-28 01:46:03,541 [INFO]   [75/100] 3.2s/pair  ETA 1.3min  sae_ok=75  heads_ok=75
+2026-04-28 01:46:18,324 [INFO]   [80/100] 3.2s/pair  ETA 1.1min  sae_ok=80  heads_ok=80
+2026-04-28 01:46:33,277 [INFO]   [85/100] 3.1s/pair  ETA 0.8min  sae_ok=85  heads_ok=85
+2026-04-28 01:46:48,250 [INFO]   [90/100] 3.1s/pair  ETA 0.5min  sae_ok=90  heads_ok=90
+2026-04-28 01:47:03,302 [INFO]   [95/100] 3.1s/pair  ETA 0.3min  sae_ok=95  heads_ok=95
+2026-04-28 01:47:18,387 [INFO]   [100/100] 3.1s/pair  ETA 0.0min  sae_ok=100  heads_ok=100
+2026-04-28 01:47:18,392 [INFO] Saved heads_ie.pt  shape=(100, 32, 32)
+2026-04-28 01:47:18,416 [INFO] Saved sae_ie.pt  shape=(100, 32768)
+2026-04-28 01:47:18,447 [INFO] Done. Summary: {'src_lang': 'English', 'tgt_lang': 'Arabic', 'direction_key': 'English__Arabic', 'n_pairs_attempted': 100, 'n_pairs_successful_heads': 100, 'n_pairs_successful_sae': 100, 'seed': 42, 'split': 'dev', 'max_response_tokens': 128, 'elapsed_seconds': 312.33429050445557, 'model_id': 'meta-llama/Llama-3.1-8B', 'sae_id': 'jbrinkma/sae-llama-3-8b-layer16', 'sae_clean_frac_orig_preferred_pertoken': 0.99, 'sae_clean_mean_logp_orig_pertoken': -1.1346425835168643, 'sae_clean_mean_logp_cf_pertoken': -2.8655527424587954, 'sae_max_orig_drift': 0.0, 'sae_mean_orig_drift': 0.0, 'head_max_orig_drift': 0.0, 'head_mean_orig_drift': 0.0}
+[gcm_sweep.5] done

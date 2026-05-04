@@ -1,0 +1,50 @@
+[gcm_null.64] host=scc-212  null direction=Hebrew -> Hebrew
+GPU 0: NVIDIA A100 80GB PCIe (UUID: GPU-d22367e0-76dd-f7b8-d8b4-11c056b9910d)
+GPU 1: NVIDIA A100 80GB PCIe (UUID: GPU-809bb8e3-2f38-cc55-1e11-51980ab4d0c8)
+GPU 2: NVIDIA A100 80GB PCIe (UUID: GPU-796dc0ce-242f-5eb3-5381-0dd79067eb5a)
+GPU 3: NVIDIA A100 80GB PCIe (UUID: GPU-affa00ea-ce17-4eb0-6ed5-7f188115872d)
+2026-04-30 05:48:49,111 [INFO] === GCM translation: Hebrew__Hebrew ===
+2026-04-30 05:48:49,111 [INFO]   n_pairs=100  components=both  out=outputs/gcm_translation_null/Hebrew__Hebrew
+2026-04-30 05:48:49,385 [INFO] GPU compute capability: 8.0
+2026-04-30 05:48:49,385 [INFO] Loading model meta-llama/Llama-3.1-8B and SAE jbrinkma/sae-llama-3-8b-layer16...
+`torch_dtype` is deprecated! Use `dtype` instead!
+2026-04-30 05:48:55,311 [INFO]   loaded in 5.9s on cuda
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-30 05:48:55,519 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'heb' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/heb/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:55:57 2025).
+2026-04-30 05:48:55,539 [WARNING] Found the latest cached dataset configuration 'heb' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/heb/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:55:57 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-30 05:48:55,679 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'heb' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/heb/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:55:57 2025).
+2026-04-30 05:48:55,685 [WARNING] Found the latest cached dataset configuration 'heb' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/heb/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:55:57 2025).
+Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+2026-04-30 05:48:55,776 [WARNING] Using the latest cached version of the dataset since gsarti/flores_101 couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'heb' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/heb/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:55:57 2025).
+2026-04-30 05:48:55,782 [WARNING] Found the latest cached dataset configuration 'heb' at /projectnb/mcnet/jbrin/.cache/huggingface/datasets/gsarti___flores_101/heb/1.0.0/e663cc717b274f2cef5142df786973abbf1966a7115d99509c062936d77d4335 (last modified on Tue Jun 24 01:55:57 2025).
+2026-04-30 05:48:55,824 [INFO] NULL mode: sampled 100 (A, B, C) triples (split=dev); shots from indices (0,1). Neither tgt_B nor tgt_C is the gold translation of A.
+You're using a PreTrainedTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:03,  1.09s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:02<00:02,  1.13s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:03<00:01,  1.11s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.30it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.12it/s]
+2026-04-30 05:49:18,561 [INFO]   [5/100] 4.5s/pair  ETA 7.2min  sae_ok=5  heads_ok=5
+2026-04-30 05:49:37,515 [INFO]   [10/100] 4.2s/pair  ETA 6.3min  sae_ok=10  heads_ok=10
+2026-04-30 05:49:56,668 [INFO]   [15/100] 4.1s/pair  ETA 5.7min  sae_ok=15  heads_ok=15
+2026-04-30 05:50:16,015 [INFO]   [20/100] 4.0s/pair  ETA 5.3min  sae_ok=20  heads_ok=20
+2026-04-30 05:50:35,212 [INFO]   [25/100] 4.0s/pair  ETA 5.0min  sae_ok=25  heads_ok=25
+2026-04-30 05:50:54,325 [INFO]   [30/100] 4.0s/pair  ETA 4.6min  sae_ok=30  heads_ok=30
+2026-04-30 05:51:13,301 [INFO]   [35/100] 3.9s/pair  ETA 4.3min  sae_ok=35  heads_ok=35
+2026-04-30 05:51:32,624 [INFO]   [40/100] 3.9s/pair  ETA 3.9min  sae_ok=40  heads_ok=40
+2026-04-30 05:51:51,793 [INFO]   [45/100] 3.9s/pair  ETA 3.6min  sae_ok=45  heads_ok=45
+2026-04-30 05:52:10,922 [INFO]   [50/100] 3.9s/pair  ETA 3.3min  sae_ok=50  heads_ok=50
+2026-04-30 05:52:29,817 [INFO]   [55/100] 3.9s/pair  ETA 2.9min  sae_ok=55  heads_ok=55
+2026-04-30 05:52:48,847 [INFO]   [60/100] 3.9s/pair  ETA 2.6min  sae_ok=60  heads_ok=60
+2026-04-30 05:53:08,177 [INFO]   [65/100] 3.9s/pair  ETA 2.3min  sae_ok=65  heads_ok=65
+2026-04-30 05:53:27,319 [INFO]   [70/100] 3.9s/pair  ETA 1.9min  sae_ok=70  heads_ok=70
+2026-04-30 05:53:46,556 [INFO]   [75/100] 3.9s/pair  ETA 1.6min  sae_ok=75  heads_ok=75
+2026-04-30 05:54:05,832 [INFO]   [80/100] 3.9s/pair  ETA 1.3min  sae_ok=80  heads_ok=80
+2026-04-30 05:54:25,025 [INFO]   [85/100] 3.9s/pair  ETA 1.0min  sae_ok=85  heads_ok=85
+2026-04-30 05:54:44,278 [INFO]   [90/100] 3.9s/pair  ETA 0.6min  sae_ok=90  heads_ok=90
+2026-04-30 05:55:03,766 [INFO]   [95/100] 3.9s/pair  ETA 0.3min  sae_ok=95  heads_ok=95
+2026-04-30 05:55:22,904 [INFO]   [100/100] 3.9s/pair  ETA 0.0min  sae_ok=100  heads_ok=100
+2026-04-30 05:55:22,909 [INFO] Saved heads_ie.pt  shape=(100, 32, 32)
+2026-04-30 05:55:22,938 [INFO] Saved sae_ie.pt  shape=(100, 32768)
+2026-04-30 05:55:22,980 [INFO] Done. Summary: {'src_lang': 'Hebrew', 'tgt_lang': 'Hebrew', 'direction_key': 'Hebrew__Hebrew', 'null_control': True, 'n_pairs_attempted': 100, 'n_pairs_successful_heads': 100, 'n_pairs_successful_sae': 100, 'seed': 42, 'split': 'dev', 'max_response_tokens': 128, 'elapsed_seconds': 387.1512248516083, 'model_id': 'meta-llama/Llama-3.1-8B', 'sae_id': 'jbrinkma/sae-llama-3-8b-layer16', 'sae_clean_frac_orig_preferred_pertoken': 0.48, 'sae_clean_mean_logp_orig_pertoken': -1.2204446216263214, 'sae_clean_mean_logp_cf_pertoken': -1.2120488727994738, 'sae_max_orig_drift': 6.032135009765625, 'sae_mean_orig_drift': 1.6799551391601562, 'head_max_orig_drift': 16.6907958984375, 'head_mean_orig_drift': 4.5143774795532225}
+[gcm_null.64] done

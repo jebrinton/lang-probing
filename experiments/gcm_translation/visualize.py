@@ -1,18 +1,20 @@
 """
 Plotting for GCM translation attribution.
 
-Per-direction:
-  - heads_heatmap.png          — [n_layers, n_heads] mean-abs IE colormap
-  - top_heads_bar.png          — top-20 heads with error bars across pairs
-  - top_sae_bar.png            — top-50 SAE features
+Per-direction (one file per (src, tgt), saved into a subdir per plot type):
+  - heads_heatmap/<src>__<tgt>_heads_heatmap.png               — [L, H] mean-abs IE
+  - heads_signed_heatmap/<src>__<tgt>_heads_signed_heatmap.png — [L, H] signed mean IE
+  - top_heads_bar/<src>__<tgt>_top_heads_bar.png               — top-20 heads, error bars
+  - top_sae_bar/<src>__<tgt>_top_sae_bar.png                   — top-50 SAE features
 
-Cross-direction (run after analyze.py):
+Cross-direction / global (run after analyze.py — saved at the root of img/):
   - universal_heads_heatmap.png  — n_directions_in_topk per (layer, head)
-  - signed_ie_per_direction.png  — for top-5 universal heads, signed IE per direction
 
 Output convention: figures are saved under the experiment-local
 `experiments/gcm_translation/img/` (not the repo-level `img/`) so the
-experiment folder is self-contained and portable.
+experiment folder is self-contained and portable. Per-direction plots
+are bucketed into per-plot-type subdirs to keep the directory navigable
+when sweeping many language pairs.
 """
 from __future__ import annotations
 
@@ -28,9 +30,18 @@ DEFAULT_IMG_DIR = EXP_DIR / "img"
 import torch
 
 
+PER_DIRECTION_SUBDIRS = (
+    "heads_heatmap",
+    "heads_signed_heatmap",
+    "top_heads_bar",
+    "top_sae_bar",
+)
+
+
 def plot_direction(direction_dir: Path, img_dir: Path):
     name = direction_dir.name
-    img_dir.mkdir(parents=True, exist_ok=True)
+    for sub in PER_DIRECTION_SUBDIRS:
+        (img_dir / sub).mkdir(parents=True, exist_ok=True)
 
     heads_path = direction_dir / "heads_ie.pt"
     sae_path = direction_dir / "sae_ie.pt"
@@ -47,7 +58,7 @@ def plot_direction(direction_dir: Path, img_dir: Path):
         ax.set_title(f"{name}  mean |IE|  (N={heads.shape[0]} pairs)")
         plt.colorbar(im, ax=ax)
         plt.tight_layout()
-        plt.savefig(img_dir / f"{name}_heads_heatmap.png", dpi=120)
+        plt.savefig(img_dir / "heads_heatmap" / f"{name}_heads_heatmap.png", dpi=120)
         plt.close(fig)
 
         # signed mean for direction info
@@ -60,7 +71,7 @@ def plot_direction(direction_dir: Path, img_dir: Path):
         ax.set_title(f"{name}  signed mean IE  (red=increases logp(r_cf|p_orig))")
         plt.colorbar(im, ax=ax)
         plt.tight_layout()
-        plt.savefig(img_dir / f"{name}_heads_signed_heatmap.png", dpi=120)
+        plt.savefig(img_dir / "heads_signed_heatmap" / f"{name}_heads_signed_heatmap.png", dpi=120)
         plt.close(fig)
 
     if top_path.exists():
@@ -85,7 +96,7 @@ def plot_direction(direction_dir: Path, img_dir: Path):
             ax.set_ylabel("mean |IE| (+- std across pairs)")
             ax.set_title(f"{name}  top-20 heads")
             plt.tight_layout()
-            plt.savefig(img_dir / f"{name}_top_heads_bar.png", dpi=120)
+            plt.savefig(img_dir / "top_heads_bar" / f"{name}_top_heads_bar.png", dpi=120)
             plt.close(fig)
 
         # Top-50 SAE bar
@@ -101,7 +112,7 @@ def plot_direction(direction_dir: Path, img_dir: Path):
             ax.set_ylabel("mean |IE|")
             ax.set_title(f"{name}  top-50 SAE features  (red=positive signed IE, blue=negative)")
             plt.tight_layout()
-            plt.savefig(img_dir / f"{name}_top_sae_bar.png", dpi=120)
+            plt.savefig(img_dir / "top_sae_bar" / f"{name}_top_sae_bar.png", dpi=120)
             plt.close(fig)
 
     print(f"  plotted {name}")

@@ -29,6 +29,11 @@
 
 set -euo pipefail
 
+if [ -z "${SGE_TASK_ID:-}" ]; then
+    echo "ERROR: SGE_TASK_ID is unset (run via 'qsub -t 1-64')" >&2
+    exit 1
+fi
+
 module load miniconda
 export HF_HOME="/projectnb/mcnet/jbrin/.cache/huggingface"
 # expandable_segments reduces fragmentation; +1-2 GB effective headroom
@@ -55,6 +60,10 @@ done
 
 # SGE_TASK_ID is 1-indexed
 TASK_INDEX=$((SGE_TASK_ID - 1))
+if [ "$TASK_INDEX" -lt 0 ] || [ "$TASK_INDEX" -ge "${#DIRECTIONS[@]}" ]; then
+    echo "ERROR: TASK_INDEX $TASK_INDEX out of range [0, ${#DIRECTIONS[@]}); submit -t 1-${#DIRECTIONS[@]}" >&2
+    exit 1
+fi
 DIR="${DIRECTIONS[$TASK_INDEX]}"
 SRC_LANG="${DIR%%|*}"
 TGT_LANG="${DIR##*|}"

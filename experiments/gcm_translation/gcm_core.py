@@ -125,13 +125,19 @@ def tokenize_pair(
 
     full_ids = joint_ids.unsqueeze(0).to(device)  # [1, S]
 
+    decoded_last_src = tokenizer.decode([full_ids[0, prompt_len - 1].item()])
+    assert decoded_last_src in (":", " "), (
+        f"tokenize_pair: decoded_last_src is {decoded_last_src!r} — expected ':' or ' '. "
+        f"The prompt template must end with 'LangName: ' (trailing space after colon). "
+        f"This assert catches tokenization drift from prompt template changes."
+    )
     return TokenizedPrompt(
         input_ids=full_ids,
         prompt_len=prompt_len,
         last_src_idx=prompt_len - 1,
         response_start=prompt_len,
         response_end=full_ids.shape[1],
-        decoded_last_src=tokenizer.decode([full_ids[0, prompt_len - 1].item()]),
+        decoded_last_src=decoded_last_src,
         decoded_first_response=tokenizer.decode([full_ids[0, prompt_len].item()]),
     )
 
@@ -174,6 +180,8 @@ def gcm_attribute_sae(
     cache_response_orig: Optional[str] = None,
     cache_prompt_cf: Optional[str] = None,
     cache_response_cf: Optional[str] = None,
+    m_orig_clean: Optional[float] = None,
+    m_cf_clean: Optional[float] = None,
 ):
     """
     GCM attribution at L16 SAE features, patched at the last source-token of
@@ -223,14 +231,17 @@ def gcm_attribute_sae(
     z_cf = z_cf_proxy.detach().clone()      # [SAE_DIM]
 
     # --- Clean (un-patched) metrics for sanity ---
-    with model.trace(pr_or.input_ids, **TRACER_KWARGS), torch.no_grad():
-        logits = model.lm_head.output
-        m_orig_clean_proxy = sum_response_logprobs(logits, pr_or.input_ids, pr_or.response_start).save()
-    with model.trace(pr_or_rc.input_ids, **TRACER_KWARGS), torch.no_grad():
-        logits = model.lm_head.output
-        m_cf_clean_proxy = sum_response_logprobs(logits, pr_or_rc.input_ids, pr_or_rc.response_start).save()
-    m_orig_clean = float(m_orig_clean_proxy.item())
-    m_cf_clean = float(m_cf_clean_proxy.item())
+    # If the caller pre-computed these (e.g. run.py with --components both),
+    # skip the two forward passes to avoid ~20% wasted compute.
+    if m_orig_clean is None or m_cf_clean is None:
+        with model.trace(pr_or.input_ids, **TRACER_KWARGS), torch.no_grad():
+            logits = model.lm_head.output
+            m_orig_clean_proxy = sum_response_logprobs(logits, pr_or.input_ids, pr_or.response_start).save()
+        with model.trace(pr_or_rc.input_ids, **TRACER_KWARGS), torch.no_grad():
+            logits = model.lm_head.output
+            m_cf_clean_proxy = sum_response_logprobs(logits, pr_or_rc.input_ids, pr_or_rc.response_start).save()
+        m_orig_clean = float(m_orig_clean_proxy.item())
+        m_cf_clean = float(m_cf_clean_proxy.item())
 
     # --- Build z_leaf (float32 for numerically-clean gradients) ---
     z_leaf = z_orig.detach().clone().to(torch.float32).requires_grad_(True)
@@ -254,6 +265,10 @@ def gcm_attribute_sae(
         ).save()
 
     m_orig_p_value.backward()
+    assert z_leaf.grad is not None and z_leaf.grad.abs().sum() > 0, (
+        "SAE leaf received zero gradient after m_orig backward — "
+        "the patch did not connect to the loss (C1/C4 regression?)."
+    )
     grad_orig = z_leaf.grad.detach().clone()  # [SAE_DIM]
     m_orig_patched = float(m_orig_p_value.item())
     z_leaf.grad = None  # zero between traces so the next backward starts clean
@@ -272,6 +287,10 @@ def gcm_attribute_sae(
         ).save()
 
     m_cf_p_value.backward()
+    assert z_leaf.grad is not None and z_leaf.grad.abs().sum() > 0, (
+        "SAE leaf received zero gradient after m_cf backward — "
+        "the patch did not connect to the loss (C1/C4 regression?)."
+    )
     grad_cf = z_leaf.grad.detach().clone()
     m_cf_patched = float(m_cf_p_value.item())
     z_leaf.grad = None
@@ -325,6 +344,8 @@ def gcm_attribute_heads(
     cache_response_orig: Optional[str] = None,
     cache_prompt_cf: Optional[str] = None,
     cache_response_cf: Optional[str] = None,
+    m_orig_clean: Optional[float] = None,
+    m_cf_clean: Optional[float] = None,
 ):
     """
     GCM attribution at every attention-head output, patched at last source token.
@@ -391,12 +412,15 @@ def gcm_attribute_heads(
     z_cf = torch.stack([p.detach().squeeze(0) for p in z_cf_proxies])
 
     # --- Clean metric values for sanity ---
-    with model.trace(pr_or.input_ids, **TRACER_KWARGS), torch.no_grad():
-        m_orig_clean_proxy = sum_response_logprobs(model.lm_head.output, pr_or.input_ids, pr_or.response_start).save()
-    with model.trace(pr_or_rc.input_ids, **TRACER_KWARGS), torch.no_grad():
-        m_cf_clean_proxy = sum_response_logprobs(model.lm_head.output, pr_or_rc.input_ids, pr_or_rc.response_start).save()
-    m_orig_clean = float(m_orig_clean_proxy.item())
-    m_cf_clean = float(m_cf_clean_proxy.item())
+    # If the caller pre-computed these (e.g. run.py with --components both),
+    # skip the two forward passes to avoid ~20% wasted compute.
+    if m_orig_clean is None or m_cf_clean is None:
+        with model.trace(pr_or.input_ids, **TRACER_KWARGS), torch.no_grad():
+            m_orig_clean_proxy = sum_response_logprobs(model.lm_head.output, pr_or.input_ids, pr_or.response_start).save()
+        with model.trace(pr_or_rc.input_ids, **TRACER_KWARGS), torch.no_grad():
+            m_cf_clean_proxy = sum_response_logprobs(model.lm_head.output, pr_or_rc.input_ids, pr_or_rc.response_start).save()
+        m_orig_clean = float(m_orig_clean_proxy.item())
+        m_cf_clean = float(m_cf_clean_proxy.item())
 
     # --- Build leaf in float32 ---
     z_leaf = z_orig.detach().clone().to(torch.float32).requires_grad_(True)
@@ -418,6 +442,14 @@ def gcm_attribute_heads(
         ).save()
 
     m_orig_p_value.backward()
+    assert z_leaf.grad is not None, (
+        "heads leaf received None gradient after m_orig backward (C1/C3 regression?)."
+    )
+    per_layer = z_leaf.grad.view(n_layers, -1).abs().sum(-1)
+    assert (per_layer > 0).all(), (
+        f"Partial gradient after m_orig backward: layers with zero grad = "
+        f"{(per_layer == 0).nonzero().flatten().tolist()}"
+    )
     grad_orig = z_leaf.grad.detach().clone()  # [n_layers, d_model]
     m_orig_patched = float(m_orig_p_value.item())
     z_leaf.grad = None
@@ -439,6 +471,14 @@ def gcm_attribute_heads(
         ).save()
 
     m_cf_p_value.backward()
+    assert z_leaf.grad is not None, (
+        "heads leaf received None gradient after m_cf backward (C1/C3 regression?)."
+    )
+    per_layer = z_leaf.grad.view(n_layers, -1).abs().sum(-1)
+    assert (per_layer > 0).all(), (
+        f"Partial gradient after m_cf backward: layers with zero grad = "
+        f"{(per_layer == 0).nonzero().flatten().tolist()}"
+    )
     grad_cf = z_leaf.grad.detach().clone()
     m_cf_patched = float(m_cf_p_value.item())
     z_leaf.grad = None

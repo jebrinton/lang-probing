@@ -43,7 +43,7 @@ if str(_GCM_DIR) not in sys.path:
 from gcm_core import tokenize_pair                         # noqa: E402
 from flores_pairs import make_prompt, get_shots            # noqa: E402
 
-from lang_probing_src.config import LAYER_NUM              # noqa: E402
+from lang_probing_src.config import LAYER_NUM, TRACER_KWARGS  # noqa: E402
 
 
 # ---------------------------------------------------------------------------
@@ -141,7 +141,11 @@ def logit_lens_topk(
     apply_norm: bool = True,
 ) -> List[Dict]:
     """Project a residual contribution through (optional) final norm + lm_head."""
-    x = residual_contrib.unsqueeze(0).unsqueeze(0)  # [1, 1, d]
+    # Match the model's parameter dtype (bf16). final_norm is RMSNorm
+    # (element-wise, auto-promotes), but lm_head is a Linear and rejects
+    # dtype-mismatched inputs.
+    target_dtype = lm_head.weight.dtype
+    x = residual_contrib.to(target_dtype).unsqueeze(0).unsqueeze(0)  # [1, 1, d]
     with torch.no_grad():
         if apply_norm:
             x = final_norm(x)
@@ -198,34 +202,72 @@ def observe(
     last_src_idx = pr.last_src_idx
     first_tgt_idx = pr.response_start
 
-    # 2. Single forward pass: capture L16 residual + every layer's o_proj input
     sae_features = list(sae_features) if sae_features else []
-    layer16_resid = {"out": None}
 
-    def cap_l16(_mod, _inputs, output):
-        out_tensor = output[0] if isinstance(output, tuple) else output
-        layer16_resid["out"] = out_tensor.detach()
-        return output
-
-    h_l16 = hf_submodule.register_forward_hook(cap_l16)
-    try:
-        with torch.no_grad(), capture_o_proj_inputs(hf_model, n_layers) as o_proj_caps:
-            outputs = hf_model(
-                pr.input_ids,
-                output_attentions=True,
-                use_cache=False,
+    # 2. Single nnsight trace captures L16 residual, every layer's
+    # o_proj.input, and every layer's attention weights.
+    #
+    # nnsight 0.5's interleaver dispatches `.save()` requests in
+    # FORWARD-EXECUTION ORDER. Queueing the L16 submodule.output BEFORE
+    # the per-layer o_proj loop produces `OutOfOrderError("Value was
+    # missed for ...input.i0")` because layer 0's o_proj.input provider
+    # fires first while the queue head still holds the L16 requester.
+    # Fix: save in forward order — for each layer L: o_proj.input,
+    # self_attn.output[1], and (only at L == LAYER_NUM) the layer's
+    # output[0] residual. SAE encoding happens AFTER the trace, on the
+    # saved real tensor, to keep the trace itself minimal.
+    #
+    # `attn_implementation="eager"` was set at LanguageModel construction
+    # in repl.py; that is what makes `self_attn.output[1]` non-None.
+    # We do NOT pass `output_attentions=True` to model.trace — it's no
+    # longer a recognized forward kwarg in current transformers.
+    o_proj_proxies = []
+    attn_proxies = []
+    l16_resid_proxy = None
+    with model.trace(pr.input_ids, **TRACER_KWARGS), torch.no_grad():
+        for L in range(n_layers):
+            o_proj_proxies.append(
+                model.model.layers[L].self_attn.o_proj.input[:, :, :].clone().save()
             )
-    finally:
-        h_l16.remove()
+            attn_proxies.append(
+                model.model.layers[L].self_attn.output[1].clone().save()
+            )
+            if L == LAYER_NUM:
+                l16_resid_proxy = submodule.output[0].clone().save()        # [B, S, d]
 
-    attentions = outputs.attentions   # tuple of [B, n_heads, S, S]
+    # After the trace exits, saved proxies dereference to real tensors.
+    # Normalize shapes — nnsight 0.5 sometimes drops the leading batch dim
+    # on save round-trips, and `submodule.output[0]` indexes the batch in
+    # current transformers (LlamaDecoderLayer.forward returns a tensor, not
+    # a tuple), so the "batch dim" we expect can already be missing. Fix
+    # everything to a known shape upfront.
+    def _ensure_dims(t, expected, name):
+        if t is None:
+            return None
+        if t.dim() == expected:
+            return t
+        if t.dim() == expected - 1:
+            return t.unsqueeze(0)
+        raise RuntimeError(
+            f"unexpected {name} shape {tuple(t.shape)}; expected {expected} or {expected-1} dims"
+        )
 
-    # SAE acts at L16
+    o_proj_caps = [_ensure_dims(p.detach(), 3, "o_proj.input") for p in o_proj_proxies]    # [B,S,d]
+    attentions  = [_ensure_dims(p.detach() if p is not None else None, 4, "self_attn.output[1]")
+                   for p in attn_proxies]                                                  # [B,H,S,S]
+    if attentions and attentions[0] is None and attention_heads:
+        raise RuntimeError(
+            "self_attn.output[1] is None — eager attention isn't returning "
+            "weights. The model must be loaded with attn_implementation='eager' "
+            "(see repl.py:load_model)."
+        )
+
+    # SAE acts at L16 — encode outside the trace on the saved real tensor.
     sae_acts = None
-    if sae_features and layer16_resid["out"] is not None:
-        l16 = layer16_resid["out"][0]                       # [S, d]
+    if sae_features and l16_resid_proxy is not None:
+        l16_resid = _ensure_dims(l16_resid_proxy.detach(), 3, "l16_resid")  # [B, S, d]
         with torch.no_grad():
-            sae_acts = autoencoder.encode(l16).detach()     # [S, SAE_DIM]
+            sae_acts = autoencoder.encode(l16_resid[0])                     # [S, SAE_DIM]
 
     # 3. Build panels
     panels = []

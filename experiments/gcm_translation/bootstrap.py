@@ -184,7 +184,10 @@ def aggregate(per_direction: list[dict], out_path: Path) -> None:
     for d in per_direction:
         name = d["direction"]
         if "heads" in d:
-            for h in d["heads"]["top_k_by_mean_abs_ie"]:
+            # enumerate so the rank reflects this entry's true position, even if
+            # two heads happen to have identical struct contents (list.index would
+            # return the first match).
+            for rank0, h in enumerate(d["heads"]["top_k_by_mean_abs_ie"]):
                 key = (h["layer"], h["head"])
                 rec = head_summary.setdefault(
                     key,
@@ -198,13 +201,13 @@ def aggregate(per_direction: list[dict], out_path: Path) -> None:
                 rec["n_directions_in_topk"] += 1
                 rec["directions"].append({
                     "direction": name,
-                    "rank_in_direction": d["heads"]["top_k_by_mean_abs_ie"].index(h) + 1,
+                    "rank_in_direction": rank0 + 1,
                     "mean_abs_ie": h["mean_abs_ie"],
                     "median_abs_ie": h["median_abs_ie"],
                     "bootstrap_top_k_freq": h["bootstrap_top_k_freq"],
                 })
         if "sae" in d:
-            for s in d["sae"]["top_k_by_mean_abs_ie"]:
+            for rank0, s in enumerate(d["sae"]["top_k_by_mean_abs_ie"]):
                 key = s["feature_idx"]
                 rec = sae_summary.setdefault(
                     key,
@@ -217,7 +220,7 @@ def aggregate(per_direction: list[dict], out_path: Path) -> None:
                 rec["n_directions_in_topk"] += 1
                 rec["directions"].append({
                     "direction": name,
-                    "rank_in_direction": d["sae"]["top_k_by_mean_abs_ie"].index(s) + 1,
+                    "rank_in_direction": rank0 + 1,
                     "mean_abs_ie": s["mean_abs_ie"],
                     "median_abs_ie": s["median_abs_ie"],
                     "bootstrap_top_k_freq": s["bootstrap_top_k_freq"],

@@ -42,7 +42,8 @@ from lang_probing_src.utils import setup_model, get_device_info
 # local imports (this experiment)
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from flores_pairs import sample_pairs, sample_null_triples, get_shots, make_prompt
-from gcm_core import gcm_attribute_sae, gcm_attribute_heads
+from gcm_core import gcm_attribute_sae, gcm_attribute_heads, tokenize_pair, sum_response_logprobs
+from lang_probing_src.config import TRACER_KWARGS
 
 
 logging.basicConfig(
@@ -50,6 +51,29 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s",
 )
 logger = logging.getLogger(__name__)
+
+
+def _compute_clean_metrics(model, tokenizer, prompt_orig, response_orig, response_cf, device, max_response_tokens):
+    """
+    Compute logp(r_orig | prompt_orig) and logp(r_cf | prompt_orig) in two
+    no-grad forward passes. Used by run.py to hoist the clean-metric computation
+    out of the per-component attribution functions when --components both, so
+    neither gcm_attribute_sae nor gcm_attribute_heads duplicates these passes.
+
+    Both metrics are scored against prompt_orig (not prompt_cf), matching the
+    GCM formulation: M = logp(r_cf | p_orig, z) - logp(r_orig | p_orig, z).
+    """
+    pr_or = tokenize_pair(tokenizer, prompt_orig, response_orig, device, max_response_tokens)
+    pr_or_rc = tokenize_pair(tokenizer, prompt_orig, response_cf, device, max_response_tokens)
+    with model.trace(pr_or.input_ids, **TRACER_KWARGS), torch.no_grad():
+        m_orig_proxy = sum_response_logprobs(
+            model.lm_head.output, pr_or.input_ids, pr_or.response_start
+        ).save()
+    with model.trace(pr_or_rc.input_ids, **TRACER_KWARGS), torch.no_grad():
+        m_cf_proxy = sum_response_logprobs(
+            model.lm_head.output, pr_or_rc.input_ids, pr_or_rc.response_start
+        ).save()
+    return float(m_orig_proxy.item()), float(m_cf_proxy.item())
 
 
 def main():
@@ -179,6 +203,25 @@ def main():
                 "heads_ok": False,
             }
 
+        # --- Hoist clean-metric forward passes when running both components ---
+        # When --components both, each attribution function would independently
+        # run 2 no-grad forward passes for m_orig_clean / m_cf_clean (~20%
+        # extra compute). Pre-compute once here and pass in to both.
+        hoisted_m_orig_clean = None
+        hoisted_m_cf_clean = None
+        if args.components == "both":
+            try:
+                hoisted_m_orig_clean, hoisted_m_cf_clean = _compute_clean_metrics(
+                    model, tokenizer, prompt_orig, response_orig, response_cf,
+                    device, args.max_response_tokens,
+                )
+            except Exception as e:
+                logger.warning(
+                    f"  [{i+1}/{len(pairs)}] clean-metric pre-computation FAILED on "
+                    f"{pair.pair_id}: {type(e).__name__}: {e}; "
+                    f"both attribution functions will compute internally."
+                )
+
         # --- SAE attribution ---
         if args.components in ("both", "sae"):
             try:
@@ -190,6 +233,8 @@ def main():
                     cache_response_orig=cache_response_orig,
                     cache_prompt_cf=cache_prompt_cf,
                     cache_response_cf=cache_response_cf,
+                    m_orig_clean=hoisted_m_orig_clean,
+                    m_cf_clean=hoisted_m_cf_clean,
                 )
                 sae_ies.append(sae_out["ie"])
                 rec.update({
@@ -229,6 +274,8 @@ def main():
                     cache_response_orig=cache_response_orig,
                     cache_prompt_cf=cache_prompt_cf,
                     cache_response_cf=cache_response_cf,
+                    m_orig_clean=hoisted_m_orig_clean,
+                    m_cf_clean=hoisted_m_cf_clean,
                 )
                 head_ies.append(head_out["ie"])
                 rec.update({
@@ -278,11 +325,7 @@ def main():
     # --- Top-K rankings (NaN-aware) ---
     top = {}
     if head_ies:
-        # nanmean across pairs ignores failed pairs
-        mean_abs_head = torch.nan_to_num(head_stack.abs(), nan=0.0).sum(dim=0) / max(
-            (~torch.isnan(head_stack[:, 0, 0])).sum().item(), 1
-        )
-        # Actually use proper nanmean over the abs values:
+        # NaN-aware aggregation: failed pairs are NaN sentinels and ignored.
         mean_abs_head = torch.nanmean(head_stack.abs(), dim=0)        # [n_layers, n_heads]
         mean_signed_head = torch.nanmean(head_stack, dim=0)
         flat = mean_abs_head.flatten()

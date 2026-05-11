@@ -3,8 +3,8 @@
 #$ -N gcm_same_lang
 #$ -l h_rt=2:00:00
 #$ -l gpus=1
-#$ -l gpu_memory=48G
-#$ -l gpu_c=8.0
+#$ -l gpu_memory=80G
+#$ -l gpu_type=A100
 #$ -m ea
 #$ -j y
 #$ -o /projectnb/mcnet/jbrin/lang-probing/experiments/gcm_translation/run/$JOB_NAME.$TASK_ID.out

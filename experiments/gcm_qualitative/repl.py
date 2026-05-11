@@ -107,7 +107,43 @@ class HarnessSession:
 
     def load_model(self):
         print("[repl] loading model + SAE — first time only, ~30–60s …", flush=True)
-        model, submodule, autoencoder, tokenizer = setup_model(MODEL_ID, SAE_ID)
+
+        import torch
+        device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
+        self.device = device
+
+        # NOTE: We bypass `setup_model()` for the LanguageModel construction
+        # to pass `attn_implementation="eager"` at load time. In current
+        # transformers, eager attention is what makes `self_attn.output[1]`
+        # carry a real tensor (sdpa returns None there); calling
+        # `set_attn_implementation('eager')` post-hoc on the nnsight-wrapped
+        # model didn't reliably propagate. We still use setup_autoencoder
+        # via the original utility (in the external lang-similarity repo).
+        sys.stdout.write("[repl] constructing LanguageModel with attn_implementation=eager …\n")
+        sys.stdout.flush()
+        from nnsight import LanguageModel
+        from transformers import AutoTokenizer
+        model = LanguageModel(
+            MODEL_ID,
+            torch_dtype=torch.bfloat16 if device.type == "cuda" else torch.float32,
+            device_map=device,
+            attn_implementation="eager",
+        )
+        submodule = model.model.layers[16]
+        tokenizer = AutoTokenizer.from_pretrained(MODEL_ID, padding_side="left")
+        tokenizer.pad_token = tokenizer.eos_token
+
+        # Load the SAE through the same path setup_model uses, but call the
+        # external setup_autoencoder helper directly.
+        sys.stdout.write("[repl] loading SAE checkpoint …\n"); sys.stdout.flush()
+        from huggingface_hub import hf_hub_download
+        sys.path.insert(0, "/projectnb/mcnet/jbrin/lang-similarity/src")
+        from sae.utils import setup_autoencoder  # noqa: E402
+        sae_filename = ("aya-23-8b-layer16.pt" if "aya" in MODEL_ID.lower()
+                        else "llama-3-8b-layer16.pt")
+        sae_path = hf_hub_download(repo_id=SAE_ID, filename=sae_filename)
+        autoencoder = setup_autoencoder(sae_path)
+
         # Freeze grads (harness does no backward)
         try:
             model.requires_grad_(False)
@@ -115,17 +151,68 @@ class HarnessSession:
                 autoencoder.requires_grad_(False)
         except Exception:
             pass
-        # nnsight wraps the HF model; we use the wrapped model directly.
-        import torch
-        if torch.cuda.is_available():
-            self.device = torch.device("cuda")
-        else:
-            self.device = torch.device("cpu")
+
+        # Confirm the underlying HF model is now eager.
+        hf_model = getattr(model, "_model", model)
+        try:
+            current = getattr(hf_model.config, "_attn_implementation", "?")
+            sys.stdout.write(f"[repl]   model config._attn_implementation = {current!r}\n")
+        except Exception:
+            pass
+        sys.stdout.flush()
+
+        # Materialize the SAE on GPU. The existing gcm_translation pipeline
+        # always uses the autoencoder *inside* `model.trace()` blocks where
+        # nnsight implicitly materializes weights; we call it directly, so
+        # we have to do it ourselves. Detect meta params and reload from the
+        # local checkpoint if needed.
+        if autoencoder is not None:
+            sys.stdout.write("[repl] materializing autoencoder on GPU …\n"); sys.stdout.flush()
+            self._materialize_autoencoder(autoencoder, device)
+            sys.stdout.write("[repl]   autoencoder ready\n"); sys.stdout.flush()
+
+        # Warmup trace — nnsight's LanguageModel keeps the HF model on `meta`
+        # until the first `model.trace()` call. Run a tiny trace so the model
+        # is dispatched on GPU and subsequent direct calls (e.g. the
+        # intervene path's `hf_model.generate(...)`) don't see meta tensors.
+        sys.stdout.write("[repl] warmup trace (dispatches model to GPU) …\n"); sys.stdout.flush()
+        try:
+            from lang_probing_src.config import TRACER_KWARGS
+            import torch as _torch
+            warm_ids = tokenizer("hi", return_tensors="pt").input_ids.to(device)
+            with model.trace(warm_ids, **TRACER_KWARGS), _torch.no_grad():
+                pass
+            sys.stdout.write("[repl]   warmup OK\n"); sys.stdout.flush()
+        except Exception as e:
+            sys.stdout.write(f"[repl]   WARNING: warmup trace failed: {e!r}\n"); sys.stdout.flush()
+
         self.model = model
         self.submodule = submodule
         self.autoencoder = autoencoder
         self.tokenizer = tokenizer
         print("[repl] model ready.", flush=True)
+
+    @staticmethod
+    def _materialize_autoencoder(autoencoder, device):
+        """Ensure the autoencoder's weights are real (not meta) and on `device`."""
+        import torch
+        meta_params = [n for n, p in autoencoder.named_parameters() if p.device.type == "meta"]
+        if meta_params:
+            print(f"[repl] autoencoder has {len(meta_params)} meta-device params; "
+                  f"reloading from checkpoint …", flush=True)
+            from huggingface_hub import hf_hub_download
+            sae_filename = ("aya-23-8b-layer16.pt" if "aya" in MODEL_ID.lower()
+                            else "llama-3-8b-layer16.pt")
+            ckpt_path = hf_hub_download(repo_id=SAE_ID, filename=sae_filename)
+            state = torch.load(ckpt_path, weights_only=True, map_location="cpu")
+            # to_empty allocates real storage on `device` for any meta params,
+            # then load_state_dict copies the real weights in.
+            autoencoder.to_empty(device=device)
+            autoencoder.load_state_dict(state)
+        autoencoder.to(device)
+        # Make sure encode(x) doesn't trip over self.device == None either.
+        if hasattr(autoencoder, "device"):
+            autoencoder.device = device
 
     # -----------------------------------------------------------------
     # Commands
